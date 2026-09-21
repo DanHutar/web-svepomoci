@@ -1,0 +1,85 @@
+.sample-page {
+  --sample-ink: #173a35;
+  --sample-paper: #f8f6f1;
+  --sample-muted: #54645b;
+  --sample-accent: #d7ec91;
+  width: 100%;
+  margin: 0;
+  color: var(--sample-ink);
+  background: var(--sample-paper);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.sample-page,
+.sample-page * { box-sizing: border-box; }
+.sample-page h1,
+.sample-page h2,
+.sample-page h3,
+.sample-page p { margin-top: 0; }
+.sample-page h1,
+.sample-page h2,
+.sample-page h3 { color: inherit; font-family: inherit; }
+.sample-page h1 { margin-bottom: 28px; font-size: clamp(40px, 5.7vw, 76px); font-weight: 650; line-height: 1.07; letter-spacing: -0.055em; }
+.sample-page h1 span { color: #627c3a; }
+.sample-page h2 { margin-bottom: 24px; font-size: clamp(30px, 3.4vw, 44px); font-weight: 600; line-height: 1.15; letter-spacing: -0.04em; }
+.sample-page h3 { font-size: 21px; line-height: 1.3; font-weight: 600; letter-spacing: -0.02em; }
+.sample-page .sample-page__eyebrow { margin-bottom: 22px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.sample-page .sample-page__hero,
+.sample-page .sample-page__services,
+.sample-page .sample-page__process { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+.sample-page .sample-page__hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; padding-block: 88px 100px; }
+.sample-page .sample-page__hero-copy { min-width: 0; }
+.sample-page .sample-page__lead { max-width: 510px; color: var(--sample-muted); font-size: 18px; line-height: 1.75; margin-bottom: 32px; }
+.sample-page .sample-page__button { display: inline-flex; align-items: center; justify-content: center; gap: 22px; max-width: 100%; padding: 16px 23px; border: 1px solid var(--sample-ink); border-radius: 99px; background: var(--sample-ink); color: white; font-size: 14px; font-weight: 600; line-height: 1.5; text-decoration: none; }
+.sample-page .sample-page__button:hover { background: #28564d; }
+.sample-page a:focus-visible { outline: 3px solid #56722b; outline-offset: 5px; }
+.sample-page .sample-page__note { margin-top: 24px; margin-bottom: 0; font-size: 12px; color: var(--sample-muted); }
+.sample-page .sample-page__illustration { position: relative; min-height: 470px; overflow: hidden; background: #e5e5d4; border-radius: 180px 180px 12px 12px; }
+.sample-page .sample-page__arch { position: absolute; left: 17%; top: 16%; width: 54%; height: 68%; border-radius: 120px 120px 0 0; background: #79917a; box-shadow: inset 20px 0 0 #657e67; }
+.sample-page .sample-page__sun { position: absolute; top: 27%; right: 15%; width: 98px; height: 98px; border-radius: 50%; background: var(--sample-accent); }
+.sample-page .sample-page__shelf { position: absolute; bottom: 18%; left: 8%; right: 8%; height: 26px; background: #b59d7d; box-shadow: 0 14px 18px #173a3520; }
+.sample-page .sample-page__vase { position: absolute; right: 18%; bottom: calc(18% + 26px); width: 68px; height: 104px; background: #f8f6f1; border-radius: 12px 12px 30px 30px; transform: rotate(-6deg); }
+.sample-page .sample-page__caption { position: absolute; bottom: 24px; width: 100%; text-align: center; font-size: 12px; font-weight: 500; letter-spacing: 0.03em; }
+.sample-page .sample-page__services { padding-block: 72px 90px; border-top: 1px solid #173a3526; scroll-margin-top: 24px; }
+.sample-page .sample-page__section-heading { margin-bottom: 42px; }
+.sample-page .sample-page__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.sample-page .sample-page__card { padding: 32px; border: 1px solid #173a3526; border-radius: 12px; }
+.sample-page .sample-page__number { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin-bottom: 32px; border-radius: 50%; background: var(--sample-accent); font-size: 12px; }
+.sample-page .sample-page__card h3 { margin-bottom: 16px; }
+.sample-page .sample-page__card p { margin-bottom: 0; color: var(--sample-muted); font-size: 15px; }
+.sample-page .sample-page__process { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; padding-block: 72px 90px; border-top: 1px solid #173a3526; scroll-margin-top: 24px; }
+.sample-page .sample-page__process p { color: var(--sample-muted); }
+.sample-page .sample-page__process .sample-page__eyebrow { color: var(--sample-ink); }
+.sample-page .sample-page__steps { margin: 0; padding-left: 26px; }
+.sample-page .sample-page__steps li { padding: 0 0 24px 12px; }
+.sample-page .sample-page__steps li::marker { color: #56722b; font-weight: 600; }
+.sample-page .sample-page__steps h3 { margin-bottom: 8px; }
+.sample-page .sample-page__steps p { margin-bottom: 0; font-size: 15px; }
+.sample-page .sample-page__contact { padding: 76px 24px 84px; text-align: center; color: var(--sample-paper); background: var(--sample-ink); }
+.sample-page .sample-page__contact p { max-width: 520px; margin-inline: auto; }
+.sample-page .sample-page__contact .sample-page__eyebrow { color: var(--sample-accent); }
+.sample-page .sample-page__contact .sample-page__button--light { margin-top: 12px; color: var(--sample-ink); background: var(--sample-accent); border-color: var(--sample-accent); }
+.sample-page .sample-page__contact .sample-page__button--light:hover { background: #e4f4b8; }
+.sample-page .sample-page__contact a:focus-visible { outline-color: white; }
+@media (max-width: 900px) {
+  .sample-page .sample-page__hero { gap: 30px; padding-block: 64px; }
+  .sample-page .sample-page__illustration { min-height: 400px; }
+  .sample-page .sample-page__cards { gap: 14px; }
+  .sample-page .sample-page__card { padding: 24px; }
+  .sample-page .sample-page__process { gap: 40px; }
+}
+@media (max-width: 680px) {
+  .sample-page .sample-page__hero,
+  .sample-page .sample-page__services,
+  .sample-page .sample-page__process { width: calc(100% - 36px); }
+  .sample-page .sample-page__hero { grid-template-columns: 1fr; gap: 38px; padding-block: 48px 56px; }
+  .sample-page .sample-page__lead { font-size: 16px; }
+  .sample-page .sample-page__illustration { min-height: 360px; max-width: 420px; width: 100%; justify-self: center; }
+  .sample-page .sample-page__services,
+  .sample-page .sample-page__process { padding-block: 48px 56px; }
+  .sample-page .sample-page__cards,
+  .sample-page .sample-page__process { grid-template-columns: 1fr; gap: 22px; }
+  .sample-page .sample-page__number { margin-bottom: 22px; }
+  .sample-page .sample-page__contact { padding-block: 56px 64px; }
+}

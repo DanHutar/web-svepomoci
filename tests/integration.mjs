@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { bootWordPress, phpJson, projectRoot } from '../tools/playground.mjs';
+
+const out = path.join(projectRoot, 'test-results');
+await fs.mkdir(out, { recursive: true });
+const server = await bootWordPress(9401, false);
+try {
+  const result = await phpJson(server, 'wp_set_password("aiwp-local-test", 1); require "/aiwp-tests/checks.php";');
+  console.log(result);
+  const page = await (await fetch(server.serverUrl + '/?page_id=' + result.fixtures.pageId)).text();
+  assert.match(page, /class="aiwp-content"/);
+  assert.match(page, /class="aiwp-header"/);
+  assert.match(page, /class="aiwp-footer"/);
+  assert.match(page, /<meta name="description" content="Ukázková/);
+  assert.match(page, /<title>Ateliér/);
+  assert.equal((page.match(/rel=['"]canonical['"]/g) || []).length, 1, 'One canonical tag');
+  assert.ok(!page.includes('<p>Standardní obsah zachován.</p>'));
+  const normal = await (await fetch(server.serverUrl + '/?page_id=' + result.fixtures.normalId)).text();
+  assert.ok(normal.includes('normal-content'));
+  assert.ok(!normal.includes('/* AI Web: page */'));
+  await phpJson(server, `update_post_meta(${result.fixtures.pageId}, '_aiwp_hide_header', 1); update_post_meta(${result.fixtures.pageId}, '_aiwp_hide_footer', 1); echo 'true';`);
+  const hidden = await (await fetch(server.serverUrl + '/')).text();
+  assert.ok(!hidden.includes('class="aiwp-header"') && !hidden.includes('class="aiwp-footer"'), 'Page can hide shared parts');
+  assert.ok(!hidden.includes('/* AI Web: header */'), 'Hidden part CSS is not loaded');
+  await phpJson(server, `update_post_meta(${result.fixtures.pageId}, '_aiwp_hide_header', false); update_post_meta(${result.fixtures.pageId}, '_aiwp_hide_footer', false); wp_update_post(['ID'=>${result.fixtures.pageId}, 'post_password'=>'test-only']); echo 'true';`);
+  const protectedPage = await (await fetch(server.serverUrl + '/')).text();
+  assert.ok(protectedPage.includes('post-password-form') && !protectedPage.includes('sample-page__hero'), 'Password-protected page never emits AI HTML');
+  assert.ok(!protectedPage.includes('/* AI Web: page */'), 'Password-protected page does not emit its CSS');
+  await phpJson(server, `wp_update_post(['ID'=>${result.fixtures.pageId}, 'post_password'=>'']); echo 'true';`);
+  await fs.writeFile(path.join(out, 'frontend.html'), page);
+  const { runBrowserChecks } = await import('./browser.mjs');
+  await runBrowserChecks(server.serverUrl, result.fixtures, out);
+  await phpJson(server, 'require_once ABSPATH . "wp-admin/includes/plugin.php"; deactivate_plugins("ai-web-studio/ai-web-studio.php"); echo "true";');
+  const fallback = await (await fetch(server.serverUrl + '/')).text();
+  assert.ok(fallback.includes('Standardní obsah zachován.') && !fallback.includes('aiwp-content'), 'Theme works with plugin deactivated');
+  await fs.writeFile(path.join(out, 'results.json'), JSON.stringify({ ...result, frontend: 'passed', browser: 'passed', wordpress: '6.8.3', php: '8.3' }, null, 2));
+  console.log('PASS: WordPress integration, HTTP output and browser checks.');
+} finally {
+  await server[Symbol.asyncDispose]();
+}

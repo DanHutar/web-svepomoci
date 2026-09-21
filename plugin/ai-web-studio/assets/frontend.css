@@ -1,0 +1,28 @@
+/* Layout and typography are supplied by the page's own CSS. */
+.aiwp-content, .aiwp-header, .aiwp-footer { min-width: 0; }
+.aiwp-content img, .aiwp-header img, .aiwp-footer img { max-width: 100%; }
+
+/* Native WordPress menu markup. AI CSS can customize these low-specificity defaults. */
+:where(.aiwp-content, .aiwp-header, .aiwp-footer) .aiwp-menu,
+:where(.aiwp-content, .aiwp-header, .aiwp-footer) .aiwp-menu .sub-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+:where(.aiwp-content, .aiwp-header, .aiwp-footer) .aiwp-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 24px;
+}
+:where(.aiwp-content, .aiwp-header, .aiwp-footer) .aiwp-menu li { margin: 0; }
+:where(.aiwp-content, .aiwp-header, .aiwp-footer) .aiwp-menu a { display: inline-block; }
+:where(.aiwp-content, .aiwp-header, .aiwp-footer) .aiwp-menu .sub-menu {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+  padding-inline-start: 16px;
+}
+@media (max-width: 720px) {
+  :where(.aiwp-content, .aiwp-header, .aiwp-footer) .aiwp-menu { flex-direction: column; }
+}

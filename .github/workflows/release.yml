@@ -1,0 +1,58 @@
+name: Test and release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository == 'DanHutar/web-svepomoci' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build both installable packages and update manifest
+        shell: pwsh
+        run: ./tools/package.ps1
+      - name: Test update discovery and actual ZIP replacement in WordPress
+        run: npm run test:updates
+      - name: Publish a new stable version once
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION=$(node -p "require('./dist/updates.json').version")
+          TAG="v$VERSION"
+          # A successful API request distinguishes 'no release' from authentication/network errors.
+          EXISTS=$(gh api --paginate "repos/$GH_REPO/releases" --jq ".[] | select(.tag_name == \"$TAG\") | .id")
+          if [ -n "$EXISTS" ]; then
+            DRAFT=$(gh api "repos/$GH_REPO/releases/$EXISTS" --jq '.draft')
+            if [ "$DRAFT" = true ]; then
+              echo "Release $TAG is an unfinished draft. Resolve it before publishing again."
+              exit 1
+            fi
+            echo "Release $TAG already exists; published packages stay unchanged."
+            exit 0
+          fi
+          # Keep the release hidden until all three assets have been uploaded.
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "Web svépomocí $VERSION" --notes-file RELEASE.md --draft
+          gh release upload "$TAG" dist/web-svepomoci-plugin.zip dist/web-svepomoci-sablona.zip dist/updates.json
+          gh release edit "$TAG" --draft=false --latest

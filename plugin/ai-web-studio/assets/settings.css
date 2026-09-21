@@ -1,0 +1,13 @@
+.aiwp-dashboard { max-width: 1260px; padding: 18px 20px 40px 0; }
+.aiwp-dashboard-hero { padding: clamp(28px, 4vw, 58px); border: 1px solid #d9e5e4; border-radius: 14px; background: #edf5f3; }
+.aiwp-dashboard-hero > span { font-size: 11px; font-weight: 700; letter-spacing: .15em; color: #2d6d5a; }
+.aiwp-dashboard-hero h1 { font-size: clamp(28px, 3vw, 42px); line-height: 1.2; font-weight: 650; color: #163d33; margin: 18px 0 12px; }
+.aiwp-dashboard-hero p { font-size: 17px; margin-bottom: 24px; color: #436458; }
+.aiwp-dashboard-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+.aiwp-dashboard-grid section { background: #fff; border: 1px solid #dcdcde; border-radius: 10px; padding: 28px; }
+.aiwp-dashboard-grid h2 { font-size: 18px; line-height: 1.4; }
+.aiwp-dashboard-grid p { font-size: 14px; line-height: 1.7; color: #50575e; }
+.aiwp-step-number { color: #2d6d5a; font-size: 12px; font-weight: 700; }
+.aiwp-dashboard-footnote { color: #646970; max-width: 950px; padding-top: 16px; line-height: 1.7; }
+.aiwp-settings-form { background: #fff; padding: 8px 28px 20px; border: 1px solid #dcdcde; border-radius: 10px; margin-top: 24px; }
+@media (max-width: 1000px) { .aiwp-dashboard-grid { grid-template-columns: 1fr; } }

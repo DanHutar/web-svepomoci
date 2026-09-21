@@ -1,0 +1,99 @@
+/*
+Theme Name: web-svepomoci-sablona
+Theme URI: https://github.com/DanHutar/web-svepomoci
+Update URI: https://github.com/DanHutar/web-svepomoci
+Description: Lehká univerzální šablona pro stránky vytvořené pomocí AI. S doprovodným web-svepomoci-plugin podporuje vlastní HTML, CSS, JavaScript, hlavičku a patičku.
+Version: 1.2.0
+Requires at least: 6.4
+Requires PHP: 7.4
+Author: DanHutar
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: ai-web
+Tags: custom-menu, custom-logo, featured-images, translation-ready, blog
+*/
+
+/* AI pages receive only the small baseline below. Theme typography and layout
+   are scoped to the ordinary WordPress content and fallback site parts. */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+body { margin: 0; color: #202b38; background: #fff; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.6; }
+.screen-reader-text { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.ai-web-skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100000; padding: .75rem 1rem; color: #fff; background: #153d84; text-decoration: none; transform: translateY(-200%); }
+.ai-web-skip-link:focus { transform: translateY(0); }
+.aiwp-page { min-width: 0; }
+
+.ai-web-container { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+.ai-web-header { border-bottom: 1px solid #e6eaf0; background: #fff; }
+.ai-web-header__inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem 2rem; padding-block: 1.25rem; }
+.ai-web-brand { display: flex; align-items: center; gap: 1rem; }
+.ai-web-brand .custom-logo { display: block; width: auto; max-width: 180px; height: auto; max-height: 64px; }
+.ai-web-site-title { color: #162a48; font-size: 1.3rem; font-weight: 750; line-height: 1.3; text-decoration: none; }
+.ai-web-site-description { margin: .2rem 0 0; color: #5e6979; font-size: .85rem; }
+.ai-web-navigation a, .ai-web-footer a { color: inherit; text-underline-offset: .22em; }
+.ai-web-menu { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1.3rem; margin: 0; padding: 0; list-style: none; }
+.ai-web-menu a { display: inline-block; padding-block: .2rem; text-decoration: none; }
+.ai-web-menu a:hover, .ai-web-menu .current-menu-item > a, .ai-web-menu .current_page_item > a { text-decoration: underline; }
+.ai-web-menu .sub-menu, .ai-web-menu .children { margin: .25rem 0 0; padding-left: 1rem; list-style: none; font-size: .9em; }
+.ai-web-menu-toggle { display: none; padding: .55rem .8rem; border: 1px solid #a8b5c5; border-radius: .4rem; color: #162a48; background: #fff; font: inherit; cursor: pointer; }
+.ai-web-navigation[hidden], .ai-web-menu-toggle[hidden] { display: none; }
+.ai-web-header :focus-visible, .ai-web-footer :focus-visible, .ai-web-main :focus-visible { outline: 3px solid #2862c4; outline-offset: 4px; }
+.ai-web-footer { margin-top: 0; padding-block: 2rem; border-top: 1px solid #e6eaf0; background: #f8fafc; color: #526174; }
+.ai-web-footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem 2rem; }
+.ai-web-footer p { margin: 0; }
+
+.ai-web-main { min-height: 55vh; padding-block: clamp(2rem, 6vw, 5rem); }
+.ai-web-main a { color: #174ea6; text-underline-offset: .2em; }
+.ai-web-main h1, .ai-web-main h2, .ai-web-main h3, .ai-web-main h4, .ai-web-main h5, .ai-web-main h6 { color: #162a48; line-height: 1.2; overflow-wrap: anywhere; }
+.ai-web-main h1 { margin: 0 0 1.5rem; font-size: clamp(2rem, 4vw, 3rem); }
+.ai-web-main h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+.ai-web-main img { max-width: 100%; height: auto; }
+.ai-web-main figure { max-width: 100%; margin-inline: 0; }
+.ai-web-main iframe { max-width: 100%; }
+.ai-web-main pre { overflow-x: auto; padding: 1rem; background: #f1f4f8; }
+.ai-web-main blockquote { margin-inline: 0; padding-left: 1.25rem; border-left: 3px solid #b7c7df; }
+.ai-web-main table { border-collapse: collapse; max-width: 100%; }
+.ai-web-main th, .ai-web-main td { padding: .5rem .75rem; border: 1px solid #d7dfe9; text-align: start; }
+.ai-web-main .alignleft { float: left; margin: 0 1.5rem 1rem 0; }
+.ai-web-main .alignright { float: right; margin: 0 0 1rem 1.5rem; }
+.ai-web-main .aligncenter { display: block; margin-inline: auto; }
+.ai-web-main .wp-caption-text, .ai-web-main figcaption, .ai-web-main .gallery-caption { color: #5e6979; font-size: .9rem; }
+.ai-web-entry { max-width: 800px; margin-inline: auto; }
+.ai-web-entry__content::after { display: table; clear: both; content: ""; }
+.ai-web-entry__content > :first-child { margin-top: 0; }
+.ai-web-entry__meta { margin: -.5rem 0 1.5rem; color: #5e6979; font-size: .9rem; }
+.ai-web-entry__thumbnail { display: block; margin: 0 0 1.5rem; }
+.ai-web-entry__thumbnail img { display: block; }
+.ai-web-card { padding-bottom: 2rem; margin-bottom: 2rem; border-bottom: 1px solid #e6eaf0; }
+.ai-web-card h2 { margin: 0 0 .75rem; }
+.ai-web-card h2 a { color: inherit; text-decoration: none; }
+.ai-web-card h2 a:hover { text-decoration: underline; }
+.ai-web-archive-header { max-width: 800px; margin: 0 auto 3rem; }
+.ai-web-main .navigation { max-width: 800px; margin: 2rem auto 0; }
+.ai-web-main .nav-links { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .75rem 1.5rem; }
+.ai-web-main .page-numbers { padding: .25rem .65rem; }
+.ai-web-main .page-numbers.current { color: #fff; background: #174ea6; border-radius: .25rem; }
+.ai-web-main .post-page-numbers { display: inline-block; margin-inline: .3rem; }
+.ai-web-search { display: flex; gap: .6rem; flex-wrap: wrap; margin-block: 1.5rem; }
+.ai-web-search label { flex: 1 1 220px; }
+.ai-web-search input[type="search"] { width: 100%; }
+.ai-web-main input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]), .ai-web-main textarea { max-width: 100%; padding: .7rem .8rem; border: 1px solid #a8b5c5; border-radius: .35rem; color: inherit; background: #fff; font: inherit; }
+.ai-web-search button, .ai-web-main input[type="submit"] { padding: .7rem 1rem; border: 1px solid #174ea6; border-radius: .35rem; color: #fff; background: #174ea6; font: inherit; cursor: pointer; }
+.ai-web-comments { max-width: 800px; margin: 3rem auto 0; border-top: 1px solid #e6eaf0; padding-top: 2rem; }
+.ai-web-comments .comment-list { padding-left: 1.5rem; }
+.ai-web-comments .comment-body { padding-block: 1rem; }
+.ai-web-comments .comment-author .avatar { float: left; margin: 0 .75rem .5rem 0; border-radius: 50%; }
+.ai-web-comments .comment-metadata { font-size: .85rem; }
+.ai-web-comments .bypostauthor > .comment-body { border-left: 3px solid #b7c7df; padding-left: 1rem; }
+.ai-web-comments .comment-form label { display: block; }
+.ai-web-comments .comment-form-cookies-consent label { display: inline; }
+.ai-web-comments textarea { width: 100%; }
+
+@media (max-width: 720px) {
+  .ai-web-container { width: calc(100% - 2rem); }
+  .ai-web-menu-toggle { display: inline-flex; }
+  .ai-web-navigation { flex-basis: 100%; }
+  .ai-web-header .ai-web-menu { display: flex; align-items: stretch; flex-direction: column; gap: .35rem; }
+  .ai-web-header .ai-web-menu a { padding-block: .4rem; }
+  .ai-web-footer__inner { align-items: flex-start; flex-direction: column; }
+}
