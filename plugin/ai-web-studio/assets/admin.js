@@ -108,6 +108,7 @@
         'Vrať přesně tři oddělené části označené HTML, CSS a JS, které zkopíruji do samostatných polí.',
         'HTML je jen fragment obsahu: bez doctype, html, head, body, style, script, PHP, on* atributů a javascript: URL. ' + (part ? 'Vrať pouze požadovanou hlavičku nebo patičku.' : 'Hlavičku a patičku spravuji zvlášť, nevytvářej je. Začni jedním hlavním nadpisem H1; nepřidávej další značku main.'),
         'CSS vrať bez značek style. Všechny selektory omez na jedinečnou kořenovou třídu tohoto fragmentu; nepoužívej globální body, h1, button apod. K dispozici jsou proměnné --aiwp-accent, --aiwp-width a --aiwp-font.',
+        config.designContext || '',
         'Menu spravuji přes Vzhled → Menu. ' + (part ? 'Do nav vlož přesně [aiwp_menu location="' + location + '"].' : 'Pokud potřebuji menu uvnitř obsahu, použij [aiwp_menu location="primary"] nebo [aiwp_menu location="footer"].') + ' Tato jediná podporovaná značka vytvoří ul.aiwp-menu s li.menu-item a odkazy a; případné podmenu je ul.sub-menu. CSS přizpůsob této struktuře a zahrň přístupné zobrazení podmenu. Odkazy ručně nevypisuj. Jiné shortcody nejsou podporované.',
         'JS je nepovinný čistý JavaScript bez značek script, bez knihoven a externích skriptů. Selektory omez na kořen fragmentu; kód uzavři do IIFE a počítej s načteným DOM. Nepoužívej PHP ani volání WordPress funkcí.',
         'Návrh musí být responzivní, čitelný a přístupný z klávesnice. Dodrž kontrast, přidej popisy ovládání a respektuj prefers-reduced-motion.',
@@ -198,13 +199,15 @@
       var settings = config.settings || {};
       var accent = /^#[a-f\d]{6}$/i.test(settings.accent) ? settings.accent : '#2563eb';
       var width = Math.max(640, Math.min(1920, parseInt(settings.width, 10) || 1200));
-      var font = settings.font === 'serif' ? 'Georgia, "Times New Roman", serif' : 'system-ui, -apple-system, "Segoe UI", sans-serif';
+      var font = config.font ? config.font.stack : 'system-ui, sans-serif';
       var baseCss = ':root{--aiwp-accent:' + accent + ';--aiwp-width:' + width + 'px;--aiwp-font:' + font + ';}*{box-sizing:border-box}body{margin:0;font-family:var(--aiwp-font);color:#1b2838;line-height:1.6}img,video{max-width:100%;height:auto}';
       baseCss += '.aiwp-menu,.aiwp-menu .sub-menu{list-style:none;margin:0;padding:0}.aiwp-menu{display:flex;flex-wrap:wrap;align-items:flex-start;gap:12px 24px}.aiwp-menu li{margin:0}.aiwp-menu a{display:inline-block}.aiwp-menu .sub-menu{display:grid;gap:4px;margin-top:6px;padding-inline-start:16px}@media(max-width:720px){.aiwp-menu{flex-direction:column}}.aiwp-menu-preview-notice{padding:12px;border:1px solid #e0c574;background:#fff8e6;color:#6b4700;font-size:14px}';
       var csp = "default-src 'none'; img-src https: http: data: blob:; media-src https: http:; font-src https: http: data:; style-src 'unsafe-inline' https: http:; script-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none';";
-      var previewCss = baseCss + '\n' + (settings.css || '') + '\n' + css;
+      var previewCss = baseCss + '\n' + (config.globalCss || settings.css || '') + '\n' + css;
+      var fontLink = config.font && config.font.url ? '<link rel="stylesheet" href="' + config.font.url.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '">' : '';
+      var wrapper = studio.dataset.aiwpKind === 'page' ? 'aiwp-content' : (studio.dataset.aiwpKind === 'footer' ? 'aiwp-footer' : 'aiwp-header');
       // srcdoc stays in an opaque sandbox origin; never insert user content into the admin DOM.
-      frame.srcdoc = '<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="' + csp + '"><title>Náhled obsahu</title><style>' + previewCss.replace(/<\/style/gi, '<\\/style') + '</style></head><body>' + html + '<script>' + js.replace(/<\/script/gi, '<\\/script') + '<\/script></body></html>';
+      frame.srcdoc = '<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="' + csp + '"><title>Náhled obsahu</title>' + fontLink + '<style>' + previewCss.replace(/<\/style/gi, '<\\/style') + '</style></head><body><div class="' + wrapper + '">' + html + '</div><script>' + js.replace(/<\/script/gi, '<\\/script') + '<\/script></body></html>';
       frame.hidden = false;
       studio.querySelector('[data-aiwp-preview-empty]').hidden = true;
       previewRendered = true;

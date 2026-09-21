@@ -4,7 +4,9 @@
 
 Napište si název webu, pro koho je určený, jaké služby nabízíte a jak vás mají návštěvníci kontaktovat. Připravte vlastní texty a fotografie. Ukázka dodaná s projektem používá fiktivní ateliér a ukázkovou e-mailovou adresu; před zveřejněním je nahraďte.
 
-Otevřete svou oblíbenou AI a vložte [zadání pro AI](zadani-pro-ai.md). Doplňte údaje v hranatých závorkách. AI vám má vrátit zvlášť HTML, CSS a JS. Samotná instalace Web svépomocí žádnou AI službu nevolá.
+Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte Google Font a použijte **Zkopírovat zadání pro společné CSS**. AI navrhne společný vzhled a velikosti i řádkování pomocí `clamp()` pro H1–H6, běžný text a small. Výsledek vložte do **Společného CSS** a uložte. Podrobný [postup a první prompt](spolecny-vzhled.md).
+
+Potom otevřete svou oblíbenou AI a vložte [zadání pro stránku](zadani-pro-ai.md) spolu s uloženým společným CSS. Doplňte údaje v hranatých závorkách. AI vám má vrátit zvlášť HTML, CSS a JS; společné styly už jen používá. Tlačítko pro zadání v editoru stránky připojí uložený font a společné CSS automaticky. Samotná instalace Web svépomocí žádnou AI službu nevolá.
 
 ## 2. Vytvořte první stránku
 

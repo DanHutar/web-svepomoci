@@ -5,7 +5,7 @@ function aiwp_get_settings() {
     $stored = get_option( 'aiwp_settings', array() );
     $settings = wp_parse_args( is_array( $stored ) ? $stored : array(), array( 'accent' => '#2563eb', 'font' => 'system', 'width' => 1200, 'css' => '' ) );
     $settings['accent'] = sanitize_hex_color( $settings['accent'] ) ?: '#2563eb';
-    $settings['font'] = 'serif' === $settings['font'] ? 'serif' : 'system';
+    $settings['font'] = aiwp_valid_font( $settings['font'] ) ? $settings['font'] : 'system';
     $settings['width'] = max( 640, min( 1920, absint( $settings['width'] ) ) );
     $settings['css'] = is_string( $settings['css'] ) ? $settings['css'] : '';
     return $settings;
@@ -52,7 +52,11 @@ function aiwp_sanitize_settings( $input ) {
         add_settings_error( 'aiwp_settings', 'aiwp_settings_code', is_wp_error( $code ) ? $code->get_error_message() : 'Zadejte platnou barvu, například #2563eb.' );
         return $old;
     }
-    return array( 'accent' => $color, 'font' => 'serif' === $input['font'] ? 'serif' : 'system', 'width' => max( 640, min( 1920, absint( $input['width'] ) ) ), 'css' => $code['css'] );
+    if ( ! aiwp_valid_font( $input['font'] ) ) {
+        add_settings_error( 'aiwp_settings', 'aiwp_font', 'Vyberte písmo z nabídky Google Fonts.' );
+        return $old;
+    }
+    return array( 'accent' => $color, 'font' => $input['font'], 'width' => max( 640, min( 1920, absint( $input['width'] ) ) ), 'css' => $code['css'] );
 }
 
 add_action( 'admin_enqueue_scripts', function ( $hook ) {
@@ -60,6 +64,10 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
         return;
     }
     wp_enqueue_style( 'aiwp-settings', AIWP_URL . 'assets/settings.css', array(), AIWP_VERSION );
+    if ( 'aiwp-settings' === ( isset( $_GET['page'] ) ? $_GET['page'] : '' ) && aiwp_can_edit_code() ) {
+        wp_enqueue_script( 'aiwp-settings-prompt', AIWP_URL . 'assets/settings.js', array(), AIWP_VERSION, true );
+        wp_localize_script( 'aiwp-settings-prompt', 'aiwpDesign', array( 'rules' => aiwp_typography_rules() ) );
+    }
 } );
 
 function aiwp_overview() {
@@ -103,10 +111,22 @@ function aiwp_settings_page() {
         <?php settings_fields( 'aiwp_settings_group' ); ?>
         <table class="form-table" role="presentation"><tbody>
             <tr><th scope="row"><label for="aiwp-accent">Hlavní barva</label></th><td><input type="color" id="aiwp-accent" name="aiwp_settings[accent]" value="<?php echo esc_attr( $settings['accent'] ); ?>"><p class="description"><code>var(--aiwp-accent)</code></p></td></tr>
-            <tr><th scope="row"><label for="aiwp-font">Písmo</label></th><td><select id="aiwp-font" name="aiwp_settings[font]"><option value="system" <?php selected( $settings['font'], 'system' ); ?>>Systémové bezpatkové</option><option value="serif" <?php selected( $settings['font'], 'serif' ); ?>>Patkové (Georgia)</option></select><p class="description">Bez stahování fontů z cizích služeb. <code>var(--aiwp-font)</code></p></td></tr>
+            <tr><th scope="row"><label for="aiwp-font">Písmo — Google Fonts</label></th><td><select id="aiwp-font" name="aiwp_settings[font]">
+                <optgroup label="Veřejné Google Fonts">
+                <?php foreach ( aiwp_font_catalog() as $key => $font ) : ?>
+                    <option value="<?php echo esc_attr( $key ); ?>" data-family="<?php echo esc_attr( $font['family'] ); ?>" <?php selected( $settings['font'], $key ); ?>><?php echo esc_html( $font['family'] ); ?></option>
+                <?php endforeach; ?>
+                </optgroup>
+                <optgroup label="Původní písma bez stahování"><option value="system" data-family="Systémové bezpatkové písmo" <?php selected( $settings['font'], 'system' ); ?>>Systémové bezpatkové</option><option value="serif" data-family="Georgia" <?php selected( $settings['font'], 'serif' ); ?>>Georgia</option></optgroup>
+                </select><p class="description">Výběr osmi veřejných Google Fonts, načítaných ze serverů Googlu bez API klíče. Písmo použijte přes <code>var(--aiwp-font)</code>. Vlastní font-family ve starém CSS má přednost.</p></td></tr>
             <tr><th scope="row"><label for="aiwp-width">Šířka obsahu</label></th><td><input type="number" id="aiwp-width" name="aiwp_settings[width]" min="640" max="1920" value="<?php echo esc_attr( $settings['width'] ); ?>"> px<p class="description"><code>max-width: var(--aiwp-width)</code> v CSS vaší stránky.</p></td></tr>
             <tr><th scope="row"><label for="aiwp-global-css">Společné CSS</label></th><td><textarea class="large-text code" rows="16" id="aiwp-global-css" name="aiwp_settings[css]" spellcheck="false"><?php echo esc_textarea( $settings['css'] ); ?></textarea><p class="description">Pouze CSS bez značek &lt;style&gt;. Změna se projeví na celém webu. Tato společná nastavení nemají historii revizí.</p></td></tr>
         </tbody></table>
+        <h2>Zadání pro společný vzhled</h2>
+        <p>Vyberte písmo a zkopírujte zadání do AI. Navrhne společné CSS včetně velikostí a výšek řádků pomocí clamp() pro H1–H6, běžný text a small. Výsledek vložte do Společného CSS a uložte vzhled webu. Samotná volba písma typografickou stupnici nepřepisuje.</p>
+        <button type="button" class="button" data-aiwp-design-copy>Zkopírovat zadání pro společné CSS</button>
+        <p data-aiwp-design-status role="status" aria-live="polite"></p>
+        <details data-aiwp-design-fallback hidden><summary>Zadání pro ruční kopírování</summary><textarea class="large-text code" rows="12" readonly aria-label="Zadání pro společné CSS"></textarea></details>
         <?php submit_button( 'Uložit vzhled webu' ); ?>
     </form></div>
     <?php

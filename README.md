@@ -42,6 +42,8 @@ Postup pro další vývoj a vydání je v [docs/vydavani.md](docs/vydavani.md).
 
 ## Jak se web skládá
 
+Od verze **1.3.0** vyberete ve **Vzhled webu** veřejný Google Font a zkopírujete zadání pro společné CSS. AI podle fontu navrhne `clamp()` pro velikosti i řádkování H1–H6, běžného textu a small. [Postup a první prompt](docs/spolecny-vzhled.md). Zadání v editorech přebírá uložený font i společné CSS; samotné přepnutí fontu staré CSS stránek nepřepisuje.
+
 | Místo | Co se vkládá |
 | --- | --- |
 | Úprava stránky | Zapnutí režimu Web svépomocí a oddělené HTML, CSS a JS pro jednu stránku; SEO; volitelné skrytí hlavičky či patičky |

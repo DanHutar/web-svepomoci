@@ -42,6 +42,9 @@ final class AIWP_Admin {
 		wp_localize_script( 'aiwp-admin', 'aiwpAdmin', array(
 			'editors'      => $editors,
 			'settings'     => aiwp_get_settings(),
+			'font'         => aiwp_font_details( aiwp_get_settings()['font'] ),
+			'globalCss'    => aiwp_global_css(),
+			'designContext' => aiwp_shared_design_context(),
 			'siteName'     => get_bloginfo( 'name' ),
 			'siteUrl'      => home_url( '/' ),
 			'menuPreviews' => array( 'primary' => aiwp_render_menu( 'primary' ), 'footer' => aiwp_render_menu( 'footer' ) ),

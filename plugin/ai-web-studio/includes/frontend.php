@@ -39,12 +39,18 @@ add_filter( 'the_content', function ( $content ) {
 
 function aiwp_global_css() {
     $settings = aiwp_get_settings();
-    $font = 'serif' === $settings['font'] ? 'Georgia, "Times New Roman", serif' : 'system-ui, -apple-system, "Segoe UI", sans-serif';
+    $font = aiwp_font_details( $settings['font'] )['stack'];
     return ':root{--aiwp-accent:' . $settings['accent'] . ';--aiwp-width:' . $settings['width'] . 'px;--aiwp-font:' . $font . ';}.aiwp-content,.aiwp-header,.aiwp-footer{font-family:var(--aiwp-font);}' . "\n" . $settings['css'];
 }
 
 add_action( 'wp_enqueue_scripts', function () {
-    wp_enqueue_style( 'aiwp-runtime', AIWP_URL . 'assets/frontend.css', array(), AIWP_VERSION );
+    $font = aiwp_font_details( aiwp_get_settings()['font'] );
+    $dependencies = array();
+    if ( $font['url'] ) {
+        wp_enqueue_style( 'aiwp-google-font', $font['url'], array(), null );
+        $dependencies[] = 'aiwp-google-font';
+    }
+    wp_enqueue_style( 'aiwp-runtime', AIWP_URL . 'assets/frontend.css', $dependencies, AIWP_VERSION );
     wp_add_inline_style( 'aiwp-runtime', aiwp_global_css() );
     $documents = array();
     // Parts are consumed only by a compatible theme. Avoid leaking their code on other themes.

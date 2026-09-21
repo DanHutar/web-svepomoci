@@ -57,3 +57,15 @@ Ověřeno lokálně 21. 9. 2026 ve WordPressu 6.8.3 / PHP 8.3. Prošla celá int
 - Aktualizační kód funguje, pokud je aktivní samotná šablona nebo samotný plugin.
 
 Test pracuje s dočasnými kopiemi balíčků. Původní instalaci simuluje ponecháním původních identifikátorů, názvů a verzí a vypnutím nového updateru; nejde o archiv všech historických souborů verze 1.0.0. Odpovědi GitHubu pro budoucí verze jsou v automatickém testu řízené testovací odpovědi. Nasazení na konkrétní hosting zůstává samostatným krokem.
+
+## Verze 1.3.0: Google Fonts a společné prompty
+
+Lokálně prošla integrační sada `npm test` ve WordPressu 6.8.3 / PHP 8.3 a Chrome, rozšířená o `tests/design-browser.mjs`:
+
+- Přijetí všech osmi povolených Google Fontů a odmítnutí cizího názvu či URL; zachování původních systémových voleb bez externího požadavku.
+- Uložení fontu Lora a společného CSS skutečným formulářem WordPressu a jejich opětovné načtení.
+- Kopírování promptu podle aktuálního výběru a CSS, včetně náhradního ručního kopírování při odmítnutí schránky.
+- Požadavek na `clamp()` pro velikost i výšku řádku všech osmi textových úrovní; předání uloženého fontu a celého společného CSS do zadání stránky.
+- Jeden odkaz na font na veřejné stránce, správná rodina písma v CSS a použití společných clamp hodnot na veřejné stránce i ve správném obalu náhledu.
+
+Samostatné požadavky na skutečné Google Fonts CSS API ověřily dostupnost všech osmi rodin s vahami 400, 500, 600 a 700. Browser test používá pro odpověď tohoto API řízenou náhradu, aby nebyl závislý na síti; netestuje vzhled každého glyfu všech fontů. Konkrétní stupnici navrhuje až AI uživatele, proto její výsledné CSS vyžaduje kontrolu na daném webu.

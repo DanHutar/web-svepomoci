@@ -1,6 +1,6 @@
 # Zadání, které můžete zkopírovat do AI
 
-Nahraďte údaje v hranatých závorkách a pošlete následující zadání AI. Jako první si nechte vytvořit obsah stránky. Hlavičku a patičku připravte samostatně podle doplňujících zadání níže.
+Nejdříve vytvořte [společný vzhled a typografii](spolecny-vzhled.md). Pak použijte zadání pro stránku, hlavičku, patičku a úpravy níže. Tlačítko v editoru připojuje uložené společné CSS automaticky; při ručním použití ho přiložte sami.
 
 ```text
 Vytvoř obsah stránky pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.
@@ -10,6 +10,8 @@ Návštěvníci: [pro koho web je]
 Cíl stránky: [například návštěvník mi napíše e-mail]
 Obsah a sekce: [skutečné texty, služby, reference a kontakt]
 Vizuální styl: [barvy, nálada a přibližné rozložení]
+Zvolený font ve Vzhled webu: [název]; používej var(--aiwp-font).
+Společné CSS: [přilož celý aktuální obsah pole Společné CSS].
 Povolené cíle odkazů: [skutečné adresy stránek a e-mail]
 Obrázky: [adresy obrázků z knihovny médií; pokud je nemám, použij rozložení bez nich]
 
@@ -31,7 +33,8 @@ Pravidla:
    selektory na vlastní obal. Kód uzavři do vlastní funkce, která se hned
    spustí. Nepoužívej dokumentové document.write ani globální proměnné.
 5. Nepoužívej externí fonty, analytiku, CDN, balíčkové manažery, React,
-   Vue, PHP ani API klíče. Nepoužívej WordPress shortcody s výjimkou vlastní
+   Vue, PHP ani API klíče. Vybraný Google Font načítá plugin; nevkládej ho znovu.
+   Nepoužívej WordPress shortcody s výjimkou vlastní
    značky aiwp_menu pro menu podle zadání níže. Kód nebude procházet buildem.
 6. Rozložení musí fungovat na telefonu i počítači. Použij dostatečný
    kontrast, viditelný focus klávesnice a přístupné popisky ovládání.
@@ -46,6 +49,12 @@ Pravidla:
    do SEO polí, proto nevytvářej meta značky v HTML.
 10. Vrať celé obsahy polí, které mohu přímo zkopírovat. Krátce vysvětli,
     které moje adresy nebo údaje je potřeba před zveřejněním doplnit.
+11. Používej společné třídy a typografické proměnné --aiwp-size-h1 až
+    --aiwp-size-h6, --aiwp-size-body, --aiwp-size-small a odpovídající
+    --aiwp-leading-*. Společné CSS má clamp() pro velikosti i řádkování
+    všech osmi úrovní. V CSS stránky je nedefinuj znovu ani neměň font-family.
+    CSS stránky obsahuje jen její odlišnosti. Pokud společný vzhled chybí,
+    upozorni mě, abych jej nejprve vytvořil zadáním pro společné CSS.
 ```
 
 ## Zadání pro hlavičku
@@ -79,6 +88,7 @@ Do nav s aria-label vlož přesně [aiwp_menu location="footer"].
 Značku ponech v HTML. Připrav styly pro ul.aiwp-menu, li > a a ul.sub-menu.
 Podnabídky mají zůstat přístupné klávesnicí i dotykem.
 Nepřidávej nadpis h1 ani smyšlené právní texty. Vrať HTML, CSS a JS zvlášť.
+Použij přiložené společné CSS a jeho typografii; přidej jen odlišnosti patičky.
 Pokud není potřeba skript, může JS zůstat prázdný.
 ```
 
@@ -90,6 +100,10 @@ jedinečný obal stránky a všechny dosavadní funkční odkazy.
 Pokud HTML obsahuje značky [aiwp_menu location="primary"] nebo
 [aiwp_menu location="footer"], zachovej je a styly jejich seznamů.
 Požadovaná změna: [konkrétně co změnit].
+Font vybraný ve Vzhled webu: [název]; používej var(--aiwp-font).
+Společné CSS: [přilož aktuální společné CSS]. Zachovej jeho třídy,
+velikosti a výšky řádků clamp() pro H1–H6, body a small.
+Nekopíruj společné CSS do CSS této stránky; upravuj pouze její odlišnosti.
 Vrať úplný nový obsah každého změněného pole, nikoli jen rozdíl.
 
 Současné HTML:
