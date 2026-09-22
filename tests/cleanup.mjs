@@ -31,6 +31,8 @@ export async function runCleanupChecks(server) {
     const normal = await get(data.normal);
     assert.ok(coreStyles.test(normal), 'Ordinary page retains native block styles');
     assert.ok(!emoji.test(normal));
+    await phpJson(server, `update_option('aiwp_settings',array('css'=>'.wp-block-button__link { color: red; }')); echo 'true';`);
+    assert.ok(!coreStyles.test(await get(data.page)), 'Unused block selector alone does not require core CSS');
     await phpJson(server, `update_post_meta(${data.page}, '_aiwp_html', '<p class="has-vivid-red-color">Copied block class</p>'); echo 'true';`);
     assert.ok(coreStyles.test(await get(data.page)), 'AI HTML using WP classes retains core styles');
     await phpJson(server, `update_post_meta(${data.page}, '_aiwp_html', '<section class="cleanup-fixture"><h1>Čistá stránka 🌻</h1></section>'); update_option('aiwp_settings',array('css'=>'.cleanup-fixture{color:var(--wp--preset--color--vivid-red)}')); echo 'true';`);

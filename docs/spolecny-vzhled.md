@@ -10,7 +10,9 @@ CSS není utajené: prohlížeč je potřebuje a návštěvník si je může st�
 
 ## Méně výchozího kódu WordPressu od verze 1.6.0
 
-AI stránka s naší šablonou může vynechat výchozí styly bloků a barevné palety WordPressu, pokud její vlastní kód vystačí se společným a místním CSS. Plugin kontroluje uložené HTML, CSS a JS zobrazených částí, společné a dodatečné CSS i třídy přiřazených menu. Při rozpoznání tříd jako `wp-block-button`, `has-vivid-red-color` nebo proměnných `--wp--preset--…` výchozí styly ponechá.
+AI stránka s naší šablonou může vynechat výchozí styly bloků a barevné palety WordPressu, pokud její vlastní kód vystačí se společným a místním CSS. Plugin kontroluje uložené HTML a JS zobrazených částí i třídy přiřazených menu. Při rozpoznání tříd jako `wp-block-button` nebo `has-vivid-red-color` výchozí styly ponechá. Od verze 1.6.1 samotný selektor v CSS, například `.wp-block-button__link`, neznamená použití bloku. Odkazy na proměnné `--wp--preset--…` ve společném, místním či dodatečném CSS výchozí styly nadále zachovávají, stejně jako nejednoznačné CSS s escapovanými identifikátory.
+
+Od verze 1.6.1 se při sestavení veřejného CSS vynechávají sousední totožné bloky, například stejný obsah CSS Headeru a Footeru. Uložené zdrojové kódy v administraci se nemění. Odlišné styly ani opakování oddělená jinými pravidly se automaticky nemažou: pořadí A → B → A může být potřebné pro výsledný vzhled. Společná pravidla proto dlouhodobě ukládejte jednou do **Společného CSS**; do jednotlivých částí patří jejich odlišnosti.
 
 Běžné stránky s bloky, formuláře chráněných stránek, vlastní šablony stránek, náhled Přizpůsobení a jiné aktivní šablony se takto neodlehčují. Doplněk třetí strany, který na AI stránku dynamicky vkládá bloky, může potřebovat standardní styly: vývojář je zachová filtrem `add_filter( 'aiwp_trim_core_styles', '__return_false' );` ve vlastním pluginu. Automatická kontrola uloženého kódu nemůže odhalit každý dynamicky vytvořený prvek.
 

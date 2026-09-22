@@ -54,12 +54,25 @@ function aiwp_compact_css( $css ) {
     return trim( $out );
 }
 
-function aiwp_frontend_css() {
-    $css = aiwp_global_css();
-    foreach ( aiwp_frontend_documents() as $document ) {
-        $css .= "\n" . $document['css'];
+/** Only adjacent copies are redundant: A / B / A can intentionally override B. */
+function aiwp_join_css( $parts ) {
+    $result = array();
+    $previous = null;
+    foreach ( $parts as $part ) {
+        $compact = aiwp_compact_css( $part );
+        if ( '' === $compact ) { continue; }
+        if ( $compact !== $previous ) { $result[] = $part; }
+        $previous = $compact;
     }
-    return $css;
+    return implode( "\n", $result );
+}
+
+function aiwp_frontend_css() {
+    $parts = array( aiwp_global_css() );
+    foreach ( aiwp_frontend_documents() as $document ) {
+        $parts[] = $document['css'];
+    }
+    return aiwp_join_css( $parts );
 }
 
 /** Keep the document's path and query: relative CSS URLs and WP previews keep working. */

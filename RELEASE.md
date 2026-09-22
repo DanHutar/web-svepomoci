@@ -1,4 +1,10 @@
-# Web svépomocí 1.6.0
+# Web svépomocí 1.6.1
+
+- Stejné sousední CSS bloky hlavičky a patičky se ve veřejném CSS načítají jen jednou. Uložené kódy v administraci zůstávají zachované.
+- Samotný nepoužitý selektor jako `.wp-block-button__link` ve společném CSS již nezpůsobuje načítání všech výchozích stylů WordPressu. Skutečné použití jeho tříd v HTML či JS a odkazy na jeho CSS proměnné nadále zachovávají potřebné styly.
+- Pořadí odlišných CSS pravidel a úmyslných přepisů zůstává zachované.
+
+Zachované úpravy z verze 1.6.0:
 
 - Samostatné AI stránky v naší šabloně vynechávají nepotřebné základní styly bloků, barevné palety a globální styly WordPressu.
 - Pokud kód stránky, zobrazené hlavičky či patičky, společné CSS nebo třídy menu odkazují na styly WordPressu, jejich načítání zůstává zachované.

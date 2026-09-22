@@ -12,9 +12,16 @@ function aiwp_can_trim_core_styles() {
     if ( is_admin() || 'ai-web' !== get_stylesheet() || ! is_page() || ! aiwp_is_code_page() || is_customize_preview() || get_page_template_slug( get_queried_object_id() ) || post_password_required( get_queried_object_id() ) ) {
         return false;
     }
-    $texts = array( aiwp_get_settings()['css'], wp_get_custom_css() );
+    $texts = array();
+    $styles = array( aiwp_get_settings()['css'], wp_get_custom_css() );
     foreach ( aiwp_frontend_documents() as $document ) {
-        foreach ( array( 'html', 'css', 'js' ) as $field ) { $texts[] = $document[ $field ]; }
+        foreach ( array( 'html', 'js' ) as $field ) { $texts[] = $document[ $field ]; }
+        $styles[] = $document['css'];
+    }
+    // A CSS selector does not create block markup. Preset references still need WP.
+    // Escaped identifiers are ambiguous; keep core styles conservatively in that case.
+    foreach ( $styles as $css ) {
+        if ( false !== strpos( $css, '--wp--' ) || false !== strpos( $css, '\\' ) ) { return false; }
     }
     // Menu item classes are editable separately from the AI HTML.
     foreach ( array_unique( array_values( get_nav_menu_locations() ) ) as $menu_id ) {

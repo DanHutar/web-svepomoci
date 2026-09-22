@@ -11,6 +11,21 @@ export function stylesUrl(html) {
 export async function runStylesChecks(server) {
   const fixture = await phpJson(server, `
     $settings = get_option('aiwp_settings', array());
+    $part_ids = get_option('aiwp_part_ids', array());
+    $test_parts = array();
+    foreach (array('header', 'footer') as $kind) {
+      $id = wp_insert_post(array('post_type'=>'aiwp_part','post_status'=>'publish','post_title'=>'Duplicate CSS test'));
+      update_post_meta($id, '_aiwp_enabled', true);
+      update_post_meta($id, '_aiwp_html', '<div class="duplicate-part">Shared part</div>');
+      update_post_meta($id, '_aiwp_css', '.duplicate-part { color: rgb(11, 22, 33); }');
+      $test_parts[$kind] = $id;
+    }
+    update_option('aiwp_part_ids', $test_parts);
+    $a = '.duplicate { color: red; }';
+    $b = '.duplicate { color: blue; }';
+    if (aiwp_join_css(array($a, '', $a)) !== $a) { throw new Exception('Adjacent duplicate CSS was retained'); }
+    if (aiwp_join_css(array($a, $b, $a)) !== implode("\\n", array($a, $b, $a))) { throw new Exception('CSS override order changed'); }
+    if (aiwp_join_css(array('.x::after { content: "a  b"; }', '.x::after { content: "a b"; }')) !== '.x::after { content: "a  b"; }' . "\\n" . '.x::after { content: "a b"; }') { throw new Exception('Different CSS strings were merged'); }
     $page = wp_insert_post(array('post_type'=>'page','post_status'=>'publish','post_title'=>'External CSS fixture'));
     update_post_meta($page, '_aiwp_enabled', 1);
     update_post_meta($page, '_aiwp_html', '<section class="css-fixture"><h1>CSS fixture</h1><p>Text</p></section>');
@@ -27,7 +42,7 @@ export async function runStylesChecks(server) {
     $_SERVER['REQUEST_URI'] = '/nested/page/?page_id=' . $page . '&preview=true';
     $url = aiwp_styles_url();
     if (strpos($url, '/nested/page/?') === false || strpos($url, 'preview=true') === false) { throw new Exception('Stylesheet changed the document base URL'); }
-    echo wp_json_encode(array('id'=>$page,'settings'=>$settings));
+    echo wp_json_encode(array('id'=>$page,'settings'=>$settings,'part_ids'=>$part_ids,'test_parts'=>array_values($test_parts)));
   `);
   let browser;
   try {
@@ -40,6 +55,7 @@ export async function runStylesChecks(server) {
     assert.match(response.headers.get('content-type'), /^text\/css/);
     assert.equal(response.headers.get('x-content-type-options'), 'nosniff');
     const css = await response.text();
+    assert.equal((css.match(/\.duplicate-part\s*\{/g) || []).length, 1, 'Identical header and footer CSS is served once');
     assert.ok(css.includes('border-top: 3px') && css.includes('rgb(12, 34, 56)'));
     assert.ok(!css.includes('private author note') && css.includes('a  b /* literal */'));
     const cached = await fetch(url, { headers: { 'If-None-Match': response.headers.get('etag') } });
@@ -48,6 +64,7 @@ export async function runStylesChecks(server) {
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto(`${server.serverUrl}/?page_id=${fixture.id}`);
+    assert.deepEqual(await page.locator('.duplicate-part').evaluateAll(elements => elements.map(el => getComputedStyle(el).color)), ['rgb(11, 22, 33)', 'rgb(11, 22, 33)'], 'Both header and footer retain their styles');
     const initial = await page.locator('.css-fixture').evaluate(el => ({ padding: getComputedStyle(el).paddingTop, content: getComputedStyle(el, '::after').content }));
     assert.deepEqual(initial, { padding: '20px', content: '"a  b /* literal */"' }, 'Compaction preserves calc arithmetic and literal strings');
     await phpJson(server, `update_post_meta(${fixture.id}, '_aiwp_css', '.css-fixture { color: rgb(90, 80, 70); }'); echo 'true';`);
@@ -80,6 +97,8 @@ export async function runStylesChecks(server) {
   } finally {
     if (browser) await browser.close();
     const settings = Buffer.from(JSON.stringify(fixture.settings)).toString('base64');
+    const parts = Buffer.from(JSON.stringify(fixture.part_ids)).toString('base64');
+    await phpJson(server, `update_option('aiwp_part_ids',json_decode(base64_decode('${parts}'),true)); foreach(array(${fixture.test_parts.join(',')}) as $id) { wp_delete_post($id,true); } echo 'true';`);
     await phpJson(server, `update_option('aiwp_settings',json_decode(base64_decode('${settings}'),true)); wp_delete_post(${fixture.id},true); echo 'true';`);
   }
 }

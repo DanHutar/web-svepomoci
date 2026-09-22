@@ -1,7 +1,7 @@
 {
   "name": "web-svepomoci-workspace",
   "private": true,
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Local WordPress integration checks; no Node dependencies are shipped in the theme or plugin.",
   "type": "module",
   "scripts": {

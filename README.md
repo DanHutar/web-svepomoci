@@ -24,9 +24,9 @@ Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plu
 1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
 2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
 3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.6.0**.
+4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.6.1**.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.6.0**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.6.1**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
 
 Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro propojení starší hlavičky s menu vložte značku popsanou níže a uložte ji. Změny odkazů pak provádějte ve **Vzhled → Menu**.
 
