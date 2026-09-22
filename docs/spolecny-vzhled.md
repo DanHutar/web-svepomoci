@@ -1,5 +1,15 @@
 # Zadání 1: společný vzhled a typografie
 
+## Načítání CSS od verze 1.5.0
+
+Společné CSS i CSS stránky, hlavičky a patičky se načítá odděleně od HTML. Plugin připraví CSS odpověď pro právě zobrazenou stránku; na disku nevznikají veřejné kopie kódu konceptů. Adresa obsahuje otisk aktuálního obsahu, takže se po uložení CSS změní. Prohlížeč může uloženou odpověď znovu ověřit pomocí ETag; neveřejné náhledy a stránky s heslem se do cache neukládají.
+
+Veřejná podoba má zkrácené mezery a odstraněný text komentářů. Textové řetězce, URL, mezery potřebné pro výpočty a oddělení tokenů zůstávají zachované. U neobvyklých escapovaných identifikátorů nebo nedokončených komentářů plugin ponechá původní CSS, aby zmenšení nezměnilo význam. V administraci a zadáních pro AI pracujete dál s původním čitelným kódem.
+
+CSS není utajené: prohlížeč je potřebuje a návštěvník si je může stáhnout. Úprava odstraní vypisování našeho uloženého CSS přímo do zdrojového HTML. Jiné pluginy mohou vkládat vlastní styly nebo znovu vložit externí CSS do HTML. Po aktualizaci vymažte případnou cache webu; pokud používáte optimalizaci CSS, ověřte, že nezapíná vložení celého CSS přímo do stránky.
+
+## Příprava společného vzhledu
+
 Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte písmo, barvu a šířku a uložte nastavení. Od verze **1.4.0** pak můžete otevřít **Web svépomocí → Zadání pro AI**, vybrat **Společný vzhled a typografie** a popsat zaměření i požadovaný styl webu. Klikněte na **Připravit zadání** a **Zkopírovat zadání**. Doplní se uložený font, barva, šířka a současné společné CSS. [Podrobný postup](zadani-ve-wordpressu.md).
 
 Dosavadní tlačítko **Zkopírovat zadání pro společné CSS** ve **Vzhled webu** zůstává dostupné; bere hodnoty přímo z rozepsaného formuláře. Nová sekce **Zadání pro AI** naproti tomu používá uložené nastavení. AI nic negeneruje přímo ve WordPressu: zadání jí vložíte a výsledek zkopírujete zpět.

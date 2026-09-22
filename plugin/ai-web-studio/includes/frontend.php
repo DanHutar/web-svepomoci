@@ -43,15 +43,7 @@ function aiwp_global_css() {
     return ':root{--aiwp-accent:' . $settings['accent'] . ';--aiwp-width:' . $settings['width'] . 'px;--aiwp-font:' . $font . ';}.aiwp-content,.aiwp-header,.aiwp-footer{font-family:var(--aiwp-font);}' . "\n" . $settings['css'];
 }
 
-add_action( 'wp_enqueue_scripts', function () {
-    $font = aiwp_font_details( aiwp_get_settings()['font'] );
-    $dependencies = array();
-    if ( $font['url'] ) {
-        wp_enqueue_style( 'aiwp-google-font', $font['url'], array(), null );
-        $dependencies[] = 'aiwp-google-font';
-    }
-    wp_enqueue_style( 'aiwp-runtime', AIWP_URL . 'assets/frontend.css', $dependencies, AIWP_VERSION );
-    wp_add_inline_style( 'aiwp-runtime', aiwp_global_css() );
+function aiwp_frontend_documents() {
     $documents = array();
     // Parts are consumed only by a compatible theme. Avoid leaking their code on other themes.
     if ( current_theme_supports( 'ai-web-parts' ) ) {
@@ -65,10 +57,19 @@ add_action( 'wp_enqueue_scripts', function () {
     if ( is_page() && aiwp_is_code_page() && ! post_password_required( get_queried_object_id() ) ) {
         $documents['page'] = aiwp_get_document( get_queried_object_id() );
     }
-    foreach ( $documents as $kind => $document ) {
-        if ( '' !== trim( $document['css'] ) ) {
-            wp_add_inline_style( 'aiwp-runtime', "/* AI Web: " . $kind . " */\n" . $document['css'] );
-        }
+    return $documents;
+}
+
+add_action( 'wp_enqueue_scripts', function () {
+    $font = aiwp_font_details( aiwp_get_settings()['font'] );
+    $dependencies = array();
+    if ( $font['url'] ) {
+        wp_enqueue_style( 'aiwp-google-font', $font['url'], array(), null );
+        $dependencies[] = 'aiwp-google-font';
+    }
+    wp_enqueue_style( 'aiwp-runtime', AIWP_URL . 'assets/frontend.css', $dependencies, AIWP_VERSION );
+    wp_enqueue_style( 'aiwp-design', aiwp_styles_url(), array( 'aiwp-runtime' ), null );
+    foreach ( aiwp_frontend_documents() as $kind => $document ) {
         if ( '' !== trim( $document['js'] ) ) {
             // Separate handles ensure one syntax error does not stop other fragments from parsing.
             $handle = 'aiwp-' . $kind;

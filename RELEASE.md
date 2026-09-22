@@ -1,15 +1,14 @@
-# Web svépomocí 1.4.0
+# Web svépomocí 1.5.0
 
-- Nová sekce **Web svépomocí → Zadání pro AI** připraví zadání pro společný vzhled a typografii, novou stránku, Header, Footer nebo úpravu existující stránky.
-- Popíšete svůj požadavek a plugin doplní uložený font, barvu, šířku a společné CSS. Při úpravě přidá kód pouze vybrané stránky nebo části webu.
-- Zadání pro společný vzhled požaduje `clamp()` pro velikosti písma i výšky řádků H1–H6, body a small. Header a Footer používají menu spravované ve **Vzhled → Menu**.
-- Celé zadání si můžete prohlédnout a zkopírovat. Pod ním najdete přesné pokyny a odkaz na místo, kam vložit odpověď AI.
-- Vyhledávání stránek ukazuje názvy bez načítání jejich kódu do prohlížeče. Změna výběru nebo požadavku zahodí předchozí zadání, aby se nekopíroval zastaralý výsledek.
+- Uložené společné CSS a styly aktuální stránky, Headeru a Footeru se načítají samostatně. V HTML je odkaz místo celého kódu těchto stylů.
+- Veřejná podoba CSS se šetrně zmenšuje a odstraňuje text komentářů. Původní čitelný kód zůstává v administraci, revizích a zadáních pro AI.
+- Změna CSS mění otisk v adrese. Staré odkazy načítají aktuální povolený obsah; přístup ke stylům konceptů, soukromých stránek a stránek s heslem vychází z oprávnění WordPressu.
+- Relativní URL obrázků zachovávají cestu původní stránky. Pořadí společných a místních stylů i náhled editoru zůstávají zachované.
 
-Z verzí 1.2.0 a 1.3.0 aktualizujte běžným tlačítkem ve WordPressu; kontrolu vyvoláte přes **Web svépomocí → Zkontrolovat aktualizace**. Ze starších verzí nahrajte instalační ZIPy ručně a potvrďte nahrazení.
+Od verze 1.2.0 aktualizujte běžným tlačítkem ve WordPressu; kontrolu vyvoláte přes **Web svépomocí → Zkontrolovat aktualizace**. Ze starších verzí nahrajte instalační ZIPy ručně a potvrďte nahrazení. Po aktualizaci vymažte případnou cache webu.
 
-Příprava zadání používá uložená data. Rozpracované změny v jiných editorech nejprve uložte. Plugin se nepřipojuje k AI a nic jí automaticky neposílá; zadání a výsledný kód přenesete kopírováním. Dosavadní tlačítka pro kopírování zadání zůstávají dostupná.
+Samostatné načítání CSS není šifrování ani ochrana proti kopírování. Prohlížeč stále dostává potřebné styly, které lze zobrazit v jeho nástrojích. Nic není potřeba přesouvat mezi poli administrace. Styly vložené WordPressem nebo jinými pluginy tato změna neupravuje.
 
-Podrobný postup: [Zadání přímo ve WordPressu](https://github.com/DanHutar/web-svepomoci/blob/main/docs/zadani-ve-wordpressu.md).
+Podrobnosti: [Společný vzhled a načítání CSS](https://github.com/DanHutar/web-svepomoci/blob/main/docs/spolecny-vzhled.md).
 
 Použijte přílohy **web-svepomoci-plugin.zip** a **web-svepomoci-sablona.zip**. **Source code (zip)** není instalační balíček WordPressu.

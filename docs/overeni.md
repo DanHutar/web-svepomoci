@@ -83,3 +83,15 @@ Ověřeno lokálně 22. 9. 2026 ve WordPressu 6.8.3 / PHP 8.3 a Google Chrome. P
 - Ovládání při mobilní šířce 390 px.
 
 Prošla také sada `npm run test:updates`: skutečná výměna instalačních ZIPů v dočasném WordPressu a zachování uložených dat, nastavení, přiřazení menu a aktivace obou součástí. Tyto testy neověřují nasazení na konkrétní hosting ani kvalitu kódu, který následně vytvoří externí AI uživatele.
+
+## Verze 1.5.0: samostatné načítání CSS
+
+Ve WordPressu 6.8.3 / PHP 8.3 a Chrome prošla integrační sada `npm test`, včetně nových kontrol v `tests/styles.mjs`:
+
+- Uložené společné a místní CSS není ve zdrojovém HTML; samostatná odpověď používá `text/css` a `nosniff`.
+- Styly se skutečně aplikují v prohlížeči. Výpočty `calc()`, textové řetězce, URL a hranice tokenů zůstávají zachované; původní editory a náhled dál fungují.
+- Změna CSS mění adresu; ETag umožňuje ověření nezměněného obsahu a starý odkaz vrací aktuální povolené styly.
+- Skryté části a vypnutý AI obsah nepřidávají své CSS. Změna publikované stránky na koncept či soukromou stránku znepřístupní její styly i pod starou adresou.
+- Stránka s heslem neposkytuje místní CSS bez hesla; po zadání správného hesla se CSS načte. Tato odpověď se neukládá do cache.
+
+Prošel i `npm run test:updates` se skutečnou výměnou ZIPů a zachováním dat a aktivace. Při místním testování bylo nutné zopakovat běh po časovém limitu přihlášení; dokončený běh prošel celou sadou. Na konkrétním hostingu je třeba po aktualizaci vymazat případnou cache a ověřit nastavení optimalizačních pluginů. CSS zůstává pro návštěvníkův prohlížeč dostupné, nejde o jeho utajení.

@@ -27,7 +27,7 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
-      - name: Test editors, Google Fonts and the prompt hub in Chrome
+      - name: Test editors, prompts and external CSS in Chrome
         run: npm test
       - name: Build both installable packages and update manifest
         shell: pwsh

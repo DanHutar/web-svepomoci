@@ -13,7 +13,10 @@ export async function runBrowserChecks(serverUrl, fixtures, outputDir) {
     if (await page.locator('#user_login').count()) {
       await page.locator('#user_login').fill('admin');
       await page.locator('#user_pass').fill('aiwp-local-test');
-      await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#wp-submit').click()]);
+      await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#wp-submit').click()]).catch(async error => {
+        console.error('Login diagnostic:', page.url(), await page.locator('body').innerText());
+        throw error;
+      });
     }
     await page.locator('.aiwp-studio').waitFor();
     await page.waitForFunction(() => document.querySelector('.CodeMirror')?.CodeMirror);
