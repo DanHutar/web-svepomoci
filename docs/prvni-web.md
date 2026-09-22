@@ -4,9 +4,9 @@
 
 Napište si název webu, pro koho je určený, jaké služby nabízíte a jak vás mají návštěvníci kontaktovat. Připravte vlastní texty a fotografie. Ukázka dodaná s projektem používá fiktivní ateliér a ukázkovou e-mailovou adresu; před zveřejněním je nahraďte.
 
-Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte Google Font a použijte **Zkopírovat zadání pro společné CSS**. AI navrhne společný vzhled a velikosti i řádkování pomocí `clamp()` pro H1–H6, běžný text a small. Výsledek vložte do **Společného CSS** a uložte. Podrobný [postup a první prompt](spolecny-vzhled.md).
+Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte Google Font, barvu a šířku obsahu a uložte je. Potom otevřete **Web svépomocí → Zadání pro AI**, vyberte **Společný vzhled a typografie** a stručně popište svůj web. Použijte **Připravit zadání** a **Zkopírovat zadání** a vložte text do své AI. Ta navrhne společný vzhled a velikosti i řádkování pomocí `clamp()` pro H1–H6, běžný text a small. Výsledek vložte do **Společného CSS** a uložte. Podrobný [postup ke společnému vzhledu](spolecny-vzhled.md).
 
-Potom otevřete svou oblíbenou AI a vložte [zadání pro stránku](zadani-pro-ai.md) spolu s uloženým společným CSS. Doplňte údaje v hranatých závorkách. AI vám má vrátit zvlášť HTML, CSS a JS; společné styly už jen používá. Tlačítko pro zadání v editoru stránky připojí uložený font a společné CSS automaticky. Samotná instalace Web svépomocí žádnou AI službu nevolá.
+Ve stejné nabídce **Zadání pro AI** potom vyberte **Nová stránka**, popište její obsah a připravte další zadání. Uložený font a společné CSS se připojí automaticky. AI vám má vrátit zvlášť HTML, CSS a JS; společné styly už jen používá. [Podrobný postup práce se zadáním](zadani-ve-wordpressu.md). Samotná instalace Web svépomocí žádnou AI službu nevolá. Pokud raději zadání připravíte ručně, použijte [vzory](zadani-pro-ai.md).
 
 ## 2. Vytvořte první stránku
 
@@ -29,6 +29,8 @@ V přehledu **Web svépomocí** můžete upravit společnou barvu, písmo, ší�
 
 ## 3. Přidejte společnou hlavičku a patičku
 
+V nabídce **Web svépomocí → Zadání pro AI** vyberte **Header — hlavička webu** nebo **Footer — patička webu**, popište požadovaný obsah a zkopírujte připravené zadání do AI. Připojí se společný vzhled i případný dosavadní uložený kód příslušné části.
+
 1. Otevřete **Header** v levém menu administrace.
 2. Vložte HTML, CSS a JS hlavičky. Pro ukázku použijte soubory `examples/header.*`.
 3. Zapněte použití vlastní hlavičky a uložte změny.
@@ -38,7 +40,7 @@ Hlavička a patička jsou společné pro web. Jakmile jsou zapnuté, jejich ulo�
 
 ### Propojte hlavičku s Vzhled → Menu
 
-Funkce byla přidána v AI Web Studio 1.1.0 a je součástí přejmenovaného **web-svepomoci-plugin 1.2.0**. Starší instalaci aktualizujte podle [návodu k aktualizaci](../README.md#aktualizace-existujícího-testovacího-webu-na-120). Šablona se nyní jmenuje **web-svepomoci-sablona**.
+Funkce byla přidána v AI Web Studio 1.1.0 a je součástí přejmenovaného **web-svepomoci-plugin**. Starší instalaci aktualizujte podle [návodu k aktualizaci](../README.md#ruční-aktualizace). Šablona se nyní jmenuje **web-svepomoci-sablona**.
 
 1. Otevřete **Vzhled → Menu**, napište název menu a klikněte na **Vytvořit menu**.
 2. V levé části vyberte své stránky a použijte **Přidat do menu**. Položky můžete přetahováním seřadit; odsazením pod jinou položku vytvoříte podnabídku.
@@ -82,7 +84,7 @@ Pokud používáte Yoast SEO, Rank Math, All in One SEO, SEOPress nebo The SEO F
 
 ## Další úpravy a návrat k předchozí verzi
 
-Při změně předejte AI současné HTML, CSS i JS a popište konkrétní požadavek. Požádejte o úplný výsledný obsah každého změněného pole. Pro začátečníka je snazší celé pole nahradit než hledat jednotlivé řádky.
+V nabídce **Web svépomocí → Zadání pro AI** vyberte **Úprava existující stránky**, zvolte stránku a popište konkrétní změnu. Zadání samo připojí uložené HTML, CSS a JS vybrané stránky. Rozpracované změny nejprve uložte. AI má vrátit úplný výsledný obsah změněných polí, abyste nemuseli hledat jednotlivé řádky.
 
 Uložené verze najdete ve standardních revizích WordPressu. Revize zahrnují také kód a SEO uložené v metadatech. Počet uchovaných verzí závisí na nastavení WordPressu a revize nemusí být dostupné, pokud je instalace vypíná. Návrat kontrolujte v náhledu; automatické ukládání neberte jako náhradu vědomého uložení změn.
 

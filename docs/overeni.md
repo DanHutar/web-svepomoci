@@ -69,3 +69,17 @@ Lokálně prošla integrační sada `npm test` ve WordPressu 6.8.3 / PHP 8.3 a C
 - Jeden odkaz na font na veřejné stránce, správná rodina písma v CSS a použití společných clamp hodnot na veřejné stránce i ve správném obalu náhledu.
 
 Samostatné požadavky na skutečné Google Fonts CSS API ověřily dostupnost všech osmi rodin s vahami 400, 500, 600 a 700. Browser test používá pro odpověď tohoto API řízenou náhradu, aby nebyl závislý na síti; netestuje vzhled každého glyfu všech fontů. Konkrétní stupnici navrhuje až AI uživatele, proto její výsledné CSS vyžaduje kontrolu na daném webu.
+
+## Verze 1.4.0: zadání pro AI v administraci
+
+Ověřeno lokálně 22. 9. 2026 ve WordPressu 6.8.3 / PHP 8.3 a Google Chrome. Prošla integrační sada `npm test`, včetně 62 PHP kontrol přípravy zadání a ovládání nové sekce v prohlížeči:
+
+- Všech pět druhů zadání, správná místa pro vložení výsledku a doplnění uloženého společného vzhledu i obsahu vybrané stránky nebo části webu.
+- Oprávnění správce včetně oprávnění upravovat vybranou stránku; odmítnutí nepřihlášeného přístupu, neplatného nonce, jiné metody než POST a chybných vstupů AJAX požadavků.
+- Hledání stránek podle názvu bez předávání jejich kódu v seznamu výsledků.
+- Zobrazení uloženého HTML jako textu zadání bez jeho spuštění v administraci.
+- Kopírování do schránky a nabídka ručního kopírování při odmítnutí přístupu ke schránce.
+- Zneplatnění zadání po změně vstupů a odmítnutí opožděné odpovědi pro původní požadavek.
+- Ovládání při mobilní šířce 390 px.
+
+Prošla také sada `npm run test:updates`: skutečná výměna instalačních ZIPů v dočasném WordPressu a zachování uložených dat, nastavení, přiřazení menu a aktivace obou součástí. Tyto testy neověřují nasazení na konkrétní hosting ani kvalitu kódu, který následně vytvoří externí AI uživatele.

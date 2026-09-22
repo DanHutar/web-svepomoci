@@ -34,6 +34,8 @@ try {
   await runBrowserChecks(server.serverUrl, result.fixtures, out);
   const { runDesignChecks } = await import('./design-browser.mjs');
   await runDesignChecks(server);
+  const { runPromptChecks } = await import('./prompts-browser.mjs');
+  await runPromptChecks(server);
   await phpJson(server, 'require_once ABSPATH . "wp-admin/includes/plugin.php"; deactivate_plugins("ai-web-studio/ai-web-studio.php"); echo "true";');
   const fallback = await (await fetch(server.serverUrl + '/')).text();
   assert.ok(fallback.includes('Standardní obsah zachován.') && !fallback.includes('aiwp-content'), 'Theme works with plugin deactivated');

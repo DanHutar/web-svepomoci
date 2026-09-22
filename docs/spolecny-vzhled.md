@@ -1,6 +1,8 @@
 # Zadání 1: společný vzhled a typografie
 
-Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte písmo a použijte **Zkopírovat zadání pro společné CSS**. Tlačítko doplní vybraný font, barvu, šířku a současné CSS z formuláře. AI nic negeneruje přímo ve WordPressu: zadání jí vložíte a výsledek zkopírujete zpět.
+Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte písmo, barvu a šířku a uložte nastavení. Od verze **1.4.0** pak můžete otevřít **Web svépomocí → Zadání pro AI**, vybrat **Společný vzhled a typografie** a popsat zaměření i požadovaný styl webu. Klikněte na **Připravit zadání** a **Zkopírovat zadání**. Doplní se uložený font, barva, šířka a současné společné CSS. [Podrobný postup](zadani-ve-wordpressu.md).
+
+Dosavadní tlačítko **Zkopírovat zadání pro společné CSS** ve **Vzhled webu** zůstává dostupné; bere hodnoty přímo z rozepsaného formuláře. Nová sekce **Zadání pro AI** naproti tomu používá uložené nastavení. AI nic negeneruje přímo ve WordPressu: zadání jí vložíte a výsledek zkopírujete zpět.
 
 Nová nabídka obsahuje Inter, Roboto, Open Sans, Montserrat, Nunito Sans, Source Sans 3, Lora a Merriweather. Jde o výběr veřejných Google Fonts, nikoli celý katalog. Font se načítá ze serverů Googlu přes CSS API bez API klíče, s `display=swap` a vahami 400, 500, 600, 700. Původní systémové písmo a Georgia zůstávají dostupné pro stávající weby a použití bez stahování fontu.
 
@@ -50,7 +52,7 @@ Současné společné CSS:
 [VLOŽ CELÉ DOSAVADNÍ CSS, NEBO NAPIŠ PRÁZDNÉ]
 ```
 
-Výsledek vložte do **Společného CSS** a klikněte na **Uložit vzhled webu**. Potom vytvářejte stránky podle [další sady zadání](zadani-pro-ai.md). Tlačítko pro zadání v editoru stránky, Headeru i Footeru už připojí uložený font a společné CSS. Po změně společných nastavení znovu načtěte otevřené editory.
+Výsledek vložte do **Společného CSS** a klikněte na **Uložit vzhled webu**. Potom připravujte stránky, Header a Footer přes [Zadání pro AI ve WordPressu](zadani-ve-wordpressu.md), nebo použijte [ruční vzory](zadani-pro-ai.md). Tlačítko pro zadání v editoru stránky, Headeru i Footeru také připojí uložený font a společné CSS. Po změně společných nastavení znovu načtěte otevřené editory.
 
 Volba jiného fontu sama nemění hodnoty clamp(). Pro nový font si nechte stupnici znovu navrhnout. Již uložené CSS stránek se automaticky nepřepisuje: vlastní font-family, font-size nebo line-height může přebít společný vzhled. Takové výjimky odstraňujte po kontrole jednotlivých stránek, nikoli hromadným mazáním CSS.
 

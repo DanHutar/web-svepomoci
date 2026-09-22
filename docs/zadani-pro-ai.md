@@ -1,5 +1,7 @@
 # Zadání, které můžete zkopírovat do AI
 
+Od verze **1.4.0** můžete zadání připravit přímo v nabídce **Web svépomocí → Zadání pro AI**. Stačí vybrat druh zadání a popsat požadavek; uložený vzhled a potřebný kód se připojí automaticky. [Postup ve WordPressu](zadani-ve-wordpressu.md). Níže zůstávají vzory pro ruční použití.
+
 Nejdříve vytvořte [společný vzhled a typografii](spolecny-vzhled.md). Pak použijte zadání pro stránku, hlavičku, patičku a úpravy níže. Tlačítko v editoru připojuje uložené společné CSS automaticky; při ručním použití ho přiložte sami.
 
 ```text

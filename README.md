@@ -3,7 +3,7 @@
 Jednoduchá šablona a doprovodný plugin pro sestavení webu z HTML, CSS a JavaScriptu, které vám připraví AI. Kód kopírujete do oddělených polí v administraci WordPressu. Žádný účet AI ani klíč API se s webem nepropojuje.
 
 - **Šablona `web-svepomoci-sablona`** zobrazuje stránky, společnou hlavičku a patičku.
-- **Plugin `web-svepomoci-plugin`** přidává editory kódu, nastavení vzhledu, SEO, náhled a ukládání do revizí WordPressu.
+- **Plugin `web-svepomoci-plugin`** přidává editory kódu, přípravu zadání pro AI, nastavení vzhledu, SEO, náhled a ukládání do revizí WordPressu.
 - **Složka `examples`** obsahuje hotovou ukázku stránky, hlavičky a patičky.
 
 Potřebujete WordPress **6.4 nebo novější**, PHP **7.4 nebo novější** a účet s oprávněními `manage_options` i `unfiltered_html`. V běžné samostatné instalaci je to správce; v síti Multisite zpravidla správce celé sítě. Jiné role mohou dál pracovat s běžným obsahem podle svých oprávnění, ale nemohou vkládat spustitelný kód do těchto editorů.
@@ -19,14 +19,14 @@ Zobrazené názvy jsou nové, ale kvůli zachování aktivace a přiřazení men
 
 Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plugin/ai-web-studio` do `wp-content/plugins/`.
 
-## Aktualizace existujícího testovacího webu na 1.2.0
+## Ruční aktualizace
 
 1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
 2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
 3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.2.0**.
+4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.4.0**.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.2.0** a nové názvy. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.4.0**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
 
 Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro propojení starší hlavičky s menu vložte značku popsanou níže a uložte ji. Změny odkazů pak provádějte ve **Vzhled → Menu**.
 
@@ -34,11 +34,17 @@ Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro prop
 
 Repozitář: [DanHutar/web-svepomoci](https://github.com/DanHutar/web-svepomoci). Instalační ZIPy najdete mezi přílohami [nejnovějšího vydání](https://github.com/DanHutar/web-svepomoci/releases/latest). Nepoužívejte **Source code (zip)** jako instalační balíček.
 
-Verze 1.2.0 přidává kontrolu nových stabilních vydání. Po jejím prvním ručním nahrání se další verze nabízejí v běžných **Aktualizacích WordPressu**, u pluginu a u šablony. V nabídce **Web svépomocí → Zkontrolovat aktualizace** můžete vynutit nové načtení. Automatické instalace bez kliknutí se samy nezapínají.
+Od verze 1.2.0 se nové stabilní verze nabízejí v běžných **Aktualizacích WordPressu**, u pluginu a u šablony. Pokud máte starší instalaci, nahrajte nejnovější balíčky jednou ručně. V nabídce **Web svépomocí → Zkontrolovat aktualizace** můžete vynutit nové načtení. Automatické instalace bez kliknutí se samy nezapínají.
 
 Kontrola používá veřejné GitHub API a manifest vydání, nepotřebuje token. Odesílá běžný HTTP požadavek, nikoli obsah vašich stránek nebo přihlašovací údaje. Výsledek se ukládá na hodinu, neúspěch na pět minut. Když GitHub neodpovídá, web dál funguje; aktualizace se nabídne po úspěšné kontrole. Musí být aktivní alespoň náš plugin nebo naše šablona. Stejná čísla verzí obou balíčků zjednodušují vydávání.
 
 Postup pro další vývoj a vydání je v [docs/vydavani.md](docs/vydavani.md).
+
+## Zadání pro AI přímo ve WordPressu
+
+Od verze **1.4.0** otevřete **Web svépomocí → Zadání pro AI**, vyberte společný vzhled, novou stránku, Header, Footer nebo úpravu existující stránky a vlastními slovy popište požadavek. Klikněte na **Připravit zadání** a pak na **Zkopírovat zadání**. U úpravy stránky nejprve vyhledejte a vyberte konkrétní stránku.
+
+Zadání připojí uložený font, společné CSS, barvu a šířku; při úpravě také uložený kód vybrané stránky nebo části webu. Rozpracované změny nejprve uložte. Zadání vložte do své AI a její výsledek ručně zkopírujte do polí uvedených pod zadáním. WordPress sám AI nevolá ani výsledek neukládá. [Podrobný postup](docs/zadani-ve-wordpressu.md).
 
 ## Jak se web skládá
 
@@ -50,11 +56,12 @@ Od verze **1.3.0** vyberete ve **Vzhled webu** veřejný Google Font a zkopíruj
 | **Header** v levém menu | Společná hlavička webu včetně svého CSS a JS |
 | **Footer** v levém menu | Společná patička webu včetně svého CSS a JS |
 | **Vzhled → Menu** | Odkazy pro umístění **Hlavní menu** a **Menu v patičce** |
+| **Web svépomocí → Zadání pro AI** | Popis požadavku; připravené zadání se kopíruje do vaší AI |
 | **Web svépomocí** | Návod a společná nastavení vzhledu |
 
 V režimu Web svépomocí se místo standardního obsahu dané stránky zobrazí její HTML. Při vypnutí režimu se opět používá běžný obsah WordPressu. Hlavička a patička mají vlastní zapnutí; jejich uložené změny se při aktivním zapnutí projeví na celém webu.
 
-Začněte [návodem pro první web](docs/prvni-web.md). Do AI můžete zkopírovat [připravené zadání](docs/zadani-pro-ai.md). Příklady a seznam souborů najdete v [examples/README.md](examples/README.md).
+Začněte [návodem pro první web](docs/prvni-web.md). Zadání si připravte [přímo ve WordPressu](docs/zadani-ve-wordpressu.md), nebo použijte [ruční vzory](docs/zadani-pro-ai.md). Příklady a seznam souborů najdete v [examples/README.md](examples/README.md).
 
 ## Menu z WordPressu ve vlastním HTML
 
