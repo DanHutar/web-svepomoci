@@ -24,9 +24,9 @@ Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plu
 1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
 2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
 3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.5.0**.
+4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.6.0**.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.5.0**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.6.0**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
 
 Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro propojení starší hlavičky s menu vložte značku popsanou níže a uložte ji. Změny odkazů pak provádějte ve **Vzhled → Menu**.
 
@@ -47,6 +47,8 @@ Od verze **1.4.0** otevřete **Web svépomocí → Zadání pro AI**, vyberte sp
 Zadání připojí uložený font, společné CSS, barvu a šířku; při úpravě také uložený kód vybrané stránky nebo části webu. Rozpracované změny nejprve uložte. Zadání vložte do své AI a její výsledek ručně zkopírujte do polí uvedených pod zadáním. WordPress sám AI nevolá ani výsledek neukládá. [Podrobný postup](docs/zadani-ve-wordpressu.md).
 
 ## Jak se web skládá
+
+Od verze **1.6.0** plugin na samostatných AI stránkách naší šablony vynechává nepotřebné výchozí styly WordPressu. Při rozpoznané závislosti na jeho třídách nebo proměnných je ponechá; běžné stránky s bloky si zachovávají standardní styly. Na veřejném webu s naší šablonou se vypíná doplňková podpora emoji, která přidávala další JavaScript a CSS. Emoji se zobrazují podle podpory zařízení. Po aktualizaci vymažte případnou cache webu.
 
 Od verze **1.5.0** se uložené společné CSS a CSS aktuální stránky, Headeru a Footeru načítá jedním samostatným odkazem místo vypisování do HTML. Nic nemusíte přesouvat: původní čitelný kód zůstává ve stejných polích administrace. Veřejný výstup se šetrně zmenšuje a vypouští text komentářů, pokud to dovoluje syntaxe. CSS lze stále stáhnout v prohlížeči; není zašifrované a nepatří do něj tajné údaje. [Podrobnosti](docs/spolecny-vzhled.md#načítání-css-od-verze-150).
 

@@ -4,7 +4,7 @@ import path from 'node:path';
 
 export const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 
-export async function bootWordPress(port = 9400, login = true, sourceRoot = projectRoot) {
+export async function bootWordPress(port = 9400, login = true, sourceRoot = projectRoot, wordpressVersion = '6.8.3') {
   // An upgrade replaces package directories. Mount their parents in disposable
   // test copies, because a mounted directory itself cannot be removed by WASM.
   const packageMounts = sourceRoot === projectRoot ? [
@@ -15,7 +15,7 @@ export async function bootWordPress(port = 9400, login = true, sourceRoot = proj
     { hostPath: path.join(sourceRoot, 'plugin'), vfsPath: '/wordpress/wp-content/plugins' },
   ];
   return runCLI({
-    command: 'server', port, login, php: '8.3', wp: '6.8.3', workers: 1,
+    command: 'server', port, login, php: '8.3', wp: wordpressVersion, workers: 1,
     'mount-before-install': [
       ...packageMounts,
       { hostPath: path.join(projectRoot, 'examples'), vfsPath: '/aiwp-examples' },

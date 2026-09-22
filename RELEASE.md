@@ -1,13 +1,13 @@
-# Web svépomocí 1.5.0
+# Web svépomocí 1.6.0
 
-- Uložené společné CSS a styly aktuální stránky, Headeru a Footeru se načítají samostatně. V HTML je odkaz místo celého kódu těchto stylů.
-- Veřejná podoba CSS se šetrně zmenšuje a odstraňuje text komentářů. Původní čitelný kód zůstává v administraci, revizích a zadáních pro AI.
-- Změna CSS mění otisk v adrese. Staré odkazy načítají aktuální povolený obsah; přístup ke stylům konceptů, soukromých stránek a stránek s heslem vychází z oprávnění WordPressu.
-- Relativní URL obrázků zachovávají cestu původní stránky. Pořadí společných a místních stylů i náhled editoru zůstávají zachované.
+- Samostatné AI stránky v naší šabloně vynechávají nepotřebné základní styly bloků, barevné palety a globální styly WordPressu.
+- Pokud kód stránky, zobrazené hlavičky či patičky, společné CSS nebo třídy menu odkazují na styly WordPressu, jejich načítání zůstává zachované.
+- Běžné stránky s bloky, stránky s vypnutým AI editorem, formuláře pro zadání hesla, vlastní šablony stránek a jiné šablony webu zachovávají standardní načítání stylů.
+- Na veřejném webu s naší šablonou se nenačítá doplňkový skript a CSS WordPressu pro emoji. Běžné znaky emoji se zobrazují podle podpory zařízení.
 
 Od verze 1.2.0 aktualizujte běžným tlačítkem ve WordPressu; kontrolu vyvoláte přes **Web svépomocí → Zkontrolovat aktualizace**. Ze starších verzí nahrajte instalační ZIPy ručně a potvrďte nahrazení. Po aktualizaci vymažte případnou cache webu.
 
-Samostatné načítání CSS není šifrování ani ochrana proti kopírování. Prohlížeč stále dostává potřebné styly, které lze zobrazit v jeho nástrojích. Nic není potřeba přesouvat mezi poli administrace. Styly vložené WordPressem nebo jinými pluginy tato změna neupravuje.
+Úprava zkracuje zdroj HTML, není ochranou proti kopírování. Obsah a jeho potřebné styly zůstávají dostupné prohlížeči. SEO metadata, API, RSS a ostatní funkce WordPressu se nevypínají. Nastavení ani uložený kód není potřeba převádět.
 
 Podrobnosti: [Společný vzhled a načítání CSS](https://github.com/DanHutar/web-svepomoci/blob/main/docs/spolecny-vzhled.md).
 

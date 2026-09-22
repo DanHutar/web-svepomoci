@@ -8,6 +8,14 @@ Veřejná podoba má zkrácené mezery a odstraněný text komentářů. Textov�
 
 CSS není utajené: prohlížeč je potřebuje a návštěvník si je může stáhnout. Úprava odstraní vypisování našeho uloženého CSS přímo do zdrojového HTML. Jiné pluginy mohou vkládat vlastní styly nebo znovu vložit externí CSS do HTML. Po aktualizaci vymažte případnou cache webu; pokud používáte optimalizaci CSS, ověřte, že nezapíná vložení celého CSS přímo do stránky.
 
+## Méně výchozího kódu WordPressu od verze 1.6.0
+
+AI stránka s naší šablonou může vynechat výchozí styly bloků a barevné palety WordPressu, pokud její vlastní kód vystačí se společným a místním CSS. Plugin kontroluje uložené HTML, CSS a JS zobrazených částí, společné a dodatečné CSS i třídy přiřazených menu. Při rozpoznání tříd jako `wp-block-button`, `has-vivid-red-color` nebo proměnných `--wp--preset--…` výchozí styly ponechá.
+
+Běžné stránky s bloky, formuláře chráněných stránek, vlastní šablony stránek, náhled Přizpůsobení a jiné aktivní šablony se takto neodlehčují. Doplněk třetí strany, který na AI stránku dynamicky vkládá bloky, může potřebovat standardní styly: vývojář je zachová filtrem `add_filter( 'aiwp_trim_core_styles', '__return_false' );` ve vlastním pluginu. Automatická kontrola uloženého kódu nemůže odhalit každý dynamicky vytvořený prvek.
+
+Na veřejných stránkách naší šablony se také vypíná skript a CSS pro dodatečnou podporu emoji. Samotné znaky emoji zůstávají v obsahu a vykresluje je zařízení návštěvníka; starší zařízení nemusí zobrazit všechny nové znaky. Administrace, e-maily a RSS se touto změnou neupravují. SEO metadata a služby WordPressu zůstávají dostupné.
+
 ## Příprava společného vzhledu
 
 Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte písmo, barvu a šířku a uložte nastavení. Od verze **1.4.0** pak můžete otevřít **Web svépomocí → Zadání pro AI**, vybrat **Společný vzhled a typografie** a popsat zaměření i požadovaný styl webu. Klikněte na **Připravit zadání** a **Zkopírovat zadání**. Doplní se uložený font, barva, šířka a současné společné CSS. [Podrobný postup](zadani-ve-wordpressu.md).

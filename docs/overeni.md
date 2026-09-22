@@ -95,3 +95,15 @@ Ve WordPressu 6.8.3 / PHP 8.3 a Chrome prošla integrační sada `npm test`, vč
 - Stránka s heslem neposkytuje místní CSS bez hesla; po zadání správného hesla se CSS načte. Tato odpověď se neukládá do cache.
 
 Prošel i `npm run test:updates` se skutečnou výměnou ZIPů a zachováním dat a aktivace. Při místním testování bylo nutné zopakovat běh po časovém limitu přihlášení; dokončený běh prošel celou sadou. Na konkrétním hostingu je třeba po aktualizaci vymazat případnou cache a ověřit nastavení optimalizačních pluginů. CSS zůstává pro návštěvníkův prohlížeč dostupné, nejde o jeho utajení.
+
+## Verze 1.6.0: méně výchozího kódu WordPressu
+
+Prošla celá integrační sada `npm test` na WordPressu 6.8.3 a samostatný test `npm run test:cleanup` na WordPressu 7.1.2, v obou případech s PHP 8.3 a Chrome. Nové kontroly ověřují:
+
+- Samostatná AI stránka vynechává výchozí styly bloků a palet i doplňkový emoji kód. Unicode emoji a SEO metadata zůstávají v HTML.
+- Běžné blokové stránky zachovávají potřebné styly; barevný preset se správně vykreslí v prohlížeči.
+- Třídy WordPressu v AI HTML a jeho proměnné ve společném CSS zachovají standardní styly. Kontrola rozpoznává i HTML entity v názvech tříd.
+- Vypnutí AI editoru a zobrazení formuláře pro heslo zachovají běžné styly.
+- Vlastní CSS AI stránky se dál správně aplikuje. Dosavadní editor, náhled, ukládání, prompty, SEO a ochrana samostatných CSS odpovědí prošly původní integrační sadou.
+
+Prošla také skutečná výměna ZIPů příkazem `npm run test:updates` se zachováním dat a aktivace. Automatické vydání opakuje testy obou verzí WordPressu. Tato kontrola není testem všech doplňků třetích stran; doplňky dynamicky vkládající bloky mohou vyžadovat zachování základních stylů přes filtr popsaný v návodu.
