@@ -31,6 +31,8 @@ jobs:
         run: npm test
       - name: Test lean frontend on WordPress 7.1.2
         run: npm run test:cleanup
+      - name: Test external JavaScript on WordPress 7.1.2
+        run: npm run test:scripts
       - name: Build both installable packages and update manifest
         shell: pwsh
         run: ./tools/package.ps1

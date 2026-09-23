@@ -4,6 +4,7 @@ import path from 'node:path';
 import { bootWordPress, phpJson, projectRoot } from '../tools/playground.mjs';
 import { stylesUrl, runStylesChecks } from './styles.mjs';
 import { runCleanupChecks } from './cleanup.mjs';
+import { runScriptChecks } from './scripts.mjs';
 
 const out = path.join(projectRoot, 'test-results');
 await fs.mkdir(out, { recursive: true });
@@ -40,6 +41,7 @@ try {
   const { runPromptChecks } = await import('./prompts-browser.mjs');
   await runPromptChecks(server);
   await runStylesChecks(server);
+  await runScriptChecks(server);
   await runCleanupChecks(server);
   await phpJson(server, 'require_once ABSPATH . "wp-admin/includes/plugin.php"; deactivate_plugins("ai-web-studio/ai-web-studio.php"); echo "true";');
   const fallback = await (await fetch(server.serverUrl + '/')).text();

@@ -73,9 +73,7 @@ add_action( 'wp_enqueue_scripts', function () {
         if ( '' !== trim( $document['js'] ) ) {
             // Separate handles ensure one syntax error does not stop other fragments from parsing.
             $handle = 'aiwp-' . $kind;
-            wp_register_script( $handle, false, array(), AIWP_VERSION, true );
-            wp_enqueue_script( $handle );
-            wp_add_inline_script( $handle, "(function(){\n" . $document['js'] . "\n})();" );
+            wp_enqueue_script( $handle, aiwp_script_url( $kind, $document['js'] ), array(), null, true );
         }
     }
 }, 30 );

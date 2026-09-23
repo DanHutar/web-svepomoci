@@ -1,20 +1,15 @@
-# Web svépomocí 1.6.1
+# Web svépomocí 1.7.0
 
-- Stejné sousední CSS bloky hlavičky a patičky se ve veřejném CSS načítají jen jednou. Uložené kódy v administraci zůstávají zachované.
-- Samotný nepoužitý selektor jako `.wp-block-button__link` ve společném CSS již nezpůsobuje načítání všech výchozích stylů WordPressu. Skutečné použití jeho tříd v HTML či JS a odkazy na jeho CSS proměnné nadále zachovávají potřebné styly.
-- Pořadí odlišných CSS pravidel a úmyslných přepisů zůstává zachované.
-
-Zachované úpravy z verze 1.6.0:
-
-- Samostatné AI stránky v naší šabloně vynechávají nepotřebné základní styly bloků, barevné palety a globální styly WordPressu.
-- Pokud kód stránky, zobrazené hlavičky či patičky, společné CSS nebo třídy menu odkazují na styly WordPressu, jejich načítání zůstává zachované.
-- Běžné stránky s bloky, stránky s vypnutým AI editorem, formuláře pro zadání hesla, vlastní šablony stránek a jiné šablony webu zachovávají standardní načítání stylů.
-- Na veřejném webu s naší šablonou se nenačítá doplňkový skript a CSS WordPressu pro emoji. Běžné znaky emoji se zobrazují podle podpory zařízení.
+- JavaScript uložený u stránky, Headeru a Footeru se načítá samostatnými odkazy. Ve zdroji HTML už není celý obsah polí JS.
+- Způsob vkládání kódu, náhledy, revize, pořadí spouštění a oddělení skriptů zůstávají zachované. Kód není potřeba znovu ukládat.
+- Načítají se pouze skripty zobrazených a zapnutých částí. Koncepty, soukromé stránky a stránky zamčené heslem svůj JavaScript anonymnímu návštěvníkovi neposkytnou ani přes staré odkazy.
+- Změna kódu mění verzi odkazu. Privilegované odpovědi a stránky s heslem se neukládají do cache; veřejné odpovědi ověřují aktuálnost pomocí ETag.
+- Dosavadní samostatné CSS, odstraňování sousedních duplicit CSS a omezení nepotřebných stylů WordPressu zůstávají zachované.
 
 Od verze 1.2.0 aktualizujte běžným tlačítkem ve WordPressu; kontrolu vyvoláte přes **Web svépomocí → Zkontrolovat aktualizace**. Ze starších verzí nahrajte instalační ZIPy ručně a potvrďte nahrazení. Po aktualizaci vymažte případnou cache webu.
 
-Úprava zkracuje zdroj HTML, není ochranou proti kopírování. Obsah a jeho potřebné styly zůstávají dostupné prohlížeči. SEO metadata, API, RSS a ostatní funkce WordPressu se nevypínají. Nastavení ani uložený kód není potřeba převádět.
+Úprava zkracuje zdroj HTML, není ochranou proti kopírování. JavaScript zůstává dostupný v nástrojích prohlížeče. Původní syntaxe a komentáře se zachovávají; nejde o minifikaci ani šifrování.
 
-Podrobnosti: [Společný vzhled a načítání CSS](https://github.com/DanHutar/web-svepomoci/blob/main/docs/spolecny-vzhled.md).
+Podrobnosti: [JavaScript mimo zdroj HTML](https://github.com/DanHutar/web-svepomoci/blob/main/docs/javascript.md).
 
 Použijte přílohy **web-svepomoci-plugin.zip** a **web-svepomoci-sablona.zip**. **Source code (zip)** není instalační balíček WordPressu.

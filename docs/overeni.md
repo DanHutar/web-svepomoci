@@ -107,3 +107,15 @@ Prošla celá integrační sada `npm test` na WordPressu 6.8.3 a samostatný tes
 - Vlastní CSS AI stránky se dál správně aplikuje. Dosavadní editor, náhled, ukládání, prompty, SEO a ochrana samostatných CSS odpovědí prošly původní integrační sadou.
 
 Prošla také skutečná výměna ZIPů příkazem `npm run test:updates` se zachováním dat a aktivace. Automatické vydání opakuje testy obou verzí WordPressu. Tato kontrola není testem všech doplňků třetích stran; doplňky dynamicky vkládající bloky mohou vyžadovat zachování základních stylů přes filtr popsaný v návodu.
+
+## Verze 1.7.0: samostatné skripty
+
+Kontroly `tests/scripts.mjs` jsou součástí `npm test` na WordPressu 6.8.3. Samostatný příkaz `npm run test:scripts` je spouští na WordPressu 7.1.2. Automatické vydání vyžaduje úspěch obou sad i testu aktualizačních ZIPů.
+
+- Celé JS z polí není ve zdroji HTML; načítají se tři samostatné odpovědi s typem `application/javascript` a `nosniff`.
+- Chrome ověřuje pořadí Header → Footer → stránka, událost `DOMContentLoaded` a funkční kliknutí. Syntaktická chyba v hlavičce nezastaví patičku a stránku.
+- Obsah odpovědi zachovává původní skript i koncový řádkový komentář, ETag vrací 304 pouze pro nezměněný obsah a změna kódu mění verzi odkazu.
+- Skrytá část, vypnutá AI stránka, koncept a soukromá stránka neposkytují JS přes původní odkazy. Neplatná hodnota ani pole v parametru skriptu se nezpracují jako platný požadavek.
+- Stránka s heslem poskytne JS až po odemčení; odpověď má `no-store` a nemá ETag. Odkaz zachovává cestu a parametry původní stránky.
+
+Nejde o test všech optimalizačních doplňků: externí slučování či odkládání skriptů může ovlivnit jejich pořadí. Obsah skriptů zůstává dostupný v prohlížeči.

@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/DanHutar/web-svepomoci
  * Update URI: https://github.com/DanHutar/web-svepomoci
  * Description: HTML, CSS a JavaScript pro jednotlivé stránky, společná hlavička a patička a základní SEO.
- * Version: 1.6.1
+ * Version: 1.7.0
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Author: DanHutar
@@ -13,7 +13,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-define( 'AIWP_VERSION', '1.6.1' );
+define( 'AIWP_VERSION', '1.7.0' );
 define( 'AIWP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AIWP_URL', plugin_dir_url( __FILE__ ) );
 
@@ -22,6 +22,7 @@ require_once AIWP_DIR . 'includes/menus.php';
 require_once AIWP_DIR . 'includes/frontend.php';
 require_once AIWP_DIR . 'includes/frontend-cleanup.php';
 require_once AIWP_DIR . 'includes/styles.php';
+require_once AIWP_DIR . 'includes/scripts.php';
 require_once AIWP_DIR . 'includes/seo.php';
 require_once AIWP_DIR . 'includes/design.php';
 require_once AIWP_DIR . 'includes/settings.php';
