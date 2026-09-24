@@ -33,6 +33,8 @@ jobs:
         run: npm run test:cleanup
       - name: Test external JavaScript on WordPress 7.1.2
         run: npm run test:scripts
+      - name: Test WebP media conversion without companion plugin
+        run: npm run test:webp
       - name: Build both installable packages and update manifest
         shell: pwsh
         run: ./tools/package.ps1

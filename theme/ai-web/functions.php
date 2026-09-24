@@ -5,6 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 require_once get_template_directory() . '/includes/github-updates.php';
+require_once get_template_directory() . '/includes/webp.php';
 
 function ai_web_setup() {
 	load_theme_textdomain( 'ai-web', get_template_directory() . '/languages' );

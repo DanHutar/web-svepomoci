@@ -46,6 +46,7 @@ try {
   await phpJson(server, 'require_once ABSPATH . "wp-admin/includes/plugin.php"; deactivate_plugins("ai-web-studio/ai-web-studio.php"); echo "true";');
   const fallback = await (await fetch(server.serverUrl + '/')).text();
   assert.ok(fallback.includes('Standardní obsah zachován.') && !fallback.includes('aiwp-content'), 'Theme works with plugin deactivated');
+  console.log(await phpJson(server, 'require "/aiwp-tests/webp.php";'));
   await fs.writeFile(path.join(out, 'results.json'), JSON.stringify({ ...result, frontend: 'passed', browser: 'passed', wordpress: '6.8.3', php: '8.3' }, null, 2));
   console.log('PASS: WordPress integration, HTTP output and browser checks.');
 } finally {

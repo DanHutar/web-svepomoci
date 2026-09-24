@@ -119,3 +119,15 @@ Kontroly `tests/scripts.mjs` jsou součástí `npm test` na WordPressu 6.8.3. Sa
 - Stránka s heslem poskytne JS až po odemčení; odpověď má `no-store` a nemá ETag. Odkaz zachovává cestu a parametry původní stránky.
 
 Nejde o test všech optimalizačních doplňků: externí slučování či odkládání skriptů může ovlivnit jejich pořadí. Obsah skriptů zůstává dostupný v prohlížeči.
+
+## Verze 1.8.0: nahrávání WebP
+
+`tests/webp.php` testuje skutečné nahrávání přes `media_handle_sideload` po deaktivaci doprovodného pluginu. Je součástí `npm test` na WordPressu 6.8.3 a samostatného `npm run test:webp` na WordPressu 7.1.2.
+
+- Nově nahrané JPEG a PNG mají WebP obsah, adresu a MIME typ v médiích, včetně vytvořeného náhledu.
+- Průhlednost PNG zůstává zachovaná. Otočení JPEG se ověřuje vynucenou EXIF orientací přes standardní filtr WordPressu.
+- Existující stejně pojmenovaný soubor se nepřepíše. Originál po úspěchu zmizí až po vytvoření WebP.
+- Bez dostupného editoru se původní obsah nezmění. Simulovaná chyba ukládání ponechá originál a odstraní neúplný nový výstup.
+- PNG s animačním blokem, poškozené obrázky a ostatní formáty se nepřevádějí.
+
+Testovací prostředí používá GD. Dostupnost WebP a EXIF závisí na konkrétním hostingu; šablona před převodem ověřuje podporu editoru. Test negarantuje menší velikost každého výstupu ani kompatibilitu se všemi optimalizačními pluginy.

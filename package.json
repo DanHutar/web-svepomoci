@@ -1,7 +1,7 @@
 {
   "name": "web-svepomoci-workspace",
   "private": true,
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "Local WordPress integration checks; no Node dependencies are shipped in the theme or plugin.",
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "test:updates": "node tests/updates.mjs",
     "test:cleanup": "node tests/cleanup-flow.mjs",
     "test:scripts": "node tests/scripts-flow.mjs",
+    "test:webp": "node tests/webp-flow.mjs",
     "preview": "node tools/preview.mjs"
   },
   "devDependencies": {
