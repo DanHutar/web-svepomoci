@@ -227,16 +227,24 @@
 
     document.querySelectorAll('[data-aiwp-counter]').forEach(function (counter) {
       var input = document.getElementById(counter.dataset.aiwpCounter);
-      if (!input) return;
+      if (!input || typeof input.value !== 'string') return;
       function update() { counter.textContent = String(Array.from(input.value).length); }
       input.addEventListener('input', update);
       update();
     });
 
     var mediaButton = document.querySelector('[data-aiwp-media]');
+    var mediaStatus = document.querySelector('[data-aiwp-media-status]');
     var mediaFrame;
     if (mediaButton) mediaButton.addEventListener('click', function () {
-      if (!window.wp || !window.wp.media) return;
+      if (mediaStatus) { mediaStatus.hidden = true; mediaStatus.textContent = ''; }
+      if (!window.wp || typeof window.wp.media !== 'function') {
+        if (mediaStatus) {
+          mediaStatus.textContent = 'Knihovna médií se nenačetla. Obnovte stránku; případně vložte adresu obrázku přímo do pole.';
+          mediaStatus.hidden = false;
+        }
+        return;
+      }
       if (!mediaFrame) {
         mediaFrame = window.wp.media({ title: 'Vybrat obrázek pro sdílení', button: { text: 'Použít tento obrázek' }, library: { type: 'image' }, multiple: false });
         mediaFrame.on('select', function () {

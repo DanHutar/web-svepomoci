@@ -5,6 +5,7 @@ import { bootWordPress, phpJson, projectRoot } from '../tools/playground.mjs';
 import { stylesUrl, runStylesChecks } from './styles.mjs';
 import { runCleanupChecks } from './cleanup.mjs';
 import { runScriptChecks } from './scripts.mjs';
+import { runSeoMediaChecks } from './seo-media.mjs';
 
 const out = path.join(projectRoot, 'test-results');
 await fs.mkdir(out, { recursive: true });
@@ -43,6 +44,7 @@ try {
   await runStylesChecks(server);
   await runScriptChecks(server);
   await runCleanupChecks(server);
+  await runSeoMediaChecks(server);
   await phpJson(server, 'require_once ABSPATH . "wp-admin/includes/plugin.php"; deactivate_plugins("ai-web-studio/ai-web-studio.php"); echo "true";');
   const fallback = await (await fetch(server.serverUrl + '/')).text();
   assert.ok(fallback.includes('Standardní obsah zachován.') && !fallback.includes('aiwp-content'), 'Theme works with plugin deactivated');

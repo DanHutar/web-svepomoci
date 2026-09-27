@@ -47,11 +47,11 @@ export async function runBrowserChecks(serverUrl, fixtures, outputDir) {
       cm('css').setValue(cm('css').getValue() + '\n#browser-roundtrip { --saved-check: 1; }');
       cm('js').setValue(cm('js').getValue() + '\ndocument.documentElement.dataset.aiwpTest = "ok";');
     });
-    await page.locator('#aiwp-seo-title').fill('Ateliér – ověřená stránka');
+    await page.locator('#aiwp-seo-title-input').fill('Ateliér – ověřená stránka');
     await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#publish').click()]);
     await page.locator('.aiwp-studio').waitFor();
     assert.ok((await page.locator('#aiwp-html').inputValue()).includes('browser-roundtrip'));
-    assert.equal(await page.locator('#aiwp-seo-title').inputValue(), 'Ateliér – ověřená stránka');
+    assert.equal(await page.locator('#aiwp-seo-title-input').inputValue(), 'Ateliér – ověřená stránka');
     await context.clearCookies();
     await page.goto(serverUrl + '/?page_id=' + fixtures.pageId);
     await page.waitForFunction(() => document.documentElement.dataset.aiwpTest === 'ok');

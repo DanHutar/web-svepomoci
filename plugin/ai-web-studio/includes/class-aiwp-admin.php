@@ -33,7 +33,7 @@ final class AIWP_Admin {
 		foreach ( array( 'html' => 'text/html', 'css' => 'text/css', 'js' => 'application/javascript' ) as $key => $mime ) {
 			$editors[ $key ] = wp_enqueue_code_editor( array( 'type' => $mime, 'codemirror' => array( 'lineNumbers' => true, 'lineWrapping' => true, 'indentUnit' => 2, 'tabSize' => 2, 'lint' => false ) ) );
 		}
-		$dependencies = array( 'jquery' );
+		$dependencies = array( 'jquery', 'media-views' );
 		if ( false !== $editors['html'] ) {
 			$dependencies[] = 'code-editor';
 		}
@@ -131,8 +131,9 @@ final class AIWP_Admin {
 		$data = aiwp_get_document( $post->ID );
 		?>
 		<div class="aiwp-seo-fields">
+			<p class="description" data-aiwp-media-status role="status" aria-live="polite" hidden></p>
 			<p class="aiwp-section-lead">Pomozte lidem poznat, co na stránce najdou. Prázdný SEO titulek se doplní z názvu stránky.</p>
-			<div class="aiwp-field"><label for="aiwp-seo-title">SEO titulek</label><input type="text" id="aiwp-seo-title" name="aiwp[seo_title]" value="<?php echo esc_attr( $data['seo_title'] ); ?>" placeholder="<?php echo esc_attr( get_the_title( $post ) ); ?>" aria-describedby="aiwp-seo-title-hint"><p class="description" id="aiwp-seo-title-hint"><span data-aiwp-counter="aiwp-seo-title">0</span> znaků · Obvykle se hodí přibližně 50–60 znaků; nejdůležitější sdělení dejte na začátek.</p></div>
+			<div class="aiwp-field"><label for="aiwp-seo-title-input">SEO titulek</label><input type="text" id="aiwp-seo-title-input" name="aiwp[seo_title]" value="<?php echo esc_attr( $data['seo_title'] ); ?>" placeholder="<?php echo esc_attr( get_the_title( $post ) ); ?>" aria-describedby="aiwp-seo-title-input-hint"><p class="description" id="aiwp-seo-title-input-hint"><span data-aiwp-counter="aiwp-seo-title-input">0</span> znaků · Obvykle se hodí přibližně 50–60 znaků; nejdůležitější sdělení dejte na začátek.</p></div>
 			<div class="aiwp-field"><label for="aiwp-seo-description">Meta popis</label><textarea id="aiwp-seo-description" name="aiwp[seo_description]" rows="3" aria-describedby="aiwp-seo-description-hint"><?php echo esc_textarea( $data['seo_description'] ); ?></textarea><p class="description" id="aiwp-seo-description-hint"><span data-aiwp-counter="aiwp-seo-description">0</span> znaků · Stručně popište přínos stránky. Přibližně 140–160 znaků je dobrý výchozí bod, nikoli pevný limit.</p></div>
 			<div class="aiwp-field"><label for="aiwp-seo-image">Obrázek pro sdílení</label><div class="aiwp-input-action"><input type="url" id="aiwp-seo-image" name="aiwp[seo_image]" value="<?php echo esc_attr( $data['seo_image'] ); ?>" placeholder="https://…/obrazek.jpg"><button type="button" class="button" data-aiwp-media>Vybrat z médií</button></div><p class="description">Adresa obrázku pro náhled odkazu na sociálních sítích. Můžete vložit URL nebo vybrat obrázek z knihovny.</p></div>
 			<details class="aiwp-seo-advanced"><summary>Pokročilé nastavení</summary><div class="aiwp-field"><label for="aiwp-seo-canonical">Kanonická URL</label><input type="url" id="aiwp-seo-canonical" name="aiwp[seo_canonical]" value="<?php echo esc_attr( $data['seo_canonical'] ); ?>" placeholder="Automaticky: adresa této stránky"><p class="description">Vyplňte pouze, pokud má vyhledávač považovat jinou adresu za hlavní verzi stejného obsahu.</p></div><label class="aiwp-checkbox-line"><input type="checkbox" name="aiwp[seo_noindex]" value="1" <?php checked( ! empty( $data['seo_noindex'] ) ); ?>> Požádat vyhledávače, aby tuto stránku neindexovaly (noindex)</label><p class="description">Stránka zůstane veřejně dostupná. Toto nastavení ji nechrání heslem.</p></details>

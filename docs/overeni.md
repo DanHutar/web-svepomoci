@@ -131,3 +131,9 @@ Nejde o test všech optimalizačních doplňků: externí slučování či odkl�
 - PNG s animačním blokem, poškozené obrázky a ostatní formáty se nepřevádějí.
 
 Testovací prostředí používá GD. Dostupnost WebP a EXIF závisí na konkrétním hostingu; šablona před převodem ověřuje podporu editoru. Test negarantuje menší velikost každého výstupu ani kompatibilitu se všemi optimalizačními pluginy.
+
+## Verze 1.8.1: výběr obrázku pro sdílení
+
+Na WordPressu 7.1.2 se podařilo zopakovat nefunkční tlačítko a chybu `undefined is not iterable`: nadpis metaboxu dostává od WordPressu ID `aiwp-seo-title`, které používal také náš input. Počítadlo načetlo nadpis a přerušilo inicializaci před připojením tlačítka médií. Pole nyní používá vlastní ID `aiwp-seo-title-input`; název ukládaného pole a metadata se nemění.
+
+Test `tests/seo-media.mjs` je součástí `npm test` na WordPressu 6.8.3 a příkazu `npm run test:seo-media` na WordPressu 7.1.2. Přes skutečný dialog knihovny médií ověřuje výběr a nahrazení obrázku, zavření bez změny, následné uložení a hodnoty `og:image` i `twitter:image`. Kontroluje také počítadlo s diakritikou a emoji, absenci JavaScriptových chyb a srozumitelné hlášení při dočasné nedostupnosti `wp.media`.
