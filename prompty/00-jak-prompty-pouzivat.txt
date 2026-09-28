@@ -1,0 +1,21 @@
+WEB SVÉPOMOCÍ — TEXTOVÁ ZADÁNÍ PRO AI
+
+Tuto složku najdete uvnitř instalačního ZIPu pluginu i šablony. ZIP pro instalaci ve WordPressu ponechte zabalený; pro čtení promptů si rozbalte jeho kopii. Soubory jsou obyčejný text v UTF-8 a otevřete je například v Poznámkovém bloku.
+
+1. Začněte souborem 01-spolecny-vzhled.txt. Vyberte font ve Vzhled webu a vytvořte společné CSS.
+2. Pro každou stránku použijte 02-stranka.txt. Pro společné části webu použijte 03-header.txt a 04-footer.txt.
+3. Právní informační stránky připravte pomocí 05-informace-o-cookies.txt a 06-ochrana-osobnich-udaju.txt. Nejprve shromážděte skutečné informace o webu. AI nesmí vymýšlet služby, doby uchování ani tvrdit, že má web právně ověřený.
+4. Vybraný soubor zkopírujte do AI a nahraďte údaje v hranatých závorkách. Pokud údaj neznáte, napište NEVÍM. Neposílejte hesla, tajné klíče ani skutečné údaje zákazníků.
+5. HTML vložte do pole Obsah, CSS do Vzhledu a JS do Chování v našem editoru. Vkládejte samotný kód bez obalových značek ```; PHP nevkládejte. Společné CSS patří pouze do Web svépomocí → Vzhled webu → Společné CSS. SEO titulek a popis vložte do samostatného SEO bloku stránky.
+6. Zapněte zobrazení obsahu z AI editoru a stránku uložte. Header a footer ukládejte do příslušných společných částí, ne do každé stránky. Ověřte náhled i skutečný web na mobilu a ovládání klávesnicí.
+
+Menu vytvořte ve Vzhled → Menu a přiřaďte umístění primary (hlavní) nebo footer (patička). AI má vložit značku [aiwp_menu location="primary"] nebo [aiwp_menu location="footer"], nikoli ručně přepisovat odkazy menu.
+
+SOUHLAS A COMPLIANZ
+Vyberte jediný systém pro správu souhlasu. Pokud používáte Complianz či jiný externí plugin, v Web svépomocí → Soukromí a cookies zaškrtněte „Souhlas spravuje externí plugin“ a uložte. Externí plugin nastavte samostatně. Kódy ani souhlasy se automaticky nepřenášejí. Po přepnutí vymažte cache. Naše tlačítko i lišta pak zmizí; změnu souhlasu musí zpřístupnit externí plugin.
+
+Měření nevkládejte do stránky, headeru ani footeru. Náš HTML editor zpracovává pouze značku aiwp_menu; krátké kódy dokumentů od Complianz zde nepoužívejte. Pokud dokument vytváří Complianz, ponechte ho na samostatné běžné WordPress stránce spravované tímto pluginem, bez zapnutého AI editoru. Z AI patičky na tuto stránku pouze odkažte, nejlépe přes menu.
+
+AI prompty samy nezjišťují cookies, nezapínají měření ani nenahrazují ověření skutečného provozu. Aktuální oficiální podklady pro informační stránky:
+https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
+https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=cs

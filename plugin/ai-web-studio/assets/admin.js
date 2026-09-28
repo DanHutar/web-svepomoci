@@ -104,7 +104,7 @@
       var part = studio.dataset.aiwpKind !== 'page';
       var location = studio.dataset.aiwpKind === 'footer' ? 'footer' : 'primary';
       return [
-        'Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky. Volitelné služby patří do Web svépomocí → Soukromí a cookies a spouštějí až po souhlasu.',
+        'Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky. Volitelné služby nastavuje zvolený správce souhlasu: Web svépomocí → Soukromí a cookies, nebo při externí správě například Complianz. Kódy mezi správci neduplikuj.',
         'Vytvoř ' + (part ? (location === 'footer' ? 'společnou patičku' : 'společnou hlavičku') : 'obsah stránky') + ' pro WordPress s šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.',
         'Moje zadání: [DOPLŇ účel, texty, barvy, cílové publikum a požadované sekce].',
         'Vrať přesně tři oddělené části označené HTML, CSS a JS, které zkopíruji do samostatných polí.',

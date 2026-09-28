@@ -1,0 +1,21 @@
+Vytvoř společné CSS pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin. Toto CSS vložím jednou do Web svépomocí → Vzhled webu → Společné CSS.
+
+MOJE PODKLADY
+Název a zaměření webu: [DOPLŇ]
+Cíloví návštěvníci a požadovaný styl: [DOPLŇ]
+Font již vybraný ve Vzhled webu: [DOPLŇ]
+Hlavní barva a šířka obsahu nastavené v administraci: [DOPLŇ]
+Další barvy: [DOPLŇ nebo NAVRHNI]
+Současné společné CSS: [VLOŽ nebo ŽÁDNÉ]
+Existující HTML a společné třídy, které musíme zachovat: [VLOŽ nebo ŽÁDNÉ]
+
+POSTUP A VÝSTUP
+Pokud chybí podstatné vstupy, nejprve se stručně zeptej. Jinak vrať úplné výsledné společné CSS a krátký seznam tříd, které mají používat další prompty. Zachovej stávající funkční pravidla, pokud výslovně nežádám změnu. Nevytvářej HTML stránky ani měřicí kód.
+
+Použij var(--aiwp-font), var(--aiwp-accent) a var(--aiwp-width); tyto proměnné dodává plugin a nepřepisuj je. Nevkládej @import, @font-face ani externí zdroje. Google Font případně načítá plugin, jeho dostupné váhy jsou 400, 500, 600 a 700.
+
+Navrhni čitelnou stupnici H1–H6, body a small podle proporcí vybraného písma. Pro všech osm úrovní vytvoř zvlášť font-size: clamp(...) i line-height: clamp(...). Na :root definuj --aiwp-size-h1 až --aiwp-size-h6, --aiwp-size-body, --aiwp-size-small a odpovídající --aiwp-leading-h1 až --aiwp-leading-h6, --aiwp-leading-body, --aiwp-leading-small. Všech 16 hodnot bude clamp(). Velikosti používej v rem s prostředním členem calc(rem + vw); minimum nesmí převyšovat maximum. U řádkování používej kompatibilní délkové jednotky, např. clamp(1.15em, calc(1.1em + 0.2vw), 1.35em), nikdy nemíchej bezrozměrná čísla s délkami uvnitř clamp(). Konkrétní hodnoty přizpůsob úrovni, nejsou univerzálně určené názvem fontu.
+
+Připoj skutečné selektory používající proměnné. Vzhled omez na :where(.aiwp-content, .aiwp-header, .aiwp-footer). Body znamená běžný text těchto částí, nikoli globální přepis elementu body. Řádkování přiřaď přímo příslušným textovým úrovním, aby zděděná vypočtená délka nepoškodila jiné velikosti. Běžný text nejméně 1rem, small obvykle nejméně 0.875rem. Podstatné informace nezmenšuj. Neměň základní velikost html na pevné pixely.
+
+Navrhni opakovaně použitelné třídy pro kontejner, sekci, tlačítka, odkazy a jednoduché karty. Nedoplňuj styly konkrétních stránek. Ověř návrhem kontrast, focus-visible, dlouhé české texty, šířky 320–1440 px a zvětšení textu na 200 %. Nepoužívej pevné výšky textových bloků; respektuj prefers-reduced-motion. Netvrď, že jsi provedl test v prohlížeči, pokud jsi ho skutečně neprovedl.

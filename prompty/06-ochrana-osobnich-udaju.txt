@@ -1,0 +1,35 @@
+Pomoz mi připravit stránku Ochrana osobních údajů pro český web ve WordPressu se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin. Zpracuj ji podle skutečných činností provozovatele; nevytvářej univerzální dokument se smyšlenými údaji.
+
+PODKLADY
+Název a URL webu: [DOPLŇ]
+Správce osobních údajů — jméno/název, sídlo, případně IČO a kontakt pro uplatnění práv: [DOPLŇ]
+Pověřenec nebo zástupce, pokud je relevantní a skutečně určen: [DOPLŇ / NENÍ / NEVÍM]
+Území působení a cílová skupina včetně případného zaměření na děti: [DOPLŇ]
+Co web skutečně umožňuje — např. zprávy, rezervace, nákupy, účty, komentáře, newsletter: [VYPIŠ; neuvedené funkce nepředpokládej]
+Pro každou činnost: jaké údaje, od koho, proč, kdo k nim má přístup, doba uchování nebo pravidlo pro výmaz, známý právní základ a případný oprávněný zájem: [DOPLŇ; neznámé hodnoty označ NEVÍM]
+Hosting, e-mail, rezervační systém, platební služba, analytika, marketing a další příjemci/zpracovatelé: [SKUTEČNÍ POSKYTOVATELÉ A JEJICH ROLE]
+Případná předání mimo EHP a ověřené záruky: [DOPLŇ / NEVÍM]
+Automatizované rozhodování či profilování a jeho případné důsledky: [POPIS / NE / NEVÍM]
+Jaké údaje jsou povinné a co se stane, když je člověk neposkytne: [DOPLŇ]
+URL Informací o cookies a skutečný způsob změny souhlasu: [DOPLŇ]
+Existující dokument, případně spravovaný Complianz: [VLOŽ nebo NENÍ]
+Datum věcné kontroly podkladů: [DOPLŇ]
+Společné CSS, třídy a vybraný font: [VLOŽ]
+
+POSTUP
+Nejprve vypiš chybějící podstatné informace a polož konkrétní otázky. Nenahrazuj neznámý údaj tvrzením „nepředáváme“, „neshromažďujeme“ nebo smyšlenou dobou uchování. Neslibuj úplnou anonymitu či absolutní bezpečnost. Nepožaduj osobní údaje konkrétních zákazníků ani hesla.
+
+U každého skutečného účelu rozliš údaje, právní základ, příjemce a uchování. Neoznačuj veškeré zpracování automaticky jako souhlas; případné návrhy právního základu označ mimo veřejný text k ověření. Podle relevance zahrň totožnost a kontakt správce, pověřence, předávání a záruky, dobrovolnost/povinnost poskytnutí údajů, zdroje nepřímo získaných údajů a automatizované rozhodování. Srozumitelně popiš práva včetně jejich podmínek, postup uplatnění, odvolání souhlasu tam, kde se používá, a možnost stížnosti u ÚOOÚ. Netvrď, že právo na výmaz je bezvýjimečné.
+
+Ověř aktuální pravidla a informační povinnosti podle relevantních článků 12–14 GDPR a pravidel pro práva subjektů údajů. Použij primární zdroje, nikoli kopii cizích zásad. Pokud nemůžeš zdroje ověřit, uveď to mimo návrh:
+https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=cs
+https://uoou.gov.cz/
+
+Pokud dokument spravuje externí plugin, nejprve vyjasni, zda upravujeme jeho dokument, nebo tvoříme ruční stránku. Nevytvářej druhou rozpornou verzi. Shortcode externího pluginu patří do běžné WordPress stránky s vypnutým AI editorem, nikoli do našeho HTML pole.
+
+VÝSTUP
+Nejprve připrav český text ke kontrole a oddělený seznam neověřených bodů. Dokud chybí podstatná fakta, označ výstup jako pracovní návrh. Nevydávej text za právně ověřený či garantovaně vyhovující. Po mém potvrzení údajů vytvoř celé HTML a jen potřebné CSS jako samostatné bloky. JS nech prázdný. SEO titulek a meta popis vrať zvlášť jako text.
+
+HTML je jen fragment s jedním H1, logickými H2/H3 a jedinečnou kořenovou třídou. Bez headeru, footeru, main, doctype, html, head, body, meta, title, link, base, style, script, PHP, on* atributů, javascript: URL a shortcodů. Žádné souhlasové checkboxy, nové cookie lišty, měřicí skripty ani formuláře bez napojení. Doplň skutečný odkaz na informace o cookies.
+
+Použij společné třídy a proměnné --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* a --aiwp-leading-*. Zachovej společné clamp() velikosti a výšky řádků; nekopíruj společné CSS. Vlastní CSS omez na kořen stránky a nezbytné odlišnosti. Bez dalších fontů a externích zdrojů. Pokud společné CSS chybí, nejprve požádej o jeho vytvoření promptem 01-spolecny-vzhled.txt. Dokument musí zůstat čitelný na 320 px i při zvětšení textu na 200 %. Do editoru zkopíruji kód bez značek ```.

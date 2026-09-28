@@ -1,0 +1,32 @@
+Pomoz mi připravit stránku Informace o cookies pro český web ve WordPressu. Používám šablonu web-svepomoci-sablona a plugin web-svepomoci-plugin. Nejprve ověř dostatečnost podkladů; nevytvářej zdánlivě hotový právní text z domněnek.
+
+PODKLADY
+Web a jeho URL: [DOPLŇ]
+Provozovatel, sídlo, případně IČO a kontaktní e-mail: [DOPLŇ]
+URL stránky Ochrana osobních údajů: [DOPLŇ]
+Správce souhlasu: [NÁŠ PLUGIN / COMPLIANZ / JINÝ — UVEĎ]
+Jak návštěvník otevře nastavení a odvolá souhlas: [POPIS SKUTEČNÉHO OVLÁDÁNÍ]
+Používá Complianz vlastní průběžně aktualizovaný dokument cookies? [ANO / NE / NEVÍM]
+Skutečně používané služby včetně analytiky, reklamy, formulářů, map, videí, fontů a dalších pluginů: [VYPIŠ; pokud nejsou, výslovně napiš ŽÁDNÉ]
+Ověřený seznam cookies a úložišť: [VLOŽ z kontroly webu a dokumentace poskytovatelů]
+Pro každou položku: název, poskytovatel/doména, účel, kategorie, cookie/localStorage/sessionStorage, doba uložení nebo způsob jejího určení, okamžik spuštění a související zpracování/předávání údajů: [DOPLŇ nebo NEVÍM]
+Datum ověření seznamu: [DOPLŇ]
+Společné CSS a třídy, vybraný font: [VLOŽ]
+
+PRVNÍ KROK
+Pokud chybí skutečný seznam služeb nebo doby uložení, nejprve se zeptej a vysvětli, které údaje mám dohledat. Názvy, poskytovatele, doby uložení ani tvrzení „web používá jen nezbytné cookies“ neodhaduj podle vzhledu webu. Neprohlašuj, že jsi provedl sken, pokud jsi ho neprovedl. Žádné marketingové identifikátory, cookies nebo právní závěry nevymýšlej. Nezaměňuj dobu uložení cookie s dobou uchování údajů u poskytovatele.
+
+Pokud je dokument spravovaný Complianz, doporuč zachovat jeho dokument na běžné WordPress stránce s vypnutým AI editorem. Nevytvářej druhou rozpornou kopii seznamu ani nevkládej shortcode Complianz do našeho HTML editoru (podporuje pouze aiwp_menu). V takovém případě vrať návrh případného úvodu jako obyčejný text a postup, kam na existující dokument odkazovat; nevracej náhradní HTML dokument.
+
+OBSAH PO DOPLNĚNÍ PODKLADŮ
+Srozumitelně vysvětli používané cookies a obdobná úložiště, jejich účely, poskytovatele a doby uložení. Rozliš nezbytné a volitelné účely podle ověřené konfigurace. Popiš skutečnou možnost odmítnutí, změny a odvolání souhlasu. Netvrď, že procházení webu znamená souhlas. Připoj kontakt, datum aktualizace a odkaz na ochranu osobních údajů. Nepoužívané služby neuváděj jako aktivní. Ověř aktuální podklady u ÚOOÚ; pokud nemáš přístup na internet, jasně to uveď mimo veřejný text:
+https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
+
+U naší správy je volba ukládána na 180 dní do cookie aiwp_consent_… a ke změnám mezi kartami slouží localStorage s příponou _sync. Přesný název zjisti z podkladů; nevymýšlej hash. Toto uváděj pouze tehdy, pokud naše správa skutečně běží. Při externím režimu použij skutečné údaje externího správce. Netvrď, že plugin automaticky blokuje všechny služby nebo odstraňuje cookies jiných domén. Nevytvářej vlastní lištu či ovládání souhlasu.
+
+VÝSTUP PRO RUČNĚ SPRAVOVANOU STRÁNKU
+Nejprve vrať text k věcné kontrole. Neověřené body odděl mimo návrh a označ ho jako pracovní, dokud je nedoplním. Až potvrdím údaje, vrať samostatné HTML a případně minimální CSS; JS bude prázdný. SEO titulek a meta popis napiš zvlášť. Nezaručuj právní soulad pouze na základě generování textu.
+
+HTML bude pouze fragment s jedním H1 a vlastní kořenovou třídou, bez headeru, footeru, main, doctype, html, head, body, meta, title, link, base, style, script, PHP, on* atributů, javascript: URL a shortcodů. Použij sémantické nadpisy, seznamy a přístupnou tabulku seznamu cookies pouze se skutečnými údaji. Na mobilu zajisti čitelnost tabulky bez roztažení celé stránky.
+
+Využij společné CSS a --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* a --aiwp-leading-*. Nekopíruj společné styly; zachovej clamp() velikosti a řádkování. CSS omez na kořen fragmentu a jen nezbytné odlišnosti, bez externích zdrojů. Pokud společné CSS chybí, nejprve požádej o jeho vytvoření promptem 01-spolecny-vzhled.txt. Výsledný kód vložím do našeho editoru bez značek ```.

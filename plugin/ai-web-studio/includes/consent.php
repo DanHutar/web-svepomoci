@@ -9,6 +9,8 @@ function aiwp_consent_settings() {
     $stored = get_option( 'aiwp_consent_settings', array() );
     $stored = is_array( $stored ) ? $stored : array();
     $result = array( 'policy' => isset( $stored['policy'] ) && is_string( $stored['policy'] ) ? $stored['policy'] : '' );
+    $result['external'] = ! empty( $stored['external'] );
+    $result['revision'] = isset( $stored['revision'] ) ? absint( $stored['revision'] ) : 0;
     foreach ( aiwp_consent_categories() as $key => $label ) {
         $item = isset( $stored[ $key ] ) && is_array( $stored[ $key ] ) ? $stored[ $key ] : array();
         $result[ $key ] = array( 'enabled' => ! empty( $item['enabled'] ) );
@@ -28,7 +30,7 @@ function aiwp_consent_cookie_name() {
 }
 
 function aiwp_consent_active( $settings, $key ) {
-    return ! empty( $settings['policy'] ) && ! empty( $settings[ $key ]['enabled'] ) && '' !== trim( $settings[ $key ]['description'] ) && '' !== trim( $settings[ $key ]['js'] );
+    return empty( $settings['external'] ) && ! empty( $settings['policy'] ) && ! empty( $settings[ $key ]['enabled'] ) && '' !== trim( $settings[ $key ]['description'] ) && '' !== trim( $settings[ $key ]['js'] );
 }
 
 function aiwp_consent_names( $text ) {
@@ -42,8 +44,19 @@ function aiwp_sanitize_consent( $input ) {
         add_settings_error( 'aiwp_consent_settings', 'permission', 'Nastavení může měnit pouze správce s oprávněním vkládat kód.' );
         return $old;
     }
+    $external = isset( $input['external'] ) && in_array( $input['external'], array( '1', true ), true );
+    $revision = $old['revision'] + ( $external !== $old['external'] ? 1 : 0 );
+    // Switching off must work even with incomplete old service settings.
+    // Keep their code for a possible return; never migrate it to another plugin.
+    if ( $external ) {
+        $old['external'] = true;
+        $old['revision'] = $revision;
+        return $old;
+    }
     if ( ! isset( $input['policy'] ) || ! is_string( $input['policy'] ) ) { $input['policy'] = ''; }
     $result = array( 'policy' => esc_url_raw( trim( $input['policy'] ), array( 'http', 'https' ) ) );
+    $result['external'] = false;
+    $result['revision'] = $revision;
     $valid = '' === trim( $input['policy'] ) || ( $result['policy'] && wp_parse_url( $result['policy'], PHP_URL_HOST ) );
     foreach ( aiwp_consent_categories() as $key => $label ) {
         $item = isset( $input[ $key ] ) && is_array( $input[ $key ] ) ? $input[ $key ] : array();
@@ -85,11 +98,14 @@ function aiwp_consent_admin() {
     $settings = aiwp_consent_settings();
     ?>
     <div class="wrap"><h1>Soukromí a cookies</h1>
-    <p>Měření a marketing jsou ve výchozím stavu vypnuté. Lišta se automaticky zobrazí až po zapnutí alespoň jedné úplně vyplněné kategorie. Nastavení cookies zůstává dostupné na konci webu.</p>
-    <p>Sledovací kód vkládejte pouze sem. Kód vložený do HTML/JS stránky, jiného pluginu nebo externí obsah tato funkce automaticky neblokuje. Pro každou službu ověřte cookies, úložiště a skutečné síťové požadavky.</p>
+    <p>Při vlastní správě jsou měření a marketing ve výchozím stavu vypnuté. Naše lišta se automaticky zobrazí až po zapnutí alespoň jedné úplně vyplněné kategorie a Nastavení cookies zůstává dostupné na konci webu. Pro jiného správce souhlasu použijte přepínač níže.</p>
+    <p>Při použití naší správy souhlasu vkládejte sledovací kód pouze sem. Kód vložený do HTML/JS stránky, jiného pluginu nebo externí obsah tato funkce automaticky neblokuje. Pro každou službu ověřte cookies, úložiště a skutečné síťové požadavky.</p>
     <?php settings_errors( 'aiwp_consent_settings' ); ?>
     <form method="post" action="options.php">
     <?php settings_fields( 'aiwp_consent' ); ?>
+    <p><label for="aiwp-consent-external"><input id="aiwp-consent-external" type="checkbox" name="aiwp_consent_settings[external]" value="1" <?php checked( $settings['external'] ); ?>> <strong>Souhlas spravuje externí plugin (například Complianz)</strong></label></p>
+    <p>Po uložení vypneme naši lištu, tlačítko i odkaz v patičce, související CSS/JS a spouštění zde uložených měřicích skriptů. Externí plugin musíte samostatně nastavit, včetně měření a možnosti změnit souhlas. Skripty ani souhlasy se do něj nepřenášejí. Vymažte cache webu a ověřte výsledek v novém anonymním okně.</p>
+    <?php if ( $settings['external'] ) : ?><p><strong>Externí správa je zapnutá.</strong> Níže uvedené hodnoty jsou uchované, ale nepoužívají se a při uložení v tomto režimu se nemění. Pro návrat zrušte zaškrtnutí a uložte; návštěvníci potom musí zvolit souhlas znovu. Před návratem vypněte správu souhlasu v externím pluginu.</p><?php endif; ?>
     <p><label for="aiwp-consent-policy"><strong>Adresa stránky s informacemi o soukromí a cookies</strong></label><br>
     <input class="large-text" id="aiwp-consent-policy" type="url" name="aiwp_consent_settings[policy]" value="<?php echo esc_attr( $settings['policy'] ); ?>"></p>
     <p>Uveďte provozovatele, poskytovatele služeb, účely, dobu uchování, případné předávání údajů a práva návštěvníka. Text musí odpovídat skutečnému používání webu.</p>
@@ -109,6 +125,7 @@ function aiwp_consent_admin() {
 
 /** Cookie is a visitor preference, not an authorization token for private data. */
 function aiwp_consent_allows( $settings, $key ) {
+    if ( ! empty( $settings['external'] ) ) { return false; }
     $name = aiwp_consent_cookie_name();
     if ( ! isset( $_COOKIE[ $name ] ) || ! is_string( $_COOKIE[ $name ] ) ) { return false; }
     $record = json_decode( wp_unslash( $_COOKIE[ $name ] ), true );
@@ -138,6 +155,7 @@ add_action( 'template_redirect', function () {
 
 add_action( 'wp_enqueue_scripts', function () {
     $settings = aiwp_consent_settings();
+    if ( $settings['external'] ) { return; }
     $config = array( 'name' => aiwp_consent_cookie_name(), 'version' => aiwp_consent_version( $settings ), 'path' => wp_parse_url( home_url( '/' ), PHP_URL_PATH ) ?: '/', 'categories' => array() );
     foreach ( aiwp_consent_categories() as $key => $label ) {
         $config['categories'][ $key ] = array( 'active' => aiwp_consent_active( $settings, $key ), 'cookies' => aiwp_consent_names( $settings[ $key ]['cookies'] ), 'storage' => aiwp_consent_names( $settings[ $key ]['storage'] ), 'url' => add_query_arg( 'aiwp_consent_script', $key, home_url( '/' ) ) );
@@ -149,6 +167,7 @@ add_action( 'wp_enqueue_scripts', function () {
 
 add_action( 'wp_footer', function () {
     $settings = aiwp_consent_settings();
+    if ( $settings['external'] ) { return; }
     $active = array_filter( array_keys( aiwp_consent_categories() ), function ( $key ) use ( $settings ) { return aiwp_consent_active( $settings, $key ); } );
     ?>
     <div class="aiwp-consent-footer"><button type="button" data-aiwp-consent-open hidden>Nastavení cookies</button><?php if ( $settings['policy'] ) : ?> <a href="<?php echo esc_url( $settings['policy'] ); ?>">Soukromí a cookies</a><?php endif; ?><noscript>Volitelné služby spravované tímto pluginem jsou bez JavaScriptu vypnuté.</noscript></div>

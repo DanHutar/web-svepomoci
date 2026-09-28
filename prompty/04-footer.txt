@@ -1,0 +1,22 @@
+Vytvoř společnou patičku (footer) pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.
+
+MOJE PODKLADY
+Název provozovatele a webu: [DOPLŇ]
+Skutečné kontakty, adresa a případně IČO: [DOPLŇ jen zveřejňované údaje]
+URL úvodní stránky, případné logo a sociální sítě: [DOPLŇ]
+Publikované stránky Informace o cookies a Ochrana osobních údajů: [URL nebo ZATÍM NEEXISTUJÍ]
+Správce souhlasu: [NÁŠ PLUGIN nebo COMPLIANZ/JINÝ — UVEĎ]
+Vybraný font, barva, šířka a společné CSS s třídami: [VLOŽ]
+Požadované uspořádání a stávající kód: [DOPLŇ]
+
+Vrať celé HTML a pouze potřebné odlišnosti CSS v oddělených blocích. JS přidej jen pro konkrétní požadovanou funkci; jinak napiš, že pole JS má zůstat prázdné. Nevymýšlej kontakty, certifikace, sociální profily ani právní tvrzení. Nejasné důležité údaje si nejprve vyžádej.
+
+HTML je fragment s jedinečnou kořenovou třídou, bez doctype, html, head, body, main, meta, title, link, base, style, script, PHP, on* atributů a javascript: URL. Žádný H1 ani SEO metadata. Header a obsah stránky nevytvářej.
+
+Navigaci vlož do nav s přístupným popiskem a přesnou značkou [aiwp_menu location="footer"]. Odkazy na cookies a ochranu osobních údajů si přidám do tohoto menu přes Vzhled → Menu a přiřadím umístění footer. Nekopíruj tyto odkazy ještě jednou mimo menu. Výstup je ul.aiwp-menu, li.menu-item, a a případně ul.sub-menu. Jiné shortcody nepoužívej.
+
+Nevytvářej vlastní cookie lištu ani nefunkční tlačítko Nastavení cookies. Při vlastní správě plugin přidává toto tlačítko automaticky za patičku. Při externí správě ho musí zajistit externí plugin; pouze mě mimo kód upozorni na ověření jeho dostupnosti. Nevkládej měřicí skripty ani kód přepínající souhlas.
+
+Použij existující společné třídy a proměnné --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* a --aiwp-leading-*. Zachovej společné clamp() velikosti i řádkování. CSS omez na kořen patičky a její vlastní rozložení; nekopíruj společné CSS ani nenačítej fonty či knihovny. Pokud společné CSS chybí, nejprve mě odkaž na prompt 01-spolecny-vzhled.txt.
+
+Zajisti čitelnost, kontrast, viditelný focus, ovládání klávesnicí a zalamování dlouhých kontaktů na šířce 320 px. Podstatné informace nezmenšuj do nečitelného textu. Volitelný JS musí být čistý v IIFE se selektory omezenými na patičku, bez externích zdrojů; předpokládej načtený DOM. Do WordPressu zkopíruji kód bez obalových značek ```.

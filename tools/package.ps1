@@ -14,6 +14,9 @@ $packages = @(
 
 $components = [ordered]@{}
 $releaseVersion = $null
+$promptDirectory = Join-Path $projectDirectory 'prompty'
+$promptFiles = @(Get-ChildItem -LiteralPath $promptDirectory -Filter '*.txt' -File)
+if ($promptFiles.Count -lt 7) { throw 'The downloadable text prompt set is incomplete.' }
 foreach ($package in $packages) {
     $sourceDirectory = Join-Path $projectDirectory $package.RelativeSource
     $requiredFile = Join-Path $sourceDirectory $package.RequiredFile
@@ -54,6 +57,11 @@ foreach ($package in $packages) {
                 $relativePath = $sourceFile.FullName.Substring($sourceDirectory.Length).TrimStart([char[]]@('\', '/')).Replace('\', '/')
                 $entryName = $package.Slug + '/' + $relativePath
                 [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $sourceFile.FullName, $entryName, [System.IO.Compression.CompressionLevel]::Optimal) | Out-Null
+            }
+            foreach ($promptFile in $promptFiles) {
+                if ($promptFile.Length -eq 0) { throw ('Empty prompt: ' + $promptFile.Name) }
+                $entryName = $package.Slug + '/prompty/' + $promptFile.Name
+                [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $promptFile.FullName, $entryName, [System.IO.Compression.CompressionLevel]::Optimal) | Out-Null
             }
         }
         finally { $archive.Dispose() }

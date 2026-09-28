@@ -1,0 +1,21 @@
+Vytvoř společnou hlavičku (header) pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.
+
+MOJE PODKLADY
+Název webu: [DOPLŇ]
+Adresa úvodní stránky: [DOPLŇ skutečnou URL, web může být v podadresáři]
+Logo a jeho rozměry: [URL A ROZMĚRY nebo POUZE TEXTOVÝ NÁZEV]
+Požadované rozložení a případné akční tlačítko s URL: [DOPLŇ]
+Vybraný font, barva, šířka a společné CSS s třídami: [VLOŽ]
+Existující kód hlavičky: [VLOŽ nebo NOVÁ HLAVIČKA]
+
+Vrať celé HTML, CSS a případný JS v samostatných blocích. Ty vložím do polí společného Headeru. Pokud nejsou vstupy dostatečné, nejprve se zeptej. Nevymýšlej logo, kontakty ani URL.
+
+HTML je pouze fragment s vlastní kořenovou třídou, bez doctype, html, head, body, main, meta, title, link, base, style, script, PHP, on* atributů a javascript: URL. Nepřidávej H1 ani SEO metadata. Nevytvářej obsah stránky ani footer.
+
+Menu budu spravovat ve Vzhled → Menu a přiřadím ho do umístění primary. Do nav s přístupným popiskem vlož přesně [aiwp_menu location="primary"]. Odkazy menu ručně nevypisuj. Značka vytvoří ul.aiwp-menu s li.menu-item a odkazy a, případně ul.sub-menu. Navrhni i podmenu; jiné shortcody nejsou podporované.
+
+Použij společné třídy a proměnné --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* a --aiwp-leading-*. CSS obsahuje pouze odlišnosti hlavičky a selektory omezené na její kořenovou třídu. Nepřepisuj společnou clamp() typografii, nekopíruj celé společné CSS ani nenačítej další font. Pokud společné CSS chybí, nejprve mě odkaž na prompt 01-spolecny-vzhled.txt.
+
+Mobilní ovládání menu, pokud je potřeba, vytvoř tlačítkem s aria-expanded a aria-controls. Menu musí být použitelné klávesnicí i bez JavaScriptu; JS může po inicializaci zapnout sbalený režim. Podmenu nesmí být dostupné jen na hover. Zachovej srozumitelný focus, Escape pro zavření, dostatečně velké dotykové cíle a funkčnost při změně šířky. Nezaváděj zbytečný focus trap. Zajisti použitelnost od 320 px a při zvětšení textu na 200 %.
+
+JS musí být čistý, v IIFE, bez značek script, externích knihoven a PHP. Selektory omez na hlavičku, počítej s načteným DOM. Nevkládej měření, marketing ani cookie lištu. Souhlas řeší samostatný správce. Kód vložím bez obalových značek ```.

@@ -134,6 +134,8 @@ Testovací prostředí používá GD. Dostupnost WebP a EXIF závisí na konkré
 
 ## Verze 1.9.0: souhlas s volitelnými službami
 
+Rozšíření ve verzi 1.9.1 testuje přepnutí na externího správce přes administraci, uchování původních hodnot, odstranění celé naší lišty a frontendových souborů a zablokování endpointu i s původním souhlasem. Nový návštěvník v externím režimu nedostane naši cookie. Návrat k vlastní správě vyžaduje novou volbu; předchozí souhlas se neobnoví. Test ověřuje izolaci našeho modulu, nikoli všechny konfigurace nebo verze Complianz.
+
 Test `npm run test:consent` spouští WordPress 7.1.2 a skutečný Chrome. Ověřuje výchozí vypnutí, žádné měření před volbou, zapamatované odmítnutí, samostatný souhlas s analytikou, přijmutí obou kategorií, odvolání a odstranění testovacích cookies i localStorage. Zahrnuje synchronizaci mezi kartami, vypršení a změnu verze volby, zákaz cache odpovědí se skripty, odmítnutí požadavku bez souhlasu, neplatný parametr a šířku panelu na mobilu. Ověřuje také uložení přes administraci a odmítnutí neúplného nastavení či změny bez oprávnění.
 
 Test používá místní testovací služby; neověřuje konfiguraci konkrétního Google Analytics, marketingového poskytovatele ani produkčního hostingu. Rozsah a postup konfigurace popisuje [návod](soukromi-cookies.md).

@@ -1,0 +1,25 @@
+Vytvoř obsah jedné stránky pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin. Obsah vložím do oddělených polí HTML, CSS a JS našeho editoru.
+
+MOJE PODKLADY
+Název a účel stránky: [DOPLŇ]
+Cílová skupina a hlavní akce návštěvníka: [DOPLŇ]
+Požadované sekce a přesné texty: [DOPLŇ]
+Skutečné adresy odkazů a obrázků, kontakty: [DOPLŇ]
+Vybraný font, barva a šířka obsahu: [DOPLŇ]
+Současné společné CSS a popis společných tříd: [VLOŽ]
+Současné HTML/CSS/JS této stránky, pokud ji upravujeme: [VLOŽ nebo NOVÁ STRÁNKA]
+Požadované změny: [DOPLŇ]
+
+Nejprve se zeptej na chybějící důležité údaje. Nevymýšlej kontakty, recenze, ceny, fotografie ani funkční odesílání formuláře bez skutečného napojení.
+
+Vrať úplné HTML, CSS a JS jako samostatné bloky. Pokud JS není potřeba, napiš mimo kód, že pole zůstane prázdné. SEO titulek a meta popis vrať zvlášť jako text. Do editoru zkopíruji samotný obsah bloků bez značek ```.
+
+HTML je pouze fragment bez doctype, html, head, body, main, meta, title, link, base, style, script, PHP, atributů on* a javascript: URL. Header a footer spravuji zvlášť, nevytvářej je. Použij jeden hlavní H1 a logickou hierarchii dalších nadpisů. Kořen fragmentu opatři jedinečnou třídou podle názvu stránky.
+
+Použij existující společné třídy a proměnné --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* a --aiwp-leading-*. Zachovej clamp() velikosti i řádkování H1–H6, body a small. CSS stránky obsahuje pouze její odlišnosti, omezené na kořenovou třídu. Společné CSS nekopíruj ani znovu negeneruj. Pokud společné CSS chybí, nejprve mě odkaž na prompt 01-spolecny-vzhled.txt. Nenahrávej další fonty ani knihovny.
+
+JS je nepovinný čistý JavaScript bez značek script a externích zdrojů, uzavřený v IIFE, se selektory omezenými na tuto stránku. Počítej s načteným DOM. Menu se spravuje přes Vzhled → Menu; pouze pokud ho stránka potřebuje, vlož [aiwp_menu location="primary"] nebo [aiwp_menu location="footer"]. Tyto značky vytvářejí ul.aiwp-menu, li.menu-item, odkazy a a podmenu ul.sub-menu. Jiné shortcody nepoužívej.
+
+Nevytvářej cookie lištu ani měřicí či marketingové skripty. Souhlas a tyto služby řeší zvolený správce souhlasu, buď naše sekce Soukromí a cookies, nebo samostatně nastavený externí plugin.
+
+Zajisti čitelnost a ovládání klávesnicí, popisy ovládacích prvků, viditelný focus, vhodné alternativní texty obrázků a prefers-reduced-motion. Návrh musí zvládnout šířku 320 px, dlouhé české texty a zvětšení textu na 200 % bez ztráty obsahu. Na konci stručně uveď, co mám před publikováním ověřit; neoznačuj neprovedené testy za hotové.
