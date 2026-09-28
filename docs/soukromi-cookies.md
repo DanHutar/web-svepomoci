@@ -1,6 +1,22 @@
 # Soukromí a cookies
 
-V administraci otevřete **Web svépomocí → Soukromí a cookies**. Analytika a marketing jsou po instalaci vypnuté. Dokud nezapnete vyplněnou kategorii, lišta se automaticky nezobrazuje. Na konci webu je tlačítko Nastavení cookies.
+V administraci otevřete **Web svépomocí → Soukromí a cookies**. Od verze 1.9.2 je bez uložené volby zaškrtnuto **Souhlas spravuje externí plugin**: naše lišta, tlačítka a skripty se nenačítají. Již uložená volba zůstává zachovaná. Zaškrtnutí samo žádný externí plugin nezapíná.
+
+Pro vlastní správu zrušte zaškrtnutí a uložte. Analytika a marketing zůstávají vypnuté, dokud je sami nenastavíte. Lišta se automaticky zobrazí až po zapnutí vyplněné kategorie.
+
+## Tlačítko přímo v patičce
+
+Do HTML svého Footeru vložte na požadované místo samostatnou značku:
+
+```text
+[aiwp_cookie_settings]
+```
+
+Vytvoří tlačítko `button.aiwp-cookie-settings`. Jeho vzhled můžete upravit v CSS patičky. Nevkládejte značku do dalšího odkazu nebo tlačítka a nepřepisujte atribut `hidden`; další JS není potřeba. Na stránce mohou být i dvě ovládání, obě fungují. Po zavření nastavení se fokus vrátí na použité tlačítko.
+
+Pokud je značka vykreslená, samostatný blok pod patičkou se nepřidá. Odkazy na informační stránky vložte do menu v patičce. Výchozí patička naší šablony již tlačítko obsahuje. U vlastní patičky bez značky, skryté patičky nebo jiné šablony zůstává záložní ovládání na konci stránky. V náhledu AI editoru je tlačítko pouze neaktivní ukázka; otevírání a změnu souhlasu testujte na webu.
+
+V externím režimu značka nic nevypíše. Ovládání Complianz či jiného správce nastavte v příslušném pluginu.
 
 ## Až budete chtít měření
 
@@ -18,7 +34,7 @@ Volba je uložena 180 dnů v technické cookie `aiwp_consent_…`, spolu s čase
 
 ## Změna a odvolání
 
-Tlačítko **Nastavení cookies** zůstává na konci webu. Při odvolání plugin uloží novou volbu, odstraní uvedené dostupné cookies a položky localStorage/sessionStorage a obnoví stránku bez odmítnutých skriptů. Úložiště sdílené s nadále povolenou kategorií se nemaže. Doporučujeme každé službě přiřadit právě jednu kategorii.
+Tlačítko **Nastavení cookies** je ve vlastní patičce nebo v záložním ovládání na konci stránky. Při odvolání plugin uloží novou volbu, odstraní uvedené dostupné cookies a položky localStorage/sessionStorage a obnoví stránku bez odmítnutých skriptů. Úložiště sdílené s nadále povolenou kategorií se nemaže. Doporučujeme každé službě přiřadit právě jednu kategorii.
 
 Cookies jiných domén, HttpOnly cookies ani již odeslaná data nelze tímto JavaScriptem odstranit. U konkrétní služby je nutné ověřit její chování. Seznam k odstranění není automatický skener cookies.
 

@@ -134,6 +134,8 @@ Testovací prostředí používá GD. Dostupnost WebP a EXIF závisí na konkré
 
 ## Verze 1.9.0: souhlas s volitelnými službami
 
+Ve verzi 1.9.2 test ověřuje výchozí externí režim bez souborů a ovládání cookies, dvě tlačítka uvnitř vlastní patičky bez duplicitního bloku, otevření a zavření klávesnicí včetně návratu fokusu, skrytí značky v externím režimu a záložní ovládání u patičky bez značky. Parser odmítá atributy nepodporované značky a zachovává zápis s dvojitými hranatými závorkami jako text.
+
 Rozšíření ve verzi 1.9.1 testuje přepnutí na externího správce přes administraci, uchování původních hodnot, odstranění celé naší lišty a frontendových souborů a zablokování endpointu i s původním souhlasem. Nový návštěvník v externím režimu nedostane naši cookie. Návrat k vlastní správě vyžaduje novou volbu; předchozí souhlas se neobnoví. Test ověřuje izolaci našeho modulu, nikoli všechny konfigurace nebo verze Complianz.
 
 Test `npm run test:consent` spouští WordPress 7.1.2 a skutečný Chrome. Ověřuje výchozí vypnutí, žádné měření před volbou, zapamatované odmítnutí, samostatný souhlas s analytikou, přijmutí obou kategorií, odvolání a odstranění testovacích cookies i localStorage. Zahrnuje synchronizaci mezi kartami, vypršení a změnu verze volby, zákaz cache odpovědí se skripty, odmítnutí požadavku bez souhlasu, neplatný parametr a šířku panelu na mobilu. Ověřuje také uložení přes administraci a odmítnutí neúplného nastavení či změny bez oprávnění.

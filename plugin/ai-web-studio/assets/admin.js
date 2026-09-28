@@ -111,7 +111,7 @@
         'HTML je jen fragment obsahu: bez doctype, html, head, body, style, script, PHP, on* atributů a javascript: URL. ' + (part ? 'Vrať pouze požadovanou hlavičku nebo patičku.' : 'Hlavičku a patičku spravuji zvlášť, nevytvářej je. Začni jedním hlavním nadpisem H1; nepřidávej další značku main.'),
         'CSS vrať bez značek style. Všechny selektory omez na jedinečnou kořenovou třídu tohoto fragmentu; nepoužívej globální body, h1, button apod. K dispozici jsou proměnné --aiwp-accent, --aiwp-width a --aiwp-font.',
         config.designContext || '',
-        'Menu spravuji přes Vzhled → Menu. ' + (part ? 'Do nav vlož přesně [aiwp_menu location="' + location + '"].' : 'Pokud potřebuji menu uvnitř obsahu, použij [aiwp_menu location="primary"] nebo [aiwp_menu location="footer"].') + ' Tato jediná podporovaná značka vytvoří ul.aiwp-menu s li.menu-item a odkazy a; případné podmenu je ul.sub-menu. CSS přizpůsob této struktuře a zahrň přístupné zobrazení podmenu. Odkazy ručně nevypisuj. Jiné shortcody nejsou podporované.',
+        'Menu spravuji přes Vzhled → Menu. ' + (part ? 'Do nav vlož přesně [aiwp_menu location="' + location + '"].' : 'Pokud potřebuji menu uvnitř obsahu, použij [aiwp_menu location="primary"] nebo [aiwp_menu location="footer"].') + ' Tato značka vytvoří ul.aiwp-menu s li.menu-item a odkazy a; případné podmenu je ul.sub-menu. CSS přizpůsob této struktuře a zahrň přístupné zobrazení podmenu. Odkazy ručně nevypisuj. Podporovaná je také značka [aiwp_cookie_settings] pro ovládání cookies v patičce (button.aiwp-cookie-settings); v externím režimu se nevypisuje. Další shortcody nejsou podporované.',
         'JS je nepovinný čistý JavaScript bez značek script, bez knihoven a externích skriptů. Selektory omez na kořen fragmentu; kód uzavři do IIFE a počítej s načteným DOM. Nepoužívej PHP ani volání WordPress funkcí.',
         'Návrh musí být responzivní, čitelný a přístupný z klávesnice. Dodrž kontrast, přidej popisy ovládání a respektuj prefers-reduced-motion.',
         'Používej skutečné dodané URL obrázků; pokud chybějí, vytvoř vzhled bez fotografií. Nevymýšlej neexistující funkční formulář, platební bránu ani odesílání e-mailů.',
@@ -192,6 +192,10 @@
       var js = value('js');
       var error = validationMessage(html, css, js);
       if (error) { previewStatus.textContent = error; return; }
+      html = html.replace(/(\[?)\[aiwp_cookie_settings\s*\](\]?)/g, function (match, escapeOpen, escapeClose) {
+        if (escapeOpen && escapeClose) return match.slice(1, -1);
+        return escapeOpen + (config.consentExternal ? '' : '<button type="button" class="aiwp-cookie-settings" disabled title="Ovládání souhlasu vyzkoušejte na webu">Nastavení cookies</button>') + escapeClose;
+      });
       html = html.replace(/(\[?)\[aiwp_menu\s+location\s*=\s*(["'])(primary|footer)\2\s*\](\]?)/g, function (match, escapeOpen, quote, location, escapeClose) {
         if (escapeOpen && escapeClose) return match.slice(1, -1);
         var menu = config.menuPreviews && config.menuPreviews[location];

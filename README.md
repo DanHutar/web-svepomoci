@@ -24,9 +24,9 @@ Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plu
 1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
 2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
 3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.9.1**.
+4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.9.2**.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.9.1**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.9.2**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
 
 Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro propojení starší hlavičky s menu vložte značku popsanou níže a uložte ji. Změny odkazů pak provádějte ve **Vzhled → Menu**.
 
@@ -110,6 +110,8 @@ Pro používání na hostingu nepotřebujete Node.js. Vývojář může s Node.j
 Od verze 1.9.0 nastavíte souhlas přes **Web svépomocí → Soukromí a cookies**. Měření je ve výchozím stavu vypnuté. [Návod a rozsah blokování](docs/soukromi-cookies.md).
 
 Při použití Complianz zaškrtněte **Souhlas spravuje externí plugin** a uložte. Tím vypnete naši správu souhlasu včetně lišty, tlačítka a měřicích skriptů. Externí plugin nastavte samostatně a vymažte cache.
+
+Od verze 1.9.2 je externí režim výchozí, pokud volba ještě není uložená. Již uložené nastavení se nemění. Pro vlastní správu ho odškrtněte a uložte. Tlačítko přímo do HTML patičky vložíte značkou `[aiwp_cookie_settings]`; samostatný blok pod patičkou pak zmizí. V externím režimu značka nic nevypíše.
 
 ## Textové prompty v instalačních balíčcích
 

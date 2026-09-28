@@ -1,4 +1,6 @@
-#aiwp-consent-panel[hidden], #aiwp-consent-panel [hidden], .aiwp-consent-footer [hidden] { display: none !important; }
+#aiwp-consent-panel[hidden], #aiwp-consent-panel [hidden], .aiwp-consent-footer [hidden], .aiwp-cookie-settings[hidden] { display: none !important; }
+.aiwp-cookie-settings { padding: 10px; min-height: 44px; border: 1px solid currentColor; border-radius: 4px; background: transparent; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+.aiwp-cookie-settings:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
 #aiwp-consent-panel { box-sizing: border-box; position: fixed; bottom: 16px; left: 16px; width: min(720px, calc(100% - 32px)); max-height: 75vh; overflow: auto; z-index: 100000; padding: 24px; background: #fff; color: #17212b; border: 1px solid #657383; border-radius: 12px; box-shadow: 0 4px 32px #0003; font: 16px/1.5 system-ui, sans-serif; text-align: left; overflow-wrap: anywhere; }
 #aiwp-consent-panel h2 { margin: 0 0 12px; color: inherit; font: 700 24px/1.3 system-ui, sans-serif; }
 #aiwp-consent-panel p { margin: 12px 0; font: inherit; color: inherit; }
@@ -11,5 +13,4 @@
 #aiwp-consent-panel input[type=checkbox] { width: 20px; height: 20px; vertical-align: middle; }
 #aiwp-consent-panel .aiwp-consent-description { white-space: pre-line; }
 .aiwp-consent-footer { padding: 12px; text-align: center; font: 14px/1.5 system-ui, sans-serif; }
-.aiwp-consent-footer button { padding: 10px; min-height: 44px; border: 1px solid currentColor; border-radius: 4px; background: transparent; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
 .aiwp-consent-footer a { color: inherit; margin: 8px; }

@@ -3,7 +3,8 @@
     function init() {
         var config = window.aiwpConsent;
         var panel = document.getElementById('aiwp-consent-panel');
-        var opener = document.querySelector('[data-aiwp-consent-open]');
+        var openers = document.querySelectorAll('[data-aiwp-consent-open]');
+        var opener = openers[0];
         if (!config || !panel || !opener) return;
         var keys = Object.keys(config.categories);
         var loaded = {};
@@ -65,11 +66,16 @@
         }
         function show(advanced) {
             panel.hidden = false;
+            openers.forEach(function (control) { control.setAttribute('aria-expanded', 'true'); });
             details.hidden = !advanced;
             var button = panel.querySelector('[data-aiwp-consent-action="settings"]');
             if (button) button.setAttribute('aria-expanded', String(advanced));
         }
-        function close() { panel.hidden = true; opener.focus({ preventScroll: true }); }
+        function close() {
+            panel.hidden = true;
+            openers.forEach(function (control) { control.setAttribute('aria-expanded', 'false'); });
+            opener.focus({ preventScroll: true });
+        }
         function sync() {
             var record = read();
             apply(record);
@@ -91,8 +97,10 @@
             close();
             apply(stored);
         }
-        opener.hidden = false;
-        opener.addEventListener('click', function () { apply(read()); show(true); panel.querySelector('button').focus(); });
+        openers.forEach(function (control) {
+            control.hidden = false;
+            control.addEventListener('click', function () { opener = control; apply(read()); show(true); panel.querySelector('button').focus(); });
+        });
         panel.addEventListener('click', function (event) {
             var button = event.target.closest('[data-aiwp-consent-action]');
             if (!button) return;

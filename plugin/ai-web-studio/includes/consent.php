@@ -9,7 +9,7 @@ function aiwp_consent_settings() {
     $stored = get_option( 'aiwp_consent_settings', array() );
     $stored = is_array( $stored ) ? $stored : array();
     $result = array( 'policy' => isset( $stored['policy'] ) && is_string( $stored['policy'] ) ? $stored['policy'] : '' );
-    $result['external'] = ! empty( $stored['external'] );
+    $result['external'] = ! array_key_exists( 'external', $stored ) || ! empty( $stored['external'] );
     $result['revision'] = isset( $stored['revision'] ) ? absint( $stored['revision'] ) : 0;
     foreach ( aiwp_consent_categories() as $key => $label ) {
         $item = isset( $stored[ $key ] ) && is_array( $stored[ $key ] ) ? $stored[ $key ] : array();
@@ -27,6 +27,13 @@ function aiwp_consent_version( $settings ) {
 
 function aiwp_consent_cookie_name() {
     return 'aiwp_consent_' . substr( hash( 'sha256', home_url( '/' ) ), 0, 8 );
+}
+
+/** Called only when rendering a control into the actual page. */
+function aiwp_render_cookie_settings_button() {
+    if ( aiwp_consent_settings()['external'] ) { return ''; }
+    $GLOBALS['aiwp_consent_control_rendered'] = true;
+    return '<button type="button" class="aiwp-cookie-settings" data-aiwp-consent-open aria-controls="aiwp-consent-panel" aria-expanded="false" hidden>Nastavení cookies</button>';
 }
 
 function aiwp_consent_active( $settings, $key ) {
@@ -103,6 +110,7 @@ function aiwp_consent_admin() {
     <?php settings_errors( 'aiwp_consent_settings' ); ?>
     <form method="post" action="options.php">
     <?php settings_fields( 'aiwp_consent' ); ?>
+    <p>Pro umístění tlačítka přímo do HTML patičky vložte <code>[aiwp_cookie_settings]</code>. Tlačítko používá třídu <code>aiwp-cookie-settings</code>. Pokud není vykreslené na stránce, zobrazíme záložní ovládání na konci webu. V externím režimu se značka nezobrazí; ovládání poskytuje externí plugin.</p>
     <p><label for="aiwp-consent-external"><input id="aiwp-consent-external" type="checkbox" name="aiwp_consent_settings[external]" value="1" <?php checked( $settings['external'] ); ?>> <strong>Souhlas spravuje externí plugin (například Complianz)</strong></label></p>
     <p>Po uložení vypneme naši lištu, tlačítko i odkaz v patičce, související CSS/JS a spouštění zde uložených měřicích skriptů. Externí plugin musíte samostatně nastavit, včetně měření a možnosti změnit souhlas. Skripty ani souhlasy se do něj nepřenášejí. Vymažte cache webu a ověřte výsledek v novém anonymním okně.</p>
     <?php if ( $settings['external'] ) : ?><p><strong>Externí správa je zapnutá.</strong> Níže uvedené hodnoty jsou uchované, ale nepoužívají se a při uložení v tomto režimu se nemění. Pro návrat zrušte zaškrtnutí a uložte; návštěvníci potom musí zvolit souhlas znovu. Před návratem vypněte správu souhlasu v externím pluginu.</p><?php endif; ?>
@@ -170,7 +178,9 @@ add_action( 'wp_footer', function () {
     if ( $settings['external'] ) { return; }
     $active = array_filter( array_keys( aiwp_consent_categories() ), function ( $key ) use ( $settings ) { return aiwp_consent_active( $settings, $key ); } );
     ?>
-    <div class="aiwp-consent-footer"><button type="button" data-aiwp-consent-open hidden>Nastavení cookies</button><?php if ( $settings['policy'] ) : ?> <a href="<?php echo esc_url( $settings['policy'] ); ?>">Soukromí a cookies</a><?php endif; ?><noscript>Volitelné služby spravované tímto pluginem jsou bez JavaScriptu vypnuté.</noscript></div>
+    <?php if ( empty( $GLOBALS['aiwp_consent_control_rendered'] ) ) : ?>
+    <div class="aiwp-consent-footer"><?php echo aiwp_render_cookie_settings_button(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed trusted markup. ?><?php if ( $settings['policy'] ) : ?> <a href="<?php echo esc_url( $settings['policy'] ); ?>">Soukromí a cookies</a><?php endif; ?><noscript>Volitelné služby spravované tímto pluginem jsou bez JavaScriptu vypnuté.</noscript></div>
+    <?php endif; ?>
     <section id="aiwp-consent-panel" aria-labelledby="aiwp-consent-heading" hidden>
         <h2 id="aiwp-consent-heading">Soukromí a cookies</h2>
         <p><?php echo $active ? 'Volitelné služby spustíme pouze s vaším souhlasem. Můžete je odmítnout nebo si vybrat jednotlivé účely. Volbu kdykoliv změníte přes Nastavení cookies na konci webu.' : 'Volitelné služby spravované tímto pluginem nejsou zapnuté.'; ?></p>

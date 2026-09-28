@@ -48,6 +48,7 @@ final class AIWP_Admin {
 			'siteName'     => get_bloginfo( 'name' ),
 			'siteUrl'      => home_url( '/' ),
 			'menuPreviews' => array( 'primary' => aiwp_render_menu( 'primary' ), 'footer' => aiwp_render_menu( 'footer' ) ),
+			'consentExternal' => aiwp_consent_settings()['external'],
 		) );
 	}
 
@@ -85,6 +86,7 @@ final class AIWP_Admin {
 						<p>Ve <a href="<?php echo esc_url( admin_url( 'nav-menus.php' ) ); ?>" target="_blank" rel="noopener">Vzhled → Menu (nová karta)</a> vytvořte menu, přidejte stránky a přiřaďte ho do umístění <strong><?php echo esc_html( $menu_label ); ?></strong>. Změny odkazů se pak na webu projeví automaticky.</p>
 						<p>Do HTML vložte <code><?php echo esc_html( '[aiwp_menu location="' . $menu_location . '"]' ); ?></code>, ideálně dovnitř značky <code>&lt;nav&gt;</code>. Nahraďte jím původní ručně psané odkazy; značka se na webu změní na seznam odkazů.</p>
 						<button type="button" class="button" data-aiwp-insert-menu data-aiwp-location="<?php echo esc_attr( $menu_location ); ?>">Vložit menu z WordPressu</button>
+						<?php if ( 'footer' === $menu_location ) : ?><p>Pro tlačítko přímo v patičce vložte do HTML <code>[aiwp_cookie_settings]</code>. Vzhled upravíte přes třídu <code>aiwp-cookie-settings</code>. V externím režimu používejte ovládání svého správce souhlasu.</p><?php endif; ?>
 						<p class="description">Tlačítko vloží značku na místo kurzoru nebo označeného textu v HTML. Potom klikněte na Aktualizovat. Po změně menu ve Vzhled → Menu znovu načtěte tento editor, aby se aktualizovaly odkazy v náhledu.</p>
 						<?php if ( ! has_nav_menu( $menu_location ) ) : ?>
 							<p class="aiwp-menu-notice">K umístění „<?php echo esc_html( $menu_label ); ?>“ zatím není přiřazené menu. Nejdříve ho vyberte a uložte ve Vzhled → Menu; do té doby se odkazy na webu nezobrazí.</p>

@@ -15,7 +15,7 @@ HTML je fragment s jedinečnou kořenovou třídou, bez doctype, html, head, bod
 
 Navigaci vlož do nav s přístupným popiskem a přesnou značkou [aiwp_menu location="footer"]. Odkazy na cookies a ochranu osobních údajů si přidám do tohoto menu přes Vzhled → Menu a přiřadím umístění footer. Nekopíruj tyto odkazy ještě jednou mimo menu. Výstup je ul.aiwp-menu, li.menu-item, a a případně ul.sub-menu. Jiné shortcody nepoužívej.
 
-Nevytvářej vlastní cookie lištu ani nefunkční tlačítko Nastavení cookies. Při vlastní správě plugin přidává toto tlačítko automaticky za patičku. Při externí správě ho musí zajistit externí plugin; pouze mě mimo kód upozorni na ověření jeho dostupnosti. Nevkládej měřicí skripty ani kód přepínající souhlas.
+Pro vlastní správu souhlasu vlož přímo dovnitř patičky [aiwp_cookie_settings]. To je další podporovaná značka; vytvoří button.aiwp-cookie-settings. CSS tlačítka přizpůsob patičce, ale nepřepisuj atribut hidden. Vlastní JS pro otevření nastavení není potřeba. Při externí správě značka nic nevypíše a ovládání musí zajistit externí plugin; upozorni mě na ověření jeho dostupnosti. Nevytvářej další lištu, nefunkční ovládání, měřicí skripty ani kód přepínající souhlas.
 
 Použij existující společné třídy a proměnné --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* a --aiwp-leading-*. Zachovej společné clamp() velikosti i řádkování. CSS omez na kořen patičky a její vlastní rozložení; nekopíruj společné CSS ani nenačítej fonty či knihovny. Pokud společné CSS chybí, nejprve mě odkaž na prompt 01-spolecny-vzhled.txt.
 

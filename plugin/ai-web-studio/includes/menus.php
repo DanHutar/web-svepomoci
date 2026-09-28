@@ -26,6 +26,11 @@ add_filter( 'nav_menu_item_id', function ( $id, $item, $args ) {
 
 /** A small allowlist of dynamic markup; third-party shortcodes are never executed here. */
 function aiwp_render_dynamic_html( $html ) {
+    $html = preg_replace_callback( '/(\[?)\[aiwp_cookie_settings(?=\s|\])([^\]]*)\](\]?)/', function ( $match ) {
+        if ( '[' === $match[1] && ']' === $match[3] ) { return substr( $match[0], 1, -1 ); }
+        if ( '' !== trim( $match[2] ) ) { return ''; }
+        return $match[1] . aiwp_render_cookie_settings_button() . $match[3];
+    }, $html );
     if ( false === strpos( $html, '[aiwp_menu' ) ) {
         return $html;
     }
