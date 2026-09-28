@@ -117,3 +117,5 @@ Současné CSS:
 Současný JavaScript:
 [vložit JS]
 ```
+
+Měření, marketingové skripty ani další cookie lištu nevkládej do stránky. Volitelné služby se nastavují přes Web svépomocí → Soukromí a cookies a spouštějí až po souhlasu.

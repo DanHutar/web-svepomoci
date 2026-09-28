@@ -37,6 +37,8 @@ jobs:
         run: npm run test:webp
       - name: Test SEO media picker on WordPress 7.1.2
         run: npm run test:seo-media
+      - name: Test consent blocking and withdrawal
+        run: npm run test:consent
       - name: Build both installable packages and update manifest
         shell: pwsh
         run: ./tools/package.ps1

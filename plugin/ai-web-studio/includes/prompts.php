@@ -25,6 +25,7 @@ function aiwp_prompt_code_rules( $kind ) {
     $part = in_array( $kind, array( 'header', 'footer' ), true );
     $location = 'footer' === $kind ? 'footer' : 'primary';
     return implode( "\n\n", array(
+        'Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky, hlavičky nebo patičky. Volitelné služby se nastavují zvlášť přes Web svépomocí → Soukromí a cookies a spouštějí až po souhlasu.',
         'Vrať úplné výsledné HTML, CSS a JS jako tři samostatné bloky, nikoli jen změněné řádky. Když JavaScript není potřeba, napiš, že pole JS má zůstat prázdné. Při kopírování do WordPressu vynechám značky ``` kolem bloků.',
         'HTML je pouze fragment: bez doctype, html, head, body, meta, title, link, base, style, script, PHP, on* atributů a javascript: URL. '
             . ( $part ? 'Vytvoř pouze požadovanou hlavičku nebo patičku, bez H1.' : 'Hlavičku a patičku spravuji zvlášť, nevytvářej je. Obsah má jeden hlavní nadpis H1; nepřidávej další značku main.' ),

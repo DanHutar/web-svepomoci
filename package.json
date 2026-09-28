@@ -1,7 +1,7 @@
 {
   "name": "web-svepomoci-workspace",
   "private": true,
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "Local WordPress integration checks; no Node dependencies are shipped in the theme or plugin.",
   "type": "module",
   "scripts": {
@@ -13,7 +13,8 @@
     "test:scripts": "node tests/scripts-flow.mjs",
     "test:webp": "node tests/webp-flow.mjs",
     "test:seo-media": "node tests/seo-media-flow.mjs",
-    "preview": "node tools/preview.mjs"
+    "preview": "node tools/preview.mjs",
+    "test:consent": "node tests/consent-flow.mjs"
   },
   "devDependencies": {
     "@wp-playground/cli": "3.1.54",

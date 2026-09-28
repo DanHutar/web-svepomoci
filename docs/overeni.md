@@ -132,6 +132,12 @@ Nejde o test všech optimalizačních doplňků: externí slučování či odkl�
 
 Testovací prostředí používá GD. Dostupnost WebP a EXIF závisí na konkrétním hostingu; šablona před převodem ověřuje podporu editoru. Test negarantuje menší velikost každého výstupu ani kompatibilitu se všemi optimalizačními pluginy.
 
+## Verze 1.9.0: souhlas s volitelnými službami
+
+Test `npm run test:consent` spouští WordPress 7.1.2 a skutečný Chrome. Ověřuje výchozí vypnutí, žádné měření před volbou, zapamatované odmítnutí, samostatný souhlas s analytikou, přijmutí obou kategorií, odvolání a odstranění testovacích cookies i localStorage. Zahrnuje synchronizaci mezi kartami, vypršení a změnu verze volby, zákaz cache odpovědí se skripty, odmítnutí požadavku bez souhlasu, neplatný parametr a šířku panelu na mobilu. Ověřuje také uložení přes administraci a odmítnutí neúplného nastavení či změny bez oprávnění.
+
+Test používá místní testovací služby; neověřuje konfiguraci konkrétního Google Analytics, marketingového poskytovatele ani produkčního hostingu. Rozsah a postup konfigurace popisuje [návod](soukromi-cookies.md).
+
 ## Verze 1.8.1: výběr obrázku pro sdílení
 
 Na WordPressu 7.1.2 se podařilo zopakovat nefunkční tlačítko a chybu `undefined is not iterable`: nadpis metaboxu dostává od WordPressu ID `aiwp-seo-title`, které používal také náš input. Počítadlo načetlo nadpis a přerušilo inicializaci před připojením tlačítka médií. Pole nyní používá vlastní ID `aiwp-seo-title-input`; název ukládaného pole a metadata se nemění.

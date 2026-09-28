@@ -24,9 +24,9 @@ Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plu
 1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
 2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
 3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.8.1**.
+4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.9.0**.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.8.1**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.9.0**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
 
 Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro propojení starší hlavičky s menu vložte značku popsanou níže a uložte ji. Změny odkazů pak provádějte ve **Vzhled → Menu**.
 
@@ -104,3 +104,7 @@ Kód ve vložených polích běží na vašem webu. Pro první pokusy používej
 Pro používání na hostingu nepotřebujete Node.js. Vývojář může s Node.js 22+ spustit `npm ci` a pak `npm run preview`. Otevře se dočasný WordPress na adrese uvedené v terminálu, s aktivní šablonou, pluginem a vloženou ukázkou. Administrace je na `/wp-admin/`. Server se ukončí pomocí Ctrl+C; data této ukázky se po ukončení nezachovají. Při prvním spuštění se stáhne WordPress do cache Playground v uživatelské složce.
 
 `npm test` ověřuje PHP, ukládání a oprávnění ve WordPressu a ovládání editoru přes místní Google Chrome. Výsledky a snímky ukládá do `test-results/`. Testovací závislosti ani data se nepřidávají do instalačních ZIPů. Přesnou ověřenou konfiguraci uvádí [záznam ověření](docs/overeni.md).
+
+## Soukromí a cookies
+
+Od verze 1.9.0 nastavíte souhlas přes **Web svépomocí → Soukromí a cookies**. Měření je ve výchozím stavu vypnuté. [Návod a rozsah blokování](docs/soukromi-cookies.md).

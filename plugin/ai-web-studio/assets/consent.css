@@ -1,0 +1,15 @@
+#aiwp-consent-panel[hidden], #aiwp-consent-panel [hidden], .aiwp-consent-footer [hidden] { display: none !important; }
+#aiwp-consent-panel { box-sizing: border-box; position: fixed; bottom: 16px; left: 16px; width: min(720px, calc(100% - 32px)); max-height: 75vh; overflow: auto; z-index: 100000; padding: 24px; background: #fff; color: #17212b; border: 1px solid #657383; border-radius: 12px; box-shadow: 0 4px 32px #0003; font: 16px/1.5 system-ui, sans-serif; text-align: left; overflow-wrap: anywhere; }
+#aiwp-consent-panel h2 { margin: 0 0 12px; color: inherit; font: 700 24px/1.3 system-ui, sans-serif; }
+#aiwp-consent-panel p { margin: 12px 0; font: inherit; color: inherit; }
+#aiwp-consent-panel a { color: #174c89; text-decoration: underline; }
+#aiwp-consent-panel .aiwp-consent-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+#aiwp-consent-panel button { box-sizing: border-box; min-height: 44px; max-width: 100%; padding: 10px 14px; border: 1px solid #34495e; border-radius: 5px; background: #f1f4f7; color: #17212b; font: 600 16px/1.4 system-ui, sans-serif; cursor: pointer; white-space: normal; }
+#aiwp-consent-panel button:hover { background: #e0e7ee; }
+#aiwp-consent-panel :focus-visible, .aiwp-consent-footer :focus-visible { outline: 3px solid #1769aa; outline-offset: 3px; }
+#aiwp-consent-panel label { display: block; font-weight: 700; padding-top: 12px; }
+#aiwp-consent-panel input[type=checkbox] { width: 20px; height: 20px; vertical-align: middle; }
+#aiwp-consent-panel .aiwp-consent-description { white-space: pre-line; }
+.aiwp-consent-footer { padding: 12px; text-align: center; font: 14px/1.5 system-ui, sans-serif; }
+.aiwp-consent-footer button { padding: 10px; min-height: 44px; border: 1px solid currentColor; border-radius: 4px; background: transparent; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+.aiwp-consent-footer a { color: inherit; margin: 8px; }

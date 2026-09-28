@@ -1,13 +1,13 @@
-# Web svépomocí 1.8.1
+# Web svépomocí 1.9.0
 
-- Oprava nefunkčního tlačítka **Vybrat z médií** v SEO panelu na WordPressu 7.1.2. Identifikátor pole SEO titulku již nekoliduje s identifikátorem nadpisu panelu, který vytváří WordPress.
-- Počítadlo znaků ověřuje, že pracuje se vstupním polem. Skript má výslovnou závislost na knihovně médií a při jejím nenačtení zobrazí srozumitelnou zprávu místo tichého selhání.
-- Výběr a změna obrázku, zavření dialogu bez změny, uložení a výpis obrázku v metadatech pro sdílení mají vlastní test na WordPressu 6.8.3 i 7.1.2.
-- Již uložené SEO hodnoty se nepřevádějí ani nemažou. Převod WebP a další dosavadní funkce zůstávají zachované.
+- Nová sekce **Web svépomocí → Soukromí a cookies** pro analytické a marketingové služby. Obě kategorie jsou při instalaci vypnuté.
+- Lišta nabízí přijmutí, odmítnutí a výběr kategorií. Skripty z nové sekce se načítají až po souhlasu; platnost volby kontroluje také server.
+- Tlačítko na konci webu umožňuje změnit volbu. Odvolání odstraní nastavené dostupné cookies a úložiště a obnoví stránku bez odmítnutých skriptů. Volba se synchronizuje mezi kartami.
+- Změna konfigurace vyžaduje novou volbu. Prompty upozorňují, aby AI nevkládala sledování přímo do stránek.
 
 Od verze 1.2.0 aktualizujte běžným tlačítkem ve WordPressu; kontrolu vyvoláte přes **Web svépomocí → Zkontrolovat aktualizace**. Ze starších verzí nahrajte instalační ZIPy ručně a potvrďte nahrazení. Po aktualizaci vymažte případnou cache webu.
 
-Po aktualizaci znovu načtěte otevřený editor stránky, případně použijte Ctrl+F5. Vybraný obrázek potvrďte tlačítkem **Použít tento obrázek** a stránku uložte.
+Měření se samo nezapne. Až budete službu používat, doplňte její kód, popis, seznam cookies a odkaz na informace o soukromí. Funkce automaticky neblokuje služby vložené jinými pluginy ani externí obsah stránek. [Návod a omezení](https://github.com/DanHutar/web-svepomoci/blob/main/docs/soukromi-cookies.md).
 
 Podrobnosti: [Ověření funkcí](https://github.com/DanHutar/web-svepomoci/blob/main/docs/overeni.md).
 
