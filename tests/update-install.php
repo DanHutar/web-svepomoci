@@ -26,11 +26,11 @@ update_option( 'wsp_test_snapshot', array(
 set_site_transient( 'update_plugins', (object) array( 'response' => array(
     'ai-web-studio/ai-web-studio.php' => (object) array(
         'slug' => 'ai-web-studio', 'plugin' => 'ai-web-studio/ai-web-studio.php',
-        'new_version' => $target_version, 'package' => '/tmp/web-svepomoci-plugin.zip',
+        'new_version' => $target_version, 'package' => '/tmp/byyourself-builder.zip',
     ),
 ) ) );
 set_site_transient( 'update_themes', (object) array( 'response' => array(
-    'ai-web' => array( 'theme' => 'ai-web', 'new_version' => $target_version, 'package' => '/tmp/web-svepomoci-sablona.zip' ),
+    'ai-web' => array( 'theme' => 'ai-web', 'new_version' => $target_version, 'package' => '/tmp/byyourself-theme.zip' ),
 ) ) );
 ob_start();
 $plugin = new Plugin_Upgrader( new WP_Ajax_Upgrader_Skin() );

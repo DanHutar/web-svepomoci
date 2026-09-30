@@ -8,8 +8,8 @@ Set-StrictMode -Version Latest
 $projectDirectory = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $outputDirectory = Join-Path $projectDirectory 'dist'
 $packages = @(
-    @{ Slug = 'ai-web'; Kind = 'theme'; Name = 'web-svepomoci-sablona'; RelativeSource = 'theme/ai-web'; RequiredFile = 'style.css' },
-    @{ Slug = 'ai-web-studio'; Kind = 'plugin'; Name = 'web-svepomoci-plugin'; RelativeSource = 'plugin/ai-web-studio'; RequiredFile = 'ai-web-studio.php' }
+    @{ Slug = 'ai-web'; Kind = 'theme'; Name = 'byyourself-theme'; RelativeSource = 'theme/ai-web'; RequiredFile = 'style.css' },
+    @{ Slug = 'ai-web-studio'; Kind = 'plugin'; Name = 'byyourself-builder'; RelativeSource = 'plugin/ai-web-studio'; RequiredFile = 'ai-web-studio.php' }
 )
 
 $components = [ordered]@{}
@@ -81,7 +81,7 @@ foreach ($package in $packages) {
 
 $manifest = [ordered]@{ schema = 1; version = $releaseVersion; components = $components } | ConvertTo-Json -Depth 5
 [System.IO.File]::WriteAllText((Join-Path $outputDirectory 'updates.json'), $manifest, [System.Text.UTF8Encoding]::new($false))
-foreach ($legacyZip in @('ai-web.zip', 'ai-web-studio.zip')) {
+foreach ($legacyZip in @('ai-web.zip', 'ai-web-studio.zip', 'web-svepomoci-plugin.zip', 'web-svepomoci-sablona.zip')) {
     $legacyPath = Join-Path $outputDirectory $legacyZip
     if (Test-Path -LiteralPath $legacyPath -PathType Leaf) { Remove-Item -LiteralPath $legacyPath }
 }

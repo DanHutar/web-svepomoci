@@ -26,9 +26,9 @@ try {
     .replace("require_once get_template_directory() . '/includes/github-updates.php';", ''));
   server = await bootWordPress(9404, false, temporary);
   await server.playground.writeFile('/tmp/updates.json', await fs.readFile(path.join(projectRoot, 'dist/updates.json')));
-  for (const kind of ['plugin', 'sablona']) {
-    await server.playground.writeFile('/tmp/web-svepomoci-' + kind + '.zip',
-      await fs.readFile(path.join(projectRoot, 'dist/web-svepomoci-' + kind + '.zip')));
+  for (const kind of ['builder', 'theme']) {
+    await server.playground.writeFile('/tmp/byyourself-' + kind + '.zip',
+      await fs.readFile(path.join(projectRoot, 'dist/byyourself-' + kind + '.zip')));
   }
   const install = await phpJson(server, 'require "/aiwp-tests/update-install.php";');
   console.log(install);

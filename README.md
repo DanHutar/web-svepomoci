@@ -10,9 +10,9 @@ Potřebujete WordPress **6.4 nebo novější**, PHP **7.4 nebo novější** a ú
 
 ## Instalace
 
-1. Použijte připravené balíčky `dist/web-svepomoci-sablona.zip` a `dist/web-svepomoci-plugin.zip`. Pokud jste upravili zdrojové soubory, vytvořte je znovu ve složce `ai-wordpress` příkazem `powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\package.ps1`. Výjimka ze zásad spouštění platí jen pro tento proces; nemění trvalé nastavení Windows.
-2. Ve WordPressu otevřete **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu**. Nahrajte `web-svepomoci-sablona.zip` a aktivujte šablonu.
-3. V nabídce **Pluginy → Instalace pluginů → Nahrát plugin** nahrajte `web-svepomoci-plugin.zip` a plugin aktivujte.
+1. Použijte připravené balíčky `dist/byyourself-theme.zip` a `dist/byyourself-builder.zip`. Pokud jste upravili zdrojové soubory, vytvořte je znovu ve složce `ai-wordpress` příkazem `powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\package.ps1`. Výjimka ze zásad spouštění platí jen pro tento proces; nemění trvalé nastavení Windows.
+2. Ve WordPressu otevřete **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu**. Nahrajte `byyourself-theme.zip` a aktivujte šablonu.
+3. V nabídce **Pluginy → Instalace pluginů → Nahrát plugin** nahrajte `byyourself-builder.zip` a plugin aktivujte.
 4. Otevřete **ByYourself** a projděte nastavení. Potom vytvořte první stránku podle [návodu](docs/prvni-web.md).
 
 Zobrazené názvy jsou nové, ale kvůli zachování aktivace a přiřazení menu se technické složky nemění. ZIP soubory mají správnou instalační strukturu: kořenovou složku `ai-web`, respektive `ai-web-studio`. Znovuspuštění balení nahradí předchozí ZIP soubory. Zdrojové složky zůstávají zachované.
@@ -21,12 +21,14 @@ Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plu
 
 ## Ruční aktualizace
 
-1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
-2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
-3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **ByYourself Builder** zůstává aktivní a uvádí verzi **1.10.1**.
+**Přechod z verze 1.10.1 nebo starší na nové názvy ZIPů vyžaduje jednorázově ručně nahrát oba balíčky.** Stará kontrola hledá původní názvy a nové vydání nenabídne. Po instalaci verze 1.10.2 nebo novější budou další aktualizace opět dostupné běžně ve WordPressu.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.10.1**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
+2. Vyberte místní soubor `dist/byyourself-builder.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
+3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
+4. V přehledu pluginů ověřte, že **ByYourself Builder** zůstává aktivní a uvádí verzi **1.10.2**.
+
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/byyourself-theme.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.10.2**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
 
 Od verze 1.10.0 jsou rozhraní i prompty anglicky a česky. Nová instalace začíná anglicky, již nastavený web si zachová češtinu. Otevřete **ByYourself → Language / ByYourself → Jazyk** a nastavte samostatně rozhraní, veřejné popisky a požadovaný jazyk obsahu od AI. Uložené stránky se nepřekládají. [Návod v obou jazycích](docs/languages.md).
 
@@ -36,7 +38,7 @@ Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro prop
 
 Repozitář: [DanHutar/web-svepomoci](https://github.com/DanHutar/web-svepomoci). Instalační ZIPy najdete mezi přílohami [nejnovějšího vydání](https://github.com/DanHutar/web-svepomoci/releases/latest). Nepoužívejte **Source code (zip)** jako instalační balíček.
 
-Od verze 1.2.0 se nové stabilní verze nabízejí v běžných **Aktualizacích WordPressu**, u pluginu a u šablony. Pokud máte starší instalaci, nahrajte nejnovější balíčky jednou ručně. V nabídce **ByYourself → Zkontrolovat aktualizace** můžete vynutit nové načtení. Automatické instalace bez kliknutí se samy nezapínají.
+Po jednorázovém přechodu na verzi 1.10.2 nebo novější se další stabilní verze nabízejí v běžných **Aktualizacích WordPressu**, u pluginu a u šablony. Starší instalace aktualizujte ručním nahráním obou ZIPů podle návodu výše. V nabídce **ByYourself → Zkontrolovat aktualizace** můžete vynutit nové načtení. Automatické instalace bez kliknutí se samy nezapínají.
 
 Kontrola používá veřejné GitHub API a manifest vydání, nepotřebuje token. Odesílá běžný HTTP požadavek, nikoli obsah vašich stránek nebo přihlašovací údaje. Výsledek se ukládá na hodinu, neúspěch na pět minut. Když GitHub neodpovídá, web dál funguje; aktualizace se nabídne po úspěšné kontrole. Musí být aktivní alespoň náš plugin nebo naše šablona. Stejná čísla verzí obou balíčků zjednodušují vydávání.
 

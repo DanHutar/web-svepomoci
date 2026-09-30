@@ -9,7 +9,7 @@ if ( ! class_exists( 'WSP_GitHub_Updates', false ) ) {
     final class WSP_GitHub_Updates {
         const REPOSITORY = 'https://github.com/DanHutar/web-svepomoci';
         const API = 'https://api.github.com/repos/DanHutar/web-svepomoci/releases/latest';
-        const CACHE = 'wsp_github_release_v1';
+        const CACHE = 'wsp_github_release_v2';
         const PLUGIN = 'ai-web-studio/ai-web-studio.php';
         const THEME = 'ai-web';
         private static $registered = false;
@@ -81,7 +81,7 @@ if ( ! class_exists( 'WSP_GitHub_Updates', false ) ) {
                     || ! is_string( $asset['name'] ) || 'uploaded' !== $asset['state'] ) {
                     continue;
                 }
-                if ( in_array( $asset['name'], array( 'updates.json', 'web-svepomoci-plugin.zip', 'web-svepomoci-sablona.zip' ), true )
+                if ( in_array( $asset['name'], array( 'updates.json', 'byyourself-builder.zip', 'byyourself-theme.zip' ), true )
                     && $base . $asset['name'] === $asset['browser_download_url'] ) {
                     $assets[ $asset['name'] ] = $asset['browser_download_url'];
                 }
@@ -96,7 +96,7 @@ if ( ! class_exists( 'WSP_GitHub_Updates', false ) ) {
                 return false;
             }
             $result = array( 'url' => self::REPOSITORY . '/releases/tag/' . $release['tag_name'] );
-            foreach ( array( 'plugin' => 'web-svepomoci-plugin.zip', 'theme' => 'web-svepomoci-sablona.zip' ) as $kind => $filename ) {
+            foreach ( array( 'plugin' => 'byyourself-builder.zip', 'theme' => 'byyourself-theme.zip' ) as $kind => $filename ) {
                 $component = isset( $manifest['components'][ $kind ] ) ? $manifest['components'][ $kind ] : null;
                 if ( ! is_array( $component ) || ! isset( $component['version'], $component['requires'], $component['requires_php'] )
                     || $version[1] !== $component['version'] ) {

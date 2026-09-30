@@ -1,9 +1,9 @@
-﻿# ByYourself 1.10.1
+# ByYourself 1.10.2
 
-The plugin is now **ByYourself Builder**, the theme is **ByYourself Theme**, and the administration menu is **ByYourself** in both English and Czech.
+Installation packages now use the product names: **byyourself-builder.zip** and **byyourself-theme.zip**.
 
-Prompts, help text and documentation use the same brand. Existing page content, settings and language preferences remain unchanged.
+**One-time manual update required for installations on 1.10.1 or earlier.** Older versions look for the old ZIP filenames and will not discover this release. Upload both new ZIPs through WordPress and choose **Replace current with uploaded**. Do not delete the existing components first. Future releases can be updated normally after this migration.
 
-Update both components through WordPress. Technical folder names, identifiers, repository URLs and ZIP filenames remain unchanged to preserve compatibility with installed versions. Use **web-svepomoci-plugin.zip** for ByYourself Builder and **web-svepomoci-sablona.zip** for ByYourself Theme.
+The ZIP roots remain ai-web-studio and ai-web, preserving component identity, saved content, settings and activation. The updater now uses the new filenames and a new release-cache key.
 
-If the update does not appear, open the component overview and click **Check for updates / Zkontrolovat aktualizace**. Clear website caches after updating.
+Download the two installation attachments, not Source code (zip). See the [installation guide](https://github.com/DanHutar/web-svepomoci/blob/main/README.md#ruční-aktualizace).

@@ -8,13 +8,15 @@ Projekt se publikuje do veřejného repozitáře [DanHutar/web-svepomoci](https:
 2. Popište změny v `RELEASE.md`. Při změně požadavků upravte hlavičky `Requires at least` a `Requires PHP`; balení je automaticky vloží do manifestu.
 3. Pokud upravujete `includes/github-updates.php`, udržujte totožný soubor v pluginu i šabloně. Balení odmítne rozdílné kopie.
 4. Spusťte `npm ci`, `powershell -NoProfile -ExecutionPolicy Bypass -File ./tools/package.ps1`, `npm run test:updates` a podle změny také `npm test` / `npm run test:menu`. Na systémech s PowerShell 7 použijte `pwsh -File ./tools/package.ps1`.
-5. Nahrajte změny do větve `main`. Workflow **Test and release** sestaví oba ZIPy, spustí test aktualizací ve WordPressu a po úspěchu vytvoří stabilní vydání s tagem `v1.2.1` a třemi přílohami: `web-svepomoci-plugin.zip`, `web-svepomoci-sablona.zip`, `updates.json`.
+5. Nahrajte změny do větve `main`. Workflow **Test and release** sestaví oba ZIPy, spustí test aktualizací ve WordPressu a po úspěchu vytvoří stabilní vydání s tagem `v1.2.1` a třemi přílohami: `byyourself-builder.zip`, `byyourself-theme.zip`, `updates.json`.
 
 Workflow používá krátkodobý `GITHUB_TOKEN` poskytovaný GitHub Actions; vlastní tajné klíče se nenastavují. Publikované vydání se stejným číslem nepřepisuje. Další změny vydávejte pod vyšší verzí. Při neúspěšném nahrání může zůstat koncept vydání; zkontrolujte log Actions a koncept před novým pokusem dokončete nebo odstraňte. Neúplné, konceptové a předběžné verze WordPress nepoužije.
 
 Po vydání otevřete na testovacím webu **ByYourself → Zkontrolovat aktualizace** a aktualizujte plugin i šablonu. Nastavení automatické instalace je na správci daného WordPressu.
 
 ## Kompatibilita s původní instalací
+
+Od verze 1.10.2 se přílohy jmenují `byyourself-builder.zip` a `byyourself-theme.zip`. Instalace s verzí 1.10.1 nebo starší musí jednou ručně nahrát oba nové balíčky a potvrdit nahrazení. Původní updater nové názvy nepřijme; staré ZIPy pod původními názvy se v novém vydání nezveřejňují. Další aktualizace používají nové názvy automaticky.
 
 Názvy produktu a ZIPů jsou nové. Uvnitř ZIPů zůstávají složky `ai-web-studio` a `ai-web`, stejně jako hlavní soubor pluginu, identifikátory menu, databázová pole a nastavení. WordPress tak pozná aktualizaci existujících součástí. Složky ručně nepřejmenovávejte. Úpravy obsahu v administraci přežijí aktualizaci; ruční úpravy souborů pluginu či rodičovské šablony aktualizace nahrazuje.
 

@@ -29,7 +29,7 @@ Nová nabídka obsahuje Inter, Roboto, Open Sans, Montserrat, Nunito Sans, Sourc
 Pro ruční použití nahraďte údaje v tomto zadání:
 
 ```text
-Navrhni společné CSS pro WordPress s ByYourself Builder a web-svepomoci-sablona.
+Navrhni společné CSS pro WordPress s ByYourself Builder a ByYourself Theme.
 Font vybraný ve Vzhled webu: [PŘESNÝ NÁZEV]
 Barva: [BARVA] přes var(--aiwp-accent).
 Šířka: [ŠÍŘKA] přes var(--aiwp-width).

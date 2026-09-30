@@ -5,7 +5,7 @@ Od verze **1.4.0** můžete zadání připravit přímo v nabídce **ByYourself 
 Nejdříve vytvořte [společný vzhled a typografii](spolecny-vzhled.md). Pak použijte zadání pro stránku, hlavičku, patičku a úpravy níže. Tlačítko v editoru připojuje uložené společné CSS automaticky; při ručním použití ho přiložte sami.
 
 ```text
-Vytvoř obsah stránky pro WordPress se šablonou ByYourself Theme a pluginem web-svepomoci-plugin.
+Vytvoř obsah stránky pro WordPress se šablonou ByYourself Theme a pluginem ByYourself Builder.
 
 Web: [název a krátký popis]
 Návštěvníci: [pro koho web je]

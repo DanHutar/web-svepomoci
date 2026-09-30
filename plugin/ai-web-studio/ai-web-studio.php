@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/DanHutar/web-svepomoci
  * Update URI: https://github.com/DanHutar/web-svepomoci
  * Description: Per-page HTML, CSS and JavaScript, shared headers and footers, and essential SEO.
- * Version: 1.10.1
+ * Version: 1.10.2
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Author: DanHutar
@@ -14,7 +14,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-define( 'AIWP_VERSION', '1.10.1' );
+define( 'AIWP_VERSION', '1.10.2' );
 define( 'AIWP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AIWP_URL', plugin_dir_url( __FILE__ ) );
 

@@ -28,7 +28,7 @@ wsp_assert( AIWP_VERSION === $plugin_data['Version'], 'Plugin runtime version ma
 
 $base = WSP_GitHub_Updates::REPOSITORY . '/releases/download/v' . $next_version . '/';
 $good_release = array( 'tag_name' => 'v' . $next_version, 'draft' => false, 'prerelease' => false, 'assets' => array() );
-foreach ( array( 'updates.json', 'web-svepomoci-plugin.zip', 'web-svepomoci-sablona.zip' ) as $name ) {
+foreach ( array( 'updates.json', 'byyourself-builder.zip', 'byyourself-theme.zip' ) as $name ) {
     $good_release['assets'][] = array( 'name' => $name, 'state' => 'uploaded', 'browser_download_url' => $base . $name );
 }
 $good_manifest = array( 'schema' => 1, 'version' => $next_version, 'components' => array() );
@@ -67,8 +67,8 @@ $plugin_updates = get_site_transient( 'update_plugins' );
 $theme_updates = get_site_transient( 'update_themes' );
 wsp_assert( isset( $plugin_updates->response['ai-web-studio/ai-web-studio.php'] ), 'WordPress native plugin update discovery offers the new release' );
 wsp_assert( isset( $theme_updates->response['ai-web'] ), 'WordPress native theme update discovery offers the new release' );
-wsp_assert( $base . 'web-svepomoci-plugin.zip' === $plugin_updates->response['ai-web-studio/ai-web-studio.php']->package, 'Plugin update uses plugin ZIP, not source archive' );
-wsp_assert( $base . 'web-svepomoci-sablona.zip' === $theme_updates->response['ai-web']['package'], 'Theme update uses theme ZIP, not source archive' );
+wsp_assert( $base . 'byyourself-builder.zip' === $plugin_updates->response['ai-web-studio/ai-web-studio.php']->package, 'Plugin update uses plugin ZIP, not source archive' );
+wsp_assert( $base . 'byyourself-theme.zip' === $theme_updates->response['ai-web']['package'], 'Theme update uses theme ZIP, not source archive' );
 wsp_assert( false === WSP_GitHub_Updates::plugin_update( false, $plugin_data, 'unrelated/plugin.php', array() ), 'Unrelated GitHub plugins are untouched' );
 wsp_assert( false === WSP_GitHub_Updates::theme_update( false, array( 'UpdateURI' => WSP_GitHub_Updates::REPOSITORY ), 'other-theme', array() ), 'Unrelated themes are untouched' );
 $details = apply_filters( 'plugins_api', false, 'plugin_information', (object) array( 'slug' => 'ai-web-studio' ) );
@@ -98,7 +98,7 @@ foreach ( array( 'draft', 'prerelease', 'wrong_repository', 'missing_asset', 'un
     $mock_manifest = $good_manifest;
     $mock_failure = false;
     if ( in_array( $case, array( 'draft', 'prerelease' ), true ) ) { $mock_release[ $case ] = true; }
-    if ( 'wrong_repository' === $case ) { $mock_release['assets'][1]['browser_download_url'] = 'https://github.com/someone/else/releases/download/v1.3.0/web-svepomoci-plugin.zip'; }
+    if ( 'wrong_repository' === $case ) { $mock_release['assets'][1]['browser_download_url'] = 'https://github.com/someone/else/releases/download/v1.3.0/byyourself-builder.zip'; }
     if ( 'missing_asset' === $case ) { array_pop( $mock_release['assets'] ); }
     if ( 'unfinished_asset' === $case ) { $mock_release['assets'][1]['state'] = 'new'; }
     if ( 'bad_version' === $case ) { $mock_release['tag_name'] = 'v1.3.0-beta'; }
