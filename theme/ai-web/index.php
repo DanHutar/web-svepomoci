@@ -7,7 +7,7 @@ get_header(); ?>
 	<header class="ai-web-archive-header">
 		<h1><?php
 			$posts_page = (int) get_option( 'page_for_posts' );
-			echo esc_html( is_home() && $posts_page ? get_the_title( $posts_page ) : __( 'Články', 'ai-web' ) );
+			echo esc_html( is_home() && $posts_page ? get_the_title( $posts_page ) : __( 'Posts', 'ai-web' ) );
 		?></h1>
 	</header>
 	<?php

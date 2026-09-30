@@ -14,7 +14,7 @@ while ( have_posts() ) :
 				<p class="ai-web-entry__meta"><time datetime="<?php echo esc_attr( get_the_date( DATE_W3C ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time></p>
 				<?php if ( has_post_thumbnail() ) : ?><div class="ai-web-entry__thumbnail"><?php the_post_thumbnail( 'large' ); ?></div><?php endif; ?>
 				<div class="ai-web-entry__content"><?php the_content(); ?></div>
-				<?php wp_link_pages( array( 'before' => '<nav aria-label="' . esc_attr__( 'Části článku', 'ai-web' ) . '">', 'after' => '</nav>' ) ); ?>
+				<?php wp_link_pages( array( 'before' => '<nav aria-label="' . esc_attr__( 'Post sections', 'ai-web' ) . '">', 'after' => '</nav>' ) ); ?>
 			</article>
 			<?php the_post_navigation( array( 'prev_text' => '&larr; %title', 'next_text' => '%title &rarr;' ) ); ?>
 			<?php if ( comments_open() || get_comments_number() ) { comments_template(); } ?>

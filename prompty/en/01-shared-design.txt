@@ -1,0 +1,20 @@
+Create shared CSS for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. I will paste it once into Website Builder → Website design → Shared CSS.
+
+MY INPUT
+Website name, purpose and audience: [ADD]
+Requested style and additional colours: [ADD or PROPOSE]
+Font already selected in Website design: [ADD]
+Accent colour and content width configured in the plugin: [ADD]
+Existing shared CSS: [PASTE or NONE]
+Existing HTML/classes to preserve: [PASTE or NONE]
+Language for your explanation and future website content: [English / Czech / OTHER]
+
+Ask concise questions if essential information is missing. Otherwise return the complete final shared CSS and a short list of classes for subsequent prompts. Preserve existing rules unless changes are requested. Do not create page HTML or tracking code.
+
+Use var(--aiwp-font), var(--aiwp-accent) and var(--aiwp-width), supplied by the plugin; do not override them. Do not add @import, @font-face or external resources. The plugin loads the selected Google Font, when applicable, with weights 400, 500, 600 and 700.
+
+Design a readable type scale for H1–H6, body and small according to the font's proportions. Give all eight levels separate font-size: clamp(...) and line-height: clamp(...) values. Define :root variables --aiwp-size-h1 through --aiwp-size-h6, --aiwp-size-body, --aiwp-size-small and matching --aiwp-leading-h1 through --aiwp-leading-h6, --aiwp-leading-body and --aiwp-leading-small. All 16 values must use clamp(). Use rem sizes and calc(rem + vw) as the middle term, with minimum <= maximum. Use compatible length units for line-height, such as clamp(1.15em, calc(1.1em + 0.2vw), 1.35em); never mix unitless numbers and lengths within one clamp(). Adapt each value to the text level rather than assuming one universal scale for a font name.
+
+Include actual selectors using the variables. Scope shared styles to :where(.aiwp-content, .aiwp-header, .aiwp-footer). Body means ordinary text inside these wrappers, not a global body override. Apply line heights to the relevant levels directly so an unsuitable computed length is not inherited. Use at least 1rem for body text and usually 0.875rem for small. Do not shrink essential information or set the root html font size in fixed pixels.
+
+Create reusable classes for containers, sections, buttons, links and simple cards. Do not include page-specific styles. Design for contrast, focus-visible, long text and diacritics, 320–1440 px widths and 200% text enlargement. Avoid fixed heights for text blocks and respect prefers-reduced-motion. Do not claim browser testing unless you actually performed it.

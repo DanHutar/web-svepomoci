@@ -1,0 +1,68 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\nLanguage: cs_CZ\nPlural-Forms: nplurals=3; plural=(n == 1) ? 0 : (n >= 2 && n <= 4) ? 1 : 2;\n"
+
+msgid "Go to homepage"
+msgstr "Přejít na úvodní stránku"
+
+msgid "The link may no longer be valid. Try searching or return to the homepage."
+msgstr "Odkaz už nemusí být platný. Zkuste vyhledávání nebo se vraťte na úvodní stránku."
+
+msgid "Page not found"
+msgstr "Stránka nebyla nalezena"
+
+msgid "Comments are closed."
+msgstr "Komentáře jsou uzavřeny."
+
+msgid "Comments (%s)"
+msgstr "Komentáře (%s)"
+
+msgid "Comments"
+msgstr "Komentáře"
+
+msgid "Footer navigation"
+msgstr "Navigace v patičce"
+
+msgid "Go to plugins"
+msgstr "Přejít na pluginy"
+
+msgid "The web-svepomoci-sablona theme is ready. Activate web-svepomoci-plugin from the installation package for separate HTML, CSS, JavaScript and SEO fields, and custom headers and footers."
+msgstr "Šablona web-svepomoci-sablona je připravena. Pro samostatná pole HTML, CSS, JavaScript a SEO a vlastní hlavičku a patičku aktivujte web-svepomoci-plugin z instalačního balíčku."
+
+msgid "Footer menu"
+msgstr "Menu v patičce"
+
+msgid "Primary menu"
+msgstr "Hlavní menu"
+
+msgid "Primary navigation"
+msgstr "Hlavní navigace"
+
+msgid "Skip to content"
+msgstr "Přejít na obsah"
+
+msgid "Posts"
+msgstr "Články"
+
+msgid "Page sections"
+msgstr "Části stránky"
+
+msgid "Search results: %s"
+msgstr "Výsledky hledání: %s"
+
+msgid "What are you looking for?"
+msgstr "Co hledáte?"
+
+msgid "Post sections"
+msgstr "Části článku"
+
+msgid "No content matches your selection yet."
+msgstr "Zatím zde není žádný obsah, který by odpovídal vašemu výběru."
+
+msgid "Untitled"
+msgstr "Bez názvu"
+
+msgid "Search"
+msgstr "Hledat"
+
+msgid "A lightweight theme for AI-created pages. Its companion plugin supports custom HTML, CSS, JavaScript, headers and footers."
+msgstr "Lehká univerzální šablona pro stránky vytvořené pomocí AI. S doprovodným pluginem podporuje vlastní HTML, CSS, JavaScript, hlavičku a patičku."

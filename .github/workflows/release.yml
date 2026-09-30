@@ -27,6 +27,10 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci
+      - name: Rebuild and verify translation catalogs
+        run: |
+          node tools/build-translations.mjs
+          git diff --exit-code -- plugin/ai-web-studio/languages theme/ai-web/languages theme/ai-web/includes/languages.php
       - name: Test editors, prompts and external CSS in Chrome
         run: npm test
       - name: Test lean frontend on WordPress 7.1.2
@@ -39,6 +43,8 @@ jobs:
         run: npm run test:seo-media
       - name: Test consent blocking and withdrawal
         run: npm run test:consent
+      - name: Test English and Czech languages and migration
+        run: npm run test:languages
       - name: Build both installable packages and update manifest
         shell: pwsh
         run: ./tools/package.ps1

@@ -1,3 +1,5 @@
+Požadovaný jazyk nového obsahu: [čeština / angličtina / DOPLŇ]. Stávající texty nepřekládej bez výslovného pokynu.
+
 Vytvoř společné CSS pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin. Toto CSS vložím jednou do Web svépomocí → Vzhled webu → Společné CSS.
 
 MOJE PODKLADY

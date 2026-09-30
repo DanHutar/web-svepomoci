@@ -1,3 +1,5 @@
+Požadovaný jazyk nového obsahu: [čeština / angličtina / DOPLŇ]. Stávající texty nepřekládej bez výslovného pokynu.
+
 Vytvoř společnou patičku (footer) pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.
 
 MOJE PODKLADY

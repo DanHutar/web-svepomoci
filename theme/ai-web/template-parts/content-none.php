@@ -4,6 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="ai-web-entry">
-	<p><?php esc_html_e( 'Zatím zde není žádný obsah, který by odpovídal vašemu výběru.', 'ai-web' ); ?></p>
+	<p><?php esc_html_e( 'No content matches your selection yet.', 'ai-web' ); ?></p>
 	<?php if ( ! is_search() ) { get_search_form(); } ?>
 </div>

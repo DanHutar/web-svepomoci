@@ -21,8 +21,8 @@
     function updateCodeStatus(key) {
       dirty = true;
       studio.querySelector('[data-aiwp-filled="' + key + '"]').hidden = !value(key).trim();
-      if (previewRendered) previewStatus.textContent = 'Obsah se změnil. Obnovte náhled.';
-      studio.querySelector('[data-aiwp-code-status]').textContent = 'Změny uložte ve WordPressu.';
+      if (previewRendered) previewStatus.textContent = wp.i18n.__("Content has changed. Refresh the preview.", "ai-web-studio");
+      studio.querySelector('[data-aiwp-code-status]').textContent = wp.i18n.__("Save your changes in WordPress.", "ai-web-studio");
     }
 
     ['html', 'css', 'js'].forEach(function (key) {
@@ -74,7 +74,7 @@
       document.body.classList.toggle('aiwp-code-active', studio.dataset.aiwpKind === 'page' && enabled);
       var status = studio.querySelector('[data-aiwp-mode-status]');
       if (status) {
-        status.textContent = enabled ? 'Použití vlastního kódu je zapnuté. Změny se na web projeví po uložení nebo publikování.' : 'Použití vlastního kódu je vypnuté. Náhled ho může zobrazit, ale na web se neprojeví, dokud tuto volbu nezapnete a neuložíte.';
+        status.textContent = enabled ? wp.i18n.__("Custom code is enabled. Save or publish to apply your changes to the website.", "ai-web-studio") : wp.i18n.__("Custom code is disabled. You can preview it, but it will not appear on the website until you enable it and save.", "ai-web-studio");
         status.classList.toggle('is-disabled', !enabled);
       }
     }
@@ -104,18 +104,19 @@
       var part = studio.dataset.aiwpKind !== 'page';
       var location = studio.dataset.aiwpKind === 'footer' ? 'footer' : 'primary';
       return [
-        'Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky. Volitelné služby nastavuje zvolený správce souhlasu: Web svépomocí → Soukromí a cookies, nebo při externí správě například Complianz. Kódy mezi správci neduplikuj.',
-        'Vytvoř ' + (part ? (location === 'footer' ? 'společnou patičku' : 'společnou hlavičku') : 'obsah stránky') + ' pro WordPress s šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.',
-        'Moje zadání: [DOPLŇ účel, texty, barvy, cílové publikum a požadované sekce].',
-        'Vrať přesně tři oddělené části označené HTML, CSS a JS, které zkopíruji do samostatných polí.',
-        'HTML je jen fragment obsahu: bez doctype, html, head, body, style, script, PHP, on* atributů a javascript: URL. ' + (part ? 'Vrať pouze požadovanou hlavičku nebo patičku.' : 'Hlavičku a patičku spravuji zvlášť, nevytvářej je. Začni jedním hlavním nadpisem H1; nepřidávej další značku main.'),
-        'CSS vrať bez značek style. Všechny selektory omez na jedinečnou kořenovou třídu tohoto fragmentu; nepoužívej globální body, h1, button apod. K dispozici jsou proměnné --aiwp-accent, --aiwp-width a --aiwp-font.',
+        config.contentLanguageInstruction || '',
+        wp.i18n.__("Do not add analytics, marketing scripts or a cookie banner to the page. Configure optional services in the selected consent manager: Website Builder → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers.", "ai-web-studio"),
+        wp.i18n.__("Create ", "ai-web-studio") + (part ? (location === 'footer' ? wp.i18n.__("a shared footer", "ai-web-studio") : wp.i18n.__("a shared header", "ai-web-studio")) : wp.i18n.__("page content", "ai-web-studio")) + wp.i18n.__(" for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin.", "ai-web-studio"),
+        wp.i18n.__("My brief: [ADD the purpose, copy, colours, target audience and required sections].", "ai-web-studio"),
+        wp.i18n.__("Return exactly three separate sections labelled HTML, CSS and JS, which I will copy into separate fields.", "ai-web-studio"),
+        wp.i18n.__("HTML must be a content fragment: no doctype, html, head, body, style, script, PHP, on* attributes or javascript: URLs. ", "ai-web-studio") + (part ? wp.i18n.__("Return only the requested header or footer.", "ai-web-studio") : wp.i18n.__("I manage the header and footer separately; do not create them. Start with one main H1 heading; do not add another main element.", "ai-web-studio")),
+        wp.i18n.__("Return CSS without style tags. Scope every selector to the fragment's unique root class; do not use global body, h1, button, etc. The variables --aiwp-accent, --aiwp-width and --aiwp-font are available.", "ai-web-studio"),
         config.designContext || '',
-        'Menu spravuji přes Vzhled → Menu. ' + (part ? 'Do nav vlož přesně [aiwp_menu location="' + location + '"].' : 'Pokud potřebuji menu uvnitř obsahu, použij [aiwp_menu location="primary"] nebo [aiwp_menu location="footer"].') + ' Tato značka vytvoří ul.aiwp-menu s li.menu-item a odkazy a; případné podmenu je ul.sub-menu. CSS přizpůsob této struktuře a zahrň přístupné zobrazení podmenu. Odkazy ručně nevypisuj. Podporovaná je také značka [aiwp_cookie_settings] pro ovládání cookies v patičce (button.aiwp-cookie-settings); v externím režimu se nevypisuje. Další shortcody nejsou podporované.',
-        'JS je nepovinný čistý JavaScript bez značek script, bez knihoven a externích skriptů. Selektory omez na kořen fragmentu; kód uzavři do IIFE a počítej s načteným DOM. Nepoužívej PHP ani volání WordPress funkcí.',
-        'Návrh musí být responzivní, čitelný a přístupný z klávesnice. Dodrž kontrast, přidej popisy ovládání a respektuj prefers-reduced-motion.',
-        'Používej skutečné dodané URL obrázků; pokud chybějí, vytvoř vzhled bez fotografií. Nevymýšlej neexistující funkční formulář, platební bránu ani odesílání e-mailů.',
-        'Texty napiš česky a označ místa, kde mám doplnit vlastní údaje. Připoj navržený SEO titulek a meta popis mimo bloky kódu.'
+        wp.i18n.__("I manage navigation in Appearance → Menus. ", "ai-web-studio") + (part ? wp.i18n.__("Inside nav, insert exactly [aiwp_menu location=\"", "ai-web-studio") + location + '"].' : wp.i18n.__("If navigation is needed within the content, use [aiwp_menu location=\"primary\"] or [aiwp_menu location=\"footer\"].", "ai-web-studio")) + wp.i18n.__(" This marker produces ul.aiwp-menu with li.menu-item and a links, with ul.sub-menu for nested navigation. Adapt CSS to this structure and include accessible submenus. Do not write navigation links manually. [aiwp_cookie_settings] is also supported for footer cookie controls (button.aiwp-cookie-settings); it produces no output in external mode. Other shortcodes are not supported.", "ai-web-studio"),
+        wp.i18n.__("JS is optional plain JavaScript without script tags, libraries or external scripts. Scope selectors to the fragment root, wrap the code in an IIFE and assume the DOM is loaded. Do not use PHP or call WordPress functions.", "ai-web-studio"),
+        wp.i18n.__("The design must be responsive, readable and keyboard accessible. Provide sufficient contrast, control labels and support for prefers-reduced-motion.", "ai-web-studio"),
+        wp.i18n.__("Use the real image URLs supplied; if none are available, design without photographs. Do not invent functional forms, payment gateways or email delivery.", "ai-web-studio"),
+        wp.i18n.__("Write the copy in the requested content language and mark where I need to add my own details. Include a proposed SEO title and meta description outside the code blocks.", "ai-web-studio")
       ].join('\n\n');
     }
 
@@ -129,11 +130,11 @@
         textarea.value = prompt;
         textarea.focus();
         textarea.select();
-        actionStatus.textContent = 'Označené zadání zkopírujte pomocí Ctrl+C (na Macu Cmd+C).';
+        actionStatus.textContent = wp.i18n.__("Copy the selected prompt using Ctrl+C (Cmd+C on Mac).", "ai-web-studio");
       }
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(prompt).then(function () {
-          actionStatus.textContent = 'Zadání je zkopírované. Vložte ho do své AI a doplňte svou představu.';
+          actionStatus.textContent = wp.i18n.__("Prompt copied. Paste it into your AI and add your requirements.", "ai-web-studio");
         }).catch(fallback);
       } else fallback();
     });
@@ -153,17 +154,17 @@
         htmlField.dispatchEvent(new Event('change', { bubbles: true }));
         htmlField.focus();
       }
-      actionStatus.textContent = 'Značka menu je vložená do HTML. Umístěte ji dovnitř nav místo původních odkazů. Použití vlastního kódu musí být zapnuté; změny uložte tlačítkem Aktualizovat.';
+      actionStatus.textContent = wp.i18n.__("The menu marker has been inserted into HTML. Place it inside nav instead of the existing links. Enable custom code and save using Update.", "ai-web-studio");
     });
 
     studio.querySelector('[data-aiwp-sample]').addEventListener('click', function () {
       if (['html', 'css', 'js'].some(function (key) { return value(key).trim(); })) {
-        if (!window.confirm('Ukázka nahradí aktuální HTML, CSS a JavaScript v editoru. Pokračovat? Změna se na web uloží až tlačítkem Aktualizovat nebo Publikovat.')) return;
+        if (!window.confirm(wp.i18n.__("The sample will replace the current HTML, CSS and JavaScript in the editor. Continue? It will only be saved to the website when you click Update or Publish.", "ai-web-studio"))) return;
       }
       var part = studio.dataset.aiwpKind !== 'page';
       var location = studio.dataset.aiwpKind === 'footer' ? 'footer' : 'primary';
       var sample = {
-        html: part ? '<div class="moje-cast">\n  <a class="moje-cast__brand" href="/">Název vašeho webu</a>\n  <nav aria-label="Navigace webu">[aiwp_menu location="' + location + '"]</nav>\n</div>' : '<section class="moje-stranka">\n  <div class="moje-stranka__obsah">\n    <p class="moje-stranka__stitky">VÁŠ NOVÝ ZAČÁTEK</p>\n    <h1>Velké nápady začínají první stránkou.</h1>\n    <p>Představte návštěvníkům, co děláte a s čím jim pomůžete. Tento text nahraďte vlastním příběhem.</p>\n    <a class="moje-stranka__tlacitko" href="#vice">Zjistit více <span aria-hidden="true">↗</span></a>\n  </div>\n  <div id="vice" class="moje-stranka__karty">\n    <article><span>01</span><h2>Váš příběh</h2><p>Co vás přivedlo k tomu, co dnes děláte?</p></article>\n    <article><span>02</span><h2>Vaše služby</h2><p>Popište konkrétní pomoc, kterou nabízíte.</p></article>\n    <article><span>03</span><h2>Další krok</h2><p>Řekněte návštěvníkům, jak vás mohou kontaktovat.</p></article>\n  </div>\n</section>',
+        html: part ? wp.i18n.__("<div class=\"moje-cast\">\n  <a class=\"moje-cast__brand\" href=\"/\">Your website name</a>\n  <nav aria-label=\"Website navigation\">[aiwp_menu location=\"", "ai-web-studio") + location + '"]</nav>\n</div>' : wp.i18n.__("<section class=\"moje-stranka\">\n  <div class=\"moje-stranka__obsah\">\n    <p class=\"moje-stranka__stitky\">YOUR NEW BEGINNING</p>\n    <h1>Great ideas start with a first page.</h1>\n    <p>Tell visitors what you do and how you can help them. Replace this text with your own story.</p>\n    <a class=\"moje-stranka__tlacitko\" href=\"#vice\">Learn more <span aria-hidden=\"true\">↗</span></a>\n  </div>\n  <div id=\"vice\" class=\"moje-stranka__karty\">\n    <article><span>01</span><h2>Your story</h2><p>What led you to what you do today?</p></article>\n    <article><span>02</span><h2>Your services</h2><p>Describe the specific help you offer.</p></article>\n    <article><span>03</span><h2>The next step</h2><p>Tell visitors how to get in touch.</p></article>\n  </div>\n</section>", "ai-web-studio"),
         css: part ? '.moje-cast { max-width: var(--aiwp-width, 1200px); margin: auto; padding: 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; font-family: var(--aiwp-font, sans-serif); }\n.moje-cast a { color: inherit; text-decoration: none; }\n.moje-cast a:hover { text-decoration: underline; }\n.moje-cast a:focus-visible { outline: 3px solid var(--aiwp-accent, #2563eb); outline-offset: 5px; }\n.moje-cast__brand { font-size: 22px; font-weight: 750; }\n.moje-cast nav { display: flex; flex-wrap: wrap; gap: 24px; }' : '.moje-stranka { font-family: var(--aiwp-font, sans-serif); color: #1b2838; background: #f6f8fb; padding: clamp(32px, 7vw, 96px) 24px; }\n.moje-stranka * { box-sizing: border-box; }\n.moje-stranka__obsah, .moje-stranka__karty { max-width: var(--aiwp-width, 1200px); margin-inline: auto; }\n.moje-stranka__stitky { font-size: 12px; font-weight: 700; letter-spacing: .14em; color: #425570; }\n.moje-stranka h1 { font-size: clamp(34px, 5.5vw, 72px); line-height: 1.08; letter-spacing: -.045em; max-width: 850px; margin: 20px 0 24px; }\n.moje-stranka__obsah > p:not(.moje-stranka__stitky) { max-width: 600px; font-size: 19px; line-height: 1.7; color: #48576a; }\n.moje-stranka__tlacitko { display: inline-flex; gap: 20px; align-items: center; margin-top: 16px; padding: 15px 22px; color: #fff; background: #1d4ed8; border-radius: 8px; text-decoration: none; font-weight: 650; }\n.moje-stranka__tlacitko:hover { background: #1e40af; }\n.moje-stranka__tlacitko:focus-visible { outline: 3px solid #111827; outline-offset: 4px; }\n.moje-stranka__karty { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 64px; }\n.moje-stranka article { background: #fff; padding: 28px; border: 1px solid #e2e8f0; border-radius: 14px; }\n.moje-stranka article > span { color: #5b6b82; font-size: 13px; }\n.moje-stranka h2 { font-size: 22px; line-height: 1.3; margin: 24px 0 12px; }\n.moje-stranka article p { color: #48576a; line-height: 1.65; margin-bottom: 0; }\n@media (max-width: 700px) { .moje-stranka__karty { grid-template-columns: 1fr; margin-top: 40px; } }',
         js: ''
       };
@@ -175,14 +176,14 @@
       enabledField.checked = true;
       enabledField.dispatchEvent(new Event('change', { bubbles: true }));
       activateTab('html', false);
-      actionStatus.textContent = 'Ukázka je vložená a použití vlastního kódu je zapnuté. ' + (part ? 'Odkazy nastavte přes Vzhled → Menu. ' : 'Upravte texty a odkazy. ') + 'Potom klikněte na Aktualizovat nebo Publikovat. Samotný náhled změny neukládá.';
+      actionStatus.textContent = wp.i18n.__("The sample has been inserted and custom code is enabled. ", "ai-web-studio") + (part ? wp.i18n.__("Configure navigation in Appearance → Menus. ", "ai-web-studio") : 'Upravte texty a odkazy. ') + wp.i18n.__("Then click Update or Publish. Previewing alone does not save changes.", "ai-web-studio");
     });
 
     function validationMessage(html, css, js) {
-      if ([html, css, js].some(function (code) { return /<\?(?:php|=)?/i.test(code); })) return 'PHP do editoru nepatří. Nechte si od AI připravit HTML, CSS a JavaScript.';
-      if (/<!doctype|<\s*\/?\s*(?:html|head|body|meta|title|link|base|script|style)\b/i.test(html)) return 'V HTML ponechte jen obsah stránky. CSS patří do záložky CSS a JavaScript do JS; odstraňte obalové značky dokumentu a metadata.';
-      if ([css, js].some(function (code) { return /<\s*\/?\s*(?:style|script)\b/i.test(code); })) return 'Z CSS a JS odstraňte obalové značky style a script.';
-      if ([html, css, js].some(function (code) { return /^\s*```/m.test(code); })) return 'Odstraňte značky ``` kolem kódu z odpovědi AI.';
+      if ([html, css, js].some(function (code) { return /<\?(?:php|=)?/i.test(code); })) return wp.i18n.__("PHP is not supported in the editor. Ask your AI for HTML, CSS and JavaScript.", "ai-web-studio");
+      if (/<!doctype|<\s*\/?\s*(?:html|head|body|meta|title|link|base|script|style)\b/i.test(html)) return wp.i18n.__("Keep only page content in HTML. Put CSS in the CSS tab and JavaScript in JS; remove document wrappers and metadata.", "ai-web-studio");
+      if ([css, js].some(function (code) { return /<\s*\/?\s*(?:style|script)\b/i.test(code); })) return wp.i18n.__("Remove the style and script wrapper tags from CSS and JS.", "ai-web-studio");
+      if ([html, css, js].some(function (code) { return /^\s*```/m.test(code); })) return wp.i18n.__("Remove the ``` fences around the AI-generated code.", "ai-web-studio");
       return '';
     }
 
@@ -194,13 +195,13 @@
       if (error) { previewStatus.textContent = error; return; }
       html = html.replace(/(\[?)\[aiwp_cookie_settings\s*\](\]?)/g, function (match, escapeOpen, escapeClose) {
         if (escapeOpen && escapeClose) return match.slice(1, -1);
-        return escapeOpen + (config.consentExternal ? '' : '<button type="button" class="aiwp-cookie-settings" disabled title="Ovládání souhlasu vyzkoušejte na webu">Nastavení cookies</button>') + escapeClose;
+        return escapeOpen + (config.consentExternal ? '' : wp.i18n.__("<button type=\"button\" class=\"aiwp-cookie-settings\" disabled title=\"Test consent controls on the website\">Cookie settings</button>", "ai-web-studio")) + escapeClose;
       });
       html = html.replace(/(\[?)\[aiwp_menu\s+location\s*=\s*(["'])(primary|footer)\2\s*\](\]?)/g, function (match, escapeOpen, quote, location, escapeClose) {
         if (escapeOpen && escapeClose) return match.slice(1, -1);
         var menu = config.menuPreviews && config.menuPreviews[location];
-        var label = location === 'footer' ? 'Menu v patičce' : 'Hlavní menu';
-        return escapeOpen + (menu || '<p class="aiwp-menu-preview-notice">Pro umístění „' + label + '“ není připravené menu. Vyberte menu s odkazy ve Vzhled → Menu, uložte ho a znovu načtěte tento editor.</p>') + escapeClose;
+        var label = location === 'footer' ? wp.i18n.__("Footer menu", "ai-web-studio") : wp.i18n.__("Primary menu", "ai-web-studio");
+        return escapeOpen + (menu || wp.i18n.__("<p class=\"aiwp-menu-preview-notice\">No menu is assigned to “", "ai-web-studio") + label + wp.i18n.__("”. Assign a menu with links in Appearance → Menus, save it and reload this editor.</p>", "ai-web-studio")) + escapeClose;
       });
       var settings = config.settings || {};
       var accent = /^#[a-f\d]{6}$/i.test(settings.accent) ? settings.accent : '#2563eb';
@@ -213,11 +214,11 @@
       var fontLink = config.font && config.font.url ? '<link rel="stylesheet" href="' + config.font.url.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '">' : '';
       var wrapper = studio.dataset.aiwpKind === 'page' ? 'aiwp-content' : (studio.dataset.aiwpKind === 'footer' ? 'aiwp-footer' : 'aiwp-header');
       // srcdoc stays in an opaque sandbox origin; never insert user content into the admin DOM.
-      frame.srcdoc = '<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="' + csp + '"><title>Náhled obsahu</title>' + fontLink + '<style>' + previewCss.replace(/<\/style/gi, '<\\/style') + '</style></head><body><div class="' + wrapper + '">' + html + '</div><script>' + js.replace(/<\/script/gi, '<\\/script') + '<\/script></body></html>';
+      frame.srcdoc = '<!doctype html><html lang="' + (config.contentLanguage === 'cs' ? 'cs' : 'en') + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="' + csp + wp.i18n.__("\"><title>Content preview</title>", "ai-web-studio") + fontLink + '<style>' + previewCss.replace(/<\/style/gi, '<\\/style') + '</style></head><body><div class="' + wrapper + '">' + html + '</div><script>' + js.replace(/<\/script/gi, '<\\/script') + '<\/script></body></html>';
       frame.hidden = false;
       studio.querySelector('[data-aiwp-preview-empty]').hidden = true;
       previewRendered = true;
-      previewStatus.textContent = document.getElementById('aiwp-enabled').checked ? 'Náhled byl obnoven. Pro zobrazení změn na webu stránku uložte.' : 'Náhled byl obnoven, ale použití vlastního kódu je vypnuté. Zapněte ho a stránku uložte.';
+      previewStatus.textContent = document.getElementById('aiwp-enabled').checked ? wp.i18n.__("Preview refreshed. Save the page to apply changes to the website.", "ai-web-studio") : wp.i18n.__("Preview refreshed, but custom code is disabled. Enable it and save the page.", "ai-web-studio");
     });
 
     studio.querySelectorAll('[data-aiwp-device]').forEach(function (button) {
@@ -246,13 +247,13 @@
       if (mediaStatus) { mediaStatus.hidden = true; mediaStatus.textContent = ''; }
       if (!window.wp || typeof window.wp.media !== 'function') {
         if (mediaStatus) {
-          mediaStatus.textContent = 'Knihovna médií se nenačetla. Obnovte stránku; případně vložte adresu obrázku přímo do pole.';
+          mediaStatus.textContent = wp.i18n.__("The media library did not load. Reload the page or paste the image URL directly into the field.", "ai-web-studio");
           mediaStatus.hidden = false;
         }
         return;
       }
       if (!mediaFrame) {
-        mediaFrame = window.wp.media({ title: 'Vybrat obrázek pro sdílení', button: { text: 'Použít tento obrázek' }, library: { type: 'image' }, multiple: false });
+        mediaFrame = window.wp.media({ title: wp.i18n.__("Choose a sharing image", "ai-web-studio"), button: { text: wp.i18n.__("Use this image", "ai-web-studio") }, library: { type: 'image' }, multiple: false });
         mediaFrame.on('select', function () {
           var selection = mediaFrame.state().get('selection').first();
           if (!selection) return;

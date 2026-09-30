@@ -23,11 +23,11 @@
     const destinationLink = document.getElementById('aiwp-prompt-destination-link');
     const destinationHelp = document.getElementById('aiwp-prompt-destination-help');
     const explanations = {
-        style: 'AI navrhne společné CSS včetně velikostí písma a výšek řádků pomocí clamp() pro H1–H6, běžný text a small. Výsledek vložíte do Vzhled webu → Společné CSS.',
-        page: 'AI připraví novou stránku podle uloženého společného vzhledu. Ve WordPressu pak vytvoříte stránku a její HTML, CSS a JavaScript vložíte do odpovídajících polí AI editoru.',
-        header: 'AI připraví hlavičku podle společného vzhledu a uloženého kódu Headeru. Výsledek vložíte do HTML, CSS a JavaScriptu v položce Header. Odkazy se spravují ve Vzhled → Menu.',
-        footer: 'AI připraví patičku podle společného vzhledu a uloženého kódu Footeru. Výsledek vložíte do HTML, CSS a JavaScriptu v položce Footer. Odkazy se spravují ve Vzhled → Menu.',
-        edit: 'Vyberte stránku a popište změnu. Zadání zahrne její současný uložený kód. Odpověď od AI vložíte zpět do HTML, CSS a JavaScriptu této stránky; před uložením zkontrolujete náhled.'
+        style: wp.i18n.__("AI will propose shared CSS, including clamp() font sizes and line heights for H1–H6, body text and small. Paste the result into Website design → Shared CSS.", "ai-web-studio"),
+        page: wp.i18n.__("AI will prepare a new page using your saved shared design. Create a WordPress page and paste its HTML, CSS and JavaScript into the corresponding AI editor fields.", "ai-web-studio"),
+        header: wp.i18n.__("AI will prepare a header using the shared design and saved Header code. Paste the result into the HTML, CSS and JavaScript fields under Header. Manage links in Appearance → Menus.", "ai-web-studio"),
+        footer: wp.i18n.__("AI will prepare a footer using the shared design and saved Footer code. Paste the result into the HTML, CSS and JavaScript fields under Footer. Manage links in Appearance → Menus.", "ai-web-studio"),
+        edit: wp.i18n.__("Select a page and describe the change. The prompt includes its currently saved code. Paste the AI response back into that page's HTML, CSS and JavaScript fields; check the preview before saving.", "ai-web-studio")
     };
     let revision = 0;
     let generating = false;
@@ -83,11 +83,11 @@
         try {
             payload = await response.json();
         } catch (error) {
-            throw new Error('WordPress nevrátil odpověď. Obnovte stránku a zkuste to znovu.');
+            throw new Error(wp.i18n.__("WordPress did not return a response. Reload the page and try again.", "ai-web-studio"));
         }
         if (!response.ok || !payload || payload.success !== true) {
             const message = payload && payload.data && payload.data.message;
-            throw new Error(typeof message === 'string' ? message : 'Požadavek se nepodařilo dokončit. Obnovte stránku a zkuste to znovu.');
+            throw new Error(typeof message === 'string' ? message : wp.i18n.__("The request could not be completed. Reload the page and try again.", "ai-web-studio"));
         }
         return payload.data;
     }
@@ -101,21 +101,21 @@
         searching = true;
         searchButton.disabled = true;
         pageSelect.disabled = true;
-        pageSelect.replaceChildren(new Option('Vyberte stránku', ''));
-        pagesStatus.textContent = 'Načítám stránky…';
+        pageSelect.replaceChildren(new Option(wp.i18n.__("Select a page", "ai-web-studio"), ''));
+        pagesStatus.textContent = wp.i18n.__("Loading pages…", "ai-web-studio");
         updateGenerate();
         try {
             const data = await request('aiwp_prompt_pages', { search: pageSearch.value.trim() }, searchController.signal);
             if (thisSearch !== searchRevision || kind.value !== 'edit') return;
-            if (!data || !Array.isArray(data.pages)) throw new Error('Seznam stránek se nepodařilo načíst. Zkuste vyhledávání znovu.');
+            if (!data || !Array.isArray(data.pages)) throw new Error(wp.i18n.__("The page list could not be loaded. Try searching again.", "ai-web-studio"));
             const pages = data.pages.filter(page => Number.isInteger(Number(page.id)) && Number(page.id) > 0 && typeof page.title === 'string');
             pages.forEach(page => pageSelect.add(new Option(page.title, String(page.id))));
             pageSelect.disabled = pages.length === 0;
-            pagesStatus.textContent = pages.length === 0 ? 'Žádná dostupná stránka neodpovídá hledání. Zkuste jiný název.' :
-                data.more ? 'Zobrazuje se prvních 20 stránek. Pro další stránky zpřesněte hledání podle názvu.' : 'Vyberte stránku ze seznamu. Její kód přidáme až při přípravě zadání.';
+            pagesStatus.textContent = pages.length === 0 ? wp.i18n.__("No available pages match your search. Try a different title.", "ai-web-studio") :
+                data.more ? wp.i18n.__("Showing the first 20 pages. Refine your title search to find other pages.", "ai-web-studio") : wp.i18n.__("Select a page from the list. Its code will only be added when you generate the prompt.", "ai-web-studio");
         } catch (error) {
             if (thisSearch !== searchRevision || error.name === 'AbortError') return;
-            pagesStatus.textContent = error.message || 'Stránky se nepodařilo načíst. Zkuste to znovu.';
+            pagesStatus.textContent = error.message || wp.i18n.__("Pages could not be loaded. Try again.", "ai-web-studio");
         } finally {
             if (thisSearch === searchRevision) {
                 searching = false;
@@ -137,9 +137,9 @@
     pageSelect.addEventListener('change', invalidate);
     pageSearch.addEventListener('input', () => {
         cancelSearch();
-        pageSelect.replaceChildren(new Option('Nejprve vyhledejte stránku', ''));
+        pageSelect.replaceChildren(new Option(wp.i18n.__("Search for a page first", "ai-web-studio"), ''));
         pageSelect.disabled = true;
-        pagesStatus.textContent = 'Klikněte na Vyhledat stránky a potom vyberte stránku ze seznamu.';
+        pagesStatus.textContent = wp.i18n.__("Click Search pages, then select a page from the list.", "ai-web-studio");
         invalidate();
     });
     searchButton.addEventListener('click', findPages);
@@ -162,20 +162,20 @@
         generating = true;
         generate.setAttribute('aria-busy', 'true');
         updateGenerate();
-        setStatus('Připravuji zadání z uložených údajů…');
+        setStatus(wp.i18n.__("Preparing a prompt from saved information…", "ai-web-studio"));
         try {
             const data = await request('aiwp_build_prompt', fields, buildController.signal);
             if (thisRevision !== revision) return;
             if (!data || typeof data.prompt !== 'string' || !data.prompt || !data.destination) {
-                throw new Error('Zadání se nepodařilo připravit. Zkuste to znovu.');
+                throw new Error(wp.i18n.__("The prompt could not be prepared. Try again.", "ai-web-studio"));
             }
             const destination = new URL(data.destination.url, window.location.href);
             if (destination.origin !== window.location.origin || !['http:', 'https:'].includes(destination.protocol)) {
-                throw new Error('Odkaz do editoru se nepodařilo připravit. Obnovte stránku a zkuste to znovu.');
+                throw new Error(wp.i18n.__("The editor link could not be prepared. Reload the page and try again.", "ai-web-studio"));
             }
             output.value = data.prompt;
             destinationLink.href = destination.href;
-            destinationLink.textContent = typeof data.destination.label === 'string' ? data.destination.label : 'Otevřít editor';
+            destinationLink.textContent = typeof data.destination.label === 'string' ? data.destination.label : wp.i18n.__("Open editor", "ai-web-studio");
             destinationHelp.textContent = typeof data.destination.help === 'string' ? data.destination.help : '';
             if (Array.isArray(data.notices)) {
                 data.notices.filter(notice => typeof notice === 'string' && notice).forEach(notice => {
@@ -189,10 +189,10 @@
             output.scrollTop = 0;
             output.scrollLeft = 0;
             copy.disabled = false;
-            setStatus('Zadání je připravené níže. Prohlédněte si ho a klikněte na Zkopírovat zadání.');
+            setStatus(wp.i18n.__("Your prompt is ready below. Review it and click Copy prompt.", "ai-web-studio"));
         } catch (error) {
             if (thisRevision !== revision || error.name === 'AbortError') return;
-            setStatus(error.message || 'Zadání se nepodařilo připravit. Zkuste to znovu.', true);
+            setStatus(error.message || wp.i18n.__("The prompt could not be prepared. Try again.", "ai-web-studio"), true);
         } finally {
             if (thisRevision === revision) {
                 generating = false;
@@ -211,12 +211,12 @@
         try {
             if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('clipboard');
             await navigator.clipboard.writeText(prompt);
-            if (thisRevision === revision) copyStatus.textContent = 'Zadání je zkopírované. Vložte ho do chatu s AI.';
+            if (thisRevision === revision) copyStatus.textContent = wp.i18n.__("Prompt copied. Paste it into your AI chat.", "ai-web-studio");
         } catch (error) {
             if (thisRevision !== revision) return;
             output.focus();
             output.select();
-            copyStatus.textContent = 'Automatické kopírování není dostupné. Zadání je označené; stiskněte Ctrl+C (na Macu ⌘C).';
+            copyStatus.textContent = wp.i18n.__("Automatic copying is unavailable. The prompt is selected; press Ctrl+C (⌘C on Mac).", "ai-web-studio");
         } finally {
             if (thisRevision === revision) copy.disabled = false;
         }

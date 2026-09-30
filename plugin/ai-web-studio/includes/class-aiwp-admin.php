@@ -15,9 +15,9 @@ final class AIWP_Admin {
 	}
 
 	public static function meta_boxes() {
-		add_meta_box( 'aiwp-studio', 'web-svepomoci-plugin · Obsah stránky', array( __CLASS__, 'editor' ), 'page', 'normal', 'high' );
-		add_meta_box( 'aiwp-studio', 'web-svepomoci-plugin · Společná část webu', array( __CLASS__, 'editor' ), 'aiwp_part', 'normal', 'high' );
-		add_meta_box( 'aiwp-seo', 'SEO · Vyhledávání a sdílení', array( __CLASS__, 'seo' ), 'page', 'normal', 'default' );
+		add_meta_box( 'aiwp-studio', __( 'web-svepomoci-plugin · Page content', 'ai-web-studio' ), array( __CLASS__, 'editor' ), 'page', 'normal', 'high' );
+		add_meta_box( 'aiwp-studio', __( 'web-svepomoci-plugin · Shared website part', 'ai-web-studio' ), array( __CLASS__, 'editor' ), 'aiwp_part', 'normal', 'high' );
+		add_meta_box( 'aiwp-seo', __( 'SEO · Search and sharing', 'ai-web-studio' ), array( __CLASS__, 'seo' ), 'page', 'normal', 'default' );
 	}
 
 	public static function assets( $hook ) {
@@ -49,97 +49,99 @@ final class AIWP_Admin {
 			'siteUrl'      => home_url( '/' ),
 			'menuPreviews' => array( 'primary' => aiwp_render_menu( 'primary' ), 'footer' => aiwp_render_menu( 'footer' ) ),
 			'consentExternal' => aiwp_consent_settings()['external'],
+			'contentLanguageInstruction' => aiwp_content_language_instruction(),
+			'contentLanguage' => WSP_Languages::language( 'content' ),
 		) );
 	}
 
 	public static function editor( $post ) {
 		if ( ! aiwp_can_edit_code() ) {
-			echo '<p>Úpravy kódu jsou dostupné správci webu s oprávněním vkládat HTML a JavaScript.</p>';
+			echo __( '<p>Code editing is available to administrators with permission to insert HTML and JavaScript.</p>', 'ai-web-studio' );
 			return;
 		}
 		$data    = aiwp_get_document( $post->ID );
 		$is_page = 'page' === $post->post_type;
 		$kind    = $is_page ? 'page' : ( (int) $post->ID === aiwp_get_part_id( 'footer' ) ? 'footer' : 'header' );
 		$menu_location = 'footer' === $kind ? 'footer' : 'primary';
-		$menu_label    = 'footer' === $kind ? 'Menu v patičce' : 'Hlavní menu';
+		$menu_label    = 'footer' === $kind ? __( 'Footer menu', 'ai-web-studio' ) : __( 'Primary menu', 'ai-web-studio' );
 		wp_nonce_field( 'aiwp_save', 'aiwp_nonce' );
 		?>
 		<div class="aiwp-studio" data-aiwp-kind="<?php echo esc_attr( $kind ); ?>">
 			<div class="aiwp-intro">
-				<span class="aiwp-eyebrow">OD NÁPADU K VLASTNÍMU WEBU</span>
-				<h3>Váš nápad. Kód od AI. Váš web.</h3>
-				<p>Zkopírujte zadání pro AI, doplňte svou představu a vložte výsledek do tří polí. Potom zkontrolujte náhled a uložte změny.</p>
+				<span class="aiwp-eyebrow"><?php echo esc_html__( 'FROM AN IDEA TO YOUR OWN WEBSITE', 'ai-web-studio' ); ?></span>
+				<h3><?php echo esc_html__( 'Your idea. AI code. Your website.', 'ai-web-studio' ); ?></h3>
+				<p><?php echo esc_html__( 'Copy the AI prompt, add your requirements and paste the result into the three fields. Then check the preview and save your changes.', 'ai-web-studio' ); ?></p>
 				<div class="aiwp-actions">
-					<button type="button" class="button button-primary" data-aiwp-copy-prompt>Zkopírovat zadání pro AI <span aria-hidden="true">↗</span></button>
-					<button type="button" class="button" data-aiwp-sample>Vložit ukázkový obsah</button>
+					<button type="button" class="button button-primary" data-aiwp-copy-prompt><?php echo esc_html__( 'Copy AI prompt', 'ai-web-studio' ); ?> <span aria-hidden="true">↗</span></button>
+					<button type="button" class="button" data-aiwp-sample><?php echo esc_html__( 'Insert sample content', 'ai-web-studio' ); ?></button>
 				</div>
 				<p class="aiwp-status" data-aiwp-action-status role="status" aria-live="polite"></p>
-				<details class="aiwp-prompt-fallback" data-aiwp-prompt-fallback hidden><summary>Zadání pro ruční zkopírování</summary><textarea readonly rows="9" aria-label="Zadání pro AI k ručnímu zkopírování"></textarea></details>
+				<details class="aiwp-prompt-fallback" data-aiwp-prompt-fallback hidden><summary><?php echo esc_html__( 'Prompt for manual copying', 'ai-web-studio' ); ?></summary><textarea readonly rows="9" aria-label="<?php echo esc_attr__( 'AI prompt for manual copying', 'ai-web-studio' ); ?>"></textarea></details>
 			</div>
 			<div class="aiwp-mode">
-				<label class="aiwp-toggle"><input type="checkbox" name="aiwp[enabled]" id="aiwp-enabled" value="1" <?php checked( ! empty( $data['enabled'] ) ); ?>><span><strong><?php echo $is_page ? 'Zobrazovat obsah z AI editoru' : 'Používat tuto vlastní část webu'; ?></strong><small><?php echo $is_page ? 'Po zapnutí se na stránce zobrazí HTML, CSS a JavaScript níže. Běžný editor WordPressu zůstává zachovaný.' : 'Zapněte až po dokončení obsahu a uložte. Změna se použije společně na celém webu.'; ?></small></span></label>
+				<label class="aiwp-toggle"><input type="checkbox" name="aiwp[enabled]" id="aiwp-enabled" value="1" <?php checked( ! empty( $data['enabled'] ) ); ?>><span><strong><?php echo $is_page ? __( 'Display content from the AI editor', 'ai-web-studio' ) : __( 'Use this custom website part', 'ai-web-studio' ); ?></strong><small><?php echo $is_page ? __( 'When enabled, the page displays the HTML, CSS and JavaScript below. The standard WordPress content is preserved.', 'ai-web-studio' ) : __( 'Enable once the content is ready, then save. The change applies across the website.', 'ai-web-studio' ); ?></small></span></label>
 			</div>
 			<div class="aiwp-workspace">
 				<?php if ( ! $is_page ) : ?>
 					<div class="aiwp-menu-help">
-						<strong>Odkazy spravujte ve WordPressu</strong>
-						<p>Ve <a href="<?php echo esc_url( admin_url( 'nav-menus.php' ) ); ?>" target="_blank" rel="noopener">Vzhled → Menu (nová karta)</a> vytvořte menu, přidejte stránky a přiřaďte ho do umístění <strong><?php echo esc_html( $menu_label ); ?></strong>. Změny odkazů se pak na webu projeví automaticky.</p>
-						<p>Do HTML vložte <code><?php echo esc_html( '[aiwp_menu location="' . $menu_location . '"]' ); ?></code>, ideálně dovnitř značky <code>&lt;nav&gt;</code>. Nahraďte jím původní ručně psané odkazy; značka se na webu změní na seznam odkazů.</p>
-						<button type="button" class="button" data-aiwp-insert-menu data-aiwp-location="<?php echo esc_attr( $menu_location ); ?>">Vložit menu z WordPressu</button>
-						<?php if ( 'footer' === $menu_location ) : ?><p>Pro tlačítko přímo v patičce vložte do HTML <code>[aiwp_cookie_settings]</code>. Vzhled upravíte přes třídu <code>aiwp-cookie-settings</code>. V externím režimu používejte ovládání svého správce souhlasu.</p><?php endif; ?>
-						<p class="description">Tlačítko vloží značku na místo kurzoru nebo označeného textu v HTML. Potom klikněte na Aktualizovat. Po změně menu ve Vzhled → Menu znovu načtěte tento editor, aby se aktualizovaly odkazy v náhledu.</p>
+						<strong><?php esc_html_e( 'Manage links in WordPress', 'ai-web-studio' ); ?></strong>
+						<p><?php esc_html_e( 'In', 'ai-web-studio' ); ?> <a href="<?php echo esc_url( admin_url( 'nav-menus.php' ) ); ?>" target="_blank" rel="noopener"><?php echo esc_html__( 'Appearance → Menus (new tab)', 'ai-web-studio' ); ?></a> <?php echo esc_html__( 'create a menu, add pages and assign it to the location', 'ai-web-studio' ); ?> <strong><?php echo esc_html( $menu_label ); ?></strong><?php echo esc_html__( '. Changes to links will then appear on the website automatically.', 'ai-web-studio' ); ?></p>
+						<p><?php echo esc_html__( 'Insert into HTML', 'ai-web-studio' ); ?> <code><?php echo esc_html( '[aiwp_menu location="' . $menu_location . '"]' ); ?></code><?php echo esc_html__( ', ideally inside a', 'ai-web-studio' ); ?> <code>&lt;nav&gt;</code><?php echo esc_html__( ' element. Replace the manually written links with this marker; it will become a list of links on the website.', 'ai-web-studio' ); ?></p>
+						<button type="button" class="button" data-aiwp-insert-menu data-aiwp-location="<?php echo esc_attr( $menu_location ); ?>"><?php echo esc_html__( 'Insert WordPress menu', 'ai-web-studio' ); ?></button>
+						<?php if ( 'footer' === $menu_location ) : ?><p><?php echo esc_html__( 'To place the button inside the footer, insert into HTML', 'ai-web-studio' ); ?> <code>[aiwp_cookie_settings]</code><?php echo esc_html__( '. Style it using the class', 'ai-web-studio' ); ?> <code>aiwp-cookie-settings</code><?php echo esc_html__( '. In external mode, use your consent manager\'s controls.', 'ai-web-studio' ); ?></p><?php endif; ?>
+						<p class="description"><?php echo esc_html__( 'This button inserts the marker at the cursor or replaces the selected HTML. Then click Update. After changing a menu in Appearance → Menus, reload this editor to refresh the preview links.', 'ai-web-studio' ); ?></p>
 						<?php if ( ! has_nav_menu( $menu_location ) ) : ?>
-							<p class="aiwp-menu-notice">K umístění „<?php echo esc_html( $menu_label ); ?>“ zatím není přiřazené menu. Nejdříve ho vyberte a uložte ve Vzhled → Menu; do té doby se odkazy na webu nezobrazí.</p>
+							<p class="aiwp-menu-notice"><?php echo esc_html__( 'No menu is assigned to “', 'ai-web-studio' ); ?><?php echo esc_html( $menu_label ); ?><?php echo esc_html__( '” yet. Select and save a menu in Appearance → Menus first; links will not appear until then.', 'ai-web-studio' ); ?></p>
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
-				<p class="aiwp-mode-status<?php echo empty( $data['enabled'] ) ? ' is-disabled' : ''; ?>" data-aiwp-mode-status role="status"><?php echo empty( $data['enabled'] ) ? 'Použití vlastního kódu je vypnuté. Pro zobrazení na webu ho zapněte a stránku uložte.' : 'Použití vlastního kódu je zapnuté. Změny se na web projeví po uložení nebo publikování.'; ?></p>
-				<div class="aiwp-tabs" role="tablist" aria-label="Druh kódu">
-					<?php foreach ( array( 'html' => array( 'HTML', 'Obsah' ), 'css' => array( 'CSS', 'Vzhled' ), 'js' => array( 'JS', 'Chování' ) ) as $key => $labels ) : ?>
-						<button type="button" id="aiwp-tab-<?php echo esc_attr( $key ); ?>" class="aiwp-tab<?php echo 'html' === $key ? ' is-active' : ''; ?>" role="tab" aria-controls="aiwp-panel-<?php echo esc_attr( $key ); ?>" aria-selected="<?php echo 'html' === $key ? 'true' : 'false'; ?>" tabindex="<?php echo 'html' === $key ? '0' : '-1'; ?>" data-aiwp-tab="<?php echo esc_attr( $key ); ?>"><strong><?php echo esc_html( $labels[0] ); ?></strong><span><?php echo esc_html( $labels[1] ); ?></span><span class="aiwp-filled" data-aiwp-filled="<?php echo esc_attr( $key ); ?>" aria-label="Pole obsahuje kód" <?php echo empty( $data[ $key ] ) ? 'hidden' : ''; ?>></span></button>
+				<p class="aiwp-mode-status<?php echo empty( $data['enabled'] ) ? ' is-disabled' : ''; ?>" data-aiwp-mode-status role="status"><?php echo empty( $data['enabled'] ) ? __( 'Custom code is disabled. Enable it and save the page to show it on the website.', 'ai-web-studio' ) : __( 'Custom code is enabled. Save or publish to apply your changes to the website.', 'ai-web-studio' ); ?></p>
+				<div class="aiwp-tabs" role="tablist" aria-label="<?php echo esc_attr__( 'Code type', 'ai-web-studio' ); ?>">
+					<?php foreach ( array( 'html' => array( 'HTML', __( 'Content', 'ai-web-studio' ) ), 'css' => array( 'CSS', __( 'Design', 'ai-web-studio' ) ), 'js' => array( 'JS', __( 'Behaviour', 'ai-web-studio' ) ) ) as $key => $labels ) : ?>
+						<button type="button" id="aiwp-tab-<?php echo esc_attr( $key ); ?>" class="aiwp-tab<?php echo 'html' === $key ? ' is-active' : ''; ?>" role="tab" aria-controls="aiwp-panel-<?php echo esc_attr( $key ); ?>" aria-selected="<?php echo 'html' === $key ? 'true' : 'false'; ?>" tabindex="<?php echo 'html' === $key ? '0' : '-1'; ?>" data-aiwp-tab="<?php echo esc_attr( $key ); ?>"><strong><?php echo esc_html( $labels[0] ); ?></strong><span><?php echo esc_html( $labels[1] ); ?></span><span class="aiwp-filled" data-aiwp-filled="<?php echo esc_attr( $key ); ?>" aria-label="<?php echo esc_attr__( 'This field contains code', 'ai-web-studio' ); ?>" <?php echo empty( $data[ $key ] ) ? 'hidden' : ''; ?>></span></button>
 					<?php endforeach; ?>
 				</div>
 				<?php
-				$hints = array( 'html' => 'Vložte pouze obsah stránky, například sekce, nadpisy a odstavce. Bez značek html, head, body, style a script. PHP se nevkládá.', 'css' => 'Vložte CSS bez značek <style>. Použijte vlastní třídy, například .moje-stranka, aby se vzhled neprolínal s ostatními částmi webu.', 'js' => 'Nepovinné. Vložte JavaScript bez značek <script>. Pro běžnou stránku s texty a obrázky může toto pole zůstat prázdné.' );
+				$hints = array( 'html' => __( 'Insert only page content, such as sections, headings and paragraphs. No html, head, body, style or script tags. PHP is not supported.', 'ai-web-studio' ), 'css' => __( 'Insert CSS without <style> tags. Use your own classes, such as .moje-stranka, to avoid affecting other website elements.', 'ai-web-studio' ), 'js' => __( 'Optional. Insert JavaScript without <script> tags. For a simple page with text and images, this field can stay empty.', 'ai-web-studio' ) );
 				foreach ( $hints as $key => $hint ) :
 					?>
 					<div class="aiwp-code-panel" id="aiwp-panel-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="aiwp-tab-<?php echo esc_attr( $key ); ?>">
 						<p class="aiwp-field-hint" id="aiwp-hint-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( $hint ); ?></p>
-						<label class="screen-reader-text" for="aiwp-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( strtoupper( $key ) . ' kód' ); ?></label>
+						<label class="screen-reader-text" for="aiwp-<?php echo esc_attr( $key ); ?>"><?php echo esc_html( strtoupper( $key ) . __( ' code', 'ai-web-studio' ) ); ?></label>
 						<textarea id="aiwp-<?php echo esc_attr( $key ); ?>" name="aiwp[<?php echo esc_attr( $key ); ?>]" class="aiwp-code" rows="16" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="aiwp-hint-<?php echo esc_attr( $key ); ?>" data-aiwp-code="<?php echo esc_attr( $key ); ?>"><?php echo esc_textarea( $data[ $key ] ); ?></textarea>
 					</div>
 				<?php endforeach; ?>
-				<div class="aiwp-editor-foot"><span>Vkládejte samotný kód bez ohraničení ```.</span><span data-aiwp-code-status role="status" aria-live="polite"></span></div>
+				<div class="aiwp-editor-foot"><span><?php echo esc_html__( 'Paste the code itself without ``` fences.', 'ai-web-studio' ); ?></span><span data-aiwp-code-status role="status" aria-live="polite"></span></div>
 			</div>
 			<div class="aiwp-preview">
-				<div class="aiwp-preview-toolbar"><div><h4>Náhled obsahu</h4><p data-aiwp-preview-status role="status" aria-live="polite">Připraveno k prvnímu náhledu.</p></div><div class="aiwp-preview-controls"><div class="aiwp-device-group" role="group" aria-label="Šířka náhledu"><button type="button" class="button is-active" data-aiwp-device="desktop" aria-pressed="true">Počítač</button><button type="button" class="button" data-aiwp-device="mobile" aria-pressed="false">Mobil</button></div><button type="button" class="button button-primary" data-aiwp-refresh>Obnovit náhled</button></div></div>
-				<div class="aiwp-preview-stage" data-aiwp-preview-stage><div class="aiwp-preview-empty" data-aiwp-preview-empty><span aria-hidden="true">◇</span><strong>Tady uvidíte svůj návrh</strong><p>Po vložení kódu klikněte na „Obnovit náhled“.</p></div><iframe title="Izolovaný náhled právě vloženého obsahu" class="aiwp-preview-frame" sandbox="allow-scripts" referrerpolicy="no-referrer" hidden></iframe></div>
-				<p class="aiwp-preview-note">Tento náhled neukládá změny. Zobrazuje jen právě upravovaný obsah; odkazy, formuláře a externí skripty jsou omezené. Pro náhled celého webu nejprve uložte koncept nebo aktualizujte stránku a pak použijte tlačítko Náhled ve WordPressu.</p>
+				<div class="aiwp-preview-toolbar"><div><h4><?php echo esc_html__( 'Content preview', 'ai-web-studio' ); ?></h4><p data-aiwp-preview-status role="status" aria-live="polite"><?php echo esc_html__( 'Ready for the first preview.', 'ai-web-studio' ); ?></p></div><div class="aiwp-preview-controls"><div class="aiwp-device-group" role="group" aria-label="<?php echo esc_attr__( 'Preview width', 'ai-web-studio' ); ?>"><button type="button" class="button is-active" data-aiwp-device="desktop" aria-pressed="true"><?php echo esc_html__( 'Desktop', 'ai-web-studio' ); ?></button><button type="button" class="button" data-aiwp-device="mobile" aria-pressed="false"><?php echo esc_html__( 'Mobile', 'ai-web-studio' ); ?></button></div><button type="button" class="button button-primary" data-aiwp-refresh><?php echo esc_html__( 'Refresh preview', 'ai-web-studio' ); ?></button></div></div>
+				<div class="aiwp-preview-stage" data-aiwp-preview-stage><div class="aiwp-preview-empty" data-aiwp-preview-empty><span aria-hidden="true">◇</span><strong><?php echo esc_html__( 'Your design will appear here', 'ai-web-studio' ); ?></strong><p><?php echo esc_html__( 'After pasting the code, click “Refresh preview”.', 'ai-web-studio' ); ?></p></div><iframe title="<?php echo esc_attr__( 'Isolated preview of the entered content', 'ai-web-studio' ); ?>" class="aiwp-preview-frame" sandbox="allow-scripts" referrerpolicy="no-referrer" hidden></iframe></div>
+				<p class="aiwp-preview-note"><?php echo esc_html__( 'This preview does not save changes. It only displays the content currently being edited; links, forms and external scripts are restricted. To preview the whole website, save a draft or update the page, then use WordPress Preview.', 'ai-web-studio' ); ?></p>
 			</div>
 			<?php if ( $is_page ) : ?>
-				<details class="aiwp-page-options"><summary>Rozložení této stránky</summary><div><label><input type="checkbox" name="aiwp[hide_header]" value="1" <?php checked( ! empty( $data['hide_header'] ) ); ?>> Skrýt společnou hlavičku</label><label><input type="checkbox" name="aiwp[hide_footer]" value="1" <?php checked( ! empty( $data['hide_footer'] ) ); ?>> Skrýt společnou patičku</label><p class="description">Vhodné například pro samostatnou prodejní stránku. Tuto volbu podporuje šablona web-svepomoci-sablona.</p></div></details>
+				<details class="aiwp-page-options"><summary><?php echo esc_html__( 'Page layout', 'ai-web-studio' ); ?></summary><div><label><input type="checkbox" name="aiwp[hide_header]" value="1" <?php checked( ! empty( $data['hide_header'] ) ); ?>> <?php echo esc_html__( 'Hide shared header', 'ai-web-studio' ); ?></label><label><input type="checkbox" name="aiwp[hide_footer]" value="1" <?php checked( ! empty( $data['hide_footer'] ) ); ?>> <?php echo esc_html__( 'Hide shared footer', 'ai-web-studio' ); ?></label><p class="description"><?php echo esc_html__( 'Useful for a standalone landing page, for example. This option is supported by the web-svepomoci-sablona theme.', 'ai-web-studio' ); ?></p></div></details>
 			<?php endif; ?>
-			<div class="aiwp-save-reminder"><span class="dashicons dashicons-saved" aria-hidden="true"></span><span>Hotovo? Použijte <strong>Uložit koncept</strong>, <strong>Publikovat</strong> nebo <strong>Aktualizovat</strong> ve WordPressu. Předchozí uložené verze najdete v revizích.</span></div>
-			<noscript><p>Pro zvýraznění kódu, přepínání záložek a náhled zapněte JavaScript v prohlížeči. Kód lze i bez něj vložit do tří textových polí a uložit.</p></noscript>
+			<div class="aiwp-save-reminder"><span class="dashicons dashicons-saved" aria-hidden="true"></span><span><?php echo esc_html__( 'Finished? Use', 'ai-web-studio' ); ?> <strong><?php echo esc_html__( 'Save draft', 'ai-web-studio' ); ?></strong>, <strong><?php echo esc_html__( 'Publish', 'ai-web-studio' ); ?></strong> <?php esc_html_e( 'or', 'ai-web-studio' ); ?> <strong><?php echo esc_html__( 'Update', 'ai-web-studio' ); ?></strong> <?php echo esc_html__( 'in WordPress. Previously saved versions are available in revisions.', 'ai-web-studio' ); ?></span></div>
+			<noscript><p><?php echo esc_html__( 'Enable JavaScript in your browser for syntax highlighting, tabs and previews. Without it, you can still paste code into the three text fields and save.', 'ai-web-studio' ); ?></p></noscript>
 		</div>
 		<?php
 	}
 
 	public static function seo( $post ) {
 		if ( ! aiwp_can_edit_code() ) {
-			echo '<p>Nastavení SEO v pluginu web-svepomoci-plugin upravuje správce webu.</p>';
+			echo __( '<p>SEO settings in web-svepomoci-plugin are managed by the website administrator.</p>', 'ai-web-studio' );
 			return;
 		}
 		$data = aiwp_get_document( $post->ID );
 		?>
 		<div class="aiwp-seo-fields">
 			<p class="description" data-aiwp-media-status role="status" aria-live="polite" hidden></p>
-			<p class="aiwp-section-lead">Pomozte lidem poznat, co na stránce najdou. Prázdný SEO titulek se doplní z názvu stránky.</p>
-			<div class="aiwp-field"><label for="aiwp-seo-title-input">SEO titulek</label><input type="text" id="aiwp-seo-title-input" name="aiwp[seo_title]" value="<?php echo esc_attr( $data['seo_title'] ); ?>" placeholder="<?php echo esc_attr( get_the_title( $post ) ); ?>" aria-describedby="aiwp-seo-title-input-hint"><p class="description" id="aiwp-seo-title-input-hint"><span data-aiwp-counter="aiwp-seo-title-input">0</span> znaků · Obvykle se hodí přibližně 50–60 znaků; nejdůležitější sdělení dejte na začátek.</p></div>
-			<div class="aiwp-field"><label for="aiwp-seo-description">Meta popis</label><textarea id="aiwp-seo-description" name="aiwp[seo_description]" rows="3" aria-describedby="aiwp-seo-description-hint"><?php echo esc_textarea( $data['seo_description'] ); ?></textarea><p class="description" id="aiwp-seo-description-hint"><span data-aiwp-counter="aiwp-seo-description">0</span> znaků · Stručně popište přínos stránky. Přibližně 140–160 znaků je dobrý výchozí bod, nikoli pevný limit.</p></div>
-			<div class="aiwp-field"><label for="aiwp-seo-image">Obrázek pro sdílení</label><div class="aiwp-input-action"><input type="url" id="aiwp-seo-image" name="aiwp[seo_image]" value="<?php echo esc_attr( $data['seo_image'] ); ?>" placeholder="https://…/obrazek.jpg"><button type="button" class="button" data-aiwp-media>Vybrat z médií</button></div><p class="description">Adresa obrázku pro náhled odkazu na sociálních sítích. Můžete vložit URL nebo vybrat obrázek z knihovny.</p></div>
-			<details class="aiwp-seo-advanced"><summary>Pokročilé nastavení</summary><div class="aiwp-field"><label for="aiwp-seo-canonical">Kanonická URL</label><input type="url" id="aiwp-seo-canonical" name="aiwp[seo_canonical]" value="<?php echo esc_attr( $data['seo_canonical'] ); ?>" placeholder="Automaticky: adresa této stránky"><p class="description">Vyplňte pouze, pokud má vyhledávač považovat jinou adresu za hlavní verzi stejného obsahu.</p></div><label class="aiwp-checkbox-line"><input type="checkbox" name="aiwp[seo_noindex]" value="1" <?php checked( ! empty( $data['seo_noindex'] ) ); ?>> Požádat vyhledávače, aby tuto stránku neindexovaly (noindex)</label><p class="description">Stránka zůstane veřejně dostupná. Toto nastavení ji nechrání heslem.</p></details>
-			<p class="aiwp-seo-note">Vyhledávače mohou zvolit jiný titulek nebo popis. Pokud používáte podporovaný SEO plugin, metadata spravujte v něm — web-svepomoci-plugin mu přenechá jejich výpis.</p>
+			<p class="aiwp-section-lead"><?php echo esc_html__( 'Help people understand what the page contains. An empty SEO title uses the page title.', 'ai-web-studio' ); ?></p>
+			<div class="aiwp-field"><label for="aiwp-seo-title-input"><?php echo esc_html__( 'SEO title', 'ai-web-studio' ); ?></label><input type="text" id="aiwp-seo-title-input" name="aiwp[seo_title]" value="<?php echo esc_attr( $data['seo_title'] ); ?>" placeholder="<?php echo esc_attr( get_the_title( $post ) ); ?>" aria-describedby="aiwp-seo-title-input-hint"><p class="description" id="aiwp-seo-title-input-hint"><span data-aiwp-counter="aiwp-seo-title-input">0</span> <?php echo esc_html__( 'characters · Around 50–60 characters is often useful; put the main message first.', 'ai-web-studio' ); ?></p></div>
+			<div class="aiwp-field"><label for="aiwp-seo-description"><?php echo esc_html__( 'Meta description', 'ai-web-studio' ); ?></label><textarea id="aiwp-seo-description" name="aiwp[seo_description]" rows="3" aria-describedby="aiwp-seo-description-hint"><?php echo esc_textarea( $data['seo_description'] ); ?></textarea><p class="description" id="aiwp-seo-description-hint"><span data-aiwp-counter="aiwp-seo-description">0</span> <?php echo esc_html__( 'characters · Briefly describe the page\'s value. Around 140–160 characters is a useful starting point, not a fixed limit.', 'ai-web-studio' ); ?></p></div>
+			<div class="aiwp-field"><label for="aiwp-seo-image"><?php echo esc_html__( 'Sharing image', 'ai-web-studio' ); ?></label><div class="aiwp-input-action"><input type="url" id="aiwp-seo-image" name="aiwp[seo_image]" value="<?php echo esc_attr( $data['seo_image'] ); ?>" placeholder="https://…/obrazek.jpg"><button type="button" class="button" data-aiwp-media><?php echo esc_html__( 'Choose from media', 'ai-web-studio' ); ?></button></div><p class="description"><?php echo esc_html__( 'Image URL for social link previews. Paste a URL or choose an image from the library.', 'ai-web-studio' ); ?></p></div>
+			<details class="aiwp-seo-advanced"><summary><?php echo esc_html__( 'Advanced settings', 'ai-web-studio' ); ?></summary><div class="aiwp-field"><label for="aiwp-seo-canonical"><?php echo esc_html__( 'Canonical URL', 'ai-web-studio' ); ?></label><input type="url" id="aiwp-seo-canonical" name="aiwp[seo_canonical]" value="<?php echo esc_attr( $data['seo_canonical'] ); ?>" placeholder="<?php echo esc_attr__( 'Automatic: this page\'s URL', 'ai-web-studio' ); ?>"><p class="description"><?php echo esc_html__( 'Fill this in only if search engines should treat another URL as the primary version of the same content.', 'ai-web-studio' ); ?></p></div><label class="aiwp-checkbox-line"><input type="checkbox" name="aiwp[seo_noindex]" value="1" <?php checked( ! empty( $data['seo_noindex'] ) ); ?>> <?php echo esc_html__( 'Ask search engines not to index this page (noindex)', 'ai-web-studio' ); ?></label><p class="description"><?php echo esc_html__( 'The page remains publicly accessible. This setting does not password-protect it.', 'ai-web-studio' ); ?></p></details>
+			<p class="aiwp-seo-note"><?php echo esc_html__( 'Search engines may choose a different title or description. If you use a supported SEO plugin, manage metadata there — web-svepomoci-plugin will let it output the metadata.', 'ai-web-studio' ); ?></p>
 		</div>
 		<?php
 	}

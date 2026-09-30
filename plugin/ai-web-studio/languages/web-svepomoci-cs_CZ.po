@@ -1,0 +1,35 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\nLanguage: cs_CZ\nPlural-Forms: nplurals=3; plural=(n == 1) ? 0 : (n >= 2 && n <= 4) ? 1 : 2;\n"
+
+msgid "\">Changes in this release on GitHub</a></p>"
+msgstr "\">Změny této verze na GitHubu</a></p>"
+
+msgid "HTML, CSS and JavaScript for pages, shared headers and footers, menus and SEO."
+msgstr "HTML, CSS a JavaScript pro stránky, společná hlavička a patička, menu a SEO."
+
+msgid "You do not have permission to check for updates."
+msgstr "Nemáte oprávnění kontrolovat aktualizace."
+
+msgid "Language"
+msgstr "Jazyk"
+
+msgid "Choose English or Czech for every language setting."
+msgstr "Pro každé jazykové nastavení vyberte angličtinu nebo češtinu."
+
+msgid "These preferences apply to both Website Builder components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions."
+msgstr "Tato nastavení platí pro plugin i šablonu Web svépomocí. Nemění jazyk administrace WordPressu ani nepřekládají uložené stránky, kód, menu nebo popisy služeb."
+
+msgid "Plugin and theme interface"
+msgstr "Rozhraní pluginu a šablony"
+
+msgid "Public labels and cookie controls"
+msgstr "Veřejné popisky a ovládání cookies"
+
+msgid "Requested AI content language"
+msgstr "Požadovaný jazyk obsahu z AI"
+
+msgid "English is the default for new installations. Existing configured websites keep Czech when upgrading. After changing public labels, clear the website and CDN caches. Configure external consent plugins separately."
+msgstr "U nových instalací je výchozí angličtina. Již nastavené weby si při aktualizaci zachovají češtinu. Po změně veřejných popisků vymažte cache webu a CDN. Externí pluginy pro souhlas nastavte samostatně."
+
+msgid "Save languages"
+msgstr "Uložit jazyky"

@@ -12,7 +12,7 @@ while ( have_posts() ) :
 			<article id="post-<?php the_ID(); ?>" <?php post_class( 'ai-web-entry' ); ?>>
 				<?php the_title( '<h1>', '</h1>' ); ?>
 				<div class="ai-web-entry__content"><?php the_content(); ?></div>
-				<?php wp_link_pages( array( 'before' => '<nav aria-label="' . esc_attr__( 'Části stránky', 'ai-web' ) . '">', 'after' => '</nav>' ) ); ?>
+				<?php wp_link_pages( array( 'before' => '<nav aria-label="' . esc_attr__( 'Page sections', 'ai-web' ) . '">', 'after' => '</nav>' ) ); ?>
 			</article>
 			<?php if ( comments_open() || get_comments_number() ) { comments_template(); } ?>
 		</main>

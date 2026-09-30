@@ -90,7 +90,7 @@
             document.cookie = config.name + '=' + encodeURIComponent(JSON.stringify(record)) + '; Path=' + config.path + '; Max-Age=' + lifetime + '; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
             var stored = read();
             if (!stored || JSON.stringify(stored) !== JSON.stringify(record)) {
-                status.textContent = 'Volbu se nepodařilo uložit. Povolte nezbytné cookies v prohlížeči; volitelné služby se nezapnou.';
+                status.textContent = wp.i18n.__("Your choice could not be saved. Allow necessary cookies in your browser; optional services will remain off.", "ai-web-studio");
                 return;
             }
             try { localStorage.setItem(config.name + '_sync', JSON.stringify(record) + Date.now()); } catch (error) { /* Focus also synchronizes tabs. */ }

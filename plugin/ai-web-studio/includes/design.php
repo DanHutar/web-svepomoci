@@ -30,7 +30,7 @@ function aiwp_font_details( $font ) {
         );
     }
     return array(
-        'family' => 'serif' === $font ? 'Georgia' : 'Systémové bezpatkové písmo',
+        'family' => 'serif' === $font ? 'Georgia' : __( 'System sans-serif font', 'ai-web-studio' ),
         'stack' => 'serif' === $font ? 'Georgia, "Times New Roman", serif' : 'system-ui, -apple-system, "Segoe UI", sans-serif',
         'url' => '',
     );
@@ -38,22 +38,22 @@ function aiwp_font_details( $font ) {
 
 function aiwp_typography_rules() {
     return implode( "\n", array(
-        'Navrhni podle zvoleného fontu a jeho proporcí čitelnou typografickou stupnici pro H1, H2, H3, H4, H5, H6, body (běžný text) a small. Neexistuje jediná správná stupnice daná názvem fontu; vysvětli svůj návrh a ověř češtinu.',
-        'Pro všech osm úrovní vytvoř zvlášť font-size: clamp(...) i line-height: clamp(...). Velikosti používej v rem, prostřední člen calc(rem + vw), minimum <= maximum. Neměň kořenovou velikost html na pevné px.',
-        'U line-height používej kompatibilní délkové jednotky, například clamp(1.15em, calc(1.1em + 0.2vw), 1.35em); nemíchej bezrozměrná čísla s rem/em/vw uvnitř jednoho clamp(). Hodnoty uprav podle konkrétní úrovně a fontu. Řádkování přiřaď přímo každé úrovni, aby se nedědila nevhodná vypočtená délka.',
-        'Definuj na :root proměnné --aiwp-size-h1 až --aiwp-size-h6, --aiwp-size-body, --aiwp-size-small a odpovídající --aiwp-leading-h1 až --aiwp-leading-h6, --aiwp-leading-body, --aiwp-leading-small. Všech 16 hodnot má být clamp(). Připoj skutečné CSS selektory, které proměnné používají.',
-        'Font aplikuj přes var(--aiwp-font). Tuto proměnnou ani načítání písma nepřepisuj. Google Font načítá plugin s vahami 400, 500, 600, 700; nepřidávej @import, @font-face, link ani další externí font.',
-        'Společné styly omez na :where(.aiwp-content, .aiwp-header, .aiwp-footer). Body zde znamená běžný text v těchto obalech, nikoli nutnost měnit globální element body. Styluj h1–h6, p, li a small v těchto obalech; nezmenšuj vnořené seznamy opakovaně.',
-        'Běžný text navrhni nejméně 1rem, small zpravidla nejméně 0.875rem; nepoužívej small pro podstatné informace. Ověř šířky 320–1440 px, zvětšení textu na 200 %, dlouhé české nadpisy, zalamování a dostatek místa pro diakritiku. Nepoužívej pevné výšky textových bloků.',
+        __( 'Using the selected font and its proportions, design a readable type scale for H1, H2, H3, H4, H5, H6, body text and small. A font name does not determine a single correct scale; explain your proposal and check the requested language, including diacritics.', 'ai-web-studio' ),
+        __( 'For all eight levels, create separate font-size: clamp(...) and line-height: clamp(...) values. Use rem for sizes and calc(rem + vw) for the middle term, with minimum <= maximum. Do not set the html root font size to fixed pixels.', 'ai-web-studio' ),
+        __( 'Use compatible length units in line-height, for example clamp(1.15em, calc(1.1em + 0.2vw), 1.35em); do not mix unitless numbers with rem/em/vw within one clamp(). Adapt the values to each level and font. Assign line height directly to each level so an unsuitable computed length is not inherited.', 'ai-web-studio' ),
+        __( 'Define :root variables --aiwp-size-h1 through --aiwp-size-h6, --aiwp-size-body, --aiwp-size-small and matching --aiwp-leading-h1 through --aiwp-leading-h6, --aiwp-leading-body, --aiwp-leading-small. All 16 values must use clamp(). Include actual CSS selectors that use these variables.', 'ai-web-studio' ),
+        __( 'Apply the font through var(--aiwp-font). Do not override this variable or font loading. The plugin loads the Google Font with weights 400, 500, 600 and 700; do not add @import, @font-face, link or another external font.', 'ai-web-studio' ),
+        __( 'Scope shared styles to :where(.aiwp-content, .aiwp-header, .aiwp-footer). Body means ordinary text inside these wrappers, not a global body element override. Style h1–h6, p, li and small within these wrappers; do not repeatedly shrink nested lists.', 'ai-web-studio' ),
+        __( 'Use at least 1rem for body text and usually at least 0.875rem for small; do not use small for essential information. Check widths of 320–1440 px, 200% text enlargement, long headings, wrapping and room for diacritics. Do not use fixed heights for text blocks.', 'ai-web-studio' ),
     ) );
 }
 
 function aiwp_shared_design_context() {
     $settings = aiwp_get_settings();
     $font = aiwp_font_details( $settings['font'] );
-    return 'SPOLEČNÝ VZHLED WEBU' . "\n" . 'Zvolený font: ' . $font['family'] . '. Používej var(--aiwp-font).'
-        . "\n" . 'Barva: ' . $settings['accent'] . ' (--aiwp-accent), šířka: ' . $settings['width'] . 'px (--aiwp-width).'
-        . "\n" . 'Používej existující společné třídy a proměnné. Nevytvářej znovu společnou typografii ani tlačítka v CSS jednotlivé stránky. CSS stránky obsahuje pouze její odlišnosti. Pokud společná stupnice chybí, upozorni, že ji nejprve vytvořím zadáním ve Vzhled webu.'
-        . "\n" . 'Společná stupnice používá clamp() pro font-size i line-height H1–H6, body a small, s proměnnými --aiwp-size-* a --aiwp-leading-*. Zachovej ji; bez výslovného požadavku nepřepisuj velikosti nadpisů ani písmo.'
-        . "\n\n" . 'Aktuálně uložené společné CSS (pouze kontext, nevracej je v CSS stránky):' . "\n" . ( $settings['css'] ?: 'Zatím není vytvořené.' );
+    return __( 'SHARED WEBSITE DESIGN', 'ai-web-studio' ) . "\n" . __( 'Selected font: ', 'ai-web-studio' ) . $font['family'] . __( '. Use var(--aiwp-font).', 'ai-web-studio' )
+        . "\n" . __( 'Colour: ', 'ai-web-studio' ) . $settings['accent'] . __( ' (--aiwp-accent), width: ', 'ai-web-studio' ) . $settings['width'] . 'px (--aiwp-width).'
+        . "\n" . __( 'Use existing shared classes and variables. Do not recreate shared typography or buttons in individual page CSS. Page CSS contains only its differences. If a shared type scale is missing, tell me to create it first using the Website design prompt.', 'ai-web-studio' )
+        . "\n" . __( 'The shared scale uses clamp() for font-size and line-height of H1–H6, body and small, with --aiwp-size-* and --aiwp-leading-* variables. Preserve it; do not override heading sizes or the font unless explicitly requested.', 'ai-web-studio' )
+        . "\n\n" . __( 'Currently saved shared CSS (context only; do not return it as page CSS):', 'ai-web-studio' ) . "\n" . ( $settings['css'] ?: __( 'Not created yet.', 'ai-web-studio' ) );
 }

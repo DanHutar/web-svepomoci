@@ -1,14 +1,18 @@
-# Web svépomocí 1.9.2
+# Web svépomocí 1.10.0
 
-- **Souhlas spravuje externí plugin** je nyní výchozí stav, pokud volba ještě není uložená. Naše lišta, ovládání i skripty jsou vypnuté. Již uložená volba se nemění; pro vlastní správu zaškrtnutí zrušte a uložte.
-- Tlačítko Nastavení cookies umístíte přímo do HTML patičky značkou **[aiwp_cookie_settings]**. Výsledné tlačítko má třídu `aiwp-cookie-settings`; další JavaScript není potřeba.
-- Pokud se tlačítko vykreslí v patičce, samostatný blok pod ní se nepřidá. Výchozí patička šablony má tlačítko již uvnitř. U vlastní patičky bez značky zůstává záložní ovládání na konci stránky.
-- Podpora více ovládání, návratu fokusu a ukázky v náhledu editoru. Prompty a příklad patičky používají novou značku.
+English and Czech are now available in the plugin and theme, using one shared implementation.
+
+- Choose the interface language, public labels and requested AI content language independently under **Website Builder → Language**. With the theme alone, use **Appearance → Language**.
+- New installations start in English. Previously configured websites keep Czech on upgrade.
+- Editor labels, help, JavaScript messages and generated prompts are translated. Existing saved content and the WordPress dashboard language remain unchanged.
+- Both installation ZIPs include English and Czech text prompts in `prompty/en/` and `prompty/cs/`.
+
+Plugin i šablona nově podporují angličtinu a češtinu. Nastavení najdete pod **Web svépomocí → Jazyk**. Nové instalace začínají anglicky; již nastavené weby si zachovají češtinu. Uložený obsah se nepřekládá. Aktualizujte obě součásti a vymažte cache webu.
 
 Od verze 1.2.0 aktualizujte běžným tlačítkem ve WordPressu; kontrolu vyvoláte přes **Web svépomocí → Zkontrolovat aktualizace**. Ze starších verzí nahrajte instalační ZIPy ručně a potvrďte nahrazení. Po aktualizaci vymažte případnou cache webu.
 
-V externím režimu značka nic nevypíše. Ovládání změny souhlasu musí poskytovat externí plugin, například Complianz; přepínač jej nenastavuje. [Návod a omezení](https://github.com/DanHutar/web-svepomoci/blob/main/docs/soukromi-cookies.md). [Textové prompty](https://github.com/DanHutar/web-svepomoci/tree/main/prompty).
+[Language guide / Návod](https://github.com/DanHutar/web-svepomoci/blob/main/docs/languages.md). [Text prompts / Textové prompty](https://github.com/DanHutar/web-svepomoci/tree/main/prompty).
 
 Podrobnosti: [Ověření funkcí](https://github.com/DanHutar/web-svepomoci/blob/main/docs/overeni.md).
 
-Použijte přílohy **web-svepomoci-plugin.zip** a **web-svepomoci-sablona.zip**. **Source code (zip)** není instalační balíček WordPressu.
+Use the **web-svepomoci-plugin.zip** and **web-svepomoci-sablona.zip** attachments. **Source code (zip)** is not a WordPress installation package.

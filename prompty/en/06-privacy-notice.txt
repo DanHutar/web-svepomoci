@@ -1,0 +1,36 @@
+Help me prepare a Privacy notice for a Czech/EU website using WordPress, the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. Base it on the operator's actual activities, not a generic document with invented details.
+
+INPUT
+Website name and URL: [ADD]
+Controller: name, registered address, business ID if applicable, and contact for exercising rights: [ADD]
+Data protection officer or representative, if relevant and actually appointed: [ADD / NONE / UNKNOWN]
+Territory and audience, including any specific focus on children: [ADD]
+Actual website features: messages, bookings, purchases, accounts, comments, newsletter, etc.: [LIST; do not assume unlisted features]
+For each activity: data collected, its source, purpose, access, retention/deletion rule, known legal basis and any legitimate interest: [ADD; mark unknown details UNKNOWN]
+Hosting, email, booking, payment, analytics, marketing and other actual recipients/processors and their roles: [ADD]
+Any transfers outside the EEA and verified safeguards: [ADD / UNKNOWN]
+Automated decision-making/profiling and any consequences: [DESCRIBE / NO / UNKNOWN]
+Which information is mandatory and what happens if it is not supplied: [ADD]
+Cookie information URL and real consent-change process: [ADD]
+Existing document, including one maintained by Complianz: [PASTE or NONE]
+Date facts were checked: [ADD]
+Shared CSS, classes and selected font: [PASTE]
+Language for the notice and your explanation: [English / Czech / OTHER]
+
+PROCESS
+First identify essential missing facts and ask specific questions. Do not replace an unknown with “we do not transfer”, “we do not collect” or an invented retention period. Do not promise complete anonymity or absolute security. Do not request individual customer records or passwords.
+
+For each actual purpose, distinguish data, legal basis, recipients and retention. Do not automatically describe every activity as based on consent; label proposed legal bases for verification outside the public text. Include relevant controller/DPO details, transfers and safeguards, mandatory or voluntary provision, sources of indirectly collected data and automated decisions. Explain rights with their conditions, how to exercise them, withdrawal where consent applies and the possibility of a complaint to the Czech supervisory authority, ÚOOÚ. Do not present erasure as an unconditional right.
+
+Verify current information duties under relevant GDPR Articles 12–14 and data-subject rights. Use primary sources, not copied policies from another website. If verification is unavailable, say so outside the draft:
+https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=en
+https://uoou.gov.cz/
+
+If an external plugin maintains the document, clarify whether we are editing its document or creating a manual page. Do not create a contradictory second version. An external document shortcode belongs on a standard WordPress page with the AI editor disabled, not in our HTML field. Translating this prompt or notice into English does not imply that another jurisdiction applies.
+
+OUTPUT
+First prepare text in the requested language for review and a separate list of unverified points. Keep it labelled as a working draft while essential facts are missing. Do not claim legal review or guaranteed compliance. After I confirm the facts, return complete HTML and only necessary CSS in separate blocks, leaving JS empty. Provide the SEO title and meta description separately as text.
+
+HTML must be a fragment with one H1, logical H2/H3 headings and a unique root class. No header, footer, main, doctype, html, head, body, meta, title, link, base, style, script, PHP, on* attributes, javascript: URLs or shortcodes. Do not add consent checkboxes, cookie banners, tracking scripts or forms without a working integration. Include the real cookie information link.
+
+Use shared classes and --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* and --aiwp-leading-* variables. Preserve shared clamp() font sizes and line heights; do not duplicate shared CSS. Scope only necessary differences to the page root. Do not add fonts or external resources. If shared CSS is missing, ask me to use 01-shared-design.txt first. The document must remain readable at 320 px and with 200% text enlargement. I will paste code without ``` fences.

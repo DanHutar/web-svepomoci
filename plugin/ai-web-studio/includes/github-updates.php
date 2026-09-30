@@ -32,7 +32,7 @@ if ( ! class_exists( 'WSP_GitHub_Updates', false ) ) {
 
         public static function check_now() {
             if ( ! current_user_can( 'update_plugins' ) || ! current_user_can( 'update_themes' ) ) {
-                wp_die( 'Nemáte oprávnění kontrolovat aktualizace.', '', array( 'response' => 403 ) );
+                wp_die( __( 'You do not have permission to check for updates.', 'web-svepomoci' ), '', array( 'response' => 403 ) );
             }
             check_admin_referer( 'wsp_check_updates' );
             self::clear_cache();
@@ -160,8 +160,8 @@ if ( ! class_exists( 'WSP_GitHub_Updates', false ) ) {
                 'requires_php' => $release['plugin']['requires_php'],
                 'download_link' => $release['plugin']['package'],
                 'sections' => array(
-                    'description' => 'HTML, CSS a JavaScript pro stránky, společná hlavička a patička, menu a SEO.',
-                    'changelog' => '<p><a href="' . esc_url( $release['url'] ) . '">Změny této verze na GitHubu</a></p>',
+                    'description' => __( 'HTML, CSS and JavaScript for pages, shared headers and footers, menus and SEO.', 'web-svepomoci' ),
+                    'changelog' => '<p><a href="' . esc_url( $release['url'] ) . __( '">Changes in this release on GitHub</a></p>', 'web-svepomoci' ),
                 ),
             );
         }

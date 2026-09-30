@@ -58,4 +58,4 @@ Po přepnutí vymažte cache HTML, CDN i optimalizačních pluginů a otevřete 
 
 Při návratu nejprve vypněte souhlas a měření v externím pluginu, zrušte naše zaškrtnutí, ověřte původní nastavení a uložte. Vymažte cache. Staré souhlasy našeho pluginu se po návratu znovu nepoužijí; návštěvník provede novou volbu.
 
-Dokumenty generované Complianz ponechte na běžných WordPress stránkách s vypnutým AI editorem. Náš HTML editor neumí jejich shortcody. Z patičky na dokumenty odkažte přes menu. Pokud chcete ručně vytvořené informační stránky, textové prompty najdete ve složce `prompty` obou instalačních ZIPů a [zde v repozitáři](../prompty/00-jak-prompty-pouzivat.txt).
+Dokumenty generované Complianz ponechte na běžných WordPress stránkách s vypnutým AI editorem. Náš HTML editor neumí jejich shortcody. Z patičky na dokumenty odkažte přes menu. Pokud chcete ručně vytvořené informační stránky, textové prompty najdete ve složce `prompty` obou instalačních ZIPů a [zde v repozitáři](../prompty/README.txt).

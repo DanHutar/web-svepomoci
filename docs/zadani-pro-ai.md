@@ -120,4 +120,4 @@ Současný JavaScript:
 
 Měření, marketingové skripty ani další cookie lištu nevkládej do stránky. Volitelné služby se nastavují přes zvoleného správce souhlasu: Web svépomocí → Soukromí a cookies, nebo při externím režimu například Complianz. Kódy mezi správci neduplikuj.
 
-Samostatné kopírovatelné textové prompty pro společný vzhled, stránky, header, footer a informační stránky najdete ve složce [prompty](../prompty/00-jak-prompty-pouzivat.txt), která je také součástí obou instalačních ZIPů.
+Samostatné kopírovatelné textové prompty pro společný vzhled, stránky, header, footer a informační stránky najdete ve složce [prompty](../prompty/README.txt), která je také součástí obou instalačních ZIPů.

@@ -1,0 +1,21 @@
+Create a shared header for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin.
+
+MY INPUT
+Website name and real homepage URL (possibly in a subdirectory): [ADD]
+Logo URL and dimensions: [ADD or TEXT BRAND ONLY]
+Required layout and optional call-to-action text/URL: [ADD]
+Selected font, accent colour, width, shared CSS and reusable classes: [PASTE]
+Existing header code: [PASTE or NEW HEADER]
+Language for labels and your explanation: [English / Czech / OTHER]
+
+Return complete HTML, CSS and optional JS in separate blocks for the shared Header fields. Ask first if essential inputs are missing; do not invent a logo, contacts or URLs.
+
+HTML must be a fragment with its own root class. No H1, page content, footer or SEO metadata. Do not include doctype, html, head, body, main, meta, title, link, base, style, script, PHP, on* attributes or javascript: URLs.
+
+I manage navigation in Appearance → Menus and assign it to primary. Inside nav with an accessible label, insert exactly [aiwp_menu location="primary"]. Do not write links manually. The marker produces ul.aiwp-menu with li.menu-item, a links and possible ul.sub-menu. Support nested menus; do not add third-party shortcodes.
+
+Use shared classes and --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* and --aiwp-leading-* variables. Header CSS contains only its differences, scoped to the root class. Preserve shared clamp() typography, do not copy shared CSS and do not load another font. If shared CSS is missing, ask me to use 01-shared-design.txt first.
+
+If mobile navigation needs a toggle, use a button with aria-expanded and aria-controls. Navigation must work with a keyboard and without JavaScript; JS can enable a collapsed mode after initialization. Submenus must not depend on hover alone. Provide visible focus, Escape to close, large enough touch targets and correct behaviour when the screen width changes. Do not introduce an unnecessary focus trap. Support 320 px screens and 200% text enlargement.
+
+JS must be plain code in an IIFE, scoped to the header and assuming a loaded DOM, without script tags, libraries, external resources or PHP. Do not add tracking or a cookie banner; a separate manager handles consent. I will paste code without ``` fences.

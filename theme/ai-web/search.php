@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header(); ?>
 <main id="main" class="ai-web-main ai-web-container" tabindex="-1">
 	<header class="ai-web-archive-header">
-		<h1><?php printf( esc_html__( 'Výsledky hledání: %s', 'ai-web' ), esc_html( get_search_query() ) ); ?></h1>
+		<h1><?php printf( esc_html__( 'Search results: %s', 'ai-web' ), esc_html( get_search_query() ) ); ?></h1>
 		<?php get_search_form(); ?>
 	</header>
 	<?php

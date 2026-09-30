@@ -8,7 +8,7 @@ if ( ! ai_web_part_hidden( 'footer' ) && ! ai_web_render_part( 'footer' ) ) : ?>
 			<p>&copy; <?php echo esc_html( wp_date( 'Y' ) ); ?> <a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></p>
 			<?php if ( function_exists( 'aiwp_render_cookie_settings_button' ) ) { echo aiwp_render_cookie_settings_button(); } // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- plugin returns fixed trusted markup. ?>
 			<?php if ( has_nav_menu( 'footer' ) ) : ?>
-				<nav aria-label="<?php esc_attr_e( 'Navigace v patičce', 'ai-web' ); ?>"><?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'menu_class' => 'ai-web-menu', 'fallback_cb' => false, 'depth' => 1 ) ); ?></nav>
+				<nav aria-label="<?php esc_attr_e( 'Footer navigation', 'ai-web' ); ?>"><?php wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'menu_class' => 'ai-web-menu', 'fallback_cb' => false, 'depth' => 1 ) ); ?></nav>
 			<?php endif; ?>
 		</div>
 	</footer>

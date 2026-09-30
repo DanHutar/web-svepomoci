@@ -15,8 +15,11 @@ $packages = @(
 $components = [ordered]@{}
 $releaseVersion = $null
 $promptDirectory = Join-Path $projectDirectory 'prompty'
-$promptFiles = @(Get-ChildItem -LiteralPath $promptDirectory -Filter '*.txt' -File)
-if ($promptFiles.Count -lt 7) { throw 'The downloadable text prompt set is incomplete.' }
+$promptFiles = @(Get-ChildItem -LiteralPath $promptDirectory -Filter '*.txt' -File -Recurse)
+foreach ($language in @('en', 'cs')) {
+    if (@(Get-ChildItem -LiteralPath (Join-Path $promptDirectory $language) -Filter '*.txt' -File).Count -ne 7) { throw ('The prompt set is incomplete: ' + $language) }
+}
+if ((Get-Content -LiteralPath (Join-Path $projectDirectory 'plugin/ai-web-studio/includes/languages.php') -Raw -Encoding UTF8) -cne (Get-Content -LiteralPath (Join-Path $projectDirectory 'theme/ai-web/includes/languages.php') -Raw -Encoding UTF8)) { throw 'The two shared language helpers must be identical.' }
 foreach ($package in $packages) {
     $sourceDirectory = Join-Path $projectDirectory $package.RelativeSource
     $requiredFile = Join-Path $sourceDirectory $package.RequiredFile
@@ -60,7 +63,8 @@ foreach ($package in $packages) {
             }
             foreach ($promptFile in $promptFiles) {
                 if ($promptFile.Length -eq 0) { throw ('Empty prompt: ' + $promptFile.Name) }
-                $entryName = $package.Slug + '/prompty/' + $promptFile.Name
+                $promptRelativePath = $promptFile.FullName.Substring($promptDirectory.Length).TrimStart([char[]]@('\', '/')).Replace('\', '/')
+                $entryName = $package.Slug + '/prompty/' + $promptRelativePath
                 [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $promptFile.FullName, $entryName, [System.IO.Compression.CompressionLevel]::Optimal) | Out-Null
             }
         }

@@ -4,7 +4,7 @@ import path from 'node:path';
 
 export const projectRoot = fileURLToPath(new URL('../', import.meta.url));
 
-export async function bootWordPress(port = 9400, login = true, sourceRoot = projectRoot, wordpressVersion = '6.8.3') {
+export async function bootWordPress(port = 9400, login = true, sourceRoot = projectRoot, wordpressVersion = '6.8.3', testLanguage = 'cs') {
   // An upgrade replaces package directories. Mount their parents in disposable
   // test copies, because a mounted directory itself cannot be removed by WASM.
   const packageMounts = sourceRoot === projectRoot ? [
@@ -25,7 +25,7 @@ export async function bootWordPress(port = 9400, login = true, sourceRoot = proj
       steps: [
         { step: 'activatePlugin', pluginPath: 'ai-web-studio/ai-web-studio.php' },
         { step: 'activateTheme', themeFolderName: 'ai-web' },
-        { step: 'setSiteOptions', options: { blogname: 'Ateliér · AI Web', blogdescription: 'Ukázkový web vytvořený vložením kódu', blog_public: '1' } },
+        { step: 'setSiteOptions', options: { blogname: 'Ateliér · AI Web', blogdescription: 'Ukázkový web vytvořený vložením kódu', blog_public: '1', ...(testLanguage ? { wsp_languages: { ui: testLanguage, public: testLanguage, content: testLanguage } } : {}) } },
       ],
     },
   });

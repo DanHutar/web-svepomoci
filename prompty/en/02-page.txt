@@ -1,0 +1,25 @@
+Create one page's content for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. I will use separate HTML, CSS and JS fields in the AI editor.
+
+MY INPUT
+Page title, purpose, audience and main visitor action: [ADD]
+Required sections and exact copy: [ADD]
+Real link/image URLs and contact details: [ADD]
+Selected font, accent colour and content width: [ADD]
+Existing shared CSS and reusable classes: [PASTE]
+Existing page HTML/CSS/JS: [PASTE or NEW PAGE]
+Requested changes: [ADD]
+Language for website copy and your explanation: [English / Czech / OTHER]
+
+Ask about missing essential facts first. Do not invent contacts, reviews, prices, images or a working form submission without an actual integration. Preserve existing text unless a translation or change is requested.
+
+Return complete HTML, CSS and JS in separate blocks. If JS is unnecessary, say outside the code that its field should be empty. Return the SEO title and meta description separately as text. I will copy the code without ``` fences.
+
+HTML must be a fragment with one main H1 and a logical heading hierarchy. Give the fragment a unique root class based on the page. Do not include header, footer, main, doctype, html, head, body, meta, title, link, base, style, script, PHP, on* attributes or javascript: URLs. I manage shared headers and footers separately.
+
+Use existing shared classes and --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* and --aiwp-leading-* variables. Preserve the shared clamp() sizes and line heights for H1–H6, body and small. Page CSS must contain only page-specific differences, scoped to its root class. Never copy or regenerate shared CSS here. If shared CSS is missing, ask me to create it using 01-shared-design.txt first. Do not load additional fonts or libraries.
+
+Optional JS must be plain JavaScript in an IIFE, without script tags or external resources. Scope selectors to this page and assume the DOM is loaded. Manage navigation through Appearance → Menus. Only if navigation is needed within the page, use [aiwp_menu location="primary"] or [aiwp_menu location="footer"]. They produce ul.aiwp-menu, li.menu-item, a links and optional ul.sub-menu. Do not use third-party shortcodes.
+
+Do not create a cookie banner, analytics or marketing scripts. Those belong to the selected consent manager, either Privacy and cookies in our plugin or a separately configured external plugin. Consent controls belong in the shared footer.
+
+Provide readable contrast, keyboard access, labelled controls, visible focus, suitable image alternatives and prefers-reduced-motion support. The layout must handle 320 px screens, long copy and 200% text enlargement without losing content. End with a short list of checks to perform before publication; do not claim unperformed tests as complete.

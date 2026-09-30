@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<a class="ai-web-skip-link" href="#main"><?php esc_html_e( 'Přejít na obsah', 'ai-web' ); ?></a>
+<a class="ai-web-skip-link" href="#main"><?php esc_html_e( 'Skip to content', 'ai-web' ); ?></a>
 <?php if ( ! ai_web_part_hidden( 'header' ) && ! ai_web_render_part( 'header' ) ) : ?>
 	<header class="ai-web-header">
 		<div class="ai-web-container ai-web-header__inner">
@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 			</div>
 			<button class="ai-web-menu-toggle" type="button" aria-controls="ai-web-navigation" aria-expanded="false" hidden><?php esc_html_e( 'Menu', 'ai-web' ); ?></button>
-			<nav id="ai-web-navigation" class="ai-web-navigation" aria-label="<?php esc_attr_e( 'Hlavní navigace', 'ai-web' ); ?>">
+			<nav id="ai-web-navigation" class="ai-web-navigation" aria-label="<?php esc_attr_e( 'Primary navigation', 'ai-web' ); ?>">
 				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'ai-web-menu', 'fallback_cb' => 'ai_web_page_menu', 'depth' => 2 ) ); ?>
 			</nav>
 		</div>

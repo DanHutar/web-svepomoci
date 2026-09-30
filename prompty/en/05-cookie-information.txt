@@ -1,0 +1,33 @@
+Help me prepare a Cookie information page for a Czech/EU website using WordPress, the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. Check the supplied facts before drafting. Do not create an apparently final legal document from assumptions.
+
+INPUT
+Website name and URL: [ADD]
+Operator, registered address, business ID if applicable and contact email: [ADD]
+Privacy notice URL: [ADD]
+Consent manager: [BUILT-IN / COMPLIANZ / OTHER — SPECIFY]
+How visitors actually open settings and withdraw consent: [DESCRIBE]
+Does Complianz maintain its own updated cookie document? [YES / NO / UNKNOWN]
+Actual services, including analytics, advertising, forms, maps, video, fonts and other plugins: [LIST; explicitly say NONE where applicable]
+Verified cookie and storage inventory from the website and provider documentation: [PASTE]
+For each item: name, provider/domain, purpose, category, cookie/localStorage/sessionStorage, storage duration or its determination, when it starts, and related processing/data transfers: [ADD or UNKNOWN]
+Date the inventory was checked: [ADD]
+Shared CSS, classes and selected font: [PASTE]
+Language for the document and your explanation: [English / Czech / OTHER]
+
+FIRST STEP
+If the actual service inventory or retention details are missing, ask questions and explain which facts I need to find. Do not infer cookie names, providers, storage periods or “necessary cookies only” from the website's appearance. Do not claim a scan unless you performed one. Do not invent tracking identifiers or legal conclusions. Distinguish cookie storage duration from the provider's retention of collected data.
+
+If Complianz maintains the document, recommend keeping it on a standard WordPress page with the AI editor disabled. Do not create a conflicting duplicate inventory or put a Complianz shortcode in our HTML editor, which only expands aiwp_menu and aiwp_cookie_settings. In that case, return an optional introduction as plain text and explain where to link to the existing document; do not return replacement document HTML.
+
+CONTENT ONCE FACTS ARE AVAILABLE
+Explain the actual cookies and similar storage, their purposes, providers and retention. Distinguish necessary and optional purposes using verified configuration. Describe the real rejection, change and withdrawal controls. Do not claim that browsing constitutes consent. Include a contact, update date and privacy notice link. Do not describe unused services as active. Check current official guidance; if you cannot access it, say so outside the public draft:
+https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
+
+Only when our built-in consent manager is actually enabled: it stores the choice for 180 days in an aiwp_consent_… cookie and synchronizes changes between tabs through a localStorage key ending in _sync. Obtain the exact name from the inventory; do not invent the hash. In external mode, use the external manager's real settings. Do not claim the plugin blocks every service or deletes cookies belonging to other domains. Do not create a new banner or consent controls. An English translation does not change the website's legal jurisdiction.
+
+OUTPUT FOR A MANUALLY MAINTAINED PAGE
+First return readable copy for factual review and a separate list of unresolved points. Mark it as a working draft until missing facts are supplied. After I confirm the facts, return separate complete HTML and minimal CSS; leave JS empty. Provide an SEO title and meta description separately. Do not guarantee legal compliance simply because the text was generated.
+
+HTML must be a fragment with one H1 and its own root class, without header, footer, main, doctype, html, head, body, meta, title, link, base, style, script, PHP, on* attributes, javascript: URLs or shortcodes. Use semantic headings, lists and an accessible cookie table populated only with real data. Keep the table readable on mobile without stretching the entire page.
+
+Use shared CSS and --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* and --aiwp-leading-* variables. Do not copy shared styles; preserve clamp() sizes and line heights. Scope only necessary CSS differences to the fragment root, without external resources. If shared CSS is missing, ask me to use 01-shared-design.txt first. I will paste the final code into the AI editor without ``` fences.

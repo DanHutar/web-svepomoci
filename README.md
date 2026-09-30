@@ -24,9 +24,11 @@ Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plu
 1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
 2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
 3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.9.2**.
+4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.10.0**.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.9.2**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.10.0**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+
+Od verze 1.10.0 jsou rozhraní i prompty anglicky a česky. Nová instalace začíná anglicky, již nastavený web si zachová češtinu. Otevřete **Website Builder → Language / Web svépomocí → Jazyk** a nastavte samostatně rozhraní, veřejné popisky a požadovaný jazyk obsahu od AI. Uložené stránky se nepřekládají. [Návod v obou jazycích](docs/languages.md).
 
 Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro propojení starší hlavičky s menu vložte značku popsanou níže a uložte ji. Změny odkazů pak provádějte ve **Vzhled → Menu**.
 
@@ -115,4 +117,4 @@ Od verze 1.9.2 je externí režim výchozí, pokud volba ještě není uložená
 
 ## Textové prompty v instalačních balíčcích
 
-Oba instalační ZIPy obsahují složku `prompty` se sedmi soubory `.txt`: návod, společný vzhled, stránka, header, footer, informace o cookies a ochrana osobních údajů. Pro jejich čtení rozbalte kopii ZIPu; do WordPressu nahrávejte původní ZIP. Stejné soubory najdete [v repozitáři](prompty/00-jak-prompty-pouzivat.txt). Informační stránky vyžadují skutečné údaje o webu; prompty je nevymýšlejí a nevytvářejí další lištu souhlasu.
+Oba instalační ZIPy obsahují složky `prompty/en` a `prompty/cs`, každou se sedmi soubory `.txt`: návod, společný vzhled, stránka, header, footer, informace o cookies a ochrana osobních údajů. Pro jejich čtení rozbalte kopii ZIPu; do WordPressu nahrávejte původní ZIP. Stejné soubory najdete [v repozitáři](prompty/README.txt). Informační stránky vyžadují skutečné údaje o webu; prompty je nevymýšlejí a nevytvářejí další lištu souhlasu.

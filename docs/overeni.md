@@ -142,6 +142,12 @@ Test `npm run test:consent` spouští WordPress 7.1.2 a skutečný Chrome. Ově�
 
 Test používá místní testovací služby; neověřuje konfiguraci konkrétního Google Analytics, marketingového poskytovatele ani produkčního hostingu. Rozsah a postup konfigurace popisuje [návod](soukromi-cookies.md).
 
+## Verze 1.10.0: angličtina a čeština
+
+`npm run test:languages` ověřuje na WordPressu 7.1.2 výchozí angličtinu nové instalace, přepnutí PHP i JavaScriptových popisků přes skutečný formulář, nezávislý jazyk veřejného ovládání cookies a požadovaného obsahu v AI promptu. Kontroluje zachování uložených textů, oprávnění, odmítnutí neplatného jazyka, zachování češtiny při migraci a nastavení šablony bez aktivního pluginu. Jazyk samotného WordPressu se nemění.
+
+CI znovu sestaví překladové katalogy a ověří shodu s verzovanými soubory. Balíčky obsahují obě sady textových promptů. Dosavadní integrační testy nadále používají češtinu, aby zachytily nechtěné změny stávajícího chování.
+
 ## Verze 1.8.1: výběr obrázku pro sdílení
 
 Na WordPressu 7.1.2 se podařilo zopakovat nefunkční tlačítko a chybu `undefined is not iterable`: nadpis metaboxu dostává od WordPressu ID `aiwp-seo-title`, které používal také náš input. Počítadlo načetlo nadpis a přerušilo inicializaci před připojením tlačítka médií. Pole nyní používá vlastní ID `aiwp-seo-title-input`; název ukládaného pole a metadata se nemění.

@@ -4,6 +4,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once get_template_directory() . '/includes/languages.php';
+WSP_Languages::register( 'ai-web', get_template_directory() . '/languages' );
 require_once get_template_directory() . '/includes/github-updates.php';
 require_once get_template_directory() . '/includes/webp.php';
 
@@ -17,8 +19,8 @@ function ai_web_setup() {
 	add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ) );
 	add_theme_support( 'custom-logo', array( 'height' => 64, 'width' => 180, 'flex-height' => true, 'flex-width' => true ) );
 	register_nav_menus( array(
-		'primary' => __( 'Hlavní menu', 'ai-web' ),
-		'footer'  => __( 'Menu v patičce', 'ai-web' ),
+		'primary' => __( 'Primary menu', 'ai-web' ),
+		'footer'  => __( 'Footer menu', 'ai-web' ),
 	) );
 }
 add_action( 'after_setup_theme', 'ai_web_setup' );
@@ -59,7 +61,7 @@ function ai_web_companion_notice() {
 	}
 	?>
 	<div class="notice notice-info is-dismissible">
-		<p><?php esc_html_e( 'Šablona web-svepomoci-sablona je připravena. Pro samostatná pole HTML, CSS, JavaScript a SEO a vlastní hlavičku a patičku aktivujte web-svepomoci-plugin z instalačního balíčku.', 'ai-web' ); ?> <a href="<?php echo esc_url( admin_url( 'plugins.php' ) ); ?>"><?php esc_html_e( 'Přejít na pluginy', 'ai-web' ); ?></a></p>
+		<p><?php esc_html_e( 'The web-svepomoci-sablona theme is ready. Activate web-svepomoci-plugin from the installation package for separate HTML, CSS, JavaScript and SEO fields, and custom headers and footers.', 'ai-web' ); ?> <a href="<?php echo esc_url( admin_url( 'plugins.php' ) ); ?>"><?php esc_html_e( 'Go to plugins', 'ai-web' ); ?></a></p>
 	</div>
 	<?php
 }

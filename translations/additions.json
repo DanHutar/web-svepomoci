@@ -1,0 +1,39 @@
+{
+  "web-svepomoci": {
+    "Language": "Jazyk",
+    "Choose English or Czech for every language setting.": "Pro každé jazykové nastavení vyberte angličtinu nebo češtinu.",
+    "These preferences apply to both Website Builder components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions.": "Tato nastavení platí pro plugin i šablonu Web svépomocí. Nemění jazyk administrace WordPressu ani nepřekládají uložené stránky, kód, menu nebo popisy služeb.",
+    "Plugin and theme interface": "Rozhraní pluginu a šablony",
+    "Public labels and cookie controls": "Veřejné popisky a ovládání cookies",
+    "Requested AI content language": "Požadovaný jazyk obsahu z AI",
+    "English is the default for new installations. Existing configured websites keep Czech when upgrading. After changing public labels, clear the website and CDN caches. Configure external consent plugins separately.": "U nových instalací je výchozí angličtina. Již nastavené weby si při aktualizaci zachovají češtinu. Po změně veřejných popisků vymažte cache webu a CDN. Externí pluginy pro souhlas nastavte samostatně.",
+    "Save languages": "Uložit jazyky"
+  },
+  "ai-web-studio": {
+    "Per-page HTML, CSS and JavaScript, shared headers and footers, and essential SEO.": "HTML, CSS a JavaScript pro jednotlivé stránky, společná hlavička a patička a základní SEO.",
+    "Manage links in WordPress": "Odkazy spravujte ve WordPressu",
+    "Colour: ": "Barva: ",
+    ". Colour: ": ". Barva: ",
+    "\nWebsite URL: ": "\nAdresa webu: ",
+    "No indexing": "Neindexovat",
+    "or": "nebo",
+    "Requested content language: %s. Write the final website copy and your explanation in this language. Preserve existing text unless a translation or change is requested.": "Požadovaný jazyk obsahu: %s. V tomto jazyce napiš výsledné texty webu i své vysvětlení. Existující texty zachovej, pokud zadání nepožaduje jejich překlad nebo změnu.",
+    "English": "angličtina",
+    "Czech": "čeština",
+    "and": "a",
+    "In": "Ve",
+    "Design": "Vzhled",
+    "Analytics": "Analytika",
+    "SEO title": "SEO titulek",
+    "Meta description": "Meta popis",
+    "Settings": "Nastavit",
+    "Content": "Obsah",
+    "Check for updates": "Zkontrolovat aktualizace",
+    "Website design": "Vzhled webu",
+    "Display content from the AI editor": "Zobrazovat obsah z AI editoru"
+  },
+  "ai-web": {
+    "A lightweight theme for AI-created pages. Its companion plugin supports custom HTML, CSS, JavaScript, headers and footers.": "Lehká univerzální šablona pro stránky vytvořené pomocí AI. S doprovodným pluginem podporuje vlastní HTML, CSS, JavaScript, hlavičku a patičku.",
+    "Search": "Hledat"
+  }
+}

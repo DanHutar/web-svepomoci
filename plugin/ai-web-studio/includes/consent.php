@@ -2,7 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 function aiwp_consent_categories() {
-    return array( 'analytics' => 'Analytika', 'marketing' => 'Marketing' );
+    return array( 'analytics' => __( 'Analytics', 'ai-web-studio' ), 'marketing' => 'Marketing' );
 }
 
 function aiwp_consent_settings() {
@@ -33,7 +33,7 @@ function aiwp_consent_cookie_name() {
 function aiwp_render_cookie_settings_button() {
     if ( aiwp_consent_settings()['external'] ) { return ''; }
     $GLOBALS['aiwp_consent_control_rendered'] = true;
-    return '<button type="button" class="aiwp-cookie-settings" data-aiwp-consent-open aria-controls="aiwp-consent-panel" aria-expanded="false" hidden>Nastavení cookies</button>';
+    return __( '<button type="button" class="aiwp-cookie-settings" data-aiwp-consent-open aria-controls="aiwp-consent-panel" aria-expanded="false" hidden>Cookie settings</button>', 'ai-web-studio' );
 }
 
 function aiwp_consent_active( $settings, $key ) {
@@ -46,9 +46,9 @@ function aiwp_consent_names( $text ) {
 
 function aiwp_sanitize_consent( $input ) {
     $old = aiwp_consent_settings();
-    $error = 'Vyplňte platné nastavení soukromí. Zapnutá kategorie potřebuje popis služby, JavaScript a odkaz na informace o soukromí.';
+    $error = __( 'Enter valid privacy settings. An enabled category needs a service description, JavaScript and a link to privacy information.', 'ai-web-studio' );
     if ( ! aiwp_can_edit_code() || ! is_array( $input ) ) {
-        add_settings_error( 'aiwp_consent_settings', 'permission', 'Nastavení může měnit pouze správce s oprávněním vkládat kód.' );
+        add_settings_error( 'aiwp_consent_settings', 'permission', __( 'Only an administrator with permission to insert code may change these settings.', 'ai-web-studio' ) );
         return $old;
     }
     $external = isset( $input['external'] ) && in_array( $input['external'], array( '1', true ), true );
@@ -83,7 +83,7 @@ function aiwp_sanitize_consent( $input ) {
             foreach ( aiwp_consent_names( $result[ $key ][ $field ] ) as $name ) {
                 if ( ! preg_match( 'cookies' === $field ? '/^[a-zA-Z0-9_.-]+\*?$/' : '/^[a-zA-Z0-9_.:-]+$/', $name ) || preg_match( '/^(?:aiwp|wordpress|wp-settings|PHPSESSID)/i', $name ) ) {
                     $valid = false;
-                    $error = 'Seznam cookies nebo úložiště obsahuje neplatný nebo chráněný název. U cookies je povolena hvězdička pouze na konci názvu.';
+                    $error = __( 'The cookie or storage list contains an invalid or protected name. Cookie names only allow a wildcard at the end.', 'ai-web-studio' );
                 }
             }
         }
@@ -97,36 +97,36 @@ add_action( 'admin_init', function () {
     register_setting( 'aiwp_consent', 'aiwp_consent_settings', array( 'type' => 'array', 'sanitize_callback' => 'aiwp_sanitize_consent' ) );
 } );
 add_action( 'admin_menu', function () {
-    add_submenu_page( 'aiwp', 'Soukromí a cookies', 'Soukromí a cookies', 'manage_options', 'aiwp-consent', 'aiwp_consent_admin' );
+    add_submenu_page( 'aiwp', __( 'Privacy and cookies', 'ai-web-studio' ), __( 'Privacy and cookies', 'ai-web-studio' ), 'manage_options', 'aiwp-consent', 'aiwp_consent_admin' );
 } );
 
 function aiwp_consent_admin() {
-    if ( ! aiwp_can_edit_code() ) { wp_die( 'Toto nastavení upravuje správce s oprávněním vkládat kód.' ); }
+    if ( ! aiwp_can_edit_code() ) { wp_die( __( 'These settings require an administrator with permission to insert code.', 'ai-web-studio' ) ); }
     $settings = aiwp_consent_settings();
     ?>
-    <div class="wrap"><h1>Soukromí a cookies</h1>
-    <p>Při vlastní správě jsou měření a marketing ve výchozím stavu vypnuté. Naše lišta se automaticky zobrazí až po zapnutí alespoň jedné úplně vyplněné kategorie a Nastavení cookies zůstává dostupné na konci webu. Pro jiného správce souhlasu použijte přepínač níže.</p>
-    <p>Při použití naší správy souhlasu vkládejte sledovací kód pouze sem. Kód vložený do HTML/JS stránky, jiného pluginu nebo externí obsah tato funkce automaticky neblokuje. Pro každou službu ověřte cookies, úložiště a skutečné síťové požadavky.</p>
+    <div class="wrap"><h1><?php echo esc_html__( 'Privacy and cookies', 'ai-web-studio' ); ?></h1>
+    <p><?php echo esc_html__( 'With built-in consent management, analytics and marketing are off initially. Our banner appears automatically only after you enable a fully configured category, and Cookie settings remain available at the bottom of the website. Use the switch below for another consent manager.', 'ai-web-studio' ); ?></p>
+    <p><?php echo esc_html__( 'When using built-in consent management, place tracking code only here. This feature does not automatically block code inserted into page HTML/JS, another plugin or external content. Verify each service\'s cookies, storage and actual network requests.', 'ai-web-studio' ); ?></p>
     <?php settings_errors( 'aiwp_consent_settings' ); ?>
     <form method="post" action="options.php">
     <?php settings_fields( 'aiwp_consent' ); ?>
-    <p>Pro umístění tlačítka přímo do HTML patičky vložte <code>[aiwp_cookie_settings]</code>. Tlačítko používá třídu <code>aiwp-cookie-settings</code>. Pokud není vykreslené na stránce, zobrazíme záložní ovládání na konci webu. V externím režimu se značka nezobrazí; ovládání poskytuje externí plugin.</p>
-    <p><label for="aiwp-consent-external"><input id="aiwp-consent-external" type="checkbox" name="aiwp_consent_settings[external]" value="1" <?php checked( $settings['external'] ); ?>> <strong>Souhlas spravuje externí plugin (například Complianz)</strong></label></p>
-    <p>Po uložení vypneme naši lištu, tlačítko i odkaz v patičce, související CSS/JS a spouštění zde uložených měřicích skriptů. Externí plugin musíte samostatně nastavit, včetně měření a možnosti změnit souhlas. Skripty ani souhlasy se do něj nepřenášejí. Vymažte cache webu a ověřte výsledek v novém anonymním okně.</p>
-    <?php if ( $settings['external'] ) : ?><p><strong>Externí správa je zapnutá.</strong> Níže uvedené hodnoty jsou uchované, ale nepoužívají se a při uložení v tomto režimu se nemění. Pro návrat zrušte zaškrtnutí a uložte; návštěvníci potom musí zvolit souhlas znovu. Před návratem vypněte správu souhlasu v externím pluginu.</p><?php endif; ?>
-    <p><label for="aiwp-consent-policy"><strong>Adresa stránky s informacemi o soukromí a cookies</strong></label><br>
+    <p><?php echo esc_html__( 'To place the button inside your footer HTML, insert', 'ai-web-studio' ); ?> <code>[aiwp_cookie_settings]</code><?php echo esc_html__( '. The button uses the class', 'ai-web-studio' ); ?> <code>aiwp-cookie-settings</code><?php echo esc_html__( '. If no control is rendered on the page, a fallback appears at the bottom of the website. In external mode the marker produces no output; the external plugin supplies the controls.', 'ai-web-studio' ); ?></p>
+    <p><label for="aiwp-consent-external"><input id="aiwp-consent-external" type="checkbox" name="aiwp_consent_settings[external]" value="1" <?php checked( $settings['external'] ); ?>> <strong><?php echo esc_html__( 'Consent is managed by an external plugin (such as Complianz)', 'ai-web-studio' ); ?></strong></label></p>
+    <p><?php echo esc_html__( 'Saving disables our banner, footer button and link, related CSS/JS and execution of the tracking scripts saved here. Configure the external plugin separately, including tracking and consent controls. Scripts and consent records are not transferred. Clear the website cache and check in a new private window.', 'ai-web-studio' ); ?></p>
+    <?php if ( $settings['external'] ) : ?><p><strong><?php echo esc_html__( 'External consent management is enabled.', 'ai-web-studio' ); ?></strong> <?php echo esc_html__( 'The values below are preserved but not used or changed when saving in this mode. To return, clear the checkbox and save; visitors will need to make a new choice. Disable consent management in the external plugin before returning.', 'ai-web-studio' ); ?></p><?php endif; ?>
+    <p><label for="aiwp-consent-policy"><strong><?php echo esc_html__( 'URL of your privacy and cookie information page', 'ai-web-studio' ); ?></strong></label><br>
     <input class="large-text" id="aiwp-consent-policy" type="url" name="aiwp_consent_settings[policy]" value="<?php echo esc_attr( $settings['policy'] ); ?>"></p>
-    <p>Uveďte provozovatele, poskytovatele služeb, účely, dobu uchování, případné předávání údajů a práva návštěvníka. Text musí odpovídat skutečnému používání webu.</p>
+    <p><?php echo esc_html__( 'Identify the operator, service providers, purposes, retention periods, any data transfers and visitors\' rights. The information must reflect how the website actually works.', 'ai-web-studio' ); ?></p>
     <?php foreach ( aiwp_consent_categories() as $key => $label ) : ?>
         <h2><?php echo esc_html( $label ); ?></h2>
-        <p><label><input type="checkbox" name="aiwp_consent_settings[<?php echo esc_attr( $key ); ?>][enabled]" value="1" <?php checked( $settings[ $key ]['enabled'] ); ?>> Zapnout tuto kategorii po souhlasu návštěvníka</label></p>
-        <?php foreach ( array( 'description' => 'Popis pro návštěvníky: poskytovatel, účel, používané cookies a doby uložení', 'js' => 'Spouštěcí JavaScript služby (bez značek script)', 'cookies' => 'Cookies k odstranění při odmítnutí — jeden název na řádek, např. _ga a _ga_*', 'storage' => 'Klíče localStorage/sessionStorage k odstranění — přesné názvy, jeden na řádek' ) as $field => $title ) : ?>
+        <p><label><input type="checkbox" name="aiwp_consent_settings[<?php echo esc_attr( $key ); ?>][enabled]" value="1" <?php checked( $settings[ $key ]['enabled'] ); ?>> <?php echo esc_html__( 'Enable this category after the visitor consents', 'ai-web-studio' ); ?></label></p>
+        <?php foreach ( array( 'description' => __( 'Visitor description: provider, purpose, cookies used and retention periods', 'ai-web-studio' ), 'js' => __( 'Service startup JavaScript (without script tags)', 'ai-web-studio' ), 'cookies' => __( 'Cookies to remove on rejection — one name per line, e.g. _ga and _ga_*', 'ai-web-studio' ), 'storage' => __( 'localStorage/sessionStorage keys to remove — exact names, one per line', 'ai-web-studio' ) ) as $field => $title ) : ?>
         <p><label for="aiwp-consent-<?php echo esc_attr( $key . '-' . $field ); ?>"><?php echo esc_html( $title ); ?></label><br>
         <textarea class="large-text <?php echo 'js' === $field ? 'code' : ''; ?>" id="aiwp-consent-<?php echo esc_attr( $key . '-' . $field ); ?>" name="aiwp_consent_settings[<?php echo esc_attr( $key ); ?>][<?php echo esc_attr( $field ); ?>]" rows="<?php echo 'js' === $field ? 8 : 3; ?>"><?php echo esc_textarea( $settings[ $key ][ $field ] ); ?></textarea></p>
         <?php endforeach; ?>
     <?php endforeach; ?>
-    <p>Volba návštěvníka se uchovává 180 dní v nezbytné cookie bez uživatelského ID. Změna tohoto nastavení vyžádá novou volbu. Odvolání souhlasu obnoví stránku bez odmítnutých skriptů. Cookies třetích stran nebo HttpOnly nemůže tento plugin smazat; u konkrétní služby ověřte její způsob ukončení měření.</p>
-    <?php submit_button( 'Uložit soukromí a cookies' ); ?>
+    <p><?php echo esc_html__( 'The visitor\'s choice is stored for 180 days in a necessary cookie without a user ID. Changing these settings requires a new choice. Withdrawing consent reloads the page without rejected scripts. This plugin cannot delete third-party or HttpOnly cookies; verify how each service stops tracking.', 'ai-web-studio' ); ?></p>
+    <?php submit_button( __( 'Save privacy and cookies', 'ai-web-studio' ) ); ?>
     </form></div>
     <?php
 }
@@ -179,27 +179,27 @@ add_action( 'wp_footer', function () {
     $active = array_filter( array_keys( aiwp_consent_categories() ), function ( $key ) use ( $settings ) { return aiwp_consent_active( $settings, $key ); } );
     ?>
     <?php if ( empty( $GLOBALS['aiwp_consent_control_rendered'] ) ) : ?>
-    <div class="aiwp-consent-footer"><?php echo aiwp_render_cookie_settings_button(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed trusted markup. ?><?php if ( $settings['policy'] ) : ?> <a href="<?php echo esc_url( $settings['policy'] ); ?>">Soukromí a cookies</a><?php endif; ?><noscript>Volitelné služby spravované tímto pluginem jsou bez JavaScriptu vypnuté.</noscript></div>
+    <div class="aiwp-consent-footer"><?php echo aiwp_render_cookie_settings_button(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed trusted markup. ?><?php if ( $settings['policy'] ) : ?> <a href="<?php echo esc_url( $settings['policy'] ); ?>"><?php echo esc_html__( 'Privacy and cookies', 'ai-web-studio' ); ?></a><?php endif; ?><noscript><?php echo esc_html__( 'Optional services managed by this plugin are off without JavaScript.', 'ai-web-studio' ); ?></noscript></div>
     <?php endif; ?>
-    <section id="aiwp-consent-panel" aria-labelledby="aiwp-consent-heading" hidden>
-        <h2 id="aiwp-consent-heading">Soukromí a cookies</h2>
-        <p><?php echo $active ? 'Volitelné služby spustíme pouze s vaším souhlasem. Můžete je odmítnout nebo si vybrat jednotlivé účely. Volbu kdykoliv změníte přes Nastavení cookies na konci webu.' : 'Volitelné služby spravované tímto pluginem nejsou zapnuté.'; ?></p>
-        <?php if ( $settings['policy'] ) : ?><p><a href="<?php echo esc_url( $settings['policy'] ); ?>">Informace o soukromí a používaných cookies</a></p><?php endif; ?>
+    <section id="aiwp-consent-panel" lang="<?php echo esc_attr( WSP_Languages::language( 'public' ) ); ?>" aria-labelledby="aiwp-consent-heading" hidden>
+        <h2 id="aiwp-consent-heading"><?php echo esc_html__( 'Privacy and cookies', 'ai-web-studio' ); ?></h2>
+        <p><?php echo $active ? __( 'We only start optional services with your consent. You can reject them or choose individual purposes. Change your choice at any time through Cookie settings at the bottom of the website.', 'ai-web-studio' ) : __( 'Optional services managed by this plugin are not enabled.', 'ai-web-studio' ); ?></p>
+        <?php if ( $settings['policy'] ) : ?><p><a href="<?php echo esc_url( $settings['policy'] ); ?>"><?php echo esc_html__( 'Privacy and cookie information', 'ai-web-studio' ); ?></a></p><?php endif; ?>
         <div class="aiwp-consent-actions">
             <?php if ( $active ) : ?>
-            <button type="button" data-aiwp-consent-action="accept">Přijmout vše</button>
-            <button type="button" data-aiwp-consent-action="reject">Odmítnout volitelné</button>
-            <button type="button" data-aiwp-consent-action="settings" aria-expanded="false" aria-controls="aiwp-consent-details">Nastavit</button>
+            <button type="button" data-aiwp-consent-action="accept"><?php echo esc_html__( 'Accept all', 'ai-web-studio' ); ?></button>
+            <button type="button" data-aiwp-consent-action="reject"><?php echo esc_html__( 'Reject optional', 'ai-web-studio' ); ?></button>
+            <button type="button" data-aiwp-consent-action="settings" aria-expanded="false" aria-controls="aiwp-consent-details"><?php echo esc_html__( 'Settings', 'ai-web-studio' ); ?></button>
             <?php endif; ?>
-            <button type="button" data-aiwp-consent-action="close">Zavřít</button>
+            <button type="button" data-aiwp-consent-action="close"><?php echo esc_html__( 'Close', 'ai-web-studio' ); ?></button>
         </div>
         <div id="aiwp-consent-details" hidden>
-            <p><strong>Nezbytné:</strong> uchování vaší volby (cookie <?php echo esc_html( aiwp_consent_cookie_name() ); ?>, 180 dní). Další nezbytné služby popisuje stránka s informacemi o soukromí.</p>
+            <p><strong><?php echo esc_html__( 'Necessary:', 'ai-web-studio' ); ?></strong> <?php echo esc_html__( 'remembering your choice (cookie', 'ai-web-studio' ); ?> <?php echo esc_html( aiwp_consent_cookie_name() ); ?><?php echo esc_html__( ', 180 days). Other necessary services are described on the privacy information page.', 'ai-web-studio' ); ?></p>
             <?php foreach ( $active as $key ) : ?>
             <label><input type="checkbox" data-aiwp-consent-category="<?php echo esc_attr( $key ); ?>"> <?php echo esc_html( aiwp_consent_categories()[ $key ] ); ?></label>
             <p class="aiwp-consent-description"><?php echo esc_html( $settings[ $key ]['description'] ); ?></p>
             <?php endforeach; ?>
-            <?php if ( $active ) : ?><button type="button" data-aiwp-consent-action="save">Uložit výběr</button><?php endif; ?>
+            <?php if ( $active ) : ?><button type="button" data-aiwp-consent-action="save"><?php echo esc_html__( 'Save selection', 'ai-web-studio' ); ?></button><?php endif; ?>
         </div>
         <p data-aiwp-consent-status role="status" aria-live="polite"></p>
     </section>

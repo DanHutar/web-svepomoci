@@ -41,7 +41,7 @@ function aiwp_get_document( $post_id ) {
 
 function aiwp_register_documents() {
     register_post_type( 'aiwp_part', array(
-        'labels' => array( 'name' => 'Části webu', 'singular_name' => 'Část webu', 'edit_item' => 'Upravit část webu' ),
+        'labels' => array( 'name' => __( 'Website parts', 'ai-web-studio' ), 'singular_name' => __( 'Website part', 'ai-web-studio' ), 'edit_item' => __( 'Edit website part', 'ai-web-studio' ) ),
         'public' => false, 'publicly_queryable' => false,
         'show_ui' => true, 'show_in_menu' => false, 'show_in_rest' => false,
         'exclude_from_search' => true, 'rewrite' => false, 'query_var' => false,
@@ -76,7 +76,7 @@ function aiwp_ensure_parts() {
         return;
     }
     $ids = array();
-    foreach ( array( 'header' => 'Header – hlavička', 'footer' => 'Footer – patička' ) as $kind => $title ) {
+    foreach ( array( 'header' => __( 'Header', 'ai-web-studio' ), 'footer' => __( 'Footer', 'ai-web-studio' ) ) as $kind => $title ) {
         $ids[ $kind ] = aiwp_get_part_id( $kind );
         if ( ! $ids[ $kind ] ) {
             $id = wp_insert_post( array( 'post_type' => 'aiwp_part', 'post_status' => 'publish', 'post_title' => $title ), true );
@@ -121,32 +121,32 @@ function aiwp_protect_code_documents( $caps, $cap, $user_id, $args ) {
 /** Reject malformed submissions, preserving code verbatim instead of silently stripping it. */
 function aiwp_validate_document( $input ) {
     if ( ! is_array( $input ) ) {
-        return new WP_Error( 'aiwp_input', 'Neplatná data editoru.' );
+        return new WP_Error( 'aiwp_input', __( 'Invalid editor data.', 'ai-web-studio' ) );
     }
     $result = aiwp_document_defaults();
     foreach ( $result as $key => $default ) {
         $value = $input[ $key ] ?? $default;
         if ( ! is_scalar( $value ) ) {
-            return new WP_Error( 'aiwp_input', 'Pole editoru musí obsahovat text.' );
+            return new WP_Error( 'aiwp_input', __( 'Editor fields must contain text.', 'ai-web-studio' ) );
         }
         $result[ $key ] = is_bool( $default ) ? ! empty( $value ) : (string) $value;
     }
     foreach ( array( 'html', 'css', 'js' ) as $key ) {
         if ( strlen( $result[ $key ] ) > 500000 ) {
-            return new WP_Error( 'aiwp_size', 'Jedno pole může obsahovat nejvýše 500 kB kódu.' );
+            return new WP_Error( 'aiwp_size', __( 'A single field can contain at most 500 kB of code.', 'ai-web-studio' ) );
         }
         if ( false !== strpos( $result[ $key ], '<?' ) ) {
-            return new WP_Error( 'aiwp_php', 'PHP ani otevírací značky <? do editoru nepatří. Vložte pouze HTML, CSS a JavaScript.' );
+            return new WP_Error( 'aiwp_php', __( 'PHP and opening <? tags are not supported in the editor. Insert only HTML, CSS and JavaScript.', 'ai-web-studio' ) );
         }
         if ( preg_match( '/^\s*```/m', $result[ $key ] ) ) {
-            return new WP_Error( 'aiwp_fences', 'Odstraňte značky ``` kolem kódu z odpovědi AI.' );
+            return new WP_Error( 'aiwp_fences', __( 'Remove the ``` fences around the AI-generated code.', 'ai-web-studio' ) );
         }
         if ( preg_match( '~<\s*/?\s*(?:script|style)\b~i', $result[ $key ] ) ) {
-            return new WP_Error( 'aiwp_tags', 'Značky <script> a <style> vynechte. CSS a JavaScript vložte do samostatných polí bez obalových značek.' );
+            return new WP_Error( 'aiwp_tags', __( 'Omit <script> and <style> tags. Put CSS and JavaScript into their separate fields without wrapper tags.', 'ai-web-studio' ) );
         }
     }
     if ( preg_match( '~<\s*/?\s*(?:html|head|body|meta|title|link|base)\b|<!doctype\b~i', $result['html'] ) ) {
-        return new WP_Error( 'aiwp_document', 'Do HTML vložte jen obsah stránky, bez <!doctype>, <html>, <head>, <body> a metadat. SEO vyplňte v samostatném bloku.' );
+        return new WP_Error( 'aiwp_document', __( 'Insert only page content in HTML, without <!doctype>, <html>, <head>, <body> or metadata. Fill in SEO in its separate panel.', 'ai-web-studio' ) );
     }
     $result['seo_title'] = sanitize_text_field( $result['seo_title'] );
     $result['seo_description'] = sanitize_textarea_field( $result['seo_description'] );
@@ -156,7 +156,7 @@ function aiwp_validate_document( $input ) {
             // Validate syntax only; SEO fields must not cause server-side DNS or HTTP requests.
             $parts = wp_parse_url( $url );
             if ( ! is_array( $parts ) || empty( $parts['host'] ) || empty( $parts['scheme'] ) || ! in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true ) || isset( $parts['user'] ) || isset( $parts['pass'] ) ) {
-                return new WP_Error( 'aiwp_url', 'Obrázek a kanonická adresa musí být úplné adresy začínající https:// nebo http://.' );
+                return new WP_Error( 'aiwp_url', __( 'Image and canonical URLs must be complete addresses starting with https:// or http://.', 'ai-web-studio' ) );
             }
         }
         $result[ $key ] = esc_url_raw( $url, array( 'http', 'https' ) );
@@ -178,7 +178,7 @@ function aiwp_validate_post_submission( $data, $postarr ) {
     if ( in_array( $data['post_type'], array( 'page', 'aiwp_part' ), true ) && ! ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
         $document = aiwp_submitted_document();
         if ( is_wp_error( $document ) ) {
-            wp_die( esc_html( $document->get_error_message() ), 'Kód nebyl uložen', array( 'response' => 400, 'back_link' => true ) );
+            wp_die( esc_html( $document->get_error_message() ), __( 'Code was not saved', 'ai-web-studio' ), array( 'response' => 400, 'back_link' => true ) );
         }
     }
     return $data;
@@ -206,7 +206,7 @@ add_filter( 'wp_get_revision_ui_diff', function ( $diffs, $from, $to ) {
     if ( ! $to || ! in_array( get_post_type( $to->post_parent ), array( 'page', 'aiwp_part' ), true ) || ! aiwp_can_edit_code() ) {
         return $diffs;
     }
-    $labels = array( 'enabled' => 'AI obsah zapnutý', 'html' => 'HTML', 'css' => 'CSS', 'js' => 'JavaScript', 'hide_header' => 'Skrýt hlavičku', 'hide_footer' => 'Skrýt patičku', 'seo_title' => 'SEO titulek', 'seo_description' => 'Meta popis', 'seo_image' => 'Obrázek pro sdílení', 'seo_canonical' => 'Kanonická URL', 'seo_noindex' => 'Neindexovat' );
+    $labels = array( 'enabled' => __( 'AI content enabled', 'ai-web-studio' ), 'html' => 'HTML', 'css' => 'CSS', 'js' => 'JavaScript', 'hide_header' => __( 'Hide header', 'ai-web-studio' ), 'hide_footer' => __( 'Hide footer', 'ai-web-studio' ), 'seo_title' => __( 'SEO title', 'ai-web-studio' ), 'seo_description' => __( 'Meta description', 'ai-web-studio' ), 'seo_image' => __( 'Sharing image', 'ai-web-studio' ), 'seo_canonical' => __( 'Canonical URL', 'ai-web-studio' ), 'seo_noindex' => __( 'No indexing', 'ai-web-studio' ) );
     foreach ( $labels as $key => $label ) {
         $before = $from ? (string) aiwp_get_meta( $from->ID, '_aiwp_' . $key ) : '';
         $after = (string) aiwp_get_meta( $to->ID, '_aiwp_' . $key );

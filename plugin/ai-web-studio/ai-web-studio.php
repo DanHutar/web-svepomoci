@@ -3,19 +3,23 @@
  * Plugin Name: web-svepomoci-plugin
  * Plugin URI: https://github.com/DanHutar/web-svepomoci
  * Update URI: https://github.com/DanHutar/web-svepomoci
- * Description: HTML, CSS a JavaScript pro jednotlivé stránky, společná hlavička a patička a základní SEO.
- * Version: 1.9.2
+ * Description: Per-page HTML, CSS and JavaScript, shared headers and footers, and essential SEO.
+ * Version: 1.10.0
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Author: DanHutar
  * License: GPL-2.0-or-later
  * Text Domain: ai-web-studio
+ * Domain Path: /languages
  */
 
 defined( 'ABSPATH' ) || exit;
-define( 'AIWP_VERSION', '1.9.2' );
+define( 'AIWP_VERSION', '1.10.0' );
 define( 'AIWP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AIWP_URL', plugin_dir_url( __FILE__ ) );
+
+require_once AIWP_DIR . 'includes/languages.php';
+WSP_Languages::register( 'ai-web-studio', AIWP_DIR . 'languages' );
 
 require_once AIWP_DIR . 'includes/documents.php';
 require_once AIWP_DIR . 'includes/menus.php';
@@ -44,6 +48,7 @@ register_activation_hook( __FILE__, 'aiwp_activate' );
 AIWP_Admin::init();
 
 function aiwp_activate() {
+    WSP_Languages::initialize();
     aiwp_register_documents();
     aiwp_ensure_parts();
 }

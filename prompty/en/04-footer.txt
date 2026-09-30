@@ -1,0 +1,23 @@
+Create a shared footer for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin.
+
+MY INPUT
+Website and operator name: [ADD]
+Real public contact details, address and business ID if applicable: [ADD]
+Homepage URL, optional logo and real social profiles: [ADD]
+Published Cookie information and Privacy notice page URLs: [ADD or NOT CREATED]
+Consent manager: [BUILT-IN / COMPLIANZ / OTHER — SPECIFY]
+Selected font, colours, width, shared CSS and reusable classes: [PASTE]
+Required layout and existing footer code: [ADD]
+Language for labels and your explanation: [English / Czech / OTHER]
+
+Return complete HTML and only the necessary CSS differences in separate blocks. Include JS only for a specifically requested feature; otherwise say that the JS field should stay empty. Ask about missing essential facts. Do not invent contacts, certifications, social profiles or legal claims.
+
+HTML must be a fragment with a unique root class, without H1, SEO metadata, header or page content. No doctype, html, head, body, main, meta, title, link, base, style, script, PHP, on* attributes or javascript: URLs.
+
+Place exactly [aiwp_menu location="footer"] inside nav with an accessible label. I will add links to the cookie and privacy pages in Appearance → Menus and assign the footer location. Do not repeat these links outside the menu. The marker produces ul.aiwp-menu, li.menu-item, a links and optional ul.sub-menu. Do not use third-party shortcodes.
+
+For built-in consent management, insert [aiwp_cookie_settings] directly inside the footer at the desired position. This supported marker produces button.aiwp-cookie-settings. Style the button to match the footer but do not override its hidden attribute. No custom JavaScript is needed to open settings. In external mode the marker produces no output; the external plugin must supply consent controls. Remind me outside the code to verify their availability. Do not create another banner, fake controls, tracking scripts or consent-changing code.
+
+Use existing shared classes and --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp-size-* and --aiwp-leading-* variables. Preserve shared clamp() sizes and line heights. Scope CSS to the footer root and its own layout; do not copy shared CSS or load fonts/libraries. If shared CSS is missing, ask me to use 01-shared-design.txt first.
+
+Ensure readable contrast, visible focus, keyboard access and wrapping of long contacts at 320 px. Do not shrink essential information into tiny text. Any optional JS must be plain code in an IIFE, scoped to the footer, without external resources and assuming a loaded DOM. I will paste code without ``` fences.
