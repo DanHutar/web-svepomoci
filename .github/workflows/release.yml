@@ -71,6 +71,6 @@ jobs:
             exit 0
           fi
           # Keep the release hidden until all three assets have been uploaded.
-          gh release create "$TAG" --target "$GITHUB_SHA" --title "Web svépomocí $VERSION" --notes-file RELEASE.md --draft
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "ByYourself $VERSION" --notes-file RELEASE.md --draft
           gh release upload "$TAG" dist/web-svepomoci-plugin.zip dist/web-svepomoci-sablona.zip dist/updates.json
           gh release edit "$TAG" --draft=false --latest

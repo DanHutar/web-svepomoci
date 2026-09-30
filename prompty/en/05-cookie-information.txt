@@ -1,4 +1,4 @@
-Help me prepare a Cookie information page for a Czech/EU website using WordPress, the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. Check the supplied facts before drafting. Do not create an apparently final legal document from assumptions.
+Help me prepare a Cookie information page for a Czech/EU website using WordPress, the ByYourself Theme theme and ByYourself Builder plugin. Check the supplied facts before drafting. Do not create an apparently final legal document from assumptions.
 
 INPUT
 Website name and URL: [ADD]

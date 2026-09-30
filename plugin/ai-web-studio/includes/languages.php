@@ -58,7 +58,7 @@ if ( ! class_exists( 'WSP_Languages', false ) ) {
             ?>
             <div class="wrap" lang="<?php echo esc_attr( self::language( 'ui' ) ); ?>">
             <h1><?php esc_html_e( 'Language', 'web-svepomoci' ); ?></h1>
-            <p><?php esc_html_e( 'These preferences apply to both Website Builder components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions.', 'web-svepomoci' ); ?></p>
+            <p><?php esc_html_e( 'These preferences apply to both ByYourself components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions.', 'web-svepomoci' ); ?></p>
             <?php settings_errors( 'wsp_languages' ); ?>
             <form action="options.php" method="post">
             <?php settings_fields( 'wsp_languages' ); ?>

@@ -4,20 +4,20 @@
 
 Napište si název webu, pro koho je určený, jaké služby nabízíte a jak vás mají návštěvníci kontaktovat. Připravte vlastní texty a fotografie. Ukázka dodaná s projektem používá fiktivní ateliér a ukázkovou e-mailovou adresu; před zveřejněním je nahraďte.
 
-Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte Google Font, barvu a šířku obsahu a uložte je. Potom otevřete **Web svépomocí → Zadání pro AI**, vyberte **Společný vzhled a typografie** a stručně popište svůj web. Použijte **Připravit zadání** a **Zkopírovat zadání** a vložte text do své AI. Ta navrhne společný vzhled a velikosti i řádkování pomocí `clamp()` pro H1–H6, běžný text a small. Výsledek vložte do **Společného CSS** a uložte. Podrobný [postup ke společnému vzhledu](spolecny-vzhled.md).
+Nejprve otevřete **ByYourself → Vzhled webu**, vyberte Google Font, barvu a šířku obsahu a uložte je. Potom otevřete **ByYourself → Zadání pro AI**, vyberte **Společný vzhled a typografie** a stručně popište svůj web. Použijte **Připravit zadání** a **Zkopírovat zadání** a vložte text do své AI. Ta navrhne společný vzhled a velikosti i řádkování pomocí `clamp()` pro H1–H6, běžný text a small. Výsledek vložte do **Společného CSS** a uložte. Podrobný [postup ke společnému vzhledu](spolecny-vzhled.md).
 
-Ve stejné nabídce **Zadání pro AI** potom vyberte **Nová stránka**, popište její obsah a připravte další zadání. Uložený font a společné CSS se připojí automaticky. AI vám má vrátit zvlášť HTML, CSS a JS; společné styly už jen používá. [Podrobný postup práce se zadáním](zadani-ve-wordpressu.md). Samotná instalace Web svépomocí žádnou AI službu nevolá. Pokud raději zadání připravíte ručně, použijte [vzory](zadani-pro-ai.md).
+Ve stejné nabídce **Zadání pro AI** potom vyberte **Nová stránka**, popište její obsah a připravte další zadání. Uložený font a společné CSS se připojí automaticky. AI vám má vrátit zvlášť HTML, CSS a JS; společné styly už jen používá. [Podrobný postup práce se zadáním](zadani-ve-wordpressu.md). Samotná instalace ByYourself žádnou AI službu nevolá. Pokud raději zadání připravíte ručně, použijte [vzory](zadani-pro-ai.md).
 
 ## 2. Vytvořte první stránku
 
 1. V administraci zvolte **Stránky → Vytvořit stránku**.
 2. Zadejte název, například „Úvod“.
-3. V nastavení Web svépomocí u stránky zapněte použití vlastního kódu.
+3. V nastavení ByYourself u stránky zapněte použití vlastního kódu.
 4. Do pole **HTML** vložte pouze HTML od AI. Do **CSS** vložte styly a do **JS** skript. Prázdné pole JS je v pořádku, pokud stránka žádný skript nepotřebuje.
 5. Uložte koncept. Zkontrolujte rychlý náhled a potom běžný náhled WordPressu.
 6. Až stránka odpovídá představě, publikujte ji.
 
-Do polí nekopírujte trojité zpětné apostrofy, označení jazyka ani vysvětlení kolem kódu. HTML patří do pole pro HTML, nikoli do běžného vizuálního editoru. Při aktivním režimu Web svépomocí se běžný obsah stránky nezobrazuje; po jeho vypnutí se opět použije.
+Do polí nekopírujte trojité zpětné apostrofy, označení jazyka ani vysvětlení kolem kódu. HTML patří do pole pro HTML, nikoli do běžného vizuálního editoru. Při aktivním režimu ByYourself se běžný obsah stránky nezobrazuje; po jeho vypnutí se opět použije.
 
 Pro první pokus můžete vložit obsah `examples/page.html`, `examples/page.css` a `examples/page.js`. E-mail `ahoj@example.com` v ukázce je zástupný; nahraďte jej vlastní adresou včetně odkazů začínajících `mailto:`.
 
@@ -25,11 +25,11 @@ Jednodušší ukázku vloží přímo tlačítko **Vložit ukázkový obsah**. O
 
 V nabídce **Nastavení → Čtení** pak vyberte statickou úvodní stránku a nastavte na ni právě vytvořený „Úvod“.
 
-V přehledu **Web svépomocí** můžete upravit společnou barvu, písmo, šířku obsahu a globální CSS. Aby je používal i kód od AI, požádejte ji o použití proměnných `--aiwp-accent`, `--aiwp-font` a `--aiwp-width`. Výslovně zadané barvy nebo rozměry v CSS stránky mají přednost; dodaná ukázka si například určuje vlastní paletu.
+V přehledu **ByYourself** můžete upravit společnou barvu, písmo, šířku obsahu a globální CSS. Aby je používal i kód od AI, požádejte ji o použití proměnných `--aiwp-accent`, `--aiwp-font` a `--aiwp-width`. Výslovně zadané barvy nebo rozměry v CSS stránky mají přednost; dodaná ukázka si například určuje vlastní paletu.
 
 ## 3. Přidejte společnou hlavičku a patičku
 
-V nabídce **Web svépomocí → Zadání pro AI** vyberte **Header — hlavička webu** nebo **Footer — patička webu**, popište požadovaný obsah a zkopírujte připravené zadání do AI. Připojí se společný vzhled i případný dosavadní uložený kód příslušné části.
+V nabídce **ByYourself → Zadání pro AI** vyberte **Header — hlavička webu** nebo **Footer — patička webu**, popište požadovaný obsah a zkopírujte připravené zadání do AI. Připojí se společný vzhled i případný dosavadní uložený kód příslušné části.
 
 1. Otevřete **Header** v levém menu administrace.
 2. Vložte HTML, CSS a JS hlavičky. Pro ukázku použijte soubory `examples/header.*`.
@@ -40,7 +40,7 @@ Hlavička a patička jsou společné pro web. Jakmile jsou zapnuté, jejich ulo�
 
 ### Propojte hlavičku s Vzhled → Menu
 
-Funkce byla přidána v AI Web Studio 1.1.0 a je součástí přejmenovaného **web-svepomoci-plugin**. Starší instalaci aktualizujte podle [návodu k aktualizaci](../README.md#ruční-aktualizace). Šablona se nyní jmenuje **web-svepomoci-sablona**.
+Funkce byla přidána v AI Web Studio 1.1.0 a je součástí přejmenovaného **ByYourself Builder**. Starší instalaci aktualizujte podle [návodu k aktualizaci](../README.md#ruční-aktualizace). Šablona se nyní jmenuje **ByYourself Theme**.
 
 1. Otevřete **Vzhled → Menu**, napište název menu a klikněte na **Vytvořit menu**.
 2. V levé části vyberte své stránky a použijte **Přidat do menu**. Položky můžete přetahováním seřadit; odsazením pod jinou položku vytvoříte podnabídku.
@@ -72,7 +72,7 @@ U konkrétní stránky najdete SEO pole. Vyplňte srozumitelný SEO titulek, kr�
 
 Adresu canonical měňte pouze tehdy, když potřebujete určit jinou hlavní adresu obsahu. Pro běžnou jedinečnou stránku ji ponechte prázdnou a použije se její vlastní adresa. Volba zákazu indexace sděluje vyhledávačům, že stránku nemají zařadit do výsledků; nechrání obsah heslem.
 
-Pokud používáte Yoast SEO, Rank Math, All in One SEO, SEOPress nebo The SEO Framework, nastavte SEO v tomto pluginu. Web svépomocí mu při rozpoznání přenechá generování SEO značek, aby se výstupy neduplikovaly.
+Pokud používáte Yoast SEO, Rank Math, All in One SEO, SEOPress nebo The SEO Framework, nastavte SEO v tomto pluginu. ByYourself mu při rozpoznání přenechá generování SEO značek, aby se výstupy neduplikovaly.
 
 ## 5. Ověřte skutečný výsledek
 
@@ -84,7 +84,7 @@ Pokud používáte Yoast SEO, Rank Math, All in One SEO, SEOPress nebo The SEO F
 
 ## Další úpravy a návrat k předchozí verzi
 
-V nabídce **Web svépomocí → Zadání pro AI** vyberte **Úprava existující stránky**, zvolte stránku a popište konkrétní změnu. Zadání samo připojí uložené HTML, CSS a JS vybrané stránky. Rozpracované změny nejprve uložte. AI má vrátit úplný výsledný obsah změněných polí, abyste nemuseli hledat jednotlivé řádky.
+V nabídce **ByYourself → Zadání pro AI** vyberte **Úprava existující stránky**, zvolte stránku a popište konkrétní změnu. Zadání samo připojí uložené HTML, CSS a JS vybrané stránky. Rozpracované změny nejprve uložte. AI má vrátit úplný výsledný obsah změněných polí, abyste nemuseli hledat jednotlivé řádky.
 
 Uložené verze najdete ve standardních revizích WordPressu. Revize zahrnují také kód a SEO uložené v metadatech. Počet uchovaných verzí závisí na nastavení WordPressu a revize nemusí být dostupné, pokud je instalace vypíná. Návrat kontrolujte v náhledu; automatické ukládání neberte jako náhradu vědomého uložení změn.
 
@@ -92,8 +92,8 @@ Uložené verze najdete ve standardních revizích WordPressu. Revize zahrnují 
 
 | Problém | Co zkontrolovat |
 | --- | --- |
-| Pole Web svépomocí nevidím nebo do nich nemohu psát | Aktivaci pluginu a oprávnění účtu. Je potřeba správce s možností vkládat nefiltrované HTML; v Multisite obvykle správce sítě. |
-| Po vložení kódu vidím původní obsah | Zda je u stránky zapnutý režim Web svépomocí a změny jsou uložené. |
+| Pole ByYourself nevidím nebo do nich nemohu psát | Aktivaci pluginu a oprávnění účtu. Je potřeba správce s možností vkládat nefiltrované HTML; v Multisite obvykle správce sítě. |
+| Po vložení kódu vidím původní obsah | Zda je u stránky zapnutý režim ByYourself a změny jsou uložené. |
 | V náhledu chybí hlavička nebo některé styly | Otevřete běžný náhled uložené stránky. Rychlý náhled zobrazuje pouze upravovaný fragment. |
 | Nový styl změnil i menu | Požádejte AI, aby všechny styly omezila na unikátní třídu dané stránky a nepoužívala obecné selektory jako `header`, `button` nebo `body`. |
 | Změny ve Vzhled → Menu nejsou v hlavičce | Ověřte plugin 1.1.0, přiřazení menu k umístění **Hlavní menu** a značku `[aiwp_menu location="primary"]` v uloženém HTML hlavičky. Staré ručně napsané odkazy se samy nepřepíšou. |

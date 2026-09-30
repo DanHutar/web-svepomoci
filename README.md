@@ -1,9 +1,9 @@
-# Web svépomocí pro WordPress
+# ByYourself pro WordPress
 
 Jednoduchá šablona a doprovodný plugin pro sestavení webu z HTML, CSS a JavaScriptu, které vám připraví AI. Kód kopírujete do oddělených polí v administraci WordPressu. Žádný účet AI ani klíč API se s webem nepropojuje.
 
-- **Šablona `web-svepomoci-sablona`** zobrazuje stránky, společnou hlavičku a patičku.
-- **Plugin `web-svepomoci-plugin`** přidává editory kódu, přípravu zadání pro AI, nastavení vzhledu, SEO, náhled a ukládání do revizí WordPressu.
+- **Šablona `ByYourself Theme`** zobrazuje stránky, společnou hlavičku a patičku.
+- **Plugin `ByYourself Builder`** přidává editory kódu, přípravu zadání pro AI, nastavení vzhledu, SEO, náhled a ukládání do revizí WordPressu.
 - **Složka `examples`** obsahuje hotovou ukázku stránky, hlavičky a patičky.
 
 Potřebujete WordPress **6.4 nebo novější**, PHP **7.4 nebo novější** a účet s oprávněními `manage_options` i `unfiltered_html`. V běžné samostatné instalaci je to správce; v síti Multisite zpravidla správce celé sítě. Jiné role mohou dál pracovat s běžným obsahem podle svých oprávnění, ale nemohou vkládat spustitelný kód do těchto editorů.
@@ -13,7 +13,7 @@ Potřebujete WordPress **6.4 nebo novější**, PHP **7.4 nebo novější** a ú
 1. Použijte připravené balíčky `dist/web-svepomoci-sablona.zip` a `dist/web-svepomoci-plugin.zip`. Pokud jste upravili zdrojové soubory, vytvořte je znovu ve složce `ai-wordpress` příkazem `powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\package.ps1`. Výjimka ze zásad spouštění platí jen pro tento proces; nemění trvalé nastavení Windows.
 2. Ve WordPressu otevřete **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu**. Nahrajte `web-svepomoci-sablona.zip` a aktivujte šablonu.
 3. V nabídce **Pluginy → Instalace pluginů → Nahrát plugin** nahrajte `web-svepomoci-plugin.zip` a plugin aktivujte.
-4. Otevřete **Web svépomocí** a projděte nastavení. Potom vytvořte první stránku podle [návodu](docs/prvni-web.md).
+4. Otevřete **ByYourself** a projděte nastavení. Potom vytvořte první stránku podle [návodu](docs/prvni-web.md).
 
 Zobrazené názvy jsou nové, ale kvůli zachování aktivace a přiřazení menu se technické složky nemění. ZIP soubory mají správnou instalační strukturu: kořenovou složku `ai-web`, respektive `ai-web-studio`. Znovuspuštění balení nahradí předchozí ZIP soubory. Zdrojové složky zůstávají zachované.
 
@@ -24,11 +24,11 @@ Při ruční instalaci zkopírujte `theme/ai-web` do `wp-content/themes/` a `plu
 1. Ve své testovací administraci otevřete **Pluginy → Přidat nový → Nahrát plugin** (podle překladu může jít o **Instalace pluginů**).
 2. Vyberte místní soubor `dist/web-svepomoci-plugin.zip`, nerozbalujte jej a klikněte na **Nainstalovat**.
 3. WordPress rozpozná již nainstalovaný plugin. Zvolte **Nahradit stávající nahraným** (*Replace current with uploaded*).
-4. V přehledu pluginů ověřte, že **web-svepomoci-plugin** zůstává aktivní a uvádí verzi **1.10.0**.
+4. V přehledu pluginů ověřte, že **ByYourself Builder** zůstává aktivní a uvádí verzi **1.10.1**.
 
-Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.10.0**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
+Nahrazení aktualizuje soubory pluginu; uložené stránky, HTML, CSS, JS, SEO a revize zůstávají v databázi. Plugin předem nemažte. Stejně nahrajte `dist/web-svepomoci-sablona.zip` přes **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu** a potvrďte nahrazení. Obě součásti pak mají verzi **1.10.1**. Nový ZIP se na hosting sám neodešle; nahrajte jej uvedeným postupem.
 
-Od verze 1.10.0 jsou rozhraní i prompty anglicky a česky. Nová instalace začíná anglicky, již nastavený web si zachová češtinu. Otevřete **Website Builder → Language / Web svépomocí → Jazyk** a nastavte samostatně rozhraní, veřejné popisky a požadovaný jazyk obsahu od AI. Uložené stránky se nepřekládají. [Návod v obou jazycích](docs/languages.md).
+Od verze 1.10.0 jsou rozhraní i prompty anglicky a česky. Nová instalace začíná anglicky, již nastavený web si zachová češtinu. Otevřete **ByYourself → Language / ByYourself → Jazyk** a nastavte samostatně rozhraní, veřejné popisky a požadovaný jazyk obsahu od AI. Uložené stránky se nepřekládají. [Návod v obou jazycích](docs/languages.md).
 
 Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro propojení starší hlavičky s menu vložte značku popsanou níže a uložte ji. Změny odkazů pak provádějte ve **Vzhled → Menu**.
 
@@ -36,7 +36,7 @@ Aktualizace sama nepřepisuje již uložené HTML hlavičky a patičky. Pro prop
 
 Repozitář: [DanHutar/web-svepomoci](https://github.com/DanHutar/web-svepomoci). Instalační ZIPy najdete mezi přílohami [nejnovějšího vydání](https://github.com/DanHutar/web-svepomoci/releases/latest). Nepoužívejte **Source code (zip)** jako instalační balíček.
 
-Od verze 1.2.0 se nové stabilní verze nabízejí v běžných **Aktualizacích WordPressu**, u pluginu a u šablony. Pokud máte starší instalaci, nahrajte nejnovější balíčky jednou ručně. V nabídce **Web svépomocí → Zkontrolovat aktualizace** můžete vynutit nové načtení. Automatické instalace bez kliknutí se samy nezapínají.
+Od verze 1.2.0 se nové stabilní verze nabízejí v běžných **Aktualizacích WordPressu**, u pluginu a u šablony. Pokud máte starší instalaci, nahrajte nejnovější balíčky jednou ručně. V nabídce **ByYourself → Zkontrolovat aktualizace** můžete vynutit nové načtení. Automatické instalace bez kliknutí se samy nezapínají.
 
 Kontrola používá veřejné GitHub API a manifest vydání, nepotřebuje token. Odesílá běžný HTTP požadavek, nikoli obsah vašich stránek nebo přihlašovací údaje. Výsledek se ukládá na hodinu, neúspěch na pět minut. Když GitHub neodpovídá, web dál funguje; aktualizace se nabídne po úspěšné kontrole. Musí být aktivní alespoň náš plugin nebo naše šablona. Stejná čísla verzí obou balíčků zjednodušují vydávání.
 
@@ -44,7 +44,7 @@ Postup pro další vývoj a vydání je v [docs/vydavani.md](docs/vydavani.md).
 
 ## Zadání pro AI přímo ve WordPressu
 
-Od verze **1.4.0** otevřete **Web svépomocí → Zadání pro AI**, vyberte společný vzhled, novou stránku, Header, Footer nebo úpravu existující stránky a vlastními slovy popište požadavek. Klikněte na **Připravit zadání** a pak na **Zkopírovat zadání**. U úpravy stránky nejprve vyhledejte a vyberte konkrétní stránku.
+Od verze **1.4.0** otevřete **ByYourself → Zadání pro AI**, vyberte společný vzhled, novou stránku, Header, Footer nebo úpravu existující stránky a vlastními slovy popište požadavek. Klikněte na **Připravit zadání** a pak na **Zkopírovat zadání**. U úpravy stránky nejprve vyhledejte a vyberte konkrétní stránku.
 
 Zadání připojí uložený font, společné CSS, barvu a šířku; při úpravě také uložený kód vybrané stránky nebo části webu. Rozpracované změny nejprve uložte. Zadání vložte do své AI a její výsledek ručně zkopírujte do polí uvedených pod zadáním. WordPress sám AI nevolá ani výsledek neukládá. [Podrobný postup](docs/zadani-ve-wordpressu.md).
 
@@ -62,14 +62,14 @@ Od verze **1.3.0** vyberete ve **Vzhled webu** veřejný Google Font a zkopíruj
 
 | Místo | Co se vkládá |
 | --- | --- |
-| Úprava stránky | Zapnutí režimu Web svépomocí a oddělené HTML, CSS a JS pro jednu stránku; SEO; volitelné skrytí hlavičky či patičky |
+| Úprava stránky | Zapnutí režimu ByYourself a oddělené HTML, CSS a JS pro jednu stránku; SEO; volitelné skrytí hlavičky či patičky |
 | **Header** v levém menu | Společná hlavička webu včetně svého CSS a JS |
 | **Footer** v levém menu | Společná patička webu včetně svého CSS a JS |
 | **Vzhled → Menu** | Odkazy pro umístění **Hlavní menu** a **Menu v patičce** |
-| **Web svépomocí → Zadání pro AI** | Popis požadavku; připravené zadání se kopíruje do vaší AI |
-| **Web svépomocí** | Návod a společná nastavení vzhledu |
+| **ByYourself → Zadání pro AI** | Popis požadavku; připravené zadání se kopíruje do vaší AI |
+| **ByYourself** | Návod a společná nastavení vzhledu |
 
-V režimu Web svépomocí se místo standardního obsahu dané stránky zobrazí její HTML. Při vypnutí režimu se opět používá běžný obsah WordPressu. Hlavička a patička mají vlastní zapnutí; jejich uložené změny se při aktivním zapnutí projeví na celém webu.
+V režimu ByYourself se místo standardního obsahu dané stránky zobrazí její HTML. Při vypnutí režimu se opět používá běžný obsah WordPressu. Hlavička a patička mají vlastní zapnutí; jejich uložené změny se při aktivním zapnutí projeví na celém webu.
 
 Začněte [návodem pro první web](docs/prvni-web.md). Zadání si připravte [přímo ve WordPressu](docs/zadani-ve-wordpressu.md), nebo použijte [ruční vzory](docs/zadani-pro-ai.md). Příklady a seznam souborů najdete v [examples/README.md](examples/README.md).
 
@@ -109,7 +109,7 @@ Pro používání na hostingu nepotřebujete Node.js. Vývojář může s Node.j
 
 ## Soukromí a cookies
 
-Od verze 1.9.0 nastavíte souhlas přes **Web svépomocí → Soukromí a cookies**. Měření je ve výchozím stavu vypnuté. [Návod a rozsah blokování](docs/soukromi-cookies.md).
+Od verze 1.9.0 nastavíte souhlas přes **ByYourself → Soukromí a cookies**. Měření je ve výchozím stavu vypnuté. [Návod a rozsah blokování](docs/soukromi-cookies.md).
 
 Při použití Complianz zaškrtněte **Souhlas spravuje externí plugin** a uložte. Tím vypnete naši správu souhlasu včetně lišty, tlačítka a měřicích skriptů. Externí plugin nastavte samostatně a vymažte cache.
 

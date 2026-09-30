@@ -15,8 +15,8 @@ final class AIWP_Admin {
 	}
 
 	public static function meta_boxes() {
-		add_meta_box( 'aiwp-studio', __( 'web-svepomoci-plugin · Page content', 'ai-web-studio' ), array( __CLASS__, 'editor' ), 'page', 'normal', 'high' );
-		add_meta_box( 'aiwp-studio', __( 'web-svepomoci-plugin · Shared website part', 'ai-web-studio' ), array( __CLASS__, 'editor' ), 'aiwp_part', 'normal', 'high' );
+		add_meta_box( 'aiwp-studio', __( 'ByYourself Builder · Page content', 'ai-web-studio' ), array( __CLASS__, 'editor' ), 'page', 'normal', 'high' );
+		add_meta_box( 'aiwp-studio', __( 'ByYourself Builder · Shared website part', 'ai-web-studio' ), array( __CLASS__, 'editor' ), 'aiwp_part', 'normal', 'high' );
 		add_meta_box( 'aiwp-seo', __( 'SEO · Search and sharing', 'ai-web-studio' ), array( __CLASS__, 'seo' ), 'page', 'normal', 'default' );
 	}
 
@@ -119,7 +119,7 @@ final class AIWP_Admin {
 				<p class="aiwp-preview-note"><?php echo esc_html__( 'This preview does not save changes. It only displays the content currently being edited; links, forms and external scripts are restricted. To preview the whole website, save a draft or update the page, then use WordPress Preview.', 'ai-web-studio' ); ?></p>
 			</div>
 			<?php if ( $is_page ) : ?>
-				<details class="aiwp-page-options"><summary><?php echo esc_html__( 'Page layout', 'ai-web-studio' ); ?></summary><div><label><input type="checkbox" name="aiwp[hide_header]" value="1" <?php checked( ! empty( $data['hide_header'] ) ); ?>> <?php echo esc_html__( 'Hide shared header', 'ai-web-studio' ); ?></label><label><input type="checkbox" name="aiwp[hide_footer]" value="1" <?php checked( ! empty( $data['hide_footer'] ) ); ?>> <?php echo esc_html__( 'Hide shared footer', 'ai-web-studio' ); ?></label><p class="description"><?php echo esc_html__( 'Useful for a standalone landing page, for example. This option is supported by the web-svepomoci-sablona theme.', 'ai-web-studio' ); ?></p></div></details>
+				<details class="aiwp-page-options"><summary><?php echo esc_html__( 'Page layout', 'ai-web-studio' ); ?></summary><div><label><input type="checkbox" name="aiwp[hide_header]" value="1" <?php checked( ! empty( $data['hide_header'] ) ); ?>> <?php echo esc_html__( 'Hide shared header', 'ai-web-studio' ); ?></label><label><input type="checkbox" name="aiwp[hide_footer]" value="1" <?php checked( ! empty( $data['hide_footer'] ) ); ?>> <?php echo esc_html__( 'Hide shared footer', 'ai-web-studio' ); ?></label><p class="description"><?php echo esc_html__( 'Useful for a standalone landing page, for example. This option is supported by the ByYourself Theme theme.', 'ai-web-studio' ); ?></p></div></details>
 			<?php endif; ?>
 			<div class="aiwp-save-reminder"><span class="dashicons dashicons-saved" aria-hidden="true"></span><span><?php echo esc_html__( 'Finished? Use', 'ai-web-studio' ); ?> <strong><?php echo esc_html__( 'Save draft', 'ai-web-studio' ); ?></strong>, <strong><?php echo esc_html__( 'Publish', 'ai-web-studio' ); ?></strong> <?php esc_html_e( 'or', 'ai-web-studio' ); ?> <strong><?php echo esc_html__( 'Update', 'ai-web-studio' ); ?></strong> <?php echo esc_html__( 'in WordPress. Previously saved versions are available in revisions.', 'ai-web-studio' ); ?></span></div>
 			<noscript><p><?php echo esc_html__( 'Enable JavaScript in your browser for syntax highlighting, tabs and previews. Without it, you can still paste code into the three text fields and save.', 'ai-web-studio' ); ?></p></noscript>
@@ -129,7 +129,7 @@ final class AIWP_Admin {
 
 	public static function seo( $post ) {
 		if ( ! aiwp_can_edit_code() ) {
-			echo __( '<p>SEO settings in web-svepomoci-plugin are managed by the website administrator.</p>', 'ai-web-studio' );
+			echo __( '<p>SEO settings in ByYourself Builder are managed by the website administrator.</p>', 'ai-web-studio' );
 			return;
 		}
 		$data = aiwp_get_document( $post->ID );
@@ -141,7 +141,7 @@ final class AIWP_Admin {
 			<div class="aiwp-field"><label for="aiwp-seo-description"><?php echo esc_html__( 'Meta description', 'ai-web-studio' ); ?></label><textarea id="aiwp-seo-description" name="aiwp[seo_description]" rows="3" aria-describedby="aiwp-seo-description-hint"><?php echo esc_textarea( $data['seo_description'] ); ?></textarea><p class="description" id="aiwp-seo-description-hint"><span data-aiwp-counter="aiwp-seo-description">0</span> <?php echo esc_html__( 'characters · Briefly describe the page\'s value. Around 140–160 characters is a useful starting point, not a fixed limit.', 'ai-web-studio' ); ?></p></div>
 			<div class="aiwp-field"><label for="aiwp-seo-image"><?php echo esc_html__( 'Sharing image', 'ai-web-studio' ); ?></label><div class="aiwp-input-action"><input type="url" id="aiwp-seo-image" name="aiwp[seo_image]" value="<?php echo esc_attr( $data['seo_image'] ); ?>" placeholder="https://…/obrazek.jpg"><button type="button" class="button" data-aiwp-media><?php echo esc_html__( 'Choose from media', 'ai-web-studio' ); ?></button></div><p class="description"><?php echo esc_html__( 'Image URL for social link previews. Paste a URL or choose an image from the library.', 'ai-web-studio' ); ?></p></div>
 			<details class="aiwp-seo-advanced"><summary><?php echo esc_html__( 'Advanced settings', 'ai-web-studio' ); ?></summary><div class="aiwp-field"><label for="aiwp-seo-canonical"><?php echo esc_html__( 'Canonical URL', 'ai-web-studio' ); ?></label><input type="url" id="aiwp-seo-canonical" name="aiwp[seo_canonical]" value="<?php echo esc_attr( $data['seo_canonical'] ); ?>" placeholder="<?php echo esc_attr__( 'Automatic: this page\'s URL', 'ai-web-studio' ); ?>"><p class="description"><?php echo esc_html__( 'Fill this in only if search engines should treat another URL as the primary version of the same content.', 'ai-web-studio' ); ?></p></div><label class="aiwp-checkbox-line"><input type="checkbox" name="aiwp[seo_noindex]" value="1" <?php checked( ! empty( $data['seo_noindex'] ) ); ?>> <?php echo esc_html__( 'Ask search engines not to index this page (noindex)', 'ai-web-studio' ); ?></label><p class="description"><?php echo esc_html__( 'The page remains publicly accessible. This setting does not password-protect it.', 'ai-web-studio' ); ?></p></details>
-			<p class="aiwp-seo-note"><?php echo esc_html__( 'Search engines may choose a different title or description. If you use a supported SEO plugin, manage metadata there — web-svepomoci-plugin will let it output the metadata.', 'ai-web-studio' ); ?></p>
+			<p class="aiwp-seo-note"><?php echo esc_html__( 'Search engines may choose a different title or description. If you use a supported SEO plugin, manage metadata there — ByYourself Builder will let it output the metadata.', 'ai-web-studio' ); ?></p>
 		</div>
 		<?php
 	}

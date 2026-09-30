@@ -12,7 +12,7 @@ function aiwp_get_settings() {
 }
 
 add_action( 'admin_menu', function () {
-    add_menu_page( __( 'Website Builder', 'ai-web-studio' ), __( 'Website Builder', 'ai-web-studio' ), 'manage_options', 'aiwp', 'aiwp_overview', 'dashicons-editor-code', 25 );
+    add_menu_page( __( 'ByYourself', 'ai-web-studio' ), __( 'ByYourself', 'ai-web-studio' ), 'manage_options', 'aiwp', 'aiwp_overview', 'dashicons-editor-code', 25 );
     add_submenu_page( 'aiwp', __( 'Getting started', 'ai-web-studio' ), __( 'Getting started', 'ai-web-studio' ), 'manage_options', 'aiwp', 'aiwp_overview' );
     add_submenu_page( 'aiwp', __( 'Website design', 'ai-web-studio' ), __( 'Website design', 'ai-web-studio' ), 'manage_options', 'aiwp-settings', 'aiwp_settings_page' );
     foreach ( array( 'header' => array( 'Header', 'dashicons-align-wide' ), 'footer' => array( 'Footer', 'dashicons-align-full-width' ) ) as $kind => $label ) {
@@ -76,9 +76,9 @@ function aiwp_overview() {
     }
     ?>
     <div class="wrap aiwp-dashboard">
-        <div class="aiwp-dashboard-hero"><span><?php echo esc_html__( 'WEBSITE BUILDER ·', 'ai-web-studio' ); ?> <?php echo esc_html( AIWP_VERSION ); ?></span><h1><?php echo esc_html__( 'Your website starts with an idea.', 'ai-web-studio' ); ?></h1><p><?php echo esc_html__( 'Let AI prepare the code. Turn it into pages for your own website here.', 'ai-web-studio' ); ?></p><a class="button button-primary button-hero" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ); ?>"><?php echo esc_html__( 'Create a page', 'ai-web-studio' ); ?></a></div>
+        <div class="aiwp-dashboard-hero"><span><?php echo esc_html__( 'BYYOURSELF ·', 'ai-web-studio' ); ?> <?php echo esc_html( AIWP_VERSION ); ?></span><h1><?php echo esc_html__( 'Your website starts with an idea.', 'ai-web-studio' ); ?></h1><p><?php echo esc_html__( 'Let AI prepare the code. Turn it into pages for your own website here.', 'ai-web-studio' ); ?></p><a class="button button-primary button-hero" href="<?php echo esc_url( admin_url( 'post-new.php?post_type=page' ) ); ?>"><?php echo esc_html__( 'Create a page', 'ai-web-studio' ); ?></a></div>
         <?php if ( ! aiwp_can_edit_code() ) : ?><div class="notice notice-warning inline"><p><?php echo esc_html__( 'Inserting code requires administrator permissions and', 'ai-web-studio' ); ?> <code>unfiltered_html</code><?php echo esc_html__( '. On WordPress Multisite this is normally limited to network administrators. Other users can continue using standard WordPress content.', 'ai-web-studio' ); ?></p></div><?php endif; ?>
-        <?php if ( ! current_theme_supports( 'ai-web-parts' ) ) : ?><div class="notice notice-info inline"><p><?php echo esc_html__( 'For shared headers, footers and full-width pages, activate the theme', 'ai-web-studio' ); ?> <strong>web-svepomoci-sablona</strong> <?php echo esc_html__( 'under Appearance → Themes.', 'ai-web-studio' ); ?></p></div><?php endif; ?>
+        <?php if ( ! current_theme_supports( 'ai-web-parts' ) ) : ?><div class="notice notice-info inline"><p><?php echo esc_html__( 'For shared headers, footers and full-width pages, activate the theme', 'ai-web-studio' ); ?> <strong>ByYourself Theme</strong> <?php echo esc_html__( 'under Appearance → Themes.', 'ai-web-studio' ); ?></p></div><?php endif; ?>
         <div class="aiwp-dashboard-grid">
             <section><span class="aiwp-step-number">01</span><h2><?php echo esc_html__( 'Prepare an AI prompt', 'ai-web-studio' ); ?></h2><p><?php echo esc_html__( 'Choose shared design, a new page, Header, Footer or an existing page to edit. Describe your idea and copy the prepared prompt into your AI.', 'ai-web-studio' ); ?></p><?php if ( aiwp_can_edit_code() ) : ?><a class="button" href="<?php echo esc_url( admin_url( 'admin.php?page=aiwp-prompts' ) ); ?>"><?php echo esc_html__( 'AI prompts', 'ai-web-studio' ); ?></a><?php endif; ?></section>
             <section><span class="aiwp-step-number">02</span><h2><?php echo esc_html__( 'Paste the three code sections', 'ai-web-studio' ); ?></h2><p><?php echo esc_html__( 'Put HTML into Content, CSS into Design and JavaScript into Behaviour. Enable “Display content from the AI editor”.', 'ai-web-studio' ); ?></p></section>
@@ -93,7 +93,7 @@ function aiwp_overview() {
         <p><?php echo esc_html__( 'New plugin and theme versions are retrieved from GitHub and installed through standard WordPress updates.', 'ai-web-studio' ); ?></p>
         <p><a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=wsp_check_updates' ), 'wsp_check_updates' ) ); ?>"><?php echo esc_html__( 'Check for updates', 'ai-web-studio' ); ?></a> <a class="button" href="https://github.com/DanHutar/web-svepomoci/releases" target="_blank" rel="noopener"><?php echo esc_html__( 'View releases on GitHub', 'ai-web-studio' ); ?></a></p>
         <?php endif; ?>
-        <p class="aiwp-dashboard-footnote"><?php echo esc_html__( 'web-svepomoci-plugin does not connect to any AI service and needs no API key. You transfer prompts and code by copying. Saved page, header and footer versions are available in WordPress revisions when enabled.', 'ai-web-studio' ); ?></p>
+        <p class="aiwp-dashboard-footnote"><?php echo esc_html__( 'ByYourself Builder does not connect to any AI service and needs no API key. You transfer prompts and code by copying. Saved page, header and footer versions are available in WordPress revisions when enabled.', 'ai-web-studio' ); ?></p>
     </div>
     <?php
 }

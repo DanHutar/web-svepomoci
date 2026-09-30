@@ -1,6 +1,6 @@
 # Soukromí a cookies
 
-V administraci otevřete **Web svépomocí → Soukromí a cookies**. Od verze 1.9.2 je bez uložené volby zaškrtnuto **Souhlas spravuje externí plugin**: naše lišta, tlačítka a skripty se nenačítají. Již uložená volba zůstává zachovaná. Zaškrtnutí samo žádný externí plugin nezapíná.
+V administraci otevřete **ByYourself → Soukromí a cookies**. Od verze 1.9.2 je bez uložené volby zaškrtnuto **Souhlas spravuje externí plugin**: naše lišta, tlačítka a skripty se nenačítají. Již uložená volba zůstává zachovaná. Zaškrtnutí samo žádný externí plugin nezapíná.
 
 Pro vlastní správu zrušte zaškrtnutí a uložte. Analytika a marketing zůstávají vypnuté, dokud je sami nenastavíte. Lišta se automaticky zobrazí až po zapnutí vyplněné kategorie.
 

@@ -2,7 +2,7 @@
   "web-svepomoci": {
     "Language": "Jazyk",
     "Choose English or Czech for every language setting.": "Pro každé jazykové nastavení vyberte angličtinu nebo češtinu.",
-    "These preferences apply to both Website Builder components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions.": "Tato nastavení platí pro plugin i šablonu Web svépomocí. Nemění jazyk administrace WordPressu ani nepřekládají uložené stránky, kód, menu nebo popisy služeb.",
+    "These preferences apply to both ByYourself components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions.": "Tato nastavení platí pro plugin i šablonu ByYourself. Nemění jazyk administrace WordPressu ani nepřekládají uložené stránky, kód, menu nebo popisy služeb.",
     "Plugin and theme interface": "Rozhraní pluginu a šablony",
     "Public labels and cookie controls": "Veřejné popisky a ovládání cookies",
     "Requested AI content language": "Požadovaný jazyk obsahu z AI",

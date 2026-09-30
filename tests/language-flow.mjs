@@ -15,6 +15,7 @@ try {
   await Promise.all([page.waitForNavigation(), page.locator('#wp-submit').click()]);
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp');
   assert.equal(await page.locator('.aiwp-dashboard h1').innerText(), 'Your website starts with an idea.');
+  assert.equal(await page.locator('#toplevel_page_aiwp .wp-menu-name').innerText(), 'ByYourself');
   await page.goto(server.serverUrl+'/wp-admin/post-new.php?post_type=page');
   assert.equal(await page.locator('[data-aiwp-sample]').innerText(),'Insert sample content');
   await page.locator('[data-aiwp-copy-prompt]').click();
@@ -27,6 +28,7 @@ try {
   assert.equal(await page.locator('.wrap h1').last().innerText(),'Jazyk');
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp');
   assert.equal(await page.locator('.aiwp-dashboard h1').innerText(),'Váš web začíná nápadem.');
+  assert.equal(await page.locator('#toplevel_page_aiwp .wp-menu-name').innerText(), 'ByYourself');
   await page.goto(server.serverUrl+'/wp-admin/post-new.php?post_type=page');
   assert.equal(await page.locator('[data-aiwp-sample]').innerText(),'Vložit ukázkový obsah');
   await page.locator('[data-aiwp-copy-prompt]').click();

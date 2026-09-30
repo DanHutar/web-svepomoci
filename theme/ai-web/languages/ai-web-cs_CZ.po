@@ -25,8 +25,8 @@ msgstr "Navigace v patičce"
 msgid "Go to plugins"
 msgstr "Přejít na pluginy"
 
-msgid "The web-svepomoci-sablona theme is ready. Activate web-svepomoci-plugin from the installation package for separate HTML, CSS, JavaScript and SEO fields, and custom headers and footers."
-msgstr "Šablona web-svepomoci-sablona je připravena. Pro samostatná pole HTML, CSS, JavaScript a SEO a vlastní hlavičku a patičku aktivujte web-svepomoci-plugin z instalačního balíčku."
+msgid "The ByYourself Theme theme is ready. Activate ByYourself Builder from the installation package for separate HTML, CSS, JavaScript and SEO fields, and custom headers and footers."
+msgstr "Šablona ByYourself Theme je připravena. Pro samostatná pole HTML, CSS, JavaScript a SEO a vlastní hlavičku a patičku aktivujte ByYourself Builder z instalačního balíčku."
 
 msgid "Footer menu"
 msgstr "Menu v patičce"

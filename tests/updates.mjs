@@ -15,12 +15,12 @@ try {
   const theme = path.join(temporary, 'theme/ai-web/style.css');
   const functions = path.join(temporary, 'theme/ai-web/functions.php');
   await fs.writeFile(plugin, (await fs.readFile(plugin, 'utf8'))
-    .replace('Plugin Name: web-svepomoci-plugin', 'Plugin Name: AI Web Studio')
+    .replace('Plugin Name: ByYourself Builder', 'Plugin Name: AI Web Studio')
     .replace(/Version: [\d.]+/, 'Version: 1.1.0')
     .replace(/define\( 'AIWP_VERSION', '[\d.]+' \);/, "define( 'AIWP_VERSION', '1.1.0' );")
     .replace("require_once AIWP_DIR . 'includes/github-updates.php';", ''));
   await fs.writeFile(theme, (await fs.readFile(theme, 'utf8'))
-    .replace('Theme Name: web-svepomoci-sablona', 'Theme Name: AI Web')
+    .replace('Theme Name: ByYourself Theme', 'Theme Name: AI Web')
     .replace(/Version: [\d.]+/, 'Version: 1.0.0'));
   await fs.writeFile(functions, (await fs.readFile(functions, 'utf8'))
     .replace("require_once get_template_directory() . '/includes/github-updates.php';", ''));

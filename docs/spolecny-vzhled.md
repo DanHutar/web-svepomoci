@@ -20,7 +20,7 @@ Na veřejných stránkách naší šablony se také vypíná skript a CSS pro do
 
 ## Příprava společného vzhledu
 
-Nejprve otevřete **Web svépomocí → Vzhled webu**, vyberte písmo, barvu a šířku a uložte nastavení. Od verze **1.4.0** pak můžete otevřít **Web svépomocí → Zadání pro AI**, vybrat **Společný vzhled a typografie** a popsat zaměření i požadovaný styl webu. Klikněte na **Připravit zadání** a **Zkopírovat zadání**. Doplní se uložený font, barva, šířka a současné společné CSS. [Podrobný postup](zadani-ve-wordpressu.md).
+Nejprve otevřete **ByYourself → Vzhled webu**, vyberte písmo, barvu a šířku a uložte nastavení. Od verze **1.4.0** pak můžete otevřít **ByYourself → Zadání pro AI**, vybrat **Společný vzhled a typografie** a popsat zaměření i požadovaný styl webu. Klikněte na **Připravit zadání** a **Zkopírovat zadání**. Doplní se uložený font, barva, šířka a současné společné CSS. [Podrobný postup](zadani-ve-wordpressu.md).
 
 Dosavadní tlačítko **Zkopírovat zadání pro společné CSS** ve **Vzhled webu** zůstává dostupné; bere hodnoty přímo z rozepsaného formuláře. Nová sekce **Zadání pro AI** naproti tomu používá uložené nastavení. AI nic negeneruje přímo ve WordPressu: zadání jí vložíte a výsledek zkopírujete zpět.
 
@@ -29,7 +29,7 @@ Nová nabídka obsahuje Inter, Roboto, Open Sans, Montserrat, Nunito Sans, Sourc
 Pro ruční použití nahraďte údaje v tomto zadání:
 
 ```text
-Navrhni společné CSS pro WordPress s web-svepomoci-plugin a web-svepomoci-sablona.
+Navrhni společné CSS pro WordPress s ByYourself Builder a web-svepomoci-sablona.
 Font vybraný ve Vzhled webu: [PŘESNÝ NÁZEV]
 Barva: [BARVA] přes var(--aiwp-accent).
 Šířka: [ŠÍŘKA] přes var(--aiwp-width).

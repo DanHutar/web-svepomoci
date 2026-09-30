@@ -1,4 +1,4 @@
-Create a shared header for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin.
+Create a shared header for WordPress with the ByYourself Theme theme and ByYourself Builder plugin.
 
 MY INPUT
 Website name and real homepage URL (possibly in a subdirectory): [ADD]

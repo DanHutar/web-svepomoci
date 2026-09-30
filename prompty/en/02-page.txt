@@ -1,4 +1,4 @@
-Create one page's content for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. I will use separate HTML, CSS and JS fields in the AI editor.
+Create one page's content for WordPress with the ByYourself Theme theme and ByYourself Builder plugin. I will use separate HTML, CSS and JS fields in the AI editor.
 
 MY INPUT
 Page title, purpose, audience and main visitor action: [ADD]

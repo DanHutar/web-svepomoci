@@ -1,6 +1,6 @@
 Požadovaný jazyk nového obsahu: [čeština / angličtina / DOPLŇ]. Stávající texty nepřekládej bez výslovného pokynu.
 
-Pomoz mi připravit stránku Informace o cookies pro český web ve WordPressu. Používám šablonu web-svepomoci-sablona a plugin web-svepomoci-plugin. Nejprve ověř dostatečnost podkladů; nevytvářej zdánlivě hotový právní text z domněnek.
+Pomoz mi připravit stránku Informace o cookies pro český web ve WordPressu. Používám šablonu ByYourself Theme a plugin web-svepomoci-plugin. Nejprve ověř dostatečnost podkladů; nevytvářej zdánlivě hotový právní text z domněnek.
 
 PODKLADY
 Web a jeho URL: [DOPLŇ]

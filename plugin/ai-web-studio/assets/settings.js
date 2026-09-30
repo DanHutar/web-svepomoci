@@ -8,7 +8,7 @@
     var css = document.getElementById('aiwp-global-css').value;
     var prompt = [
       window.aiwpDesign.contentLanguageInstruction || '',
-      wp.i18n.__("Create shared CSS for a website using the web-svepomoci-sablona theme and web-svepomoci-plugin plugin.", "ai-web-studio"),
+      wp.i18n.__("Create shared CSS for a website using the ByYourself Theme theme and ByYourself Builder plugin.", "ai-web-studio"),
       wp.i18n.__("Selected font: ", "ai-web-studio") + option.dataset.family + wp.i18n.__(". Use var(--aiwp-font).", "ai-web-studio"),
       wp.i18n.__("Accent colour: ", "ai-web-studio") + document.getElementById('aiwp-accent').value + wp.i18n.__(" (--aiwp-accent). Content width: ", "ai-web-studio") + document.getElementById('aiwp-width').value + 'px (--aiwp-width).',
       wp.i18n.__("My brief: [ADD the website purpose, target audience and visual style].", "ai-web-studio"),

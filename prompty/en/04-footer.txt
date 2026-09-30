@@ -1,4 +1,4 @@
-Create a shared footer for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin.
+Create a shared footer for WordPress with the ByYourself Theme theme and ByYourself Builder plugin.
 
 MY INPUT
 Website and operator name: [ADD]

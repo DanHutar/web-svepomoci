@@ -1,6 +1,6 @@
 Požadovaný jazyk nového obsahu: [čeština / angličtina / DOPLŇ]. Stávající texty nepřekládej bez výslovného pokynu.
 
-Vytvoř obsah jedné stránky pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin. Obsah vložím do oddělených polí HTML, CSS a JS našeho editoru.
+Vytvoř obsah jedné stránky pro WordPress se šablonou ByYourself Theme a pluginem web-svepomoci-plugin. Obsah vložím do oddělených polí HTML, CSS a JS našeho editoru.
 
 MOJE PODKLADY
 Název a účel stránky: [DOPLŇ]

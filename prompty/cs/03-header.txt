@@ -1,6 +1,6 @@
 Požadovaný jazyk nového obsahu: [čeština / angličtina / DOPLŇ]. Stávající texty nepřekládej bez výslovného pokynu.
 
-Vytvoř společnou hlavičku (header) pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.
+Vytvoř společnou hlavičku (header) pro WordPress se šablonou ByYourself Theme a pluginem web-svepomoci-plugin.
 
 MOJE PODKLADY
 Název webu: [DOPLŇ]

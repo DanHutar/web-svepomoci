@@ -1,13 +1,13 @@
 # Zadání pro AI přímo ve WordPressu
 
-Od verze **1.4.0** najdete přípravu zadání v nabídce **Web svépomocí → Zadání pro AI**. Vyberete, co chcete vytvořit, a vlastními slovy popíšete požadavek. WordPress doplní potřebné údaje o vašem webu a pravidla pro kód.
+Od verze **1.4.0** najdete přípravu zadání v nabídce **ByYourself → Zadání pro AI**. Vyberete, co chcete vytvořit, a vlastními slovy popíšete požadavek. WordPress doplní potřebné údaje o vašem webu a pravidla pro kód.
 
 Žádný AI účet ani API klíč se nepropojuje. Hotové zadání vložíte do své AI a její odpověď potom ručně vložíte do WordPressu.
 
 ## Postup
 
 1. Nejprve uložte rozpracované změny ve **Vzhled webu** a v editorech stránek, Headeru nebo Footeru. Zadání používá uložený stav, nikoli rozepsané změny v jiném okně.
-2. Otevřete **Web svépomocí → Zadání pro AI** a vyberte druh zadání z tabulky níže.
+2. Otevřete **ByYourself → Zadání pro AI** a vyberte druh zadání z tabulky níže.
 3. Popište, co potřebujete. Například: „Vytvoř stránku Kontakt pro můj ateliér. Adresa je …, e-mail je …, otevírací doba je … Použij společný vzhled webu.“ U úpravy také vyhledejte a vyberte existující stránku.
 4. Klikněte na **Připravit zadání**. Prohlédněte si text i pokyny, kam potom vložit výsledek.
 5. Klikněte na **Zkopírovat zadání** a vložte je do své AI. Pokud prohlížeč kopírování nepovolí, označte text v poli a zkopírujte jej pomocí Ctrl+C; na Macu pomocí Cmd+C.
@@ -18,7 +18,7 @@ Změníte-li druh zadání, popis nebo vybranou stránku, vytvořte zadání zno
 
 | Co vybrat | Co se do zadání doplní | Kam vložit výsledek AI |
 | --- | --- | --- |
-| **Společný vzhled a typografie** | Uložený font, barva, šířka a dosavadní společné CSS; pravidla pro `clamp()` velikostí a řádkování H1–H6, běžného textu a small | Celý blok CSS do **Web svépomocí → Vzhled webu → Společné CSS** |
+| **Společný vzhled a typografie** | Uložený font, barva, šířka a dosavadní společné CSS; pravidla pro `clamp()` velikostí a řádkování H1–H6, běžného textu a small | Celý blok CSS do **ByYourself → Vzhled webu → Společné CSS** |
 | **Nová stránka** | Uložený společný vzhled a pravidla pro obsah stránky | Vytvořte stránku, zapněte vlastní kód a vložte zvlášť **HTML**, **CSS** a **JS** |
 | **Header — hlavička webu** | Společný vzhled a uložený kód hlavičky, pokud už existuje; pravidla pro menu z WordPressu | Do polí **HTML**, **CSS** a **JS** v **Headeru** |
 | **Footer — patička webu** | Společný vzhled a uložený kód patičky, pokud už existuje; pravidla pro menu z WordPressu | Do polí **HTML**, **CSS** a **JS** ve **Footeru** |
@@ -38,7 +38,7 @@ Teprve potom připravujte zadání pro jednotlivé stránky, Header a Footer. Bu
 
 Vyberte **Úprava existující stránky** a zvolte stránku ze seznamu. Pokud v něm není, napište její název a klikněte na **Vyhledat stránky**. Seznam zobrazuje nejvýše 20 výsledků; u většího webu zpřesněte hledání. Do popisu napište konkrétní změnu, například „Pod služby přidej sekci s těmito třemi cenami …, ostatní obsah zachovej.“ Nemusíte z jednotlivých polí ručně kopírovat uložený kód.
 
-Pokud vyberete běžnou stránku bez zapnutého vlastního kódu, zadání obsahuje její standardní uložený obsah pro převod do polí Web svépomocí. Po vložení výsledku zkontrolujte, že AI zachovala potřebný obsah a funkce, zapněte vlastní kód a uložte stránku. Původní běžný obsah zůstává ve WordPressu; při aktivním vlastním kódu se nezobrazuje.
+Pokud vyberete běžnou stránku bez zapnutého vlastního kódu, zadání obsahuje její standardní uložený obsah pro převod do polí ByYourself. Po vložení výsledku zkontrolujte, že AI zachovala potřebný obsah a funkce, zapněte vlastní kód a uložte stránku. Původní běžný obsah zůstává ve WordPressu; při aktivním vlastním kódu se nezobrazuje.
 
 Zadání může obsahovat neveřejný text vybrané stránky nebo kontakt z uloženého kódu. Před vložením do externí AI si text projděte. Samotné vytvoření nebo zkopírování zadání nic neposílá AI ani nemění uloženou stránku.
 

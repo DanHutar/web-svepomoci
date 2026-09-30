@@ -1,4 +1,4 @@
-Create shared CSS for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. I will paste it once into Website Builder → Website design → Shared CSS.
+Create shared CSS for WordPress with the ByYourself Theme theme and ByYourself Builder plugin. I will paste it once into ByYourself → Website design → Shared CSS.
 
 MY INPUT
 Website name, purpose and audience: [ADD]

@@ -1,4 +1,4 @@
-WEBSITE BUILDER — TEXT PROMPTS FOR AI
+BYYOURSELF — TEXT PROMPTS FOR AI
 
 These UTF-8 text files are included in the plugin and theme installation ZIPs. Keep the original ZIP for WordPress installation and extract a copy to read the prompts in any text editor.
 
@@ -6,17 +6,17 @@ These UTF-8 text files are included in the plugin and theme installation ZIPs. K
 2. Use 02-page.txt for each page, 03-header.txt for the shared header and 04-footer.txt for the shared footer.
 3. Use 05-cookie-information.txt and 06-privacy-notice.txt for informational pages. Collect real facts about the operator and services first. Do not let AI invent providers, retention periods or claims of legal compliance.
 4. Copy the chosen file into your AI and replace the bracketed fields. Write UNKNOWN when you do not know an answer. Do not send passwords, secret keys or real customer records.
-5. Paste HTML into Content, CSS into Design and JS into Behaviour in our editor. Omit ``` code fences and never paste PHP. Shared CSS belongs only in Website Builder → Website design → Shared CSS. Put the SEO title and meta description in the page's separate SEO panel.
+5. Paste HTML into Content, CSS into Design and JS into Behaviour in our editor. Omit ``` code fences and never paste PHP. Shared CSS belongs only in ByYourself → Website design → Shared CSS. Put the SEO title and meta description in the page's separate SEO panel.
 6. Enable AI editor content and save. Save headers and footers in their shared editors instead of repeating them on each page. Check both the preview and the real website, including mobile and keyboard navigation.
 
 LANGUAGES
-Website Builder → Language controls the plugin/theme interface, public labels and requested AI content language separately. The interface can be English while the website copy is Czech. These preferences do not translate saved content or change WordPress itself. For downloaded prompts, fill in the requested output language yourself. English and Czech prompt folders contain the same types of tasks.
+ByYourself → Language controls the plugin/theme interface, public labels and requested AI content language separately. The interface can be English while the website copy is Czech. These preferences do not translate saved content or change WordPress itself. For downloaded prompts, fill in the requested output language yourself. English and Czech prompt folders contain the same types of tasks.
 
 MENUS
 Create navigation in Appearance → Menus and assign it to primary or footer. Ask AI to use [aiwp_menu location="primary"] or [aiwp_menu location="footer"], not manually duplicated navigation links.
 
 CONSENT AND COMPLIANZ
-Choose one consent manager. When no choice has been saved, our consent feature is off by default: “Consent is managed by an external plugin” is checked. For our built-in manager, clear this checkbox under Website Builder → Privacy and cookies, configure services and save. Insert [aiwp_cookie_settings] inside footer HTML to position its button there. It produces button.aiwp-cookie-settings and prevents a duplicate control below the footer.
+Choose one consent manager. When no choice has been saved, our consent feature is off by default: “Consent is managed by an external plugin” is checked. For our built-in manager, clear this checkbox under ByYourself → Privacy and cookies, configure services and save. Insert [aiwp_cookie_settings] inside footer HTML to position its button there. It produces button.aiwp-cookie-settings and prevents a duplicate control below the footer.
 
 For Complianz or another external manager, keep external mode enabled and configure that plugin separately. No scripts or consent records are transferred automatically. The built-in marker outputs nothing in external mode; the external manager must provide a way to change consent. Clear caches after switching managers.
 

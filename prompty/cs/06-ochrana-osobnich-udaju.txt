@@ -1,6 +1,6 @@
 Požadovaný jazyk nového obsahu: [čeština / angličtina / DOPLŇ]. Stávající texty nepřekládej bez výslovného pokynu.
 
-Pomoz mi připravit stránku Ochrana osobních údajů pro český web ve WordPressu se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin. Zpracuj ji podle skutečných činností provozovatele; nevytvářej univerzální dokument se smyšlenými údaji.
+Pomoz mi připravit stránku Ochrana osobních údajů pro český web ve WordPressu se šablonou ByYourself Theme a pluginem web-svepomoci-plugin. Zpracuj ji podle skutečných činností provozovatele; nevytvářej univerzální dokument se smyšlenými údaji.
 
 PODKLADY
 Název a URL webu: [DOPLŇ]

@@ -1,4 +1,4 @@
-Help me prepare a Privacy notice for a Czech/EU website using WordPress, the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. Base it on the operator's actual activities, not a generic document with invented details.
+Help me prepare a Privacy notice for a Czech/EU website using WordPress, the ByYourself Theme theme and ByYourself Builder plugin. Base it on the operator's actual activities, not a generic document with invented details.
 
 INPUT
 Website name and URL: [ADD]

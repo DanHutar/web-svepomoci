@@ -30,7 +30,7 @@ function aiwp_prompt_code_rules( $kind ) {
     $part = in_array( $kind, array( 'header', 'footer' ), true );
     $location = 'footer' === $kind ? 'footer' : 'primary';
     return implode( "\n\n", array(
-        __( 'Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure optional services in the selected consent manager: Website Builder → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers.', 'ai-web-studio' ),
+        __( 'Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure optional services in the selected consent manager: ByYourself → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers.', 'ai-web-studio' ),
         __( 'Return the complete final HTML, CSS and JS as three separate blocks, not just changed lines. If JavaScript is unnecessary, say that the JS field should stay empty. I will omit the ``` fences when copying code into WordPress.', 'ai-web-studio' ),
         __( 'HTML must be a fragment: no doctype, html, head, body, meta, title, link, base, style, script, PHP, on* attributes or javascript: URLs. ', 'ai-web-studio' )
             . ( $part ? __( 'Create only the requested header or footer, without H1.', 'ai-web-studio' ) : __( 'I manage the header and footer separately; do not create them. The content has one main H1 heading; do not add another main element.', 'ai-web-studio' ) ),
@@ -77,7 +77,7 @@ function aiwp_build_prompt( $kind, $instructions, $page_id = 0 ) {
     $destination = array(
         'label' => __( 'Open a new page', 'ai-web-studio' ),
         'url' => admin_url( 'post-new.php?post_type=page' ),
-        'help' => __( 'In the web-svepomoci-plugin panel, paste HTML into Content, CSS into Design and JS into Behaviour. Paste only code, without ``` fences. Enable “Display content from the AI editor”, fill in SEO, test the preview and save a draft or publish.', 'ai-web-studio' ),
+        'help' => __( 'In the ByYourself Builder panel, paste HTML into Content, CSS into Design and JS into Behaviour. Paste only code, without ``` fences. Enable “Display content from the AI editor”, fill in SEO, test the preview and save a draft or publish.', 'ai-web-studio' ),
     );
     if ( 'edit' === $kind ) {
         $id = aiwp_prompt_page_id( $page_id );
@@ -110,7 +110,7 @@ function aiwp_build_prompt( $kind, $instructions, $page_id = 0 ) {
             }
         } else {
             $destination['url'] = admin_url( 'admin.php?page=aiwp' );
-            $notices[] = __( 'The saved website part is not available yet. Open the Website Builder overview, then select ', 'ai-web-studio' ) . $labels[ $kind ] . '.';
+            $notices[] = __( 'The saved website part is not available yet. Open the ByYourself overview, then select ', 'ai-web-studio' ) . $labels[ $kind ] . '.';
         }
         $destination['label'] = __( 'Open ', 'ai-web-studio' ) . $labels[ $kind ];
         $destination['help'] = __( 'Under ', 'ai-web-studio' ) . $labels[ $kind ] . __( ' paste HTML into Content, CSS into Design and JS into Behaviour, without ``` fences. Enable AI content and save. In Appearance → Menus assign a menu to “', 'ai-web-studio' ) . ( 'footer' === $kind ? __( 'Footer menu', 'ai-web-studio' ) : __( 'Primary menu', 'ai-web-studio' ) ) . '“.';
@@ -121,14 +121,14 @@ function aiwp_build_prompt( $kind, $instructions, $page_id = 0 ) {
 
     $prompt = array(
         aiwp_content_language_instruction(),
-        __( 'Task: ', 'ai-web-studio' ) . $labels[ $kind ] . __( ' for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. Respond in the requested content language and create the final code according to the brief below.', 'ai-web-studio' ),
+        __( 'Task: ', 'ai-web-studio' ) . $labels[ $kind ] . __( ' for WordPress with the ByYourself Theme theme and ByYourself Builder plugin. Respond in the requested content language and create the final code according to the brief below.', 'ai-web-studio' ),
         'Web: ' . wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES ) . __( "\nWebsite URL: ", 'ai-web-studio' ) . home_url( '/' ),
         __( "MY BRIEF:\n", 'ai-web-studio' ) . trim( $instructions ),
     );
     if ( 'style' === $kind ) {
         $settings = aiwp_get_settings();
         $font = aiwp_font_details( $settings['font'] );
-        $prompt[] = __( 'Create the complete final shared CSS to replace the Shared CSS field in Website Builder → Website design. Preserve necessary existing rules unless changes are requested. Return one CSS block without style tags, HTML, JS or PHP; put a short explanation outside the code. Do not propose code for an individual page.', 'ai-web-studio' );
+        $prompt[] = __( 'Create the complete final shared CSS to replace the Shared CSS field in ByYourself → Website design. Preserve necessary existing rules unless changes are requested. Return one CSS block without style tags, HTML, JS or PHP; put a short explanation outside the code. Do not propose code for an individual page.', 'ai-web-studio' );
         $prompt[] = __( 'Saved font: ', 'ai-web-studio' ) . $font['family'] . __( '. Colour: ', 'ai-web-studio' ) . $settings['accent'] . __( ' (--aiwp-accent). Width: ', 'ai-web-studio' ) . $settings['width'] . __( 'px (--aiwp-width). Do not change these settings by overriding their variables. Describe any change to the font, colour or width as a separate step in Website design settings.', 'ai-web-studio' );
         $prompt[] = aiwp_typography_rules();
         $prompt[] = __( 'Design reusable classes for containers, sections, buttons and cards. Briefly explain their use and name them so other pages can reuse them.', 'ai-web-studio' );

@@ -115,8 +115,8 @@ msgstr "Vrať přesně tři oddělené části označené HTML, CSS a JS, které
 msgid "My brief: [ADD the purpose, copy, colours, target audience and required sections]."
 msgstr "Moje zadání: [DOPLŇ účel, texty, barvy, cílové publikum a požadované sekce]."
 
-msgid " for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin."
-msgstr " pro WordPress s šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin."
+msgid " for WordPress with the ByYourself Theme theme and ByYourself Builder plugin."
+msgstr " pro WordPress s šablonou ByYourself Theme a pluginem web-svepomoci-plugin."
 
 msgid "page content"
 msgstr "obsah stránky"
@@ -130,8 +130,8 @@ msgstr "společnou patičku"
 msgid "Create "
 msgstr "Vytvoř "
 
-msgid "Do not add analytics, marketing scripts or a cookie banner to the page. Configure optional services in the selected consent manager: Website Builder → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers."
-msgstr "Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky. Volitelné služby nastavuje zvolený správce souhlasu: Web svépomocí → Soukromí a cookies, nebo při externí správě například Complianz. Kódy mezi správci neduplikuj."
+msgid "Do not add analytics, marketing scripts or a cookie banner to the page. Configure optional services in the selected consent manager: ByYourself → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers."
+msgstr "Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky. Volitelné služby nastavuje zvolený správce souhlasu: ByYourself → Soukromí a cookies, nebo při externí správě například Complianz. Kódy mezi správci neduplikuj."
 
 msgid "Custom code is disabled. You can preview it, but it will not appear on the website until you enable it and save."
 msgstr "Použití vlastního kódu je vypnuté. Náhled ho může zobrazit, ale na web se neprojeví, dokud tuto volbu nezapnete a neuložíte."
@@ -250,11 +250,11 @@ msgstr ". Používej var(--aiwp-font)."
 msgid "Selected font: "
 msgstr "Zvolený font: "
 
-msgid "Create shared CSS for a website using the web-svepomoci-sablona theme and web-svepomoci-plugin plugin."
-msgstr "Vytvoř společné CSS pro web se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin."
+msgid "Create shared CSS for a website using the ByYourself Theme theme and ByYourself Builder plugin."
+msgstr "Vytvoř společné CSS pro web se šablonou ByYourself Theme a pluginem web-svepomoci-plugin."
 
-msgid "Search engines may choose a different title or description. If you use a supported SEO plugin, manage metadata there — web-svepomoci-plugin will let it output the metadata."
-msgstr "Vyhledávače mohou zvolit jiný titulek nebo popis. Pokud používáte podporovaný SEO plugin, metadata spravujte v něm — web-svepomoci-plugin mu přenechá jejich výpis."
+msgid "Search engines may choose a different title or description. If you use a supported SEO plugin, manage metadata there — ByYourself Builder will let it output the metadata."
+msgstr "Vyhledávače mohou zvolit jiný titulek nebo popis. Pokud používáte podporovaný SEO plugin, metadata spravujte v něm — ByYourself Builder mu přenechá jejich výpis."
 
 msgid "The page remains publicly accessible. This setting does not password-protect it."
 msgstr "Stránka zůstane veřejně dostupná. Toto nastavení ji nechrání heslem."
@@ -292,8 +292,8 @@ msgstr "znaků · Obvykle se hodí přibližně 50–60 znaků; nejdůležitěj�
 msgid "Help people understand what the page contains. An empty SEO title uses the page title."
 msgstr "Pomozte lidem poznat, co na stránce najdou. Prázdný SEO titulek se doplní z názvu stránky."
 
-msgid "<p>SEO settings in web-svepomoci-plugin are managed by the website administrator.</p>"
-msgstr "<p>Nastavení SEO v pluginu web-svepomoci-plugin upravuje správce webu.</p>"
+msgid "<p>SEO settings in ByYourself Builder are managed by the website administrator.</p>"
+msgstr "<p>Nastavení SEO v pluginu ByYourself Builder upravuje správce webu.</p>"
 
 msgid "Enable JavaScript in your browser for syntax highlighting, tabs and previews. Without it, you can still paste code into the three text fields and save."
 msgstr "Pro zvýraznění kódu, přepínání záložek a náhled zapněte JavaScript v prohlížeči. Kód lze i bez něj vložit do tří textových polí a uložit."
@@ -307,7 +307,7 @@ msgstr "Uložit koncept"
 msgid "Finished? Use"
 msgstr "Hotovo? Použijte"
 
-msgid "Useful for a standalone landing page, for example. This option is supported by the web-svepomoci-sablona theme."
+msgid "Useful for a standalone landing page, for example. This option is supported by the ByYourself Theme theme."
 msgstr "Vhodné například pro samostatnou prodejní stránku. Tuto volbu podporuje šablona web-svepomoci-sablona."
 
 msgid "Hide shared footer"
@@ -448,11 +448,11 @@ msgstr "<p>Úpravy kódu jsou dostupné správci webu s oprávněním vkládat H
 msgid "SEO · Search and sharing"
 msgstr "SEO · Vyhledávání a sdílení"
 
-msgid "web-svepomoci-plugin · Shared website part"
-msgstr "web-svepomoci-plugin · Společná část webu"
+msgid "ByYourself Builder · Shared website part"
+msgstr "ByYourself Builder · Společná část webu"
 
-msgid "web-svepomoci-plugin · Page content"
-msgstr "web-svepomoci-plugin · Obsah stránky"
+msgid "ByYourself Builder · Page content"
+msgstr "ByYourself Builder · Obsah stránky"
 
 msgid "Save selection"
 msgstr "Uložit výběr"
@@ -775,14 +775,14 @@ msgstr " (--aiwp-accent). Šířka: "
 msgid "Saved font: "
 msgstr "Uložený font: "
 
-msgid "Create the complete final shared CSS to replace the Shared CSS field in Website Builder → Website design. Preserve necessary existing rules unless changes are requested. Return one CSS block without style tags, HTML, JS or PHP; put a short explanation outside the code. Do not propose code for an individual page."
-msgstr "Vytvoř úplné výsledné společné CSS, které nahradí pole Společné CSS ve Web svépomocí → Vzhled webu. Zachovej potřebná stávající pravidla, pokud zadání nepožaduje jejich změnu. Vrať jeden CSS blok bez značek style, HTML, JS nebo PHP; krátké vysvětlení dej mimo kód. Nenavrhuj kód pro jednotlivou stránku."
+msgid "Create the complete final shared CSS to replace the Shared CSS field in ByYourself → Website design. Preserve necessary existing rules unless changes are requested. Return one CSS block without style tags, HTML, JS or PHP; put a short explanation outside the code. Do not propose code for an individual page."
+msgstr "Vytvoř úplné výsledné společné CSS, které nahradí pole Společné CSS ve ByYourself → Vzhled webu. Zachovej potřebná stávající pravidla, pokud zadání nepožaduje jejich změnu. Vrať jeden CSS blok bez značek style, HTML, JS nebo PHP; krátké vysvětlení dej mimo kód. Nenavrhuj kód pro jednotlivou stránku."
 
 msgid "MY BRIEF:\n"
 msgstr "MŮJ POŽADAVEK:\n"
 
-msgid " for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin. Respond in the requested content language and create the final code according to the brief below."
-msgstr " pro WordPress s šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin. Odpověz v požadovaném jazyce obsahu a vytvoř výsledný kód podle požadavku níže."
+msgid " for WordPress with the ByYourself Theme theme and ByYourself Builder plugin. Respond in the requested content language and create the final code according to the brief below."
+msgstr " pro WordPress s šablonou ByYourself Theme a pluginem web-svepomoci-plugin. Odpověz v požadovaném jazyce obsahu a vytvoř výsledný kód podle požadavku níže."
 
 msgid "Task: "
 msgstr "Úkol: "
@@ -799,8 +799,8 @@ msgstr "V položce "
 msgid "Open "
 msgstr "Otevřít "
 
-msgid "The saved website part is not available yet. Open the Website Builder overview, then select "
-msgstr "Uložená část webu zatím není dostupná. Otevřete přehled Web svépomocí a poté položku "
+msgid "The saved website part is not available yet. Open the ByYourself overview, then select "
+msgstr "Uložená část webu zatím není dostupná. Otevřete přehled ByYourself a poté položku "
 
 msgid " is currently disabled. Enable it and save after inserting code."
 msgstr " je zatím vypnutý. Po vložení kódu jej zapněte a uložte."
@@ -826,8 +826,8 @@ msgstr "K této stránce nemáte oprávnění."
 msgid "Select an existing page that is not in the trash."
 msgstr "Vyberte existující stránku, která není v koši."
 
-msgid "In the web-svepomoci-plugin panel, paste HTML into Content, CSS into Design and JS into Behaviour. Paste only code, without ``` fences. Enable “Display content from the AI editor”, fill in SEO, test the preview and save a draft or publish."
-msgstr "V bloku web-svepomoci-plugin vložte HTML do Obsahu, CSS do Vzhledu a JS do Chování. Vkládejte pouze kód bez značek ``` kolem bloků. Zapněte „Zobrazovat obsah z AI editoru“, vyplňte SEO, vyzkoušejte náhled a uložte koncept nebo publikujte."
+msgid "In the ByYourself Builder panel, paste HTML into Content, CSS into Design and JS into Behaviour. Paste only code, without ``` fences. Enable “Display content from the AI editor”, fill in SEO, test the preview and save a draft or publish."
+msgstr "V bloku ByYourself Builder vložte HTML do Obsahu, CSS do Vzhledu a JS do Chování. Vkládejte pouze kód bez značek ``` kolem bloků. Zapněte „Zobrazovat obsah z AI editoru“, vyplňte SEO, vyzkoušejte náhled a uložte koncept nebo publikujte."
 
 msgid "Open a new page"
 msgstr "Otevřít novou stránku"
@@ -883,8 +883,8 @@ msgstr "HTML je pouze fragment: bez doctype, html, head, body, meta, title, link
 msgid "Return the complete final HTML, CSS and JS as three separate blocks, not just changed lines. If JavaScript is unnecessary, say that the JS field should stay empty. I will omit the ``` fences when copying code into WordPress."
 msgstr "Vrať úplné výsledné HTML, CSS a JS jako tři samostatné bloky, nikoli jen změněné řádky. Když JavaScript není potřeba, napiš, že pole JS má zůstat prázdné. Při kopírování do WordPressu vynechám značky ``` kolem bloků."
 
-msgid "Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure optional services in the selected consent manager: Website Builder → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers."
-msgstr "Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky, hlavičky nebo patičky. Volitelné služby nastavuje zvolený správce souhlasu: Web svépomocí → Soukromí a cookies, nebo při externí správě například Complianz. Kódy mezi správci neduplikuj."
+msgid "Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure optional services in the selected consent manager: ByYourself → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers."
+msgstr "Nevkládej měření, marketingové skripty ani vlastní cookie lištu do stránky, hlavičky nebo patičky. Volitelné služby nastavuje zvolený správce souhlasu: ByYourself → Soukromí a cookies, nebo při externí správě například Complianz. Kódy mezi správci neduplikuj."
 
 msgid "Save website design"
 msgstr "Uložit vzhled webu"
@@ -940,8 +940,8 @@ msgstr "Pro změnu nastavení se přihlaste jako správce s oprávněním vklád
 msgid "Shared settings for all pages. Colours and width affect code that references the corresponding CSS variables."
 msgstr "Společné nastavení pro všechny stránky. Barvu a šířku využijí části kódu, které odkazují na příslušné CSS proměnné."
 
-msgid "web-svepomoci-plugin does not connect to any AI service and needs no API key. You transfer prompts and code by copying. Saved page, header and footer versions are available in WordPress revisions when enabled."
-msgstr "web-svepomoci-plugin se nepřipojuje k žádné AI službě a nepotřebuje API klíč. Zadání a kód přenášíte kopírováním. Uložené verze stránek, hlavičky i patičky najdete v revizích WordPressu, pokud je instalace povoluje."
+msgid "ByYourself Builder does not connect to any AI service and needs no API key. You transfer prompts and code by copying. Saved page, header and footer versions are available in WordPress revisions when enabled."
+msgstr "ByYourself Builder se nepřipojuje k žádné AI službě a nepotřebuje API klíč. Zadání a kód přenášíte kopírováním. Uložené verze stránek, hlavičky i patičky najdete v revizích WordPressu, pokud je instalace povoluje."
 
 msgid "View releases on GitHub"
 msgstr "Přehled verzí na GitHubu"
@@ -1015,7 +1015,7 @@ msgstr "Nechte AI připravit kód. Tady z něj uděláte stránky vlastního web
 msgid "Your website starts with an idea."
 msgstr "Váš web začíná nápadem."
 
-msgid "WEBSITE BUILDER ·"
+msgid "BYYOURSELF ·"
 msgstr "WEB SVÉPOMOCÍ ·"
 
 msgid "Select a font from the Google Fonts list."
@@ -1033,8 +1033,8 @@ msgstr "Toto nastavení může změnit pouze správce s oprávněním vkládat k
 msgid "Getting started"
 msgstr "Začínáme"
 
-msgid "Website Builder"
-msgstr "Web svépomocí"
+msgid "ByYourself"
+msgstr "ByYourself"
 
 msgid "Content"
 msgstr "Obsah"

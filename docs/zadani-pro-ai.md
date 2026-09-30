@@ -1,11 +1,11 @@
 # Zadání, které můžete zkopírovat do AI
 
-Od verze **1.4.0** můžete zadání připravit přímo v nabídce **Web svépomocí → Zadání pro AI**. Stačí vybrat druh zadání a popsat požadavek; uložený vzhled a potřebný kód se připojí automaticky. [Postup ve WordPressu](zadani-ve-wordpressu.md). Níže zůstávají vzory pro ruční použití.
+Od verze **1.4.0** můžete zadání připravit přímo v nabídce **ByYourself → Zadání pro AI**. Stačí vybrat druh zadání a popsat požadavek; uložený vzhled a potřebný kód se připojí automaticky. [Postup ve WordPressu](zadani-ve-wordpressu.md). Níže zůstávají vzory pro ruční použití.
 
 Nejdříve vytvořte [společný vzhled a typografii](spolecny-vzhled.md). Pak použijte zadání pro stránku, hlavičku, patičku a úpravy níže. Tlačítko v editoru připojuje uložené společné CSS automaticky; při ručním použití ho přiložte sami.
 
 ```text
-Vytvoř obsah stránky pro WordPress se šablonou web-svepomoci-sablona a pluginem web-svepomoci-plugin.
+Vytvoř obsah stránky pro WordPress se šablonou ByYourself Theme a pluginem web-svepomoci-plugin.
 
 Web: [název a krátký popis]
 Návštěvníci: [pro koho web je]
@@ -68,7 +68,7 @@ Tentokrát vytvoř jen společnou hlavičku webu. Použij kořenový header
 s třídou ai-site-header a vlastní nav s aria-label. Odkazy spravuji
 ve WordPressu přes Vzhled → Menu v umístění Hlavní menu. Do nav vlož přesně:
 [aiwp_menu location="primary"]
-Tuto značku nenahrazuj ručně napsanými odkazy. Plugin web-svepomoci-plugin 1.2.0
+Tuto značku nenahrazuj ručně napsanými odkazy. Plugin ByYourself Builder 1.2.0
 ji vykreslí jako ul.aiwp-menu s položkami li > a a podnabídkami ul.sub-menu.
 Navrhni CSS pro tyto seznamy včetně vynulování odrážek, okrajů a odsazení.
 Podnabídky musí být přístupné klávesnicí i dotykem; mohou být stále viditelné.
@@ -97,7 +97,7 @@ Pokud není potřeba skript, může JS zůstat prázdný.
 ## Zadání pro změnu hotové stránky
 
 ```text
-Uprav následující stránku pro Web svépomocí. Zachovej oddělení HTML, CSS a JS,
+Uprav následující stránku pro ByYourself. Zachovej oddělení HTML, CSS a JS,
 jedinečný obal stránky a všechny dosavadní funkční odkazy.
 Pokud HTML obsahuje značky [aiwp_menu location="primary"] nebo
 [aiwp_menu location="footer"], zachovej je a styly jejich seznamů.
@@ -118,6 +118,6 @@ Současný JavaScript:
 [vložit JS]
 ```
 
-Měření, marketingové skripty ani další cookie lištu nevkládej do stránky. Volitelné služby se nastavují přes zvoleného správce souhlasu: Web svépomocí → Soukromí a cookies, nebo při externím režimu například Complianz. Kódy mezi správci neduplikuj.
+Měření, marketingové skripty ani další cookie lištu nevkládej do stránky. Volitelné služby se nastavují přes zvoleného správce souhlasu: ByYourself → Soukromí a cookies, nebo při externím režimu například Complianz. Kódy mezi správci neduplikuj.
 
 Samostatné kopírovatelné textové prompty pro společný vzhled, stránky, header, footer a informační stránky najdete ve složce [prompty](../prompty/README.txt), která je také součástí obou instalačních ZIPů.

@@ -105,8 +105,8 @@
       var location = studio.dataset.aiwpKind === 'footer' ? 'footer' : 'primary';
       return [
         config.contentLanguageInstruction || '',
-        wp.i18n.__("Do not add analytics, marketing scripts or a cookie banner to the page. Configure optional services in the selected consent manager: Website Builder → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers.", "ai-web-studio"),
-        wp.i18n.__("Create ", "ai-web-studio") + (part ? (location === 'footer' ? wp.i18n.__("a shared footer", "ai-web-studio") : wp.i18n.__("a shared header", "ai-web-studio")) : wp.i18n.__("page content", "ai-web-studio")) + wp.i18n.__(" for WordPress with the web-svepomoci-sablona theme and web-svepomoci-plugin plugin.", "ai-web-studio"),
+        wp.i18n.__("Do not add analytics, marketing scripts or a cookie banner to the page. Configure optional services in the selected consent manager: ByYourself → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers.", "ai-web-studio"),
+        wp.i18n.__("Create ", "ai-web-studio") + (part ? (location === 'footer' ? wp.i18n.__("a shared footer", "ai-web-studio") : wp.i18n.__("a shared header", "ai-web-studio")) : wp.i18n.__("page content", "ai-web-studio")) + wp.i18n.__(" for WordPress with the ByYourself Theme theme and ByYourself Builder plugin.", "ai-web-studio"),
         wp.i18n.__("My brief: [ADD the purpose, copy, colours, target audience and required sections].", "ai-web-studio"),
         wp.i18n.__("Return exactly three separate sections labelled HTML, CSS and JS, which I will copy into separate fields.", "ai-web-studio"),
         wp.i18n.__("HTML must be a content fragment: no doctype, html, head, body, style, script, PHP, on* attributes or javascript: URLs. ", "ai-web-studio") + (part ? wp.i18n.__("Return only the requested header or footer.", "ai-web-studio") : wp.i18n.__("I manage the header and footer separately; do not create them. Start with one main H1 heading; do not add another main element.", "ai-web-studio")),

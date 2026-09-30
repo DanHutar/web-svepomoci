@@ -1,6 +1,6 @@
 # Languages / Jazyky
 
-Open **Website Builder → Language**. Without the companion plugin, use **Appearance → Language**. The same preferences apply to both components:
+Open **ByYourself → Language**. Without the companion plugin, use **Appearance → Language**. The same preferences apply to both components:
 
 - **Plugin and theme interface**: labels, help, editor messages and generated prompt instructions.
 - **Public labels and cookie controls**: built-in visitor-facing labels. External consent plugins have their own settings.
@@ -14,7 +14,7 @@ Both installation ZIPs contain text prompts in `prompty/en/` and `prompty/cs/`. 
 
 ## Česky
 
-Otevřete **Web svépomocí → Jazyk**. Bez aktivního pluginu najdete nastavení pod **Vzhled → Jazyk**. Volba platí společně pro plugin i šablonu:
+Otevřete **ByYourself → Jazyk**. Bez aktivního pluginu najdete nastavení pod **Vzhled → Jazyk**. Volba platí společně pro plugin i šablonu:
 
 - **Rozhraní pluginu a šablony**: popisky, nápověda, zprávy editoru a pokyny v generovaných promptech.
 - **Veřejné popisky a ovládání cookies**: vlastní texty pro návštěvníky. Externí plugin pro cookies nastavujte samostatně.

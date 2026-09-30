@@ -61,7 +61,7 @@ function ai_web_companion_notice() {
 	}
 	?>
 	<div class="notice notice-info is-dismissible">
-		<p><?php esc_html_e( 'The web-svepomoci-sablona theme is ready. Activate web-svepomoci-plugin from the installation package for separate HTML, CSS, JavaScript and SEO fields, and custom headers and footers.', 'ai-web' ); ?> <a href="<?php echo esc_url( admin_url( 'plugins.php' ) ); ?>"><?php esc_html_e( 'Go to plugins', 'ai-web' ); ?></a></p>
+		<p><?php esc_html_e( 'The ByYourself Theme theme is ready. Activate ByYourself Builder from the installation package for separate HTML, CSS, JavaScript and SEO fields, and custom headers and footers.', 'ai-web' ); ?> <a href="<?php echo esc_url( admin_url( 'plugins.php' ) ); ?>"><?php esc_html_e( 'Go to plugins', 'ai-web' ); ?></a></p>
 	</div>
 	<?php
 }

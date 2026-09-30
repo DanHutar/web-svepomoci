@@ -12,7 +12,7 @@ Projekt se publikuje do veřejného repozitáře [DanHutar/web-svepomoci](https:
 
 Workflow používá krátkodobý `GITHUB_TOKEN` poskytovaný GitHub Actions; vlastní tajné klíče se nenastavují. Publikované vydání se stejným číslem nepřepisuje. Další změny vydávejte pod vyšší verzí. Při neúspěšném nahrání může zůstat koncept vydání; zkontrolujte log Actions a koncept před novým pokusem dokončete nebo odstraňte. Neúplné, konceptové a předběžné verze WordPress nepoužije.
 
-Po vydání otevřete na testovacím webu **Web svépomocí → Zkontrolovat aktualizace** a aktualizujte plugin i šablonu. Nastavení automatické instalace je na správci daného WordPressu.
+Po vydání otevřete na testovacím webu **ByYourself → Zkontrolovat aktualizace** a aktualizujte plugin i šablonu. Nastavení automatické instalace je na správci daného WordPressu.
 
 ## Kompatibilita s původní instalací
 

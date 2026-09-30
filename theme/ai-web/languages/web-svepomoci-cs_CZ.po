@@ -16,8 +16,8 @@ msgstr "Jazyk"
 msgid "Choose English or Czech for every language setting."
 msgstr "Pro každé jazykové nastavení vyberte angličtinu nebo češtinu."
 
-msgid "These preferences apply to both Website Builder components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions."
-msgstr "Tato nastavení platí pro plugin i šablonu Web svépomocí. Nemění jazyk administrace WordPressu ani nepřekládají uložené stránky, kód, menu nebo popisy služeb."
+msgid "These preferences apply to both ByYourself components. They do not change the WordPress dashboard language or translate saved pages, code, menus or service descriptions."
+msgstr "Tato nastavení platí pro plugin i šablonu ByYourself. Nemění jazyk administrace WordPressu ani nepřekládají uložené stránky, kód, menu nebo popisy služeb."
 
 msgid "Plugin and theme interface"
 msgstr "Rozhraní pluginu a šablony"

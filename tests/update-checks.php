@@ -22,8 +22,8 @@ $target_version = get_option( 'wsp_test_target_version' );
 $version_parts = explode( '.', $target_version );
 $version_parts[2] = (int) $version_parts[2] + 1;
 $next_version = implode( '.', $version_parts );
-wsp_assert( 'web-svepomoci-plugin' === $plugin_data['Name'] && $target_version === $plugin_data['Version'], 'Installed plugin has new name and version' );
-wsp_assert( 'web-svepomoci-sablona' === $theme->get( 'Name' ) && $target_version === $theme->get( 'Version' ), 'Installed theme has new name and version' );
+wsp_assert( 'ByYourself Builder' === $plugin_data['Name'] && $target_version === $plugin_data['Version'], 'Installed plugin has new name and version' );
+wsp_assert( 'ByYourself Theme' === $theme->get( 'Name' ) && $target_version === $theme->get( 'Version' ), 'Installed theme has new name and version' );
 wsp_assert( AIWP_VERSION === $plugin_data['Version'], 'Plugin runtime version matches installed header' );
 
 $base = WSP_GitHub_Updates::REPOSITORY . '/releases/download/v' . $next_version . '/';
@@ -72,7 +72,7 @@ wsp_assert( $base . 'web-svepomoci-sablona.zip' === $theme_updates->response['ai
 wsp_assert( false === WSP_GitHub_Updates::plugin_update( false, $plugin_data, 'unrelated/plugin.php', array() ), 'Unrelated GitHub plugins are untouched' );
 wsp_assert( false === WSP_GitHub_Updates::theme_update( false, array( 'UpdateURI' => WSP_GitHub_Updates::REPOSITORY ), 'other-theme', array() ), 'Unrelated themes are untouched' );
 $details = apply_filters( 'plugins_api', false, 'plugin_information', (object) array( 'slug' => 'ai-web-studio' ) );
-wsp_assert( 'web-svepomoci-plugin' === $details->name && $next_version === $details->version, 'Native plugin details use GitHub release information' );
+wsp_assert( 'ByYourself Builder' === $details->name && $next_version === $details->version, 'Native plugin details use GitHub release information' );
 
 // Core must not offer a downgrade or repeatedly offer the version already installed.
 $equal = $release;

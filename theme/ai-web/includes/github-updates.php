@@ -151,7 +151,7 @@ if ( ! class_exists( 'WSP_GitHub_Updates', false ) ) {
                 return $result;
             }
             return (object) array(
-                'name' => 'web-svepomoci-plugin',
+                'name' => 'ByYourself Builder',
                 'slug' => 'ai-web-studio',
                 'version' => $release['plugin']['version'],
                 'author' => 'DanHutar',
