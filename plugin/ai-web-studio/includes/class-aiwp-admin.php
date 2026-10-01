@@ -102,7 +102,7 @@ final class AIWP_Admin {
 					<?php endforeach; ?>
 				</div>
 				<?php
-				$hints = array( 'html' => __( 'Insert only page content, such as sections, headings and paragraphs. No html, head, body, style or script tags. PHP is not supported.', 'ai-web-studio' ), 'css' => __( 'Insert CSS without <style> tags. Use your own classes, such as .moje-stranka, to avoid affecting other website elements.', 'ai-web-studio' ), 'js' => __( 'Optional. Insert JavaScript without <script> tags. For a simple page with text and images, this field can stay empty.', 'ai-web-studio' ) );
+				$hints = array( 'html' => __( 'Insert only page content, such as sections, headings and paragraphs. No html, head, body, style or script tags. PHP is not supported.', 'ai-web-studio' ), 'css' => __( 'Insert CSS without <style> tags. Use your own classes, such as .sample-page, to avoid affecting other website elements.', 'ai-web-studio' ), 'js' => __( 'Optional. Insert JavaScript without <script> tags. For a simple page with text and images, this field can stay empty.', 'ai-web-studio' ) );
 				foreach ( $hints as $key => $hint ) :
 					?>
 					<div class="aiwp-code-panel" id="aiwp-panel-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="aiwp-tab-<?php echo esc_attr( $key ); ?>">

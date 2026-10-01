@@ -21,26 +21,26 @@ try {
   if (process.argv.includes('--expect-active')) assert.equal(enabledAfterSample, true, 'Sample insertion enables AI mode');
   await page.locator('[data-aiwp-refresh]').click();
   const preview = page.frameLocator('.aiwp-preview-frame');
-  await preview.locator('.moje-stranka').waitFor();
-  const previewBackground = await preview.locator('.moje-stranka').evaluate(el => getComputedStyle(el).backgroundColor);
+  await preview.locator('.sample-page').waitFor();
+  const previewBackground = await preview.locator('.sample-page').evaluate(el => getComputedStyle(el).backgroundColor);
   assert.equal(previewBackground, 'rgb(246, 248, 251)');
   await Promise.all([page.waitForNavigation(), page.locator('#publish').click()]);
   const publicPage = await context.newPage();
   await publicPage.goto(`${server.serverUrl}/?page_id=${id}`);
   if (!enabledAfterSample) {
-    assert.equal(await publicPage.locator('.moje-stranka').count(), 0);
+    assert.equal(await publicPage.locator('.sample-page').count(), 0);
     assert.equal(await publicPage.locator('#original-content').count(), 1);
     console.log('REPRODUCED: styled preview but original frontend content when mode stays off.');
     await page.locator('#aiwp-enabled').check();
     await Promise.all([page.waitForNavigation(), page.locator('#publish').click()]);
     await publicPage.reload();
   }
-  await publicPage.locator('.moje-stranka').waitFor();
-  assert.equal(await publicPage.locator('.moje-stranka').evaluate(el => getComputedStyle(el).backgroundColor), previewBackground);
-  assert.equal(await publicPage.locator('.moje-stranka__karty').evaluate(el => getComputedStyle(el).display), 'grid');
-  assert.equal(await publicPage.locator('.moje-stranka__karty').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 3);
+  await publicPage.locator('.sample-page').waitFor();
+  assert.equal(await publicPage.locator('.sample-page').evaluate(el => getComputedStyle(el).backgroundColor), previewBackground);
+  assert.equal(await publicPage.locator('.sample-page__cards').evaluate(el => getComputedStyle(el).display), 'grid');
+  assert.equal(await publicPage.locator('.sample-page__cards').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 3);
   await publicPage.setViewportSize({ width: 390, height: 844 });
-  assert.equal(await publicPage.locator('.moje-stranka__karty').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 1);
+  assert.equal(await publicPage.locator('.sample-page__cards').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 1);
   console.log('PASS: native sample save, frontend background, desktop grid and mobile layout.');
 } finally {
   if (browser) await browser.close();

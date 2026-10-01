@@ -1,9 +1,9 @@
-# ByYourself 1.10.2
+# ByYourself 1.10.3
 
-Installation packages now use the product names: **byyourself-builder.zip** and **byyourself-theme.zip**.
+- The theme preview now uses English text and ByYourself branding: **Your website. Built by you.** The same image appears in both languages.
+- Newly inserted sample pages, headers and footers use English HTML/CSS class names in both interface languages, including sample-page, sample-page__content, sample-page__button and sample-part. The page anchor is sample-more.
+- The English sample-insertion message is fully translated. Czech content text remains Czech.
+- Existing saved page code is preserved. New class names apply when inserting a new sample; inserting a sample replaces the current editor code after confirmation.
+- Browser tests no longer overwrite the distributed theme preview with a Czech fixture. Its English HTML source and screenshot command are included in the repository.
 
-**One-time manual update required for installations on 1.10.1 or earlier.** Older versions look for the old ZIP filenames and will not discover this release. Upload both new ZIPs through WordPress and choose **Replace current with uploaded**. Do not delete the existing components first. Future releases can be updated normally after this migration.
-
-The ZIP roots remain ai-web-studio and ai-web, preserving component identity, saved content, settings and activation. The updater now uses the new filenames and a new release-cache key.
-
-Download the two installation attachments, not Source code (zip). See the [installation guide](https://github.com/DanHutar/web-svepomoci/blob/main/README.md#ruční-aktualizace).
+Update both components. Installations on 1.10.2 can update normally. On 1.10.1 or earlier, upload **byyourself-builder.zip** and **byyourself-theme.zip** manually once and choose **Replace current with uploaded**. Do not delete the existing components first.

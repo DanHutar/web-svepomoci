@@ -3,37 +3,88 @@ import { chromium } from 'playwright';
 import { bootWordPress, phpJson, projectRoot } from '../tools/playground.mjs';
 const server = await bootWordPress(9413, false, projectRoot, '7.1.2', null);
 let browser;
+async function checkSample(page, language) {
+  await page.waitForFunction(() => document.querySelector('.CodeMirror')?.CodeMirror);
+  await page.locator('[data-aiwp-sample]').click();
+  const code = await page.evaluate(() => Object.fromEntries(['html','css'].map(key => [key, document.querySelector('#aiwp-panel-'+key+' .CodeMirror').CodeMirror.getValue()])));
+  assert.match(code.html, /class="sample-page__content"/);
+  assert.doesNotMatch(code.html + code.css, /moje-|__obsah|__karty|__tlacitko|#vice/);
+  assert.match(code.html, /href="#sample-more"/);
+  assert.match(code.html, /id="sample-more"/);
+  assert.match(await page.locator('[data-aiwp-action-status]').innerText(), language === 'en' ? /Edit the text and links/ : /Upravte texty a odkazy/);
+  const heading = language === 'en' ? 'Great ideas start with a first page.' : 'Velké nápady začínají první stránkou.';
+  await page.locator('[data-aiwp-refresh]').click();
+  const preview = page.frameLocator('.aiwp-preview-frame');
+  assert.equal(await preview.locator('.sample-page h1').innerText(), heading);
+  assert.equal(await preview.locator('.sample-page').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(246, 248, 251)');
+  await page.locator('#title').fill('Sample '+language);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#publish').click()]);
+  const id = await page.locator('#post_ID').inputValue();
+  const publicPage = await page.context().newPage();
+  try {
+    await publicPage.goto(server.serverUrl+'/?page_id='+id);
+    assert.equal(await publicPage.locator('.sample-page h1').innerText(), heading);
+    assert.equal(await publicPage.locator('.sample-page').evaluate(el => getComputedStyle(el).backgroundColor), 'rgb(246, 248, 251)');
+    assert.equal(await publicPage.locator('.sample-page__cards').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 3);
+    await publicPage.setViewportSize({width:390,height:844});
+    assert.equal(await publicPage.locator('.sample-page__cards').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 1);
+  } finally { await publicPage.close(); }
+}
+async function checkPartSamples(page, language) {
+  const ids = await phpJson(server, `echo wp_json_encode(array('header'=>aiwp_get_part_id('header'),'footer'=>aiwp_get_part_id('footer')));`);
+  for (const [kind, id] of Object.entries(ids)) {
+    await page.goto(server.serverUrl+'/wp-admin/post.php?post='+id+'&action=edit');
+    await page.waitForFunction(() => document.querySelector('.CodeMirror')?.CodeMirror);
+    await page.locator('[data-aiwp-sample]').click();
+    const html = await page.evaluate(() => document.querySelector('#aiwp-panel-html .CodeMirror').CodeMirror.getValue());
+    assert.match(html, /class="sample-part"/);
+    assert.doesNotMatch(html, /moje-/);
+    assert.ok(html.includes('[aiwp_menu location="'+(kind === 'footer' ? 'footer' : 'primary')+'"]'));
+    await page.locator('[data-aiwp-refresh]').click();
+    const preview = page.frameLocator('.aiwp-preview-frame');
+    assert.equal(await preview.locator('.sample-part__brand').innerText(), language === 'en' ? 'Your website name' : 'Název vašeho webu');
+    assert.equal(await preview.locator('.sample-part').evaluate(el => getComputedStyle(el).display), 'flex');
+    await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#publish').click()]);
+  }
+}
 try {
   const initial = await phpJson(server, `wp_set_password('aiwp-local-test',1); echo wp_json_encode(WSP_Languages::settings());`);
   assert.deepEqual(initial, { ui:'en', public:'en', content:'en' });
   browser = await chromium.launch({ headless:true, channel:'chrome' });
-  const page = await browser.newPage();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  page.on('dialog', dialog => dialog.accept());
   page.setDefaultTimeout(20000);
+  page.setDefaultNavigationTimeout(60000);
   const errors=[]; page.on('pageerror',e=>errors.push(e.message));
   await page.goto(server.serverUrl+'/wp-login.php');
   await page.locator('#user_login').fill('admin'); await page.locator('#user_pass').fill('aiwp-local-test');
-  await Promise.all([page.waitForNavigation(), page.locator('#wp-submit').click()]);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#wp-submit').click()]);
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp');
   assert.equal(await page.locator('.aiwp-dashboard h1').innerText(), 'Your website starts with an idea.');
   assert.equal(await page.locator('#toplevel_page_aiwp .wp-menu-name').innerText(), 'ByYourself');
   await page.goto(server.serverUrl+'/wp-admin/post-new.php?post_type=page');
   assert.equal(await page.locator('[data-aiwp-sample]').innerText(),'Insert sample content');
+  await checkSample(page, 'en');
   await page.locator('[data-aiwp-copy-prompt]').click();
   await page.waitForFunction(()=>document.querySelector('[data-aiwp-action-status]').textContent.length > 0);
   assert.match(await page.locator('[data-aiwp-action-status]').innerText(), /Prompt|Copy/);
+  await checkPartSamples(page, 'en');
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=wsp-languages');
   await page.locator('#wsp-language-ui').selectOption('cs');
   await page.locator('#wsp-language-public').selectOption('cs');
-  await Promise.all([page.waitForNavigation(),page.locator('#submit').click()]);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }),page.locator('#submit').click()]);
   assert.equal(await page.locator('.wrap h1').last().innerText(),'Jazyk');
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp');
   assert.equal(await page.locator('.aiwp-dashboard h1').innerText(),'Váš web začíná nápadem.');
   assert.equal(await page.locator('#toplevel_page_aiwp .wp-menu-name').innerText(), 'ByYourself');
   await page.goto(server.serverUrl+'/wp-admin/post-new.php?post_type=page');
   assert.equal(await page.locator('[data-aiwp-sample]').innerText(),'Vložit ukázkový obsah');
+  await checkSample(page, 'cs');
   await page.locator('[data-aiwp-copy-prompt]').click();
   await page.waitForFunction(()=>document.querySelector('[data-aiwp-action-status]').textContent.length > 0);
   assert.match(await page.locator('[data-aiwp-action-status]').innerText(), /Zadání|zadání/);
+  await checkPartSamples(page, 'cs');
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp-prompts');
   await page.locator('#aiwp-prompt-instructions').fill('Create an accessible contact page.');
   await page.locator('#aiwp-prompt-kind').selectOption('page');
@@ -51,7 +102,7 @@ try {
   assert.equal(await page.locator('[data-aiwp-consent-action="accept"]').innerText(),'Přijmout vše');
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=wsp-languages');
   await page.locator('#wsp-language-public').selectOption('en');
-  await Promise.all([page.waitForNavigation(),page.locator('#submit').click()]);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }),page.locator('#submit').click()]);
   assert.equal(await page.locator('.wrap h1').last().innerText(),'Jazyk', 'Public language does not change the interface');
   await page.goto(server.serverUrl+'/?page_id='+fixture);
   assert.equal(await page.locator('[data-aiwp-consent-action="accept"]').innerText(),'Accept all');
@@ -76,7 +127,7 @@ try {
   await page.goto(server.serverUrl+'/wp-admin/themes.php?page=wsp-languages');
   assert.equal(await page.locator('#wsp-language-ui').inputValue(),'cs', 'Theme supports languages without the plugin');
   await page.locator('#wsp-language-public').selectOption('en');
-  await Promise.all([page.waitForNavigation(),page.locator('#submit').click()]);
+  await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }),page.locator('#submit').click()]);
   await page.goto(server.serverUrl+'/?p=999999');
   assert.equal(await page.locator('main h1').innerText(),'Page not found');
   assert.deepEqual(errors,[]);

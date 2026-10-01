@@ -60,7 +60,7 @@ export async function runBrowserChecks(serverUrl, fixtures, outputDir) {
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
     await page.screenshot({ path: path.join(outputDir, 'website-desktop.png'), fullPage: true });
     await page.setViewportSize({ width: 1200, height: 900 });
-    await page.screenshot({ path: path.resolve(outputDir, '../theme/ai-web/screenshot.png') });
+    await page.screenshot({ path: path.join(outputDir, 'website-preview.png') });
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: path.join(outputDir, 'website-mobile.png'), fullPage: true });
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'No horizontal mobile overflow');

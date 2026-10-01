@@ -55,11 +55,11 @@ msgstr "Odkazy nastavte přes Vzhled → Menu. "
 msgid "The sample has been inserted and custom code is enabled. "
 msgstr "Ukázka je vložená a použití vlastního kódu je zapnuté. "
 
-msgid "<section class=\"moje-stranka\">\n  <div class=\"moje-stranka__obsah\">\n    <p class=\"moje-stranka__stitky\">YOUR NEW BEGINNING</p>\n    <h1>Great ideas start with a first page.</h1>\n    <p>Tell visitors what you do and how you can help them. Replace this text with your own story.</p>\n    <a class=\"moje-stranka__tlacitko\" href=\"#vice\">Learn more <span aria-hidden=\"true\">↗</span></a>\n  </div>\n  <div id=\"vice\" class=\"moje-stranka__karty\">\n    <article><span>01</span><h2>Your story</h2><p>What led you to what you do today?</p></article>\n    <article><span>02</span><h2>Your services</h2><p>Describe the specific help you offer.</p></article>\n    <article><span>03</span><h2>The next step</h2><p>Tell visitors how to get in touch.</p></article>\n  </div>\n</section>"
-msgstr "<section class=\"moje-stranka\">\n  <div class=\"moje-stranka__obsah\">\n    <p class=\"moje-stranka__stitky\">VÁŠ NOVÝ ZAČÁTEK</p>\n    <h1>Velké nápady začínají první stránkou.</h1>\n    <p>Představte návštěvníkům, co děláte a s čím jim pomůžete. Tento text nahraďte vlastním příběhem.</p>\n    <a class=\"moje-stranka__tlacitko\" href=\"#vice\">Zjistit více <span aria-hidden=\"true\">↗</span></a>\n  </div>\n  <div id=\"vice\" class=\"moje-stranka__karty\">\n    <article><span>01</span><h2>Váš příběh</h2><p>Co vás přivedlo k tomu, co dnes děláte?</p></article>\n    <article><span>02</span><h2>Vaše služby</h2><p>Popište konkrétní pomoc, kterou nabízíte.</p></article>\n    <article><span>03</span><h2>Další krok</h2><p>Řekněte návštěvníkům, jak vás mohou kontaktovat.</p></article>\n  </div>\n</section>"
+msgid "<section class=\"sample-page\">\n  <div class=\"sample-page__content\">\n    <p class=\"sample-page__eyebrow\">YOUR NEW BEGINNING</p>\n    <h1>Great ideas start with a first page.</h1>\n    <p>Tell visitors what you do and how you can help them. Replace this text with your own story.</p>\n    <a class=\"sample-page__button\" href=\"#sample-more\">Learn more <span aria-hidden=\"true\">↗</span></a>\n  </div>\n  <div id=\"sample-more\" class=\"sample-page__cards\">\n    <article><span>01</span><h2>Your story</h2><p>What led you to what you do today?</p></article>\n    <article><span>02</span><h2>Your services</h2><p>Describe the specific help you offer.</p></article>\n    <article><span>03</span><h2>The next step</h2><p>Tell visitors how to get in touch.</p></article>\n  </div>\n</section>"
+msgstr "<section class=\"sample-page\">\n  <div class=\"sample-page__content\">\n    <p class=\"sample-page__eyebrow\">VÁŠ NOVÝ ZAČÁTEK</p>\n    <h1>Velké nápady začínají první stránkou.</h1>\n    <p>Představte návštěvníkům, co děláte a s čím jim pomůžete. Tento text nahraďte vlastním příběhem.</p>\n    <a class=\"sample-page__button\" href=\"#sample-more\">Zjistit více <span aria-hidden=\"true\">↗</span></a>\n  </div>\n  <div id=\"sample-more\" class=\"sample-page__cards\">\n    <article><span>01</span><h2>Váš příběh</h2><p>Co vás přivedlo k tomu, co dnes děláte?</p></article>\n    <article><span>02</span><h2>Vaše služby</h2><p>Popište konkrétní pomoc, kterou nabízíte.</p></article>\n    <article><span>03</span><h2>Další krok</h2><p>Řekněte návštěvníkům, jak vás mohou kontaktovat.</p></article>\n  </div>\n</section>"
 
-msgid "<div class=\"moje-cast\">\n  <a class=\"moje-cast__brand\" href=\"/\">Your website name</a>\n  <nav aria-label=\"Website navigation\">[aiwp_menu location=\""
-msgstr "<div class=\"moje-cast\">\n  <a class=\"moje-cast__brand\" href=\"/\">Název vašeho webu</a>\n  <nav aria-label=\"Navigace webu\">[aiwp_menu location=\""
+msgid "<div class=\"sample-part\">\n  <a class=\"sample-part__brand\" href=\"/\">Your website name</a>\n  <nav aria-label=\"Website navigation\">[aiwp_menu location=\""
+msgstr "<div class=\"sample-part\">\n  <a class=\"sample-part__brand\" href=\"/\">Název vašeho webu</a>\n  <nav aria-label=\"Navigace webu\">[aiwp_menu location=\""
 
 msgid "The sample will replace the current HTML, CSS and JavaScript in the editor. Continue? It will only be saved to the website when you click Update or Publish."
 msgstr "Ukázka nahradí aktuální HTML, CSS a JavaScript v editoru. Pokračovat? Změna se na web uloží až tlačítkem Aktualizovat nebo Publikovat."
@@ -355,8 +355,8 @@ msgstr " kód"
 msgid "Optional. Insert JavaScript without <script> tags. For a simple page with text and images, this field can stay empty."
 msgstr "Nepovinné. Vložte JavaScript bez značek <script>. Pro běžnou stránku s texty a obrázky může toto pole zůstat prázdné."
 
-msgid "Insert CSS without <style> tags. Use your own classes, such as .moje-stranka, to avoid affecting other website elements."
-msgstr "Vložte CSS bez značek <style>. Použijte vlastní třídy, například .moje-stranka, aby se vzhled neprolínal s ostatními částmi webu."
+msgid "Insert CSS without <style> tags. Use your own classes, such as .sample-page, to avoid affecting other website elements."
+msgstr "Vložte CSS bez značek <style>. Použijte vlastní třídy, například .sample-page, aby se vzhled neprolínal s ostatními částmi webu."
 
 msgid "Insert only page content, such as sections, headings and paragraphs. No html, head, body, style or script tags. PHP is not supported."
 msgstr "Vložte pouze obsah stránky, například sekce, nadpisy a odstavce. Bez značek html, head, body, style a script. PHP se nevkládá."
@@ -1071,6 +1071,9 @@ msgstr "Vzhled webu"
 
 msgid "Check for updates"
 msgstr "Zkontrolovat aktualizace"
+
+msgid "Edit the text and links. "
+msgstr "Upravte texty a odkazy. "
 
 msgid "Per-page HTML, CSS and JavaScript, shared headers and footers, and essential SEO."
 msgstr "HTML, CSS a JavaScript pro jednotlivé stránky, společná hlavička a patička a základní SEO."

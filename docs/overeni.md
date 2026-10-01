@@ -142,6 +142,12 @@ Test `npm run test:consent` spouští WordPress 7.1.2 a skutečný Chrome. Ově�
 
 Test používá místní testovací služby; neověřuje konfiguraci konkrétního Google Analytics, marketingového poskytovatele ani produkčního hostingu. Rozsah a postup konfigurace popisuje [návod](soukromi-cookies.md).
 
+## Verze 1.10.3: ukázkový obsah a obrázek šablony
+
+Test jazyků navíc v češtině i angličtině vloží a publikuje ukázkovou stránku, ověří stejné anglické třídy v HTML/CSS, funkční kotvu, vzhled v náhledu i na frontendu a rozložení na mobilu. Kontroluje také ukázky headeru a footeru. Již uložený obsah aktualizace nepřepisuje.
+
+Anglický obrázek šablony se vytváří příkazem `npm run build:screenshot` z `tools/theme-preview.html` a existujících CSS ukázky. Je společný pro oba jazyky. Běžné integrační testy ukládají své snímky pouze do `test-results`, takže distribuovaný obrázek nepřepíšou českou ukázkou.
+
 ## Verze 1.10.0: angličtina a čeština
 
 `npm run test:languages` ověřuje na WordPressu 7.1.2 výchozí angličtinu nové instalace, přepnutí PHP i JavaScriptových popisků přes skutečný formulář, nezávislý jazyk veřejného ovládání cookies a požadovaného obsahu v AI promptu. Kontroluje zachování uložených textů, oprávnění, odmítnutí neplatného jazyka, zachování češtiny při migraci a nastavení šablony bez aktivního pluginu. Jazyk samotného WordPressu se nemění.
