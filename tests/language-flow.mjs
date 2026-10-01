@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import { bootWordPress, phpJson, projectRoot } from '../tools/playground.mjs';
 const server = await bootWordPress(9413, false, projectRoot, '7.1.2', null);
-let browser;
+let browser, page;
+const errors=[];
 async function checkSample(page, language) {
   await page.waitForFunction(() => document.querySelector('.CodeMirror')?.CodeMirror);
   await page.locator('[data-aiwp-sample]').click();
@@ -29,6 +30,7 @@ async function checkSample(page, language) {
     await publicPage.setViewportSize({width:390,height:844});
     assert.equal(await publicPage.locator('.sample-page__cards').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length), 1);
   } finally { await publicPage.close(); }
+  await page.bringToFront();
 }
 async function checkPartSamples(page, language) {
   const ids = await phpJson(server, `echo wp_json_encode(array('header'=>aiwp_get_part_id('header'),'footer'=>aiwp_get_part_id('footer')));`);
@@ -52,11 +54,17 @@ try {
   assert.deepEqual(initial, { ui:'en', public:'en', content:'en' });
   browser = await chromium.launch({ headless:true, channel:'chrome' });
   const context = await browser.newContext();
-  const page = await context.newPage();
+  // Test translated copy feedback without depending on headless browser clipboard permission UI.
+  await context.addInitScript(() => {
+    Object.defineProperty(navigator, 'clipboard', { configurable: true, value: {
+      writeText: async text => { window.copiedPrompt = text; }
+    } });
+  });
+  page = await context.newPage();
   page.on('dialog', dialog => dialog.accept());
   page.setDefaultTimeout(20000);
   page.setDefaultNavigationTimeout(60000);
-  const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+  page.on('pageerror',e=>errors.push(e.message));
   await page.goto(server.serverUrl+'/wp-login.php');
   await page.locator('#user_login').fill('admin'); await page.locator('#user_pass').fill('aiwp-local-test');
   await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#wp-submit').click()]);
@@ -65,11 +73,12 @@ try {
   assert.equal(await page.locator('#toplevel_page_aiwp .wp-menu-name').innerText(), 'ByYourself');
   await page.goto(server.serverUrl+'/wp-admin/post-new.php?post_type=page');
   assert.equal(await page.locator('[data-aiwp-sample]').innerText(),'Insert sample content');
-  await checkSample(page, 'en');
   await page.locator('[data-aiwp-copy-prompt]').click();
   await page.waitForFunction(()=>document.querySelector('[data-aiwp-action-status]').textContent.length > 0);
   assert.match(await page.locator('[data-aiwp-action-status]').innerText(), /Prompt|Copy/);
+  await checkSample(page, 'en');
   await checkPartSamples(page, 'en');
+  console.log('English page/header/footer samples: classes, preview, native save and mobile layout passed.');
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=wsp-languages');
   await page.locator('#wsp-language-ui').selectOption('cs');
   await page.locator('#wsp-language-public').selectOption('cs');
@@ -80,11 +89,12 @@ try {
   assert.equal(await page.locator('#toplevel_page_aiwp .wp-menu-name').innerText(), 'ByYourself');
   await page.goto(server.serverUrl+'/wp-admin/post-new.php?post_type=page');
   assert.equal(await page.locator('[data-aiwp-sample]').innerText(),'Vložit ukázkový obsah');
-  await checkSample(page, 'cs');
   await page.locator('[data-aiwp-copy-prompt]').click();
   await page.waitForFunction(()=>document.querySelector('[data-aiwp-action-status]').textContent.length > 0);
   assert.match(await page.locator('[data-aiwp-action-status]').innerText(), /Zadání|zadání/);
+  await checkSample(page, 'cs');
   await checkPartSamples(page, 'cs');
+  console.log('Czech page/header/footer samples: English classes, translated text and responsive layout passed.');
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp-prompts');
   await page.locator('#aiwp-prompt-instructions').fill('Create an accessible contact page.');
   await page.locator('#aiwp-prompt-kind').selectOption('page');
@@ -132,4 +142,11 @@ try {
   assert.equal(await page.locator('main h1').innerText(),'Page not found');
   assert.deepEqual(errors,[]);
   console.log('Languages: defaults, UI/JS/prompts, independent public labels, preserved content, permissions, migration and standalone theme passed.');
+} catch (error) {
+  console.error('Language test diagnostic:', errors, page && await page.evaluate(() => ({
+    url: location.href, state: document.readyState, codeEditor: !!document.querySelector('.CodeMirror'),
+    copied: window.copiedPrompt, status: document.querySelector('[data-aiwp-action-status]')?.textContent,
+    mode: document.querySelector('[data-aiwp-mode-status]')?.textContent
+  })).catch(() => null));
+  throw error;
 } finally { if(browser)await browser.close(); await server[Symbol.asyncDispose](); }
