@@ -111,11 +111,9 @@ Pro používání na hostingu nepotřebujete Node.js. Vývojář může s Node.j
 
 ## Soukromí a cookies
 
-Od verze 1.9.0 nastavíte souhlas přes **ByYourself → Soukromí a cookies**. Měření je ve výchozím stavu vypnuté. [Návod a rozsah blokování](docs/soukromi-cookies.md).
+Vestavěná správa cookies je vypnutá a její nastavení v administraci bylo odstraněno. Souhlasy, měření a ovládání nastavte v externím pluginu, například Complianz. Uložené nastavení zůstává neaktivní; kódy ani souhlasy se nepřenášejí. Po aktualizaci vymažte cache webu/CDN. Měření ani další lištu nevkládejte do AI kódu stránek, headeru a footeru.
 
-Při použití Complianz zaškrtněte **Souhlas spravuje externí plugin** a uložte. Tím vypnete naši správu souhlasu včetně lišty, tlačítka a měřicích skriptů. Externí plugin nastavte samostatně a vymažte cache.
-
-Od verze 1.9.2 je externí režim výchozí, pokud volba ještě není uložená. Již uložené nastavení se nemění. Pro vlastní správu ho odškrtněte a uložte. Tlačítko přímo do HTML patičky vložíte značkou `[aiwp_cookie_settings]`; samostatný blok pod patičkou pak zmizí. V externím režimu značka nic nevypíše.
+[Postup přechodu](docs/soukromi-cookies.md). [Bezpečnostní audit](docs/bezpecnostni-audit-2026-10-09.md).
 
 ## Textové prompty v instalačních balíčcích
 

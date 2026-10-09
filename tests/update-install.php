@@ -8,6 +8,11 @@ if ( ! defined( 'FS_METHOD' ) ) {
 }
 add_filter( 'filesystem_method', function () { return 'direct'; } );
 $fixture = aiwp_test_seed();
+// A pre-upgrade installation may have enabled its own consent manager.
+update_option( 'aiwp_consent_settings', array(
+    'external' => false, 'policy' => home_url( '/privacy/' ),
+    'analytics' => array( 'enabled' => true, 'description' => 'Existing analytics', 'js' => 'window.legacyTracking = true;', 'cookies' => '_old', 'storage' => '_old' ),
+) );
 $manifest = json_decode( file_get_contents( '/tmp/updates.json' ), true );
 $target_version = $manifest['version'];
 update_option( 'wsp_test_target_version', $target_version );
@@ -19,6 +24,7 @@ foreach ( $ids as $id ) {
 update_option( 'wsp_test_snapshot', array(
     'metadata' => $snapshot,
     'settings' => get_option( 'aiwp_settings' ),
+    'consent' => get_option( 'aiwp_consent_settings' ),
     'parts' => get_option( 'aiwp_part_ids' ),
     'theme_mods' => get_theme_mods(),
     'active' => get_option( 'active_plugins' ),

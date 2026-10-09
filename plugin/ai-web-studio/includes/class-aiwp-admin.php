@@ -48,7 +48,6 @@ final class AIWP_Admin {
 			'siteName'     => get_bloginfo( 'name' ),
 			'siteUrl'      => home_url( '/' ),
 			'menuPreviews' => array( 'primary' => aiwp_render_menu( 'primary' ), 'footer' => aiwp_render_menu( 'footer' ) ),
-			'consentExternal' => aiwp_consent_settings()['external'],
 			'contentLanguageInstruction' => aiwp_content_language_instruction(),
 			'contentLanguage' => WSP_Languages::language( 'content' ),
 		) );
@@ -88,7 +87,6 @@ final class AIWP_Admin {
 						<p><?php esc_html_e( 'In', 'ai-web-studio' ); ?> <a href="<?php echo esc_url( admin_url( 'nav-menus.php' ) ); ?>" target="_blank" rel="noopener"><?php echo esc_html__( 'Appearance → Menus (new tab)', 'ai-web-studio' ); ?></a> <?php echo esc_html__( 'create a menu, add pages and assign it to the location', 'ai-web-studio' ); ?> <strong><?php echo esc_html( $menu_label ); ?></strong><?php echo esc_html__( '. Changes to links will then appear on the website automatically.', 'ai-web-studio' ); ?></p>
 						<p><?php echo esc_html__( 'Insert into HTML', 'ai-web-studio' ); ?> <code><?php echo esc_html( '[aiwp_menu location="' . $menu_location . '"]' ); ?></code><?php echo esc_html__( ', ideally inside a', 'ai-web-studio' ); ?> <code>&lt;nav&gt;</code><?php echo esc_html__( ' element. Replace the manually written links with this marker; it will become a list of links on the website.', 'ai-web-studio' ); ?></p>
 						<button type="button" class="button" data-aiwp-insert-menu data-aiwp-location="<?php echo esc_attr( $menu_location ); ?>"><?php echo esc_html__( 'Insert WordPress menu', 'ai-web-studio' ); ?></button>
-						<?php if ( 'footer' === $menu_location ) : ?><p><?php echo esc_html__( 'To place the button inside the footer, insert into HTML', 'ai-web-studio' ); ?> <code>[aiwp_cookie_settings]</code><?php echo esc_html__( '. Style it using the class', 'ai-web-studio' ); ?> <code>aiwp-cookie-settings</code><?php echo esc_html__( '. In external mode, use your consent manager\'s controls.', 'ai-web-studio' ); ?></p><?php endif; ?>
 						<p class="description"><?php echo esc_html__( 'This button inserts the marker at the cursor or replaces the selected HTML. Then click Update. After changing a menu in Appearance → Menus, reload this editor to refresh the preview links.', 'ai-web-studio' ); ?></p>
 						<?php if ( ! has_nav_menu( $menu_location ) ) : ?>
 							<p class="aiwp-menu-notice"><?php echo esc_html__( 'No menu is assigned to “', 'ai-web-studio' ); ?><?php echo esc_html( $menu_label ); ?><?php echo esc_html__( '” yet. Select and save a menu in Appearance → Menus first; links will not appear until then.', 'ai-web-studio' ); ?></p>

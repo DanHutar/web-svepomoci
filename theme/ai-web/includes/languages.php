@@ -63,7 +63,7 @@ if ( ! class_exists( 'WSP_Languages', false ) ) {
             <form action="options.php" method="post">
             <?php settings_fields( 'wsp_languages' ); ?>
             <table class="form-table" role="presentation"><tbody>
-            <?php foreach ( array( 'ui' => __( 'Plugin and theme interface', 'web-svepomoci' ), 'public' => __( 'Public labels and cookie controls', 'web-svepomoci' ), 'content' => __( 'Requested AI content language', 'web-svepomoci' ) ) as $scope => $label ) : ?>
+            <?php foreach ( array( 'ui' => __( 'Plugin and theme interface', 'web-svepomoci' ), 'public' => __( 'Public labels', 'web-svepomoci' ), 'content' => __( 'Requested AI content language', 'web-svepomoci' ) ) as $scope => $label ) : ?>
                 <tr><th scope="row"><label for="wsp-language-<?php echo esc_attr( $scope ); ?>"><?php echo esc_html( $label ); ?></label></th><td>
                 <select id="wsp-language-<?php echo esc_attr( $scope ); ?>" name="wsp_languages[<?php echo esc_attr( $scope ); ?>]">
                 <option value="en" lang="en" <?php selected( $settings[ $scope ], 'en' ); ?>>English</option>

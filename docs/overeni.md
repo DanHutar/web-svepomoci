@@ -132,15 +132,9 @@ Nejde o test všech optimalizačních doplňků: externí slučování či odkl�
 
 Testovací prostředí používá GD. Dostupnost WebP a EXIF závisí na konkrétním hostingu; šablona před převodem ověřuje podporu editoru. Test negarantuje menší velikost každého výstupu ani kompatibilitu se všemi optimalizačními pluginy.
 
-## Verze 1.9.0: souhlas s volitelnými službami
+## Verze 1.10.4: vypnutí vestavěné správy cookies
 
-Ve verzi 1.9.2 test ověřuje výchozí externí režim bez souborů a ovládání cookies, dvě tlačítka uvnitř vlastní patičky bez duplicitního bloku, otevření a zavření klávesnicí včetně návratu fokusu, skrytí značky v externím režimu a záložní ovládání u patičky bez značky. Parser odmítá atributy nepodporované značky a zachovává zápis s dvojitými hranatými závorkami jako text.
-
-Rozšíření ve verzi 1.9.1 testuje přepnutí na externího správce přes administraci, uchování původních hodnot, odstranění celé naší lišty a frontendových souborů a zablokování endpointu i s původním souhlasem. Nový návštěvník v externím režimu nedostane naši cookie. Návrat k vlastní správě vyžaduje novou volbu; předchozí souhlas se neobnoví. Test ověřuje izolaci našeho modulu, nikoli všechny konfigurace nebo verze Complianz.
-
-Test `npm run test:consent` spouští WordPress 7.1.2 a skutečný Chrome. Ověřuje výchozí vypnutí, žádné měření před volbou, zapamatované odmítnutí, samostatný souhlas s analytikou, přijmutí obou kategorií, odvolání a odstranění testovacích cookies i localStorage. Zahrnuje synchronizaci mezi kartami, vypršení a změnu verze volby, zákaz cache odpovědí se skripty, odmítnutí požadavku bez souhlasu, neplatný parametr a šířku panelu na mobilu. Ověřuje také uložení přes administraci a odmítnutí neúplného nastavení či změny bez oprávnění.
-
-Test používá místní testovací služby; neověřuje konfiguraci konkrétního Google Analytics, marketingového poskytovatele ani produkčního hostingu. Rozsah a postup konfigurace popisuje [návod](soukromi-cookies.md).
+`npm run test:consent` kontroluje odstraněné menu a přímou administrační adresu, vypnutí lišty i se starým nastavením a souhlasem, HTTP 410 bez kódu a cache a zachování databázového nastavení. Testuje oba jazyky. Neověřuje konfiguraci Complianz ani produkční cache.
 
 ## Verze 1.10.3: ukázkový obsah a obrázek šablony
 
@@ -150,7 +144,7 @@ Anglický obrázek šablony se vytváří příkazem `npm run build:screenshot` 
 
 ## Verze 1.10.0: angličtina a čeština
 
-`npm run test:languages` ověřuje na WordPressu 7.1.2 výchozí angličtinu nové instalace, přepnutí PHP i JavaScriptových popisků přes skutečný formulář, nezávislý jazyk veřejného ovládání cookies a požadovaného obsahu v AI promptu. Kontroluje zachování uložených textů, oprávnění, odmítnutí neplatného jazyka, zachování češtiny při migraci a nastavení šablony bez aktivního pluginu. Jazyk samotného WordPressu se nemění.
+`npm run test:languages` ověřuje na WordPressu 7.1.2 výchozí angličtinu nové instalace, přepnutí PHP i JavaScriptových popisků přes skutečný formulář, nezávislý jazyk veřejných popisků a požadovaného obsahu v AI promptu. Kontroluje zachování uložených textů, oprávnění, odmítnutí neplatného jazyka, zachování češtiny při migraci a nastavení šablony bez aktivního pluginu. Jazyk samotného WordPressu se nemění.
 
 CI znovu sestaví překladové katalogy a ověří shodu s verzovanými soubory. Balíčky obsahují obě sady textových promptů. Dosavadní integrační testy nadále používají češtinu, aby zachytily nechtěné změny stávajícího chování.
 

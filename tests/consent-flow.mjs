@@ -1,180 +1,61 @@
+import { randomUUID } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import { bootWordPress, phpJson, projectRoot } from '../tools/playground.mjs';
+const testPassword = randomUUID();
 const server = await bootWordPress(9412, false, projectRoot, '7.1.2');
 let browser;
 try {
+  const saved = await phpJson(server, `
+    $s = aiwp_consent_settings(); $s['external'] = false; $s['policy'] = home_url('/privacy/');
+    foreach (array('analytics','marketing') as $key) {
+      $s[$key] = array('enabled'=>true, 'description'=>'Existing service', 'js'=>'window.retiredTracking=true;', 'cookies'=>'_test', 'storage'=>'_test');
+    }
+    update_option('aiwp_consent_settings', $s);
+    $id = wp_insert_post(array('post_type'=>'page','post_status'=>'publish','post_title'=>'Legacy cookies'));
+    update_post_meta($id, '_aiwp_enabled', true);
+    update_post_meta($id, '_aiwp_html', '<section>Legacy marker: [aiwp_cookie_settings]</section>');
+    wp_set_password('${testPassword}', 1);
+    echo wp_json_encode(array('id'=>$id,'settings'=>$s,'cookie'=>aiwp_consent_cookie_name(),'version'=>aiwp_consent_version($s)));
+  `);
   browser = await chromium.launch({ headless: true, channel: 'chrome' });
   const context = await browser.newContext();
+  await context.addCookies([{name:saved.cookie, value:encodeURIComponent(JSON.stringify({v:saved.version,t:Math.floor(Date.now()/1000),analytics:true,marketing:true})),url:server.serverUrl}]);
   const page = await context.newPage();
-  const errors = [];
-  page.on('pageerror', error => errors.push(error.message));
-  await page.goto(server.serverUrl);
-  assert.equal(await phpJson(server, `echo wp_json_encode(aiwp_consent_settings()['external']);`), true);
-  assert.equal(await page.locator('[data-aiwp-consent-open], #aiwp-consent-panel, #aiwp-consent-js').count(), 0);
-  assert.equal(await page.locator('#aiwp-consent-panel').isVisible(), false);
-  assert.equal((await context.cookies()).filter(c => c.name.startsWith('aiwp_consent')).length, 0);
-  await phpJson(server, `
-    $s = aiwp_consent_settings(); $s['external'] = false; $s['policy'] = home_url('/privacy/');
-    foreach (array('analytics','marketing') as $k) {
-      $s[$k] = array('enabled'=>true,'description'=>'Test service '.$k,'js'=>"window.consent_".$k." = true; fetch('/consent-probe?category=".$k."'); document.cookie = '_test_".$k."=yes; Path=/'; localStorage.setItem('_test_".$k."', 'yes');",'cookies'=>'_test_'.$k,'storage'=>'_test_'.$k);
-    }
-    update_option('aiwp_consent_settings',$s); echo 'true';
-  `);
-  const probes = [];
-  await page.route('**/consent-probe?*', route => { probes.push(route.request().url()); return route.fulfill({ body: 'ok' }); });
-  const endpoint = server.serverUrl + '/?aiwp_consent_script=analytics';
-  assert.equal((await context.request.get(endpoint)).status(), 403);
-  await page.reload();
-  await page.locator('#aiwp-consent-panel').waitFor();
-  assert.equal(probes.length, 0);
-  assert.ok(!(await page.content()).includes('window.consent_analytics'));
-  const action = name => page.locator('[data-aiwp-consent-action="' + name + '"]');
-  await action('reject').click();
-  await page.reload();
-  assert.equal(await page.locator('#aiwp-consent-panel').isVisible(), false);
-  assert.equal(probes.length, 0);
-  await page.locator('[data-aiwp-consent-open]').click();
-  await page.locator('[data-aiwp-consent-category="analytics"]').check();
-  await action('save').click();
-  await page.waitForFunction(() => window.consent_analytics === true);
-  assert.equal(await page.evaluate(() => !!window.consent_marketing), false);
-  const response = await context.request.get(endpoint);
-  assert.equal(response.status(), 200);
-  assert.match(response.headers()['cache-control'], /no-store/);
-  await page.locator('[data-aiwp-consent-open]').click();
-  await Promise.all([page.waitForNavigation(), action('reject').click()]);
-  assert.equal(await page.evaluate(() => !!window.consent_analytics), false);
-  assert.equal(await page.evaluate(() => localStorage.getItem('_test_analytics')), null);
-  assert.equal((await context.cookies()).some(c => c.name === '_test_analytics'), false);
-  assert.equal((await context.request.get(endpoint)).status(), 403);
-  const preference = (await context.cookies()).find(c => c.name.startsWith('aiwp_consent_'));
-  const record = JSON.parse(decodeURIComponent(preference.value));
-  record.analytics = true; record.t -= 181 * 86400;
-  await context.addCookies([{ ...preference, value: encodeURIComponent(JSON.stringify(record)) }]);
-  await page.reload();
-  await page.locator('#aiwp-consent-panel').waitFor();
-  assert.equal(await page.evaluate(() => !!window.consent_analytics), false);
-  assert.equal((await context.request.get(endpoint)).status(), 403);
-  await page.setViewportSize({ width: 320, height: 700 });
-  assert.ok(await page.locator('#aiwp-consent-panel').evaluate(el => el.scrollWidth <= el.clientWidth));
-  await action('accept').click();
-  await page.waitForFunction(() => window.consent_analytics && window.consent_marketing);
-  const second = await context.newPage();
-  await second.route('**/consent-probe?*', route => route.fulfill({ body: 'ok' }));
-  await second.goto(server.serverUrl);
-  await second.waitForFunction(() => window.consent_analytics && window.consent_marketing);
-  await page.locator('[data-aiwp-consent-open]').click();
-  await Promise.all([second.waitForNavigation(), page.waitForNavigation(), action('reject').click()]);
-  assert.equal(await second.evaluate(() => !!window.consent_analytics), false);
-  await second.close();
-  await phpJson(server, `
-    $s = aiwp_consent_settings(); $s['analytics']['description'] .= ' changed';
-    update_option('aiwp_consent_settings',$s); echo 'true';
-  `);
-  await page.reload();
-  await page.locator('#aiwp-consent-panel').waitFor();
-  assert.equal(await page.evaluate(() => !!window.consent_analytics), false);
-  assert.equal(await phpJson(server, `
-    require_once ABSPATH . 'wp-admin/includes/template.php';
-    $s = aiwp_consent_settings(); $input = $s;
-    $input['analytics']['enabled'] = '1'; $input['marketing']['enabled'] = '1';
-    $input['policy'] = ''; $invalid = aiwp_sanitize_consent($input);
-    $same = ($invalid === $s);
-    wp_set_current_user(0); $denied = aiwp_sanitize_consent($input);
-    echo wp_json_encode($same && $denied === $s);
-  `), true);
-  assert.equal((await context.request.get(server.serverUrl + '/?aiwp_consent_script[]=analytics')).status(), 404);
-  await phpJson(server, `wp_set_password('aiwp-local-test',1); echo 'true';`);
-  await page.goto(server.serverUrl + '/wp-login.php');
+  for (const language of ['en','cs']) {
+    await phpJson(server, `update_option('wsp_languages',array('ui'=>'${language}','public'=>'${language}','content'=>'${language}')); echo 'true';`);
+    await page.goto(server.serverUrl+'/?page_id='+saved.id);
+    assert.equal(await page.locator('#aiwp-consent-panel, [data-aiwp-consent-open], #aiwp-consent-js, #aiwp-consent-css').count(),0);
+    assert.ok(!(await page.content()).includes('[aiwp_cookie_settings]'));
+    assert.equal(await page.evaluate(()=>!!window.retiredTracking),false);
+  }
+  for(const key of ['analytics','marketing','invalid','%5B%5D=analytics']) {
+    const response=await context.request.get(server.serverUrl+'/?aiwp_consent_script='+key);
+    assert.equal(response.status(),410);
+    assert.equal(await response.text(),'');
+    assert.match(response.headers()['cache-control'],/no-store/);
+  }
+  const arrayResponse=await context.request.get(server.serverUrl+'/?aiwp_consent_script%5B%5D=analytics');
+  assert.equal(arrayResponse.status(),410);
+  const head=await context.request.head(server.serverUrl+'/?aiwp_consent_script=analytics');
+  assert.equal(head.status(),410);
+  await page.goto(server.serverUrl+'/wp-login.php');
   await page.locator('#user_login').fill('admin');
-  await page.locator('#user_pass').fill('aiwp-local-test');
-  await Promise.all([page.waitForNavigation(), page.locator('#wp-submit').click()]);
-  await page.goto(server.serverUrl + '/wp-admin/admin.php?page=aiwp-consent');
-  await page.locator('#aiwp-consent-analytics-description').fill('Updated description from administration');
-  await Promise.all([page.waitForNavigation(), page.locator('#submit').click()]);
-  assert.equal(await page.locator('#aiwp-consent-analytics-description').inputValue(), 'Updated description from administration');
-  assert.equal(await phpJson(server, `echo wp_json_encode(aiwp_consent_settings()['analytics']['enabled']);`), true);
-  const beforeExternal = await phpJson(server, `echo wp_json_encode(aiwp_consent_settings());`);
-  await page.goto(server.serverUrl);
-  await action('accept').click();
-  await page.waitForFunction(() => window.consent_analytics && window.consent_marketing);
-  const beforeExternalCookie = (await context.cookies()).find(c => c.name.startsWith('aiwp_consent_'));
-  await page.goto(server.serverUrl + '/wp-admin/admin.php?page=aiwp-consent');
-  await page.locator('#aiwp-consent-external').check();
-  // External mode must not require completing or altering local service settings.
-  await page.locator('#aiwp-consent-policy').fill('');
-  await Promise.all([page.waitForNavigation(), page.locator('#submit').click()]);
-  assert.equal(await page.locator('#aiwp-consent-external').isChecked(), true);
-  const external = await phpJson(server, `echo wp_json_encode(aiwp_consent_settings());`);
-  assert.equal(external.external, true);
-  assert.deepEqual(external.analytics, beforeExternal.analytics);
-  assert.equal(external.policy, beforeExternal.policy);
-  assert.equal(external.revision, beforeExternal.revision + 1);
-  const probeCount = probes.length;
-  await page.goto(server.serverUrl);
-  assert.equal(await page.locator('#aiwp-consent-panel, .aiwp-consent-footer, #aiwp-consent-js, #aiwp-consent-css').count(), 0);
-  assert.equal(await page.evaluate(() => typeof window.aiwpConsent), 'undefined');
-  assert.equal(await page.evaluate(() => !!window.consent_analytics), false);
-  assert.equal(probes.length, probeCount);
-  const blockedExternal = await context.request.get(endpoint);
-  assert.equal(blockedExternal.status(), 404);
-  assert.match(blockedExternal.headers()['cache-control'], /no-store/);
-  assert.equal(await blockedExternal.text(), '');
-  const fresh = await browser.newContext();
-  const freshPage = await fresh.newPage();
-  await freshPage.goto(server.serverUrl);
-  assert.equal((await fresh.cookies()).some(c => c.name.startsWith('aiwp_consent_')), false);
-  assert.equal(await freshPage.locator('[data-aiwp-consent-open]').count(), 0);
-  await fresh.close();
-  await page.goto(server.serverUrl + '/wp-admin/admin.php?page=aiwp-consent');
-  await page.locator('#aiwp-consent-external').uncheck();
-  await Promise.all([page.waitForNavigation(), page.locator('#submit').click()]);
-  await context.addCookies([beforeExternalCookie]);
-  await page.goto(server.serverUrl);
-  await page.locator('#aiwp-consent-panel').waitFor();
-  assert.equal(await page.evaluate(() => !!window.consent_analytics), false);
-  assert.equal((await context.request.get(endpoint)).status(), 403, 'Returning to internal mode must not revive previous consent');
-  await action('accept').click();
-  await page.waitForFunction(() => window.consent_analytics && window.consent_marketing);
-  assert.deepEqual(errors, []);
-  await phpJson(server, `
-    aiwp_ensure_parts(); $id = aiwp_get_part_id('footer');
-    update_post_meta($id, '_aiwp_enabled', true);
-    update_post_meta($id, '_aiwp_html', '<footer id="custom-cookie-footer">[aiwp_cookie_settings]<div>[aiwp_cookie_settings]</div></footer>');
-    echo 'true';
+  await page.locator('#user_pass').fill(testPassword);
+  await Promise.all([page.waitForNavigation(),page.locator('#wp-submit').click()]);
+  await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp');
+  assert.equal(await page.locator('#adminmenu a[href*="page=aiwp-consent"]').count(),0);
+  const removed=await context.request.get(server.serverUrl+'/wp-admin/admin.php?page=aiwp-consent');
+  assert.equal(removed.status(),403);
+  const footer=await phpJson(server, `echo wp_json_encode(aiwp_get_part_id('footer'));`);
+  await page.goto(server.serverUrl+'/wp-admin/post.php?post='+footer+'&action=edit');
+  assert.ok(!(await page.locator('body').innerText()).includes('[aiwp_cookie_settings]'));
+  const state=await phpJson(server, `
+    do_action('admin_init');
+    echo wp_json_encode(array('stored'=>get_option('aiwp_consent_settings'),'external'=>aiwp_consent_settings()['external'],'registered'=>isset(get_registered_settings()['aiwp_consent_settings'])));
   `);
-  await page.goto(server.serverUrl);
-  assert.equal(await page.locator('#custom-cookie-footer [data-aiwp-consent-open]').count(), 2);
-  assert.equal(await page.locator('.aiwp-consent-footer').count(), 0, 'No duplicate controls below the custom footer');
-  const customOpener = page.locator('#custom-cookie-footer [data-aiwp-consent-open]').last();
-  await customOpener.click();
-  await page.locator('#aiwp-consent-panel').waitFor();
-  assert.equal(await customOpener.getAttribute('aria-expanded'), 'true');
-  await page.keyboard.press('Escape');
-  assert.equal(await customOpener.evaluate(el => el === document.activeElement), true);
-  assert.equal(await customOpener.getAttribute('aria-expanded'), 'false');
-  await phpJson(server, `
-    $s = aiwp_consent_settings(); $s['external'] = true; update_option('aiwp_consent_settings', $s); echo 'true';
-  `);
-  await page.reload();
-  assert.equal(await page.locator('[data-aiwp-consent-open], .aiwp-consent-footer').count(), 0);
-  assert.ok(!(await page.content()).includes('[aiwp_cookie_settings]'));
-  await phpJson(server, `
-    $s = aiwp_consent_settings(); $s['external'] = false; update_option('aiwp_consent_settings', $s);
-    update_post_meta(aiwp_get_part_id('footer'), '_aiwp_html', '<footer id="custom-cookie-footer">Footer without control</footer>');
-    echo 'true';
-  `);
-  await page.reload();
-  assert.equal(await page.locator('.aiwp-consent-footer [data-aiwp-consent-open]').count(), 1);
-  await page.locator('.aiwp-consent-footer [data-aiwp-consent-open]').click();
-  await page.locator('#aiwp-consent-panel').waitFor();
-  assert.equal(await phpJson(server, `
-    echo wp_json_encode(array(aiwp_render_dynamic_html('[[aiwp_cookie_settings]]'), aiwp_render_dynamic_html('[aiwp_cookie_settings onclick="bad"]')));
-  `).then(value => JSON.stringify(value)), JSON.stringify(['[aiwp_cookie_settings]', '']));
-  assert.deepEqual(errors, []);
-  console.log('Consent: blocking, withdrawal, external manager isolation, preserved settings and fresh consent on return passed.');
-} finally {
-  if (browser) await browser.close();
-  await server[Symbol.asyncDispose]();
-}
+  assert.deepEqual(state.stored,saved.settings);
+  assert.equal(state.external,true);
+  assert.equal(state.registered,false);
+  console.log('PASS: retired consent stays off with legacy settings/cookies, in both languages; endpoints closed, admin removed, stored settings preserved.');
+} finally { if(browser) await browser.close(); await server[Symbol.asyncDispose](); }

@@ -118,6 +118,6 @@ Současný JavaScript:
 [vložit JS]
 ```
 
-Měření, marketingové skripty ani další cookie lištu nevkládej do stránky. Volitelné služby se nastavují přes zvoleného správce souhlasu: ByYourself → Soukromí a cookies, nebo při externím režimu například Complianz. Kódy mezi správci neduplikuj.
+Vestavěná správa cookies je vypnutá a její nastavení v administraci bylo odstraněno. Souhlasy, měření a ovládání nastavte v externím pluginu, například Complianz. Uložené nastavení zůstává neaktivní; kódy ani souhlasy se nepřenášejí. Po aktualizaci vymažte cache webu/CDN. Měření ani další lištu nevkládejte do AI kódu stránek, headeru a footeru.
 
 Samostatné kopírovatelné textové prompty pro společný vzhled, stránky, header, footer a informační stránky najdete ve složce [prompty](../prompty/README.txt), která je také součástí obou instalačních ZIPů.

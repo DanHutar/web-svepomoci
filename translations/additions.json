@@ -7,7 +7,8 @@
     "Public labels and cookie controls": "Veřejné popisky a ovládání cookies",
     "Requested AI content language": "Požadovaný jazyk obsahu z AI",
     "English is the default for new installations. Existing configured websites keep Czech when upgrading. After changing public labels, clear the website and CDN caches. Configure external consent plugins separately.": "U nových instalací je výchozí angličtina. Již nastavené weby si při aktualizaci zachovají češtinu. Po změně veřejných popisků vymažte cache webu a CDN. Externí pluginy pro souhlas nastavte samostatně.",
-    "Save languages": "Uložit jazyky"
+    "Save languages": "Uložit jazyky",
+    "Public labels": "Veřejné popisky"
   },
   "ai-web-studio": {
     "Edit the text and links. ": "Upravte texty a odkazy. ",
@@ -31,7 +32,11 @@
     "Content": "Obsah",
     "Check for updates": "Zkontrolovat aktualizace",
     "Website design": "Vzhled webu",
-    "Display content from the AI editor": "Zobrazovat obsah z AI editoru"
+    "Display content from the AI editor": "Zobrazovat obsah z AI editoru",
+    " This marker produces ul.aiwp-menu with li.menu-item and a links, with ul.sub-menu for nested navigation. Adapt CSS to this structure and include accessible submenus. Do not write navigation links manually. Other shortcodes are not supported.": " Tato značka vytvoří ul.aiwp-menu s li.menu-item a odkazy a; případné podmenu je ul.sub-menu. CSS přizpůsob této struktuře a zahrň přístupné zobrazení podmenu. Odkazy ručně nevypisuj. Jiné shortcody nejsou podporované.",
+    "Do not insert [aiwp_cookie_settings]. Consent controls must be configured in the external consent plugin. Do not invent cookie controls or insert unsupported shortcodes.": "Nevkládej [aiwp_cookie_settings]. Ovládání souhlasu nastav v externím pluginu. Nevymýšlej ovládací prvky cookies a nevkládej nepodporované shortcody.",
+    " Preserve existing menu markers. The marker produces ul.aiwp-menu with li.menu-item and a links, with ul.sub-menu for submenus. CSS and any controls must support submenus and keyboard access. Do not write menu links manually. Other shortcodes are not supported.": " Zachovej existující značky menu. Výstup značky je ul.aiwp-menu s li.menu-item a odkazy a, podmenu ul.sub-menu. CSS i případné ovládání musí podporovat podmenu a klávesnici. Odkazy menu nevypisuj ručně. Jiné shortcody nejsou podporované.",
+    "Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure consent and tracking in an external plugin such as Complianz. Built-in consent management is unavailable.": "Nevkládej analytiku, marketingové skripty ani cookie lištu do stránky, hlavičky nebo patičky. Souhlasy a měření nastav v externím pluginu, například Complianz. Vestavěná správa souhlasů není dostupná."
   },
   "ai-web": {
     "A lightweight theme for AI-created pages. Its companion plugin supports custom HTML, CSS, JavaScript, headers and footers.": "Lehká univerzální šablona pro stránky vytvořené pomocí AI. S doprovodným pluginem podporuje vlastní HTML, CSS, JavaScript, hlavičku a patičku.",

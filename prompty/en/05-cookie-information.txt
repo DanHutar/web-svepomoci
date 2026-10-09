@@ -4,7 +4,7 @@ INPUT
 Website name and URL: [ADD]
 Operator, registered address, business ID if applicable and contact email: [ADD]
 Privacy notice URL: [ADD]
-Consent manager: [BUILT-IN / COMPLIANZ / OTHER — SPECIFY]
+Consent manager: [COMPLIANZ / OTHER — SPECIFY]
 How visitors actually open settings and withdraw consent: [DESCRIBE]
 Does Complianz maintain its own updated cookie document? [YES / NO / UNKNOWN]
 Actual services, including analytics, advertising, forms, maps, video, fonts and other plugins: [LIST; explicitly say NONE where applicable]
@@ -17,13 +17,13 @@ Language for the document and your explanation: [English / Czech / OTHER]
 FIRST STEP
 If the actual service inventory or retention details are missing, ask questions and explain which facts I need to find. Do not infer cookie names, providers, storage periods or “necessary cookies only” from the website's appearance. Do not claim a scan unless you performed one. Do not invent tracking identifiers or legal conclusions. Distinguish cookie storage duration from the provider's retention of collected data.
 
-If Complianz maintains the document, recommend keeping it on a standard WordPress page with the AI editor disabled. Do not create a conflicting duplicate inventory or put a Complianz shortcode in our HTML editor, which only expands aiwp_menu and aiwp_cookie_settings. In that case, return an optional introduction as plain text and explain where to link to the existing document; do not return replacement document HTML.
+If Complianz maintains the document, recommend keeping it on a standard WordPress page with the AI editor disabled. Do not create a conflicting duplicate inventory or put a Complianz shortcode in our HTML editor, which only expands aiwp_menu. In that case, return an optional introduction as plain text and explain where to link to the existing document; do not return replacement document HTML.
 
 CONTENT ONCE FACTS ARE AVAILABLE
 Explain the actual cookies and similar storage, their purposes, providers and retention. Distinguish necessary and optional purposes using verified configuration. Describe the real rejection, change and withdrawal controls. Do not claim that browsing constitutes consent. Include a contact, update date and privacy notice link. Do not describe unused services as active. Check current official guidance; if you cannot access it, say so outside the public draft:
 https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
 
-Only when our built-in consent manager is actually enabled: it stores the choice for 180 days in an aiwp_consent_… cookie and synchronizes changes between tabs through a localStorage key ending in _sync. Obtain the exact name from the inventory; do not invent the hash. In external mode, use the external manager's real settings. Do not claim the plugin blocks every service or deletes cookies belonging to other domains. Do not create a new banner or consent controls. An English translation does not change the website's legal jurisdiction.
+Built-in consent management is disabled and its administration screen is removed. Configure consent, tracking and consent controls in an external plugin such as Complianz. Stored settings are preserved but inactive; scripts and consent records are not transferred. Clear website/CDN caches after upgrading. Do not add tracking or a new banner to AI page, header or footer code.
 
 OUTPUT FOR A MANUALLY MAINTAINED PAGE
 First return readable copy for factual review and a separate list of unresolved points. Mark it as a working draft until missing facts are supplied. After I confirm the facts, return separate complete HTML and minimal CSS; leave JS empty. Provide an SEO title and meta description separately. Do not guarantee legal compliance simply because the text was generated.

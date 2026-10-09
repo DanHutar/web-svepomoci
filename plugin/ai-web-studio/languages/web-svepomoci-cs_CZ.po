@@ -33,3 +33,6 @@ msgstr "U nových instalací je výchozí angličtina. Již nastavené weby si p
 
 msgid "Save languages"
 msgstr "Uložit jazyky"
+
+msgid "Public labels"
+msgstr "Veřejné popisky"

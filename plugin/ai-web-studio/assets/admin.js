@@ -105,14 +105,14 @@
       var location = studio.dataset.aiwpKind === 'footer' ? 'footer' : 'primary';
       return [
         config.contentLanguageInstruction || '',
-        wp.i18n.__("Do not add analytics, marketing scripts or a cookie banner to the page. Configure optional services in the selected consent manager: ByYourself → Privacy and cookies, or an external manager such as Complianz. Do not duplicate tracking code between managers.", "ai-web-studio"),
+        wp.i18n.__("Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure consent and tracking in an external plugin such as Complianz. Built-in consent management is unavailable.", "ai-web-studio"),
         wp.i18n.__("Create ", "ai-web-studio") + (part ? (location === 'footer' ? wp.i18n.__("a shared footer", "ai-web-studio") : wp.i18n.__("a shared header", "ai-web-studio")) : wp.i18n.__("page content", "ai-web-studio")) + wp.i18n.__(" for WordPress with the ByYourself Theme theme and ByYourself Builder plugin.", "ai-web-studio"),
         wp.i18n.__("My brief: [ADD the purpose, copy, colours, target audience and required sections].", "ai-web-studio"),
         wp.i18n.__("Return exactly three separate sections labelled HTML, CSS and JS, which I will copy into separate fields.", "ai-web-studio"),
         wp.i18n.__("HTML must be a content fragment: no doctype, html, head, body, style, script, PHP, on* attributes or javascript: URLs. ", "ai-web-studio") + (part ? wp.i18n.__("Return only the requested header or footer.", "ai-web-studio") : wp.i18n.__("I manage the header and footer separately; do not create them. Start with one main H1 heading; do not add another main element.", "ai-web-studio")),
         wp.i18n.__("Return CSS without style tags. Scope every selector to the fragment's unique root class; do not use global body, h1, button, etc. The variables --aiwp-accent, --aiwp-width and --aiwp-font are available.", "ai-web-studio"),
         config.designContext || '',
-        wp.i18n.__("I manage navigation in Appearance → Menus. ", "ai-web-studio") + (part ? wp.i18n.__("Inside nav, insert exactly [aiwp_menu location=\"", "ai-web-studio") + location + '"].' : wp.i18n.__("If navigation is needed within the content, use [aiwp_menu location=\"primary\"] or [aiwp_menu location=\"footer\"].", "ai-web-studio")) + wp.i18n.__(" This marker produces ul.aiwp-menu with li.menu-item and a links, with ul.sub-menu for nested navigation. Adapt CSS to this structure and include accessible submenus. Do not write navigation links manually. [aiwp_cookie_settings] is also supported for footer cookie controls (button.aiwp-cookie-settings); it produces no output in external mode. Other shortcodes are not supported.", "ai-web-studio"),
+        wp.i18n.__("I manage navigation in Appearance → Menus. ", "ai-web-studio") + (part ? wp.i18n.__("Inside nav, insert exactly [aiwp_menu location=\"", "ai-web-studio") + location + '"].' : wp.i18n.__("If navigation is needed within the content, use [aiwp_menu location=\"primary\"] or [aiwp_menu location=\"footer\"].", "ai-web-studio")) + wp.i18n.__(" This marker produces ul.aiwp-menu with li.menu-item and a links, with ul.sub-menu for nested navigation. Adapt CSS to this structure and include accessible submenus. Do not write navigation links manually. Other shortcodes are not supported.", "ai-web-studio"),
         wp.i18n.__("JS is optional plain JavaScript without script tags, libraries or external scripts. Scope selectors to the fragment root, wrap the code in an IIFE and assume the DOM is loaded. Do not use PHP or call WordPress functions.", "ai-web-studio"),
         wp.i18n.__("The design must be responsive, readable and keyboard accessible. Provide sufficient contrast, control labels and support for prefers-reduced-motion.", "ai-web-studio"),
         wp.i18n.__("Use the real image URLs supplied; if none are available, design without photographs. Do not invent functional forms, payment gateways or email delivery.", "ai-web-studio"),
@@ -195,7 +195,7 @@
       if (error) { previewStatus.textContent = error; return; }
       html = html.replace(/(\[?)\[aiwp_cookie_settings\s*\](\]?)/g, function (match, escapeOpen, escapeClose) {
         if (escapeOpen && escapeClose) return match.slice(1, -1);
-        return escapeOpen + (config.consentExternal ? '' : wp.i18n.__("<button type=\"button\" class=\"aiwp-cookie-settings\" disabled title=\"Test consent controls on the website\">Cookie settings</button>", "ai-web-studio")) + escapeClose;
+        return escapeOpen + escapeClose;
       });
       html = html.replace(/(\[?)\[aiwp_menu\s+location\s*=\s*(["'])(primary|footer)\2\s*\](\]?)/g, function (match, escapeOpen, quote, location, escapeClose) {
         if (escapeOpen && escapeClose) return match.slice(1, -1);

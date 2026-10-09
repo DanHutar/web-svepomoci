@@ -20,6 +20,6 @@ Use existing shared classes and --aiwp-font, --aiwp-accent, --aiwp-width, --aiwp
 
 Optional JS must be plain JavaScript in an IIFE, without script tags or external resources. Scope selectors to this page and assume the DOM is loaded. Manage navigation through Appearance → Menus. Only if navigation is needed within the page, use [aiwp_menu location="primary"] or [aiwp_menu location="footer"]. They produce ul.aiwp-menu, li.menu-item, a links and optional ul.sub-menu. Do not use third-party shortcodes.
 
-Do not create a cookie banner, analytics or marketing scripts. Those belong to the selected consent manager, either Privacy and cookies in our plugin or a separately configured external plugin. Consent controls belong in the shared footer.
+Built-in consent management is disabled and its administration screen is removed. Configure consent, tracking and consent controls in an external plugin such as Complianz. Stored settings are preserved but inactive; scripts and consent records are not transferred. Clear website/CDN caches after upgrading. Do not add tracking or a new banner to AI page, header or footer code.
 
 Provide readable contrast, keyboard access, labelled controls, visible focus, suitable image alternatives and prefers-reduced-motion support. The layout must handle 320 px screens, long copy and 200% text enlargement without losing content. End with a short list of checks to perform before publication; do not claim unperformed tests as complete.

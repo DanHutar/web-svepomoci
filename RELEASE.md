@@ -1,9 +1,7 @@
-# ByYourself 1.10.3
+# ByYourself 1.10.4
 
-- The theme preview now uses English text and ByYourself branding: **Your website. Built by you.** The same image appears in both languages.
-- Newly inserted sample pages, headers and footers use English HTML/CSS class names in both interface languages, including sample-page, sample-page__content, sample-page__button and sample-part. The page anchor is sample-more.
-- The English sample-insertion message is fully translated. Czech content text remains Czech.
-- Existing saved page code is preserved. New class names apply when inserting a new sample; inserting a sample replaces the current editor code after confirmation.
-- Browser tests no longer overwrite the distributed theme preview with a Czech fixture. Its English HTML source and screenshot command are included in the repository.
+Built-in cookie consent management is retired. Its administration screen, banner, footer control and tracking scripts are disabled, including on sites with previously enabled settings. Legacy script URLs return 410 with no-store. Saved settings remain in the database for rollback; no scripts or consent records are migrated to Complianz.
 
-Update both components. Installations on 1.10.2 can update normally. On 1.10.1 or earlier, upload **byyourself-builder.zip** and **byyourself-theme.zip** manually once and choose **Replace current with uploaded**. Do not delete the existing components first.
+Configure an external consent plugin separately and purge website/CDN caches after updating. Tracking inserted outside the retired module is not automatically blocked. Existing Google Fonts remain available. English and Czech prompts now direct consent setup to an external plugin.
+
+A scoped source-code security review is documented in docs/bezpecnostni-audit-2026-10-09.md. This release does not enable production CSP or HSTS.

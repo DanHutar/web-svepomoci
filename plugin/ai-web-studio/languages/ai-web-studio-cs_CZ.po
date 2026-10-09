@@ -1110,3 +1110,15 @@ msgstr "a"
 
 msgid "In"
 msgstr "Ve"
+
+msgid " This marker produces ul.aiwp-menu with li.menu-item and a links, with ul.sub-menu for nested navigation. Adapt CSS to this structure and include accessible submenus. Do not write navigation links manually. Other shortcodes are not supported."
+msgstr " Tato značka vytvoří ul.aiwp-menu s li.menu-item a odkazy a; případné podmenu je ul.sub-menu. CSS přizpůsob této struktuře a zahrň přístupné zobrazení podmenu. Odkazy ručně nevypisuj. Jiné shortcody nejsou podporované."
+
+msgid "Do not insert [aiwp_cookie_settings]. Consent controls must be configured in the external consent plugin. Do not invent cookie controls or insert unsupported shortcodes."
+msgstr "Nevkládej [aiwp_cookie_settings]. Ovládání souhlasu nastav v externím pluginu. Nevymýšlej ovládací prvky cookies a nevkládej nepodporované shortcody."
+
+msgid " Preserve existing menu markers. The marker produces ul.aiwp-menu with li.menu-item and a links, with ul.sub-menu for submenus. CSS and any controls must support submenus and keyboard access. Do not write menu links manually. Other shortcodes are not supported."
+msgstr " Zachovej existující značky menu. Výstup značky je ul.aiwp-menu s li.menu-item a odkazy a, podmenu ul.sub-menu. CSS i případné ovládání musí podporovat podmenu a klávesnici. Odkazy menu nevypisuj ručně. Jiné shortcody nejsou podporované."
+
+msgid "Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure consent and tracking in an external plugin such as Complianz. Built-in consent management is unavailable."
+msgstr "Nevkládej analytiku, marketingové skripty ani cookie lištu do stránky, hlavičky nebo patičky. Souhlasy a měření nastav v externím pluginu, například Complianz. Vestavěná správa souhlasů není dostupná."

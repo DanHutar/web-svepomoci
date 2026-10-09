@@ -1,6 +1,8 @@
+import { randomUUID } from 'node:crypto';
 import assert from 'node:assert/strict';
 import { chromium } from 'playwright';
 import { bootWordPress, phpJson, projectRoot } from '../tools/playground.mjs';
+const testPassword = randomUUID();
 const server = await bootWordPress(9413, false, projectRoot, '7.1.2', null);
 let browser, page;
 const errors=[];
@@ -50,7 +52,7 @@ async function checkPartSamples(page, language) {
   }
 }
 try {
-  const initial = await phpJson(server, `wp_set_password('aiwp-local-test',1); echo wp_json_encode(WSP_Languages::settings());`);
+  const initial = await phpJson(server, `wp_set_password('${testPassword}',1); echo wp_json_encode(WSP_Languages::settings());`);
   assert.deepEqual(initial, { ui:'en', public:'en', content:'en' });
   browser = await chromium.launch({ headless:true, channel:'chrome' });
   const context = await browser.newContext();
@@ -66,7 +68,7 @@ try {
   page.setDefaultNavigationTimeout(60000);
   page.on('pageerror',e=>errors.push(e.message));
   await page.goto(server.serverUrl+'/wp-login.php');
-  await page.locator('#user_login').fill('admin'); await page.locator('#user_pass').fill('aiwp-local-test');
+  await page.locator('#user_login').fill('admin'); await page.locator('#user_pass').fill(testPassword);
   await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }), page.locator('#wp-submit').click()]);
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=aiwp');
   assert.equal(await page.locator('.aiwp-dashboard h1').innerText(), 'Your website starts with an idea.');
@@ -109,14 +111,14 @@ try {
     update_option('aiwp_consent_settings',$s); echo wp_json_encode($id);
   `);
   await page.goto(server.serverUrl+'/?page_id='+fixture);
-  assert.equal(await page.locator('[data-aiwp-consent-action="accept"]').innerText(),'Přijmout vše');
+  assert.equal(await page.locator('#aiwp-consent-panel').count(), 0);
   await page.goto(server.serverUrl+'/wp-admin/admin.php?page=wsp-languages');
   await page.locator('#wsp-language-public').selectOption('en');
   await Promise.all([page.waitForNavigation({ waitUntil: 'domcontentloaded' }),page.locator('#submit').click()]);
   assert.equal(await page.locator('.wrap h1').last().innerText(),'Jazyk', 'Public language does not change the interface');
   await page.goto(server.serverUrl+'/?page_id='+fixture);
-  assert.equal(await page.locator('[data-aiwp-consent-action="accept"]').innerText(),'Accept all');
-  assert.equal(await page.locator('.aiwp-consent-description').innerText(),'Keep this service description');
+  assert.equal(await page.locator('#aiwp-consent-panel').count(), 0);
+  assert.equal(await phpJson(server, `echo wp_json_encode(get_option('aiwp_consent_settings')['analytics']['description']);`), 'Keep this service description');
   assert.ok((await page.content()).includes('Keep my original content'));
   await page.goto(server.serverUrl+'/?p=999999');
   assert.equal(await page.locator('main h1').innerText(),'Page not found');

@@ -11,11 +11,12 @@ $snapshot = get_option( 'wsp_test_snapshot' );
 foreach ( $snapshot['metadata'] as $id => $meta ) {
     wsp_assert( get_post_meta( $id ) === $meta, 'Saved page/part metadata survives ZIP replacement: ' . $id );
 }
-foreach ( array( 'settings' => 'aiwp_settings', 'parts' => 'aiwp_part_ids', 'active' => 'active_plugins' ) as $key => $option ) {
+foreach ( array( 'settings' => 'aiwp_settings', 'consent' => 'aiwp_consent_settings', 'parts' => 'aiwp_part_ids', 'active' => 'active_plugins' ) as $key => $option ) {
     wsp_assert( get_option( $option ) === $snapshot[ $key ], 'Preserved option: ' . $option );
 }
 wsp_assert( get_theme_mods() === $snapshot['theme_mods'], 'Theme mods including assigned menus survive ZIP replacement' );
 wsp_assert( 'ai-web' === get_stylesheet(), 'Existing theme stays active' );
+wsp_assert( aiwp_consent_settings()['external'] && '' === aiwp_render_cookie_settings_button(), 'Retired consent remains disabled after ZIP replacement' );
 $plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/ai-web-studio/ai-web-studio.php', false, false );
 $theme = wp_get_theme( 'ai-web' );
 $target_version = get_option( 'wsp_test_target_version' );

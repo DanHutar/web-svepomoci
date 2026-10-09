@@ -13,10 +13,9 @@ Menu vytvořte ve Vzhled → Menu a přiřaďte umístění primary (hlavní) ne
 
 SOUHLAS A COMPLIANZ
 JAZYKY: V nabídce ByYourself → Jazyk nastavíte zvlášť jazyk rozhraní, veřejných popisků a požadovaného obsahu z AI. U staženého textového promptu požadovaný jazyk napište přímo do zadání. Existující uložené texty se samy nepřekládají. Anglické varianty těchto sedmi souborů jsou ve vedlejší složce en.
-Bez uložené volby je od verze 1.9.2 naše funkce cookies vypnutá (externí režim zaškrtnutý). Pro vlastní správu zaškrtnutí zrušte a uložte. Do HTML patičky potom vložte [aiwp_cookie_settings]; tlačítko bude přímo uvnitř patičky a samostatné ovládání pod ní se nepřidá. Jeho třída je aiwp-cookie-settings. V externím režimu značka nic nevypíše.
-Vyberte jediný systém pro správu souhlasu. Pokud používáte Complianz či jiný externí plugin, v ByYourself → Soukromí a cookies zaškrtněte „Souhlas spravuje externí plugin“ a uložte. Externí plugin nastavte samostatně. Kódy ani souhlasy se automaticky nepřenášejí. Po přepnutí vymažte cache. Naše tlačítko i lišta pak zmizí; změnu souhlasu musí zpřístupnit externí plugin.
+Vestavěná správa cookies je vypnutá a její nastavení v administraci bylo odstraněno. Souhlasy, měření a ovládání nastavte v externím pluginu, například Complianz. Uložené nastavení zůstává neaktivní; kódy ani souhlasy se nepřenášejí. Po aktualizaci vymažte cache webu/CDN. Měření ani další lištu nevkládejte do AI kódu stránek, headeru a footeru.
 
-Měření nevkládejte do stránky, headeru ani footeru. Náš HTML editor zpracovává značky aiwp_menu a aiwp_cookie_settings; krátké kódy dokumentů od Complianz zde nepoužívejte. Pokud dokument vytváří Complianz, ponechte ho na samostatné běžné WordPress stránce spravované tímto pluginem, bez zapnutého AI editoru. Z AI patičky na tuto stránku pouze odkažte, nejlépe přes menu.
+Měření nevkládejte do stránky, headeru ani footeru. Náš HTML editor zpracovává značky aiwp_menu; krátké kódy dokumentů od Complianz zde nepoužívejte. Pokud dokument vytváří Complianz, ponechte ho na samostatné běžné WordPress stránce spravované tímto pluginem, bez zapnutého AI editoru. Z AI patičky na tuto stránku pouze odkažte, nejlépe přes menu.
 
 AI prompty samy nezjišťují cookies, nezapínají měření ani nenahrazují ověření skutečného provozu. Aktuální oficiální podklady pro informační stránky:
 https://uoou.gov.cz/verejnost/qa-otazky-a-odpovedi/cookies
