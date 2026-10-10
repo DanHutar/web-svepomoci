@@ -83,7 +83,7 @@ function aiwp_styles_url() {
     return add_query_arg( array(
         'aiwp_styles' => '1',
         'aiwp_css_ver' => hash( 'sha256', AIWP_VERSION . aiwp_frontend_css() ),
-    ), $origin . $uri );
+    ), is_404() ? add_query_arg( 'aiwp_error_assets', '404', home_url( '/' ) ) : $origin . $uri );
 }
 
 /** Run after WP resolves the original page and its permissions, before redirects/output. */
@@ -91,7 +91,7 @@ add_action( 'template_redirect', function () {
     if ( ! isset( $_GET['aiwp_styles'] ) ) { return; }
     header( 'Content-Type: text/css; charset=UTF-8' );
     header( 'X-Content-Type-Options: nosniff' );
-    if ( ! is_string( $_GET['aiwp_styles'] ) || '1' !== $_GET['aiwp_styles'] || is_404() ) {
+    if ( ! is_string( $_GET['aiwp_styles'] ) || '1' !== $_GET['aiwp_styles'] || ( is_404() && ! aiwp_shared_error_assets() ) ) {
         status_header( 404 );
         nocache_headers();
         exit;

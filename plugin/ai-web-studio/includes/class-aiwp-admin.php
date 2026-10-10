@@ -55,7 +55,7 @@ final class AIWP_Admin {
 
 	public static function editor( $post ) {
 		if ( ! aiwp_can_edit_code() ) {
-			echo __( '<p>Code editing is available to administrators with permission to insert HTML and JavaScript.</p>', 'ai-web-studio' );
+			echo wp_kses_post( __( '<p>Code editing is available to administrators with permission to insert HTML and JavaScript.</p>', 'ai-web-studio' ) );
 			return;
 		}
 		$data    = aiwp_get_document( $post->ID );
@@ -78,7 +78,7 @@ final class AIWP_Admin {
 				<details class="aiwp-prompt-fallback" data-aiwp-prompt-fallback hidden><summary><?php echo esc_html__( 'Prompt for manual copying', 'ai-web-studio' ); ?></summary><textarea readonly rows="9" aria-label="<?php echo esc_attr__( 'AI prompt for manual copying', 'ai-web-studio' ); ?>"></textarea></details>
 			</div>
 			<div class="aiwp-mode">
-				<label class="aiwp-toggle"><input type="checkbox" name="aiwp[enabled]" id="aiwp-enabled" value="1" <?php checked( ! empty( $data['enabled'] ) ); ?>><span><strong><?php echo $is_page ? __( 'Display content from the AI editor', 'ai-web-studio' ) : __( 'Use this custom website part', 'ai-web-studio' ); ?></strong><small><?php echo $is_page ? __( 'When enabled, the page displays the HTML, CSS and JavaScript below. The standard WordPress content is preserved.', 'ai-web-studio' ) : __( 'Enable once the content is ready, then save. The change applies across the website.', 'ai-web-studio' ); ?></small></span></label>
+				<label class="aiwp-toggle"><input type="checkbox" name="aiwp[enabled]" id="aiwp-enabled" value="1" <?php checked( ! empty( $data['enabled'] ) ); ?>><span><strong><?php echo $is_page ? esc_html__( 'Display content from the AI editor', 'ai-web-studio' ) : esc_html__( 'Use this custom website part', 'ai-web-studio' ); ?></strong><small><?php echo $is_page ? esc_html__( 'When enabled, the page displays the HTML, CSS and JavaScript below. The standard WordPress content is preserved.', 'ai-web-studio' ) : esc_html__( 'Enable once the content is ready, then save. The change applies across the website.', 'ai-web-studio' ); ?></small></span></label>
 			</div>
 			<div class="aiwp-workspace">
 				<?php if ( ! $is_page ) : ?>
@@ -93,7 +93,7 @@ final class AIWP_Admin {
 						<?php endif; ?>
 					</div>
 				<?php endif; ?>
-				<p class="aiwp-mode-status<?php echo empty( $data['enabled'] ) ? ' is-disabled' : ''; ?>" data-aiwp-mode-status role="status"><?php echo empty( $data['enabled'] ) ? __( 'Custom code is disabled. Enable it and save the page to show it on the website.', 'ai-web-studio' ) : __( 'Custom code is enabled. Save or publish to apply your changes to the website.', 'ai-web-studio' ); ?></p>
+				<p class="aiwp-mode-status<?php echo empty( $data['enabled'] ) ? ' is-disabled' : ''; ?>" data-aiwp-mode-status role="status"><?php echo empty( $data['enabled'] ) ? esc_html__( 'Custom code is disabled. Enable it and save the page to show it on the website.', 'ai-web-studio' ) : esc_html__( 'Custom code is enabled. Save or publish to apply your changes to the website.', 'ai-web-studio' ); ?></p>
 				<div class="aiwp-tabs" role="tablist" aria-label="<?php echo esc_attr__( 'Code type', 'ai-web-studio' ); ?>">
 					<?php foreach ( array( 'html' => array( 'HTML', __( 'Content', 'ai-web-studio' ) ), 'css' => array( 'CSS', __( 'Design', 'ai-web-studio' ) ), 'js' => array( 'JS', __( 'Behaviour', 'ai-web-studio' ) ) ) as $key => $labels ) : ?>
 						<button type="button" id="aiwp-tab-<?php echo esc_attr( $key ); ?>" class="aiwp-tab<?php echo 'html' === $key ? ' is-active' : ''; ?>" role="tab" aria-controls="aiwp-panel-<?php echo esc_attr( $key ); ?>" aria-selected="<?php echo 'html' === $key ? 'true' : 'false'; ?>" tabindex="<?php echo 'html' === $key ? '0' : '-1'; ?>" data-aiwp-tab="<?php echo esc_attr( $key ); ?>"><strong><?php echo esc_html( $labels[0] ); ?></strong><span><?php echo esc_html( $labels[1] ); ?></span><span class="aiwp-filled" data-aiwp-filled="<?php echo esc_attr( $key ); ?>" aria-label="<?php echo esc_attr__( 'This field contains code', 'ai-web-studio' ); ?>" <?php echo empty( $data[ $key ] ) ? 'hidden' : ''; ?>></span></button>
@@ -127,7 +127,7 @@ final class AIWP_Admin {
 
 	public static function seo( $post ) {
 		if ( ! aiwp_can_edit_code() ) {
-			echo __( '<p>SEO settings in ByYourself Builder are managed by the website administrator.</p>', 'ai-web-studio' );
+			echo wp_kses_post( __( '<p>SEO settings in ByYourself Builder are managed by the website administrator.</p>', 'ai-web-studio' ) );
 			return;
 		}
 		$data = aiwp_get_document( $post->ID );

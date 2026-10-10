@@ -10,6 +10,12 @@ Potřebujete WordPress **6.4 nebo novější**, PHP **7.4 nebo novější** a ú
 
 ## Instalace
 
+### Stránka 404 (od verze 1.10.5)
+
+Neexistující adresa automaticky zobrazí stručnou stránku s tlačítkem „Zpět domů“ (anglicky „Back home“), společným headerem a footerem. Vzhled přebírá **Společné CSS**, vybraný font a barvu; základní rozložení je v hlavním `style.css` šablony. Vlastní úpravy lze cílit na `.ai-web-not-found` a `.ai-web-not-found__button`. Není potřeba vytvářet stránku v administraci. Pro celou funkci aktualizujte plugin i šablonu.
+
+### Postup instalace
+
 1. Použijte připravené balíčky `dist/byyourself-theme.zip` a `dist/byyourself-builder.zip`. Pokud jste upravili zdrojové soubory, vytvořte je znovu ve složce `ai-wordpress` příkazem `powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\package.ps1`. Výjimka ze zásad spouštění platí jen pro tento proces; nemění trvalé nastavení Windows.
 2. Ve WordPressu otevřete **Vzhled → Šablony → Instalovat šablonu → Nahrát šablonu**. Nahrajte `byyourself-theme.zip` a aktivujte šablonu.
 3. V nabídce **Pluginy → Instalace pluginů → Nahrát plugin** nahrajte `byyourself-builder.zip` a plugin aktivujte.
@@ -109,11 +115,17 @@ Pro používání na hostingu nepotřebujete Node.js. Vývojář může s Node.j
 
 `npm test` ověřuje PHP, ukládání a oprávnění ve WordPressu a ovládání editoru přes místní Google Chrome. Výsledky a snímky ukládá do `test-results/`. Testovací závislosti ani data se nepřidávají do instalačních ZIPů. Přesnou ověřenou konfiguraci uvádí [záznam ověření](docs/overeni.md).
 
+## Komentáře
+
+Připravovaná lokální funkce **ByYourself → Komentáře** umožňuje zakázat komentáře na celém webu včetně dosavadních příspěvků. Výchozí stav je zapnuto; původní komentáře a nastavení zůstávají zachované. [Podrobnosti a test](docs/komentare.md).
+
 ## Soukromí a cookies
 
 Vestavěná správa cookies je vypnutá a její nastavení v administraci bylo odstraněno. Souhlasy, měření a ovládání nastavte v externím pluginu, například Complianz. Uložené nastavení zůstává neaktivní; kódy ani souhlasy se nepřenášejí. Po aktualizaci vymažte cache webu/CDN. Měření ani další lištu nevkládejte do AI kódu stránek, headeru a footeru.
 
 [Postup přechodu](docs/soukromi-cookies.md). [Bezpečnostní audit](docs/bezpecnostni-audit-2026-10-09.md).
+
+[Cílené bezpečnostní testy pluginu a šablony z 10. října 2026](docs/bezpecnostni-testy-2026-10-10.md) uvádějí výsledky, posouzení statických hlášení a omezení ověření. Opakování: `npm run test:security`.
 
 ## Textové prompty v instalačních balíčcích
 

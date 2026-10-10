@@ -7,6 +7,8 @@ export async function runBrowserChecks(serverUrl, fixtures, outputDir) {
   try {
     const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } });
     const page = await context.newPage();
+    // WASM serves dynamic CSS/JS serially; allow navigation to finish, keep assertions unchanged.
+    page.setDefaultNavigationTimeout(90000);
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(serverUrl + '/wp-admin/post.php?post=' + fixtures.pageId + '&action=edit');

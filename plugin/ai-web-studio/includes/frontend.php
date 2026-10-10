@@ -7,7 +7,14 @@ function aiwp_is_code_page( $post_id = 0 ) {
 }
 
 function aiwp_page_hidden( $kind ) {
+    if ( aiwp_shared_error_assets() ) { return false; }
     return in_array( $kind, array( 'header', 'footer' ), true ) && is_page() && aiwp_is_code_page() && (bool) aiwp_get_meta( get_queried_object_id(), '_aiwp_hide_' . $kind );
+}
+
+/** Public error-page assets include shared parts only, never the home page document. */
+function aiwp_shared_error_assets() {
+    return isset( $_GET['aiwp_error_assets'] ) && '404' === $_GET['aiwp_error_assets']
+        && ( isset( $_GET['aiwp_styles'] ) || isset( $_GET['aiwp_script'] ) );
 }
 
 function aiwp_part_document( $kind ) {
@@ -54,7 +61,7 @@ function aiwp_frontend_documents() {
             }
         }
     }
-    if ( is_page() && aiwp_is_code_page() && ! post_password_required( get_queried_object_id() ) ) {
+    if ( ! aiwp_shared_error_assets() && is_page() && aiwp_is_code_page() && ! post_password_required( get_queried_object_id() ) ) {
         $documents['page'] = aiwp_get_document( get_queried_object_id() );
     }
     return $documents;

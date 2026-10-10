@@ -24,6 +24,8 @@ export async function runDesignChecks(server) {
       Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: async text => { window.copiedPrompt = text; } } });
     });
     const page = await context.newPage();
+    // WASM serves dynamic CSS/JS serially; allow navigation to finish, keep assertions unchanged.
+    page.setDefaultNavigationTimeout(90000);
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(server.serverUrl + '/wp-admin/admin.php?page=aiwp-settings');

@@ -11,6 +11,15 @@ const out = path.join(projectRoot, 'test-results');
 await fs.mkdir(out, { recursive: true });
 const server = await bootWordPress(9401, false);
 try {
+  // Keep editor regression independent of remote update services and loopback cron.
+  // Update discovery has its own suite; this MU plugin exists only in disposable WP.
+  await server.playground.mkdir('/wordpress/wp-content/mu-plugins');
+  await server.playground.writeFile('/wordpress/wp-content/mu-plugins/aiwp-test-network.php', `<?php
+    if (!defined('DISABLE_WP_CRON')) define('DISABLE_WP_CRON',true);
+    add_filter('pre_http_request', function($pre,$args,$url) {
+      return new WP_Error('aiwp_test_offline','External HTTP disabled in editor regression');
+    }, PHP_INT_MAX, 3);
+  `);
   const result = await phpJson(server, 'wp_set_password("aiwp-local-test", 1); require "/aiwp-tests/checks.php";');
   console.log(result);
   const page = await (await fetch(server.serverUrl + '/?page_id=' + result.fixtures.pageId)).text();

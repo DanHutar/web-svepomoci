@@ -21,7 +21,7 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 
 function aiwp_prompts_page() {
     if ( ! aiwp_can_edit_code() ) {
-        wp_die( __( 'Only an administrator with permission to insert code can prepare prompts.', 'ai-web-studio' ), '', array( 'response' => 403 ) );
+        wp_die( esc_html__( 'Only an administrator with permission to insert code can prepare prompts.', 'ai-web-studio' ), '', array( 'response' => 403 ) );
     }
     ?>
     <div class="wrap aiwp-prompts" id="aiwp-prompts">

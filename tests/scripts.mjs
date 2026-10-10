@@ -62,6 +62,8 @@ export async function runScriptChecks(server) {
     browser = await chromium.launch({ headless: true, channel: 'chrome' });
     const context = await browser.newContext();
     const page = await context.newPage();
+    // WASM serves dynamic CSS/JS serially; allow navigation to finish, keep assertions unchanged.
+    page.setDefaultNavigationTimeout(90000);
     await page.goto(pageUrl);
     assert.deepEqual(await page.evaluate(() => window.aiwpOrder), ['header', 'footer', 'page']);
     assert.equal(await page.locator('body').getAttribute('data-script-ready'), 'yes');

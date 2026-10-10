@@ -1122,3 +1122,21 @@ msgstr " Zachovej existující značky menu. Výstup značky je ul.aiwp-menu s l
 
 msgid "Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure consent and tracking in an external plugin such as Complianz. Built-in consent management is unavailable."
 msgstr "Nevkládej analytiku, marketingové skripty ani cookie lištu do stránky, hlavičky nebo patičky. Souhlasy a měření nastav v externím pluginu, například Complianz. Vestavěná správa souhlasů není dostupná."
+
+msgid "Comments"
+msgstr "Komentáře"
+
+msgid "Disable comments across the website"
+msgstr "Zakázat komentáře na celém webu"
+
+msgid "You do not have permission to change these settings."
+msgstr "Nemáte oprávnění měnit toto nastavení."
+
+msgid "Comments are disabled on this website."
+msgstr "Komentáře jsou na tomto webu zakázané."
+
+msgid "Enabled by default, including for existing posts. Hides WordPress comments and forms and blocks new comments, pingbacks and trackbacks. Existing comments remain available in the administration and are not deleted. Uncheck to restore the original discussion settings of each post."
+msgstr "Ve výchozím stavu zapnuto i pro existující příspěvky. Skryje komentáře a formuláře WordPressu a zakáže nové komentáře, pingbacky a trackbacky. Dosavadní komentáře zůstávají v administraci a nemažou se. Odškrtnutí obnoví původní nastavení diskuze jednotlivých příspěvků."
+
+msgid "Clear website and CDN caches after changing this setting. External comment services and custom plugin forms are not controlled by this option. Features such as product reviews may also depend on WordPress comments."
+msgstr "Po změně vymažte cache webu a CDN. Volba neovládá externí komentářové služby ani vlastní formuláře jiných pluginů. Na komentářích WordPressu mohou záviset i funkce jako recenze produktů."

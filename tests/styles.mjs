@@ -63,6 +63,8 @@ export async function runStylesChecks(server) {
     browser = await chromium.launch({ headless: true, channel: 'chrome' });
     const context = await browser.newContext();
     const page = await context.newPage();
+    // WASM serves dynamic CSS/JS serially; allow navigation to finish, keep assertions unchanged.
+    page.setDefaultNavigationTimeout(90000);
     await page.goto(`${server.serverUrl}/?page_id=${fixture.id}`);
     assert.deepEqual(await page.locator('.duplicate-part').evaluateAll(elements => elements.map(el => getComputedStyle(el).color)), ['rgb(11, 22, 33)', 'rgb(11, 22, 33)'], 'Both header and footer retain their styles');
     const initial = await page.locator('.css-fixture').evaluate(el => ({ padding: getComputedStyle(el).paddingTop, content: getComputedStyle(el, '::after').content }));

@@ -24,6 +24,8 @@ export async function runSeoMediaChecks(server) {
   try {
     browser = await chromium.launch({ headless: true, channel: 'chrome' });
     const page = await browser.newPage();
+    // WASM serves dynamic CSS/JS serially; allow navigation to finish, keep assertions unchanged.
+    page.setDefaultNavigationTimeout(90000);
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
     await page.goto(`${server.serverUrl}/wp-login.php`, { waitUntil: 'domcontentloaded' });

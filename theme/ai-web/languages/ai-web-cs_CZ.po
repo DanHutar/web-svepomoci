@@ -64,5 +64,11 @@ msgstr "Bez názvu"
 msgid "Search"
 msgstr "Hledat"
 
+msgid "Back home"
+msgstr "Zpět domů"
+
+msgid "This page does not exist or has moved."
+msgstr "Tato stránka neexistuje nebo byla přesunuta."
+
 msgid "A lightweight theme for AI-created pages. Its companion plugin supports custom HTML, CSS, JavaScript, headers and footers."
 msgstr "Lehká univerzální šablona pro stránky vytvořené pomocí AI. S doprovodným pluginem podporuje vlastní HTML, CSS, JavaScript, hlavičku a patičku."

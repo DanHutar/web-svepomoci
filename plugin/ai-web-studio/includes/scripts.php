@@ -9,7 +9,7 @@ function aiwp_script_url( $kind, $js ) {
     return add_query_arg( array(
         'aiwp_script' => $kind,
         'aiwp_js_ver' => hash( 'sha256', AIWP_VERSION . $js ),
-    ), $origin . $uri );
+    ), is_404() ? add_query_arg( 'aiwp_error_assets', '404', home_url( '/' ) ) : $origin . $uri );
 }
 
 add_action( 'template_redirect', function () {
@@ -17,7 +17,7 @@ add_action( 'template_redirect', function () {
     header( 'Content-Type: application/javascript; charset=UTF-8' );
     header( 'X-Content-Type-Options: nosniff' );
     $kind = $_GET['aiwp_script'];
-    if ( ! is_string( $kind ) || ! in_array( $kind, array( 'header', 'footer', 'page' ), true ) || is_404() ) {
+    if ( ! is_string( $kind ) || ! in_array( $kind, array( 'header', 'footer', 'page' ), true ) || ( is_404() && ! aiwp_shared_error_assets() ) ) {
         status_header( 404 );
         nocache_headers();
         exit;

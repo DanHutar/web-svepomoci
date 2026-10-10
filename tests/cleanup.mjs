@@ -44,6 +44,8 @@ export async function runCleanupChecks(server) {
     await phpJson(server, `wp_update_post(array('ID'=>${data.page},'post_password'=>'')); echo 'true';`);
     browser = await chromium.launch({ headless: true, channel: 'chrome' });
     const page = await browser.newPage();
+    // WASM serves dynamic CSS/JS serially; allow navigation to finish, keep assertions unchanged.
+    page.setDefaultNavigationTimeout(90000);
     await page.goto(`${server.serverUrl}/?page_id=${data.page}`);
     assert.equal(await page.locator('.cleanup-fixture').evaluate(el => getComputedStyle(el).color), 'rgb(12, 34, 56)');
     await page.goto(`${server.serverUrl}/?page_id=${data.normal}`);

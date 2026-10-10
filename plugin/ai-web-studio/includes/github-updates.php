@@ -32,7 +32,7 @@ if ( ! class_exists( 'WSP_GitHub_Updates', false ) ) {
 
         public static function check_now() {
             if ( ! current_user_can( 'update_plugins' ) || ! current_user_can( 'update_themes' ) ) {
-                wp_die( __( 'You do not have permission to check for updates.', 'web-svepomoci' ), '', array( 'response' => 403 ) );
+                wp_die( esc_html__( 'You do not have permission to check for updates.', 'web-svepomoci' ), '', array( 'response' => 403 ) );
             }
             check_admin_referer( 'wsp_check_updates' );
             self::clear_cache();

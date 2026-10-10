@@ -178,7 +178,7 @@ function aiwp_validate_post_submission( $data, $postarr ) {
     if ( in_array( $data['post_type'], array( 'page', 'aiwp_part' ), true ) && ! ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
         $document = aiwp_submitted_document();
         if ( is_wp_error( $document ) ) {
-            wp_die( esc_html( $document->get_error_message() ), __( 'Code was not saved', 'ai-web-studio' ), array( 'response' => 400, 'back_link' => true ) );
+            wp_die( esc_html( $document->get_error_message() ), esc_html__( 'Code was not saved', 'ai-web-studio' ), array( 'response' => 400, 'back_link' => true ) );
         }
     }
     return $data;

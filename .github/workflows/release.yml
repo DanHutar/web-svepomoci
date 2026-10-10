@@ -43,6 +43,12 @@ jobs:
         run: npm run test:seo-media
       - name: Test retired consent endpoints and legacy settings
         run: npm run test:consent
+      - name: Test global comment policy and reversible settings
+        run: npm run test:comments
+      - name: Test security boundaries and escaped translations
+        run: npm run test:security
+      - name: Test shared 404 design and navigation
+        run: npm run test:404
       - name: Test English and Czech languages and migration
         run: npm run test:languages
       - name: Build both installable packages and update manifest
