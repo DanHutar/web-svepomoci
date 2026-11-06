@@ -34,6 +34,16 @@ try {
   const r=await fetch(pencilEditor.restUrl+id,{method:'POST',headers:{'Content-Type':'application/json','X-WP-Nonce':pencilEditor.nonce},body:JSON.stringify({value:'Edited safely'})});return r.status;
  },'byyourself-'+ids[0]+'.title');assert.equal(saved,200);
  await page.reload();assert.equal(await page.locator('.aiwp-content h1').innerText(),'Edited safely');
+ const beforePreview=await php(`echo json_encode(array(get_option('pencil_field_registry'),get_option('pencil_values')));`);
+ await page.goto(server.serverUrl+'/wp-admin/post.php?post='+ids[0]+'&action=edit');
+ await page.locator('[data-aiwp-refresh]').click();
+ await page.waitForFunction(()=>{const f=document.querySelector('.aiwp-preview-frame');return f && f.srcdoc.includes('Edited safely');});
+ assert.equal(await page.locator('.aiwp-preview-frame').getAttribute('sandbox'),'allow-scripts');
+ assert.equal(await page.frameLocator('.aiwp-preview-frame').locator('h1').innerText(),'Edited safely');
+ const denied=await page.evaluate(async id=>{
+  const r=await fetch(aiwpAdmin.previewUrl,{method:'POST',body:new URLSearchParams({action:'aiwp_preview_html',nonce:'invalid',post_id:id,html:'test'})});return r.status;
+ },String(ids[0]));assert.equal(denied,403);
+ assert.deepEqual(await php(`echo json_encode(array(get_option('pencil_field_registry'),get_option('pencil_values')));`),beforePreview);
  await page.goto(server.serverUrl+'/?page_id='+ids[1]);assert.equal(await page.locator('.aiwp-content h1').innerText(),'Original');
  assert.equal(await page.locator('[data-pencil-field="byyourself-'+ids[2]+'.title"]').count(),1);
  const security=await php(`

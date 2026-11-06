@@ -187,12 +187,28 @@
       return '';
     }
 
-    studio.querySelector('[data-aiwp-refresh]').addEventListener('click', function () {
+    var previewRequest = 0;
+    studio.querySelector('[data-aiwp-refresh]').addEventListener('click', async function () {
+      var request = ++previewRequest;
       var html = value('html');
       var css = value('css');
       var js = value('js');
       var error = validationMessage(html, css, js);
       if (error) { previewStatus.textContent = error; return; }
+      if (/\[aiwp_(?:text|richtext|button|image)\b/.test(html)) {
+        try {
+          var body = new URLSearchParams({action: 'aiwp_preview_html', nonce: config.previewNonce, post_id: document.getElementById('post_ID').value, html: html});
+          var response = await fetch(config.previewUrl, {method: 'POST', credentials: 'same-origin', body: body});
+          var result = await response.json();
+          if (!response.ok || !result.success || typeof result.data.html !== 'string') throw new Error('Preview failed');
+          if (request !== previewRequest) return;
+          html = result.data.html;
+        } catch (err) {
+          if (request !== previewRequest) return;
+          previewStatus.textContent = config.contentLanguage === 'cs' ? 'Náhled se nepodařilo načíst. Zkuste to znovu nebo obnovte editor.' : 'Preview could not be loaded. Try again or reload the editor.';
+          return;
+        }
+      }
       html = html.replace(/(\[?)\[aiwp_cookie_settings\s*\](\]?)/g, function (match, escapeOpen, escapeClose) {
         if (escapeOpen && escapeClose) return match.slice(1, -1);
         return escapeOpen + escapeClose;

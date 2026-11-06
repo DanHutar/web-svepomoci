@@ -1,4 +1,8 @@
-# ByYourself 1.10.6
+# ByYourself 1.10.7
+
+The page and shared-part editor preview now renders Pencilino markers instead of showing their source code. It displays saved Pencilino overrides and media images while using draft defaults for new fields. Preview requests require code-editing permission, document access and a nonce. The sandbox remains isolated; previews do not register or modify Pencilino fields or save page content. Failed requests show an error instead of raw markers.
+
+## Integration introduced in 1.10.6
 
 Optional Pencilino integration supports editable text, rich text, buttons and media images in ByYourself HTML. Pencilino remains separately installed and owns editing, permissions and storage. Existing HTML needs explicit editable markers; see docs/pencilino.md.
 

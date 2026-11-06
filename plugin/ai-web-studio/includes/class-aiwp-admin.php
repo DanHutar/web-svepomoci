@@ -40,6 +40,8 @@ final class AIWP_Admin {
 		wp_enqueue_media();
 		wp_enqueue_script( 'aiwp-admin', AIWP_URL . 'assets/admin.js', $dependencies, AIWP_VERSION, true );
 		wp_localize_script( 'aiwp-admin', 'aiwpAdmin', array(
+			'previewUrl' => admin_url( 'admin-ajax.php' ),
+			'previewNonce' => wp_create_nonce( 'aiwp_preview' ),
 			'editors'      => $editors,
 			'settings'     => aiwp_get_settings(),
 			'font'         => aiwp_font_details( aiwp_get_settings()['font'] ),

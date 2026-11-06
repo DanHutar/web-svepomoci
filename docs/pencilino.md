@@ -23,7 +23,7 @@ Menu zůstává spravováno ve Vzhled → Menu. Výchozí navigace šablony je o
 
 - Pencilino ukládá hodnoty zvlášť od výchozího HTML. Změna výchozího textu v ByYourself nepřepíše již uloženou hodnotu Pencilina. Návrat/revize HTML nevrací historii Pencilina.
 - Po vypnutí Pencilina zůstává web funkční a zobrazí původní hodnoty z HTML. Uložené změny Pencilina se znovu použijí po aktivaci se stejnými ID; nejde o export těchto změn do HTML.
-- Náhled přímo v HTML editoru ByYourself není frontendový editor Pencilina; kontrolujte publikovanou stránku nebo standardní WP náhled.
+- Od verze 1.10.7 náhled v HTML editoru vykresluje značky Pencilina, obrázky z médií a existující uložené hodnoty. Nová pole zobrazí výchozí obsah právě rozepsaného HTML. Náhled je pouze pro čtení: neregistruje pole, nemění schémata ani neukládá hodnoty. Neobsahuje samotný frontendový editor Pencilina. Vyžaduje platné přihlášení a připojení k WordPressu.
 - Cache serveru/CDN musí obcházet přihlášené uživatele a po úpravách být vyprázdněna podle použité cache. ByYourself neřídí externí cache.
 - Společné CSS generujte se selektory omezenými na vlastní obal, nikoli globálními pravidly přepisujícími editor/media dialogy. V editorových relacích neodebíráme core styly WP.
 - Nejsou povoleny libovolné shortcody ani spouštění PHP. Google Fonts zůstávají zachované.

@@ -10,10 +10,10 @@ function aiwp_pencilino_prompt_rules() {
 }
 
 /** Optional bridge. Pencilino owns editing, permissions, validation and storage. */
-function aiwp_render_document_html( $html, $document_id ) {
+function aiwp_render_document_html( $html, $document_id, $preview = false ) {
     $html = aiwp_render_dynamic_html( $html );
     $tags = array( 'aiwp_text', 'aiwp_richtext', 'aiwp_button', 'aiwp_image' );
-    return preg_replace_callback( '/' . get_shortcode_regex( $tags ) . '/s', function ( $match ) use ( $document_id ) {
+    return preg_replace_callback( '/' . get_shortcode_regex( $tags ) . '/s', function ( $match ) use ( $document_id, $preview ) {
         if ( '[' === $match[1] && ']' === $match[6] ) { return substr( $match[0], 1, -1 ); }
         $attrs = shortcode_parse_atts( $match[3] );
         $attrs = is_array( $attrs ) ? $attrs : array();
@@ -32,7 +32,22 @@ function aiwp_render_document_html( $html, $document_id ) {
         }
         if ( isset( $attrs['max_length'] ) ) { $args['max_length'] = max( 1, absint( $attrs['max_length'] ) ); }
         $helper = 'pencil_' . $type;
-        if ( $document_id && preg_match( '/^[a-z0-9][a-z0-9._-]{0,79}$/D', $id ) && function_exists( $helper ) ) {
+        $valid = $document_id && preg_match( '/^[a-z0-9][a-z0-9._-]{0,79}$/D', $id ) && function_exists( $helper );
+        if ( $preview && $valid ) {
+            // Read only: previewing drafts must never register or overwrite Pencilino schemas.
+            $key = 'byyourself-' . absint( $document_id ) . '.' . $id;
+            $values = get_option( 'pencil_values', array() );
+            $registry = get_option( 'pencil_field_registry', array() );
+            if ( is_array( $values ) && isset( $registry[$key]['type'] ) && $type === $registry[$key]['type'] && array_key_exists( $key, $values ) ) {
+                $saved = $values[$key];
+                if ( 'button' === $type && is_array( $saved ) ) {
+                    $args['default'] = array( 'text' => sanitize_text_field( $saved['text'] ?? '' ), 'url' => esc_url_raw( $saved['url'] ?? '' ) );
+                } elseif ( 'image' === $type ) { $args['default'] = absint( $saved );
+                } elseif ( is_scalar( $saved ) ) { $args['default'] = (string) $saved; }
+            }
+            if ( 'richtext' === $type ) { $args['default'] = Pencil_Fields::sanitize_richtext( $args['default'] ); }
+        }
+        if ( ! $preview && $valid ) {
             ob_start();
             // Document IDs also keep shared header/footer fields independent of the current page.
             $helper( 'byyourself-' . absint( $document_id ) . '.' . $id, $args );
@@ -44,10 +59,22 @@ function aiwp_render_document_html( $html, $document_id ) {
                 . ( '_blank' === $args['target'] ? ' target="_blank" rel="noopener"' : '' ) . '>' . esc_html( $args['default']['text'] ) . '</a>';
         }
         if ( 'image' === $type ) { return wp_get_attachment_image( $args['default'], $args['size'], false, array( 'class' => $classes ) ); }
-        if ( 'richtext' === $type ) { return '<div class="pencil-richtext ' . esc_attr( $classes ) . '">' . wp_kses_post( $content ) . '</div>'; }
+        if ( 'richtext' === $type ) { return '<div class="pencil-richtext ' . esc_attr( $classes ) . '">' . wp_kses_post( $args['default'] ) . '</div>'; }
         return esc_html( $args['default'] );
     }, $html );
 }
+
+add_action( 'wp_ajax_aiwp_preview_html', function () {
+    check_ajax_referer( 'aiwp_preview', 'nonce' );
+    $id = absint( $_POST['post_id'] ?? 0 );
+    if ( ! aiwp_can_edit_code() || ! current_user_can( 'edit_post', $id ) || ! in_array( get_post_type( $id ), array( 'page', 'aiwp_part' ), true ) ) {
+        wp_send_json_error( array(), 403 );
+    }
+    if ( ! isset( $_POST['html'] ) || ! is_string( $_POST['html'] ) || strlen( $_POST['html'] ) > 2000000 ) {
+        wp_send_json_error( array(), 400 );
+    }
+    wp_send_json_success( array( 'html' => aiwp_render_document_html( wp_unslash( $_POST['html'] ), $id, true ) ) );
+} );
 
 // Keep WP's editor/media styles intact for authorised frontend Pencilino sessions.
 add_filter( 'aiwp_trim_core_styles', function ( $trim ) {
