@@ -1,4 +1,12 @@
-# ByYourself 1.10.5
+# ByYourself 1.10.6
+
+Optional Pencilino integration supports editable text, rich text, buttons and media images in ByYourself HTML. Pencilino remains separately installed and owns editing, permissions and storage. Existing HTML needs explicit editable markers; see docs/pencilino.md.
+
+Fields are isolated by document ID, including shared headers and footers. Without Pencilino, original HTML defaults remain visible. AI prompts include integration instructions when Pencilino is active. Default theme navigation remains WordPress-managed. Frontend editor sessions retain core WordPress styles.
+
+Update both Builder and Theme. Pencilino is not bundled. Local tests with supplied Pencilino 2.0.4 passed: REST saves and reload, page isolation, images, rich-text sanitation, shared header, anonymous rejection, editor/code permission separation and deactivation fallback.
+
+## Retained improvements from 1.10.5
 
 Missing pages now show a concise, translated 404 screen with a Back home button and the same published header and footer as the rest of the website. Shared CSS and header/footer JavaScript load correctly on missing URLs, without loading the home page's private or page-specific code. The HTML response remains HTTP 404. Layout defaults live in the main theme stylesheet and can be overridden by Shared CSS.
 

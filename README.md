@@ -1,5 +1,7 @@
 # ByYourself pro WordPress
 
+Volitelné propojení s Pencilinem: [návod a značky pro upravitelný obsah](docs/pencilino.md). Pencilino zůstává samostatným pluginem.
+
 Jednoduchá šablona a doprovodný plugin pro sestavení webu z HTML, CSS a JavaScriptu, které vám připraví AI. Kód kopírujete do oddělených polí v administraci WordPressu. Žádný účet AI ani klíč API se s webem nepropojuje.
 
 - **Šablona `ByYourself Theme`** zobrazuje stránky, společnou hlavičku a patičku.

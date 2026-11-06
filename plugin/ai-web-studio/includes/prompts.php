@@ -30,6 +30,7 @@ function aiwp_prompt_code_rules( $kind ) {
     $part = in_array( $kind, array( 'header', 'footer' ), true );
     $location = 'footer' === $kind ? 'footer' : 'primary';
     return implode( "\n\n", array(
+        function_exists( 'pencil_text' ) ? aiwp_pencilino_prompt_rules() : '',
         __( 'Do not add analytics, marketing scripts or a cookie banner to the page, header or footer. Configure consent and tracking in an external plugin such as Complianz. Built-in consent management is unavailable.', 'ai-web-studio' ),
         __( 'Return the complete final HTML, CSS and JS as three separate blocks, not just changed lines. If JavaScript is unnecessary, say that the JS field should stay empty. I will omit the ``` fences when copying code into WordPress.', 'ai-web-studio' ),
         __( 'HTML must be a fragment: no doctype, html, head, body, meta, title, link, base, style, script, PHP, on* attributes or javascript: URLs. ', 'ai-web-studio' )

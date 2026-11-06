@@ -25,6 +25,16 @@ function ai_web_setup() {
 }
 add_action( 'after_setup_theme', 'ai_web_setup' );
 
+/** Menus belong to WordPress, not Pencilino's independent field storage. */
+function ai_web_pencil_menu_attributes() {
+	if ( ! class_exists( 'Pencil_Plugin' ) || ! Pencil_Plugin::can_edit() ) { return ''; }
+	$attrs = ' data-pencil-managed="wordpress" data-pencil-managed-label="' . esc_attr__( 'Menu', 'ai-web' ) . '"';
+	if ( current_user_can( 'edit_theme_options' ) ) {
+		$attrs .= ' data-pencil-managed-edit-url="' . esc_url( admin_url( 'nav-menus.php' ) ) . '"';
+	}
+	return $attrs;
+}
+
 function ai_web_assets() {
 	$version = wp_get_theme()->get( 'Version' );
 	wp_enqueue_style( 'ai-web', get_stylesheet_uri(), array(), $version );

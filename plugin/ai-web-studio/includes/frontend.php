@@ -32,7 +32,7 @@ function aiwp_render_part( $kind ) {
         return false;
     }
     // Deliberately raw: only administrators with unfiltered_html can save this code.
-    echo '<div class="aiwp-' . esc_attr( $kind ) . '">' . aiwp_render_dynamic_html( $document['html'] ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+    echo '<div class="aiwp-' . esc_attr( $kind ) . '">' . aiwp_render_document_html( $document['html'], aiwp_get_part_id( $kind ) ) . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
     return true;
 }
 
@@ -41,7 +41,7 @@ add_filter( 'the_content', function ( $content ) {
         return $content;
     }
     $document = aiwp_get_document( get_the_ID() );
-    return '<div class="aiwp-content">' . aiwp_render_dynamic_html( $document['html'] ) . '</div>';
+    return '<div class="aiwp-content">' . aiwp_render_document_html( $document['html'], get_the_ID() ) . '</div>';
 }, 99 );
 
 function aiwp_global_css() {

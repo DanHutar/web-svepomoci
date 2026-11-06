@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "node tests/integration.mjs",
+    "test:pencilino": "node tests/pencilino-flow.mjs",
     "test:sample": "node tests/sample-flow.mjs --expect-active",
     "test:menu": "node tests/menu-flow.mjs",
     "test:updates": "node tests/updates.mjs",

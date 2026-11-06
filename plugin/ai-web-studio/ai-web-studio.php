@@ -4,7 +4,7 @@
  * Plugin URI: https://github.com/DanHutar/web-svepomoci
  * Update URI: https://github.com/DanHutar/web-svepomoci
  * Description: Per-page HTML, CSS and JavaScript, shared headers and footers, and essential SEO.
- * Version: 1.10.5
+ * Version: 1.10.6
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Author: DanHutar
@@ -14,7 +14,7 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-define( 'AIWP_VERSION', '1.10.5' );
+define( 'AIWP_VERSION', '1.10.6' );
 define( 'AIWP_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AIWP_URL', plugin_dir_url( __FILE__ ) );
 
@@ -23,6 +23,7 @@ WSP_Languages::register( 'ai-web-studio', AIWP_DIR . 'languages' );
 
 require_once AIWP_DIR . 'includes/documents.php';
 require_once AIWP_DIR . 'includes/menus.php';
+require_once AIWP_DIR . 'includes/pencilino.php';
 require_once AIWP_DIR . 'includes/frontend.php';
 require_once AIWP_DIR . 'includes/frontend-cleanup.php';
 require_once AIWP_DIR . 'includes/styles.php';

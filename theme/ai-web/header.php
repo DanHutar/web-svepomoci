@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 			</div>
 			<button class="ai-web-menu-toggle" type="button" aria-controls="ai-web-navigation" aria-expanded="false" hidden><?php esc_html_e( 'Menu', 'ai-web' ); ?></button>
-			<nav id="ai-web-navigation" class="ai-web-navigation" aria-label="<?php esc_attr_e( 'Primary navigation', 'ai-web' ); ?>">
+			<nav id="ai-web-navigation" class="ai-web-navigation" aria-label="<?php esc_attr_e( 'Primary navigation', 'ai-web' ); ?>"<?php echo ai_web_pencil_menu_attributes(); // Escaped attribute markup. ?>>
 				<?php wp_nav_menu( array( 'theme_location' => 'primary', 'container' => false, 'menu_class' => 'ai-web-menu', 'fallback_cb' => 'ai_web_page_menu', 'depth' => 2 ) ); ?>
 			</nav>
 		</div>
